@@ -61,7 +61,7 @@ namespace Boltmailer_mainserver
                             name = name.Replace(invalid.ToString(), "");
                     }
 
-                    message.WriteTo(Directory.CreateDirectory("Projects") + "\\" + $"{name}.eml");
+                    message.WriteTo(Directory.CreateDirectory("Employees") + "\\" + $"{name}.eml");
 
                     client.Inbox.SetFlags(uid, MessageFlags.Seen, false);
                 }
