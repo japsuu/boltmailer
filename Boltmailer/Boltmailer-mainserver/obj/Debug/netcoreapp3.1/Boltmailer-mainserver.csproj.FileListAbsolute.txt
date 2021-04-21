@@ -1,0 +1,17 @@
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\Boltmailer-mainserver.exe
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\Boltmailer-mainserver.deps.json
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\Boltmailer-mainserver.runtimeconfig.json
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\Boltmailer-mainserver.runtimeconfig.dev.json
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\Boltmailer-mainserver.dll
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\Boltmailer-mainserver.pdb
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\MimeKit.pdb
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\MimeKit.xml
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.csprojAssemblyReference.cache
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.AssemblyInfoInputs.cache
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.AssemblyInfo.cs
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.csproj.CoreCompileInputs.cache
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.csproj.CopyComplete
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.dll
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.pdb
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.genruntimeconfig.cache
