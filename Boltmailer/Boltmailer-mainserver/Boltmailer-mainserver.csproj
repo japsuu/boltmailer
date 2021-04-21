@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.11.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="MimeKit">
       <HintPath>libs\MimeKit.dll</HintPath>
     </Reference>

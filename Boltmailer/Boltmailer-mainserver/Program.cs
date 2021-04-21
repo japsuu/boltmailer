@@ -9,7 +9,7 @@ namespace Boltmailer_mainserver
         static void Main(string[] args)
         {
             BoltReader boltReader = new BoltReader();
-            boltReader.Read();
+            boltReader.StartTicking();
 
             Console.ReadKey();
         }

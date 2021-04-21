@@ -1,73 +1,77 @@
-﻿using MimeKit;
+﻿using MailKit;
+using MailKit.Net.Imap;
+using MailKit.Search;
+using MailKit.Security;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Timers;
 
 namespace Boltmailer_mainserver
 {
     class BoltReader
     {
-
-        public void Read()
+        private Timer ticker;
+        public void StartTicking()
         {
-            string outputPath = Directory.GetCurrentDirectory();
-            string streamPath = GetMailboxPath();
-            Log("READER", "Locking to directory: " + streamPath + "\n\t\twith the output path: " + outputPath);
+            Console.WriteLine("Started monitoring for incoming mails");
+            ticker = new Timer();
+            ticker.Elapsed += new ElapsedEventHandler(Read);
+            ticker.Interval = 10000;
+            ticker.Start();
+            Read(null, null);
+        }
 
-            FileStream stream;
-            // Open the storage file with FileStream
+        public void Read(object sender, EventArgs args)
+        {
             try
             {
-                stream = new FileStream(streamPath + "Inbox", FileMode.Open, FileAccess.Read);
+                using var client = new ImapClient();
+                Console.WriteLine("Checking for mails...");
+                client.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
+                client.Authenticate("0481664@gmail.com", "Thejapsu1");
+
+                client.Inbox.Open(FolderAccess.ReadWrite);
+
+                var uids = client.Inbox.Search(SearchQuery.NotSeen);
+
+                foreach (var uid in uids)
+                {
+                    var message = client.Inbox.GetMessage(uid);
+                    string name = message.Subject;
+                    string employee;
+                    string deadline;
+
+                    using (var reader = new StringReader(message.TextBody))
+                    {
+                        employee = reader.ReadLine();
+                        deadline = reader.ReadLine();
+                    }
+
+                    Console.WriteLine($"Writing project '{name}' for '{employee}' with deadline '{deadline}' to file...");
+
+                    //make sure the filename is safe to use
+                    foreach (char invalid in Path.GetInvalidPathChars())
+                    {
+                        if (invalid.ToString() == " ")
+                            name = name.Replace(invalid.ToString(), "_");
+                        else
+                            name = name.Replace(invalid.ToString(), "");
+                    }
+
+                    message.WriteTo(Directory.CreateDirectory("Projects") + "\\" + $"{name}.eml");
+
+                    client.Inbox.SetFlags(uid, MessageFlags.Seen, false);
+                }
+
+                client.Disconnect(true);
             }
             catch (Exception ex)
             {
-                Log("ERROR", "Could not read the mailbox: " + ex.Message);
-                return;
+                Console.WriteLine("Error reading the mailbox: " + ex);
             }
-
-            // Load every message from a Unix mbox
-            var parser = new MimeParser(stream, MimeFormat.Mbox);
-            while (!parser.IsEndOfStream)
-            {
-                var message = parser.ParseMessage();
-
-                Log("READER", message.Subject);
-            }
-        }
-
-        string GetMailboxPath()
-        {
-            string rootPath = "C:\\Users\\" + Environment.UserName + "\\AppData\\Roaming\\Thunderbird\\Profiles\\";
-
-            string[] mailBoxes = Directory.GetDirectories(rootPath, "*default-release*");
-
-            if (mailBoxes.Length < 1)
-            {
-                Log("ERROR", $"No mailbox found at '{rootPath}'!");
-                return null;
-            }
-            else if (mailBoxes.Length > 1)
-            {
-                Log("READER", "Multiple mailboxes found. Please select the one to use:");
-                for (int i = 0; i < mailBoxes.Length; i++)
-                {
-                    Console.WriteLine($"[{i}] " + mailBoxes[i]);
-                }
-                Log("READER", "Input the ID of the mailbox you want to select: ");
-                return mailBoxes[Convert.ToInt32(Console.ReadLine())] + "\\Mail\\pop.gmail.com\\";
-            }
-            else
-            {
-
-                return mailBoxes[0] + "\\Mail\\pop.gmail.com\\";
-            }
-        }
-
-        void Log(string prefix, string data)
-        {
-            Console.WriteLine($"[{prefix}]\t{data}");
         }
     }
 }

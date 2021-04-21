@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "rzlSAFwOqhyWGsVsuhAjj6lk+HpnDf14Zo3/eF3F3UTSFDvT4NAU6B0C1YiNZMc2eDP4jpq9RupaNzCiDfrINQ==",
+  "dgSpecHash": "t8j94UoTeMTsXwznnXq2M7uKQLLyPS7mbtCzkBQJEMA32LgUmn54VOv9LRwFXXh+zKLiQjt2V0MFPtaMfLhdUg==",
   "success": true,
   "projectFilePath": "C:\\Users\\japsu\\Desktop\\Boltmailer\\Boltmailer\\Boltmailer-mainserver\\Boltmailer-mainserver.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\japsu\\.nuget\\packages\\mailkit\\2.11.1\\mailkit.2.11.1.nupkg.sha512",
+    "C:\\Users\\japsu\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\japsu\\.nuget\\packages\\mimekit\\2.11.0\\mimekit.2.11.0.nupkg.sha512",
+    "C:\\Users\\japsu\\.nuget\\packages\\portable.bouncycastle\\1.8.10\\portable.bouncycastle.1.8.10.nupkg.sha512",
+    "C:\\Users\\japsu\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\japsu\\.nuget\\packages\\system.reflection.typeextensions\\4.4.0\\system.reflection.typeextensions.4.4.0.nupkg.sha512",
+    "C:\\Users\\japsu\\.nuget\\packages\\system.security.cryptography.cng\\4.7.0\\system.security.cryptography.cng.4.7.0.nupkg.sha512",
+    "C:\\Users\\japsu\\.nuget\\packages\\system.security.cryptography.pkcs\\4.7.0\\system.security.cryptography.pkcs.4.7.0.nupkg.sha512",
+    "C:\\Users\\japsu\\.nuget\\packages\\system.text.encoding.codepages\\4.4.0\\system.text.encoding.codepages.4.4.0.nupkg.sha512"
+  ],
   "logs": []
 }

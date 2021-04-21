@@ -5,8 +5,6 @@ C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\net
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\Boltmailer-mainserver.dll
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\Boltmailer-mainserver.pdb
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\MimeKit.dll
-C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\MimeKit.pdb
-C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\MimeKit.xml
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.csprojAssemblyReference.cache
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.AssemblyInfoInputs.cache
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.AssemblyInfo.cs
@@ -15,3 +13,7 @@ C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\net
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.dll
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.pdb
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\obj\Debug\netcoreapp3.1\Boltmailer-mainserver.genruntimeconfig.cache
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\System.Security.Cryptography.Pkcs.dll
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Pkcs.dll
