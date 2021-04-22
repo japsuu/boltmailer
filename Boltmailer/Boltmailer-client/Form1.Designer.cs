@@ -28,13 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.ProjectsList = new System.Windows.Forms.ListView();
+            this.DebugLabel = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // ProjectsList
+            // 
+            this.ProjectsList.GridLines = true;
+            this.ProjectsList.HideSelection = false;
+            this.ProjectsList.Location = new System.Drawing.Point(54, 72);
+            this.ProjectsList.Name = "ProjectsList";
+            this.ProjectsList.Size = new System.Drawing.Size(971, 524);
+            this.ProjectsList.TabIndex = 0;
+            this.ProjectsList.UseCompatibleStateImageBehavior = false;
+            // 
+            // DebugLabel
+            // 
+            this.DebugLabel.AutoSize = true;
+            this.DebugLabel.Location = new System.Drawing.Point(54, 612);
+            this.DebugLabel.Name = "DebugLabel";
+            this.DebugLabel.Size = new System.Drawing.Size(83, 20);
+            this.DebugLabel.TabIndex = 1;
+            this.DebugLabel.Text = "Debug text";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1084, 649);
+            this.Controls.Add(this.DebugLabel);
+            this.Controls.Add(this.ProjectsList);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ListView ProjectsList;
+        private System.Windows.Forms.Label DebugLabel;
     }
 }
 

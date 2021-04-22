@@ -1,0 +1,6 @@
+{
+  "Header": "DO NOT MODIFY THIS FILE",
+  "ProjectName": "testiprojekti",
+  "Deadline": "24.5.2022",
+  "Ready": false
+}

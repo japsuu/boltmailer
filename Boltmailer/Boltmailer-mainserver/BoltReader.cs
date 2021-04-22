@@ -1,4 +1,5 @@
-﻿using MailKit;
+﻿using Boltmailer_common;
+using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Search;
 using MailKit.Security;
@@ -7,13 +8,17 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Timers;
 
 namespace Boltmailer_mainserver
 {
     class BoltReader
     {
-        private Timer ticker;
+        Timer ticker;
+        Random rnd = new Random();
+
         public void StartTicking()
         {
             Console.WriteLine("Started monitoring for incoming mails");
@@ -29,7 +34,7 @@ namespace Boltmailer_mainserver
             try
             {
                 using var client = new ImapClient();
-                Console.WriteLine("Checking for mails...");
+                Console.Write(".");
                 client.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
                 client.Authenticate("0481664@gmail.com", "Thejapsu1");
 
@@ -40,28 +45,42 @@ namespace Boltmailer_mainserver
                 foreach (var uid in uids)
                 {
                     var message = client.Inbox.GetMessage(uid);
-                    string name = message.Subject;
-                    string employee;
-                    string deadline;
+                    string projectName = message.Subject;
+                    string assignedEmployee;
+                    string projectDeadline;
 
                     using (var reader = new StringReader(message.TextBody))
                     {
-                        employee = reader.ReadLine();
-                        deadline = reader.ReadLine();
+                        assignedEmployee = reader.ReadLine();
+                        projectDeadline = reader.ReadLine();
                     }
 
-                    Console.WriteLine($"Writing project '{name}' for '{employee}' with deadline '{deadline}' to file...");
+                    Console.WriteLine($"\nWriting project '{projectName}' for '{assignedEmployee}' with deadline '{projectDeadline}' to file...");
 
-                    //make sure the filename is safe to use
-                    foreach (char invalid in Path.GetInvalidPathChars())
+                    projectName = FilenameFromTitle(projectName).ToLower();
+                    assignedEmployee = FilenameFromTitle(assignedEmployee);
+
+                    DirectoryInfo path = Directory.CreateDirectory("Projektit" + "\\" + assignedEmployee + "\\" + projectName);
+
+                    message.WriteTo($"{path}\\{projectName}_{rnd.Next(1000, 9999)}.eml");
+
+                    // Create the info file
+                    ProjectInfo info = new ProjectInfo() { ProjectName = message.Subject, Deadline = projectDeadline, Ready = false };
+                    JsonSerializerOptions options = new JsonSerializerOptions
                     {
-                        if (invalid.ToString() == " ")
-                            name = name.Replace(invalid.ToString(), "_");
-                        else
-                            name = name.Replace(invalid.ToString(), "");
-                    }
+                        WriteIndented = true
+                    };
+                    string json = JsonSerializer.Serialize(info, typeof(ProjectInfo), options);
+                    File.WriteAllText(path.FullName + "\\info.txt", json);
 
-                    message.WriteTo(Directory.CreateDirectory("Employees") + "\\" + $"{name}.eml");
+                    //using (StreamWriter sw = File.CreateText(path.FullName + "\\projectinfo.txt"))
+                    //{
+                    //    sw.WriteLine("DO NOT REMOVE THIS FILE!");
+                    //    sw.WriteLine("Project name: { " + message.Subject + " }");
+                    //    sw.WriteLine("Deadline: { " + projectDeadline + " }");
+                    //    sw.WriteLine("Ready: { false }");
+                    //}
+
 
                     client.Inbox.SetFlags(uid, MessageFlags.Seen, false);
                 }
@@ -72,6 +91,34 @@ namespace Boltmailer_mainserver
             {
                 Console.WriteLine("Error reading the mailbox: " + ex);
             }
+        }
+
+        public static string FilenameFromTitle(string name)
+        {
+            // first trim the raw string
+            string safe = name.Trim();
+
+            // replace spaces with hyphens
+            safe = safe.Replace(" ", "-").ToLower();
+
+            // replace any 'double spaces' with singles
+            if (safe.IndexOf("--") > -1)
+                while (safe.IndexOf("--") > -1)
+                    safe = safe.Replace("--", "-");
+
+            // trim out illegal characters
+            safe = System.Text.RegularExpressions.Regex.Replace(safe, "[^a-ö0-9\\-]", "");
+
+            // trim the length
+            if (safe.Length > 50)
+                safe = safe.Substring(0, 49);
+
+            // clean the beginning and end of the filename
+            char[] replace = { '-', '.' };
+            safe = safe.TrimStart(replace);
+            safe = safe.TrimEnd(replace);
+
+            return safe;
         }
     }
 }

@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "Boltmailer-mainserver/1.0.0": {
         "dependencies": {
+          "Boltmailer-common": "1.0.0",
           "MailKit": "2.11.1"
         },
         "runtime": {
@@ -75,6 +76,11 @@
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.0.0"
         }
+      },
+      "Boltmailer-common/1.0.0": {
+        "runtime": {
+          "Boltmailer-common.dll": {}
+        }
       }
     }
   },
@@ -94,7 +100,7 @@
     "Microsoft.NETCore.Platforms/2.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-VdLJOCXhZaEMY7Hm2GKiULmn7IEPFE4XC5LPSfBVCUIA8YLZVh846gtfBJalsPQF2PlzdD7ecX7DZEulJ402ZQ==",
+      "sha512": "sha512-CCf4NjmDOoise7FAij2VPuHIgKKsu696vkTwhOkPVQfLsTmB2WLFfQ4yeO5Udtk8FD636UBMx6Y9eovzJKT76A==",
       "path": "microsoft.netcore.platforms/2.0.0",
       "hashPath": "microsoft.netcore.platforms.2.0.0.nupkg.sha512"
     },
@@ -146,6 +152,11 @@
       "sha512": "sha512-6JX7ZdaceBiLKLkYt8zJcp4xTJd1uYyXXEkPw6mnlUIjh1gZPIVKPtRXPmY5kLf6DwZmf5YLwR3QUrRonl7l0A==",
       "path": "system.text.encoding.codepages/4.4.0",
       "hashPath": "system.text.encoding.codepages.4.4.0.nupkg.sha512"
+    },
+    "Boltmailer-common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

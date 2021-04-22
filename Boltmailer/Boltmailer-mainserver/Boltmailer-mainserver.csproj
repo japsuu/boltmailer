@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Boltmailer-common\Boltmailer-common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="MimeKit">
       <HintPath>libs\MimeKit.dll</HintPath>
     </Reference>

@@ -7,4 +7,8 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Boltmailer-common\Boltmailer-common.csproj" />
+  </ItemGroup>
+
 </Project>

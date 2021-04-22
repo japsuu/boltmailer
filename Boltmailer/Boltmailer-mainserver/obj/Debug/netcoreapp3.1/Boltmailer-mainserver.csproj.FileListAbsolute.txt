@@ -17,3 +17,5 @@ C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\net
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\System.Security.Cryptography.Pkcs.dll
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\Boltmailer-common.dll
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-mainserver\bin\Debug\netcoreapp3.1\Boltmailer-common.pdb
