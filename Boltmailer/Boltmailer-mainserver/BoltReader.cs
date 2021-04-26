@@ -73,14 +73,6 @@ namespace Boltmailer_mainserver
                     string json = JsonSerializer.Serialize(info, typeof(ProjectInfo), options);
                     File.WriteAllText(path.FullName + "\\info.txt", json);
 
-                    //using (StreamWriter sw = File.CreateText(path.FullName + "\\projectinfo.txt"))
-                    //{
-                    //    sw.WriteLine("DO NOT REMOVE THIS FILE!");
-                    //    sw.WriteLine("Project name: { " + message.Subject + " }");
-                    //    sw.WriteLine("Deadline: { " + projectDeadline + " }");
-                    //    sw.WriteLine("Ready: { false }");
-                    //}
-
 
                     client.Inbox.SetFlags(uid, MessageFlags.Seen, false);
                 }

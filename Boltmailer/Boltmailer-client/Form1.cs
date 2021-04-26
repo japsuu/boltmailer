@@ -20,13 +20,15 @@ namespace Boltmailer_client
         /// Root path to the folder that contains the employee folders.
         /// </summary>
         const string EMPLOYEES_ROOT_PATH = "C:\\Users\\japsu\\Desktop\\Boltmailer\\Boltmailer\\Boltmailer-mainserver\\bin\\Debug\\netcoreapp3.1\\Projektit";
+
         Timer checkTicker;
         Timer checkNotifyTicker;
         Stopwatch checkNotifyTimer = new Stopwatch();
+
         /// <summary>
         /// How often we want to check for new projects. In seconds.
         /// </summary>
-        int checkInterval = 30;
+        readonly int checkInterval = 30;
 
         public Form1()
         {
@@ -41,7 +43,7 @@ namespace Boltmailer_client
             checkTicker.Tick += new EventHandler(Refresh);
             checkTicker.Interval = checkInterval * 1000;
             checkTicker.Start();
-
+            
             checkNotifyTicker = new Timer();
             checkNotifyTicker.Tick += new EventHandler(NotifyRefresh);
             checkNotifyTicker.Interval = 1;
