@@ -1,0 +1,2144 @@
+Delivered-To: 0481664@gmail.com
+Received: by 2002:a02:94ac:0:0:0:0:0 with SMTP id x41csp2961115jah;
+        Mon, 3 May 2021 06:56:42 -0700 (PDT)
+X-Received: by 2002:a05:6000:1887:: with SMTP id a7mr24723491wri.280.1620050201984;
+        Mon, 03 May 2021 06:56:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1620050201; cv=none;
+        d=google.com; s=arc-20160816;
+        b=vKkKTOkuEY9he3nwn20NdLbFdJZ0hONaTuNtV8xw/KWQGgHe12s/ECZ9OqygTt2Pts
+         S9z4pPztbw9UewJlJ9S/xYEOdC+NpM2dP7Z+iDqzq4fxLYU3b66oaVbNiMBvyLaK8uHq
+         9A5le8lhO7cpDIghhY8qkRHpG0xgo5c07UTjtAAZXEb81MUUZzSfUeCTc3SwKSsh4EHn
+         rzdlf9XP6JehlT2Isc1sRunhahdDFba0bbqcXGXo9eeMILbZKHBqZtQdkbT/+b/P2Agn
+         /J6Goonx9MVTN42uJHDigId7X27lkp7pLd3lLKPIG2wnhvCaFpN7tO5p8paJPwrfZWdT
+         MSvA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=wx3bIXUdKKpWA0zDhoEYcVgEbm7l7NeGyUcKvCZ5O/k=;
+        b=0LADjacH0Vf2i08g0a38+y0KW78+qDYRuDwyuTzjCVD5K7kaxQKaVAdoBSSskehuOT
+         E2J77/UZY/jEaTlNV/VVQ8XaoP4OqWZ6q+hPA/0OOFlYg9p2ldrOUMJ75bJt8MWxIuvH
+         WefzDOxmfsV+9Y0NUKB/8pe3xbOlYn6xURl3gua918SjF9HsUvWUnWEFT2ID3VC5fR4W
+         2rNiJt0uGj4conWOSxDSP+cVQCZBSk+daTmmIf52Sx71qI3CFvwWKt+dHV0ATrizya64
+         7JETNkRsfglOH5VINGCJ1itq4hGY4xnXX6YlPP6OI3dsKTo/5300mNLa7A5vsOPjdAiq
+         A2CQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=h9bOLiJs;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <japsu.honkasalo@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id s9sor7671798wrt.18.2021.05.03.06.56.41
+        for <0481664@gmail.com>
+        (Google Transport Security);
+        Mon, 03 May 2021 06:56:41 -0700 (PDT)
+Received-SPF: pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=h9bOLiJs;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=wx3bIXUdKKpWA0zDhoEYcVgEbm7l7NeGyUcKvCZ5O/k=;
+        b=h9bOLiJsLbKPChqlPQpU/qCZkH2s9Nrg3M58ol9Zu4cw5p9ruPxahhj1rEkNZluDfC
+         RDoHZg3/sWaCEZsuAIUtXi0epVgUQ6t9DQeWjI2c7W0R+faykS+2oVTRIZwRZsj9+GHQ
+         RwL1Ska5YE6A6Jdm+s1fDsGGJzsTLp8T0rycnFxZ5uzOjtCyoE69jiWlQa6AnCHNTgp9
+         Hsh4H9j739oQjtbOCcBijIIrWJJlXq3FfJXA2kDuEndccU0niJRaYUXq5dswiUu4lcYV
+         DYMVOVzco7zWqtYUtvFoPeHTQ/jWKkLu9nPZB1V4gU16szD5hOlKvMXxrIC3ZvC/NAgz
+         D9gQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=wx3bIXUdKKpWA0zDhoEYcVgEbm7l7NeGyUcKvCZ5O/k=;
+        b=gNTDBAfVkw9kR0H9qTVQHybRyoKAKs7j0Xt+gNtBM1aDVk8hgQz9RbRn5J2Ebo/O3A
+         54IIn3x7Qno2z7sEVnFZUvcnFoTmTjOQbYLHz89sq7ml1kkrMJWXMVLO5cIK54YyzaxW
+         xemoBaWWtwlxBln6K61vjeySzDoojAIEuFYM++LprNQ+cmwJltZh6zZXhHypLEftWEBY
+         yLz4EguYombbcbotaQIodiQ0hvwA3vHj2XIYsGJVtzNmmwJOkDkj9hDG9NaVh9AMkxKa
+         m8vbP8DDOryggDQlqDTopCss+jMCXJudPAkx7HD8E6pmSCmORbMQiYcJTYW54ugPZckM
+         +ddA==
+X-Gm-Message-State: AOAM530+dpUiteoK7Z6Glv3h7qcWmhg4mUh1LGmoz5Bhajyb586Ht20i
+	sYbmGlInXcnQSY39wfDD8nftSjtrsAm81xXmPFQe9LMyMW8=
+X-Google-Smtp-Source: ABdhPJz7Aib64B8raegTyReM2bXIByvtMGkVIYwWFrvuAWFgSHJJNBUYKXrOKngFsTM9jpaCppyWtYcwaEBgIYs51kY=
+X-Received: by 2002:a5d:610a:: with SMTP id v10mr8702825wrt.399.1620050201331;
+ Mon, 03 May 2021 06:56:41 -0700 (PDT)
+MIME-Version: 1.0
+References: <0b28b46a69b6c6009111f2c91.132b69cb3d.20210503111949.2ca14cf95a.2db883cd@mail59.suw11.mcdlv.net>
+In-Reply-To: <0b28b46a69b6c6009111f2c91.132b69cb3d.20210503111949.2ca14cf95a.2db883cd@mail59.suw11.mcdlv.net>
+From: Jasper Honkasalo <japsu.honkasalo@gmail.com>
+Date: Mon, 3 May 2021 16:56:29 +0300
+Message-ID: <CAKNULYo88d=SZoTWDXQ2hwiEjE_h3o2wy8iPCOo-KFYkX+=WVA@mail.gmail.com>
+Subject: Testi projekti 1
+To: 0481664@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000c4cbab05c16d548c"
+
+--000000000000c4cbab05c16d548c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Teppo testimies
+6.7.2021
+64 h
+
+---------- Forwarded message ---------
+From: GraysonHobby <sales@graysonhobby.com>
+Date: Mon, May 3, 2021 at 2:21 PM
+Subject: A Warm Welcome to GraysonHobby =F0=9F=98=80
+To: <japsu.honkasalo@gmail.com>
+
+
+D
+We're so happy you are here!  We founded Grayson Hobby because we wanted to
+create a trustworthy and inspiring place for you to find everything you
+need for the RC FPV Drone and Radio Control Airplane.
+
+If you are ever in Atlanta, Georgia, we invite you to stop by and visit our
+brick and motor hobby shop. (click here for the address)
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D5165ec6e6a&e=3D132b69cb3d>
+
+
+- Basil
+As promised here is your coupon code - Terms and Conditions are at the
+bottom
+
+$5.00 off any purchase over $50.00
+Enter the Coupon Code Below (see details for restrictions)
+Shop Now
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3Dc56df49860&e=3D132b69cb3d>
+Most Popular FPV & Drones
+[image: Jumper R1+ 16Ch D16 Micro Receiver]
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3Df9654102c7&e=3D132b69cb3d>
+Jumper R1+ 16Ch D16 Micro Receiver
+9.99
+View
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3Df9654102c7&e=3D132b69cb3d>
+[image: KingKong ET125 4S Edition - FrSky BNF]
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D88094bcab5&e=3D132b69cb3d>
+KingKong ET125 4S Edition - FrSky BNF
+159.99
+View
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D88094bcab5&e=3D132b69cb3d>
+[image: Diatone Taycan 3 inch Cinewhoop 4S FPV Drone PNP]
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3De6dbc8d085&e=3D132b69cb3d>
+Diatone Taycan 3 inch Cinewhoop 4S FPV Drone PNP
+$199.99
+View
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3De6dbc8d085&e=3D132b69cb3d>
+[image: Diatone R349 3 Inch Micro FPV Drone with TBS Unify VTX]
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3Da26f2031cf&e=3D132b69cb3d>
+Diatone R349 3 Inch Micro FPV Drone with TBS Unify VTX
+$159.99
+View
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3Da26f2031cf&e=3D132b69cb3d>
+Most Popular Fixed Wing & Accessories
+[image: Dynam Waco YMF 5D - Yellow PNP]
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3Dc5921eb570&e=3D132b69cb3d>
+Dynam Waco YMF 5D - Yellow PNP
+$199.99
+View
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3Dc5921eb570&e=3D132b69cb3d>
+[image: 2200mAh 11.1v 35C - XT60 LongBow 3S Lipo Battery Pack]
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D33166e8f95&e=3D132b69cb3d>
+2200mAh 11.1v 35C - XT60 LongBow 3S Lipo Battery Pack
+$20.00
+View
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D33166e8f95&e=3D132b69cb3d>
+[image: Jumper R8 16 Channel Receiver for Airplanes]
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D686aa92563&e=3D132b69cb3d>
+Jumper R8 16 Channel Receiver for Airplanes
+$14.99
+View
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D686aa92563&e=3D132b69cb3d>
+[image: Dynam A10 V2 64mm EDF Jet Green Camo - PNP]
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D4b495dbc23&e=3D132b69cb3d>
+Dynam A10 V2 64mm EDF Jet Green Camo - PNP
+$199.99
+View
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D4b495dbc23&e=3D132b69cb3d>
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3Dbed321baf9&e=3D132b69cb3d>
+[image: Pitts 450mm Airplane Combo & Electronics Bundle - DSMX/2]
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D7bf286df79&e=3D132b69cb3d>
+Pitts 450mm Airplane Combo & Electronics Bundle - DSMX/2
+$79.99
+View
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D7bf286df79&e=3D132b69cb3d>
+[image: 150mAh 2S 7.4V Battery Pack - JST]
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D2a6b5a0a3d&e=3D132b69cb3d>
+150mAh 2S 7.4V Battery Pack - JST
+$6.99
+View
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D2a6b5a0a3d&e=3D132b69cb3d>
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D5abf0ce360&e=3D132b69cb3d>
+Click the link to see all of our Tutorials!
+Offer valid on online or instore purchases.  To redeem online promotion
+code must be entered at checkout and is valid for one-time use only. Sales
+tax, shipping & handling do not qualify for discount. This offer is not
+redeemable for cash or gift cards, nor is it valid toward previous
+purchases. Offer may not be combined with any other coupons, discounts,
+offers, or promotions. Void if altered, copied, transferred, auctioned or
+sold. Offer valid on in-stock items only. No rain checks issued. Offer not
+valid for prior purchases. Other restrictions may apply. Cash Value 1/10=C2=
+=A2.
+Coupon code can expire at anytime.
+
+
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3Df77f54a62b&e=3D132b69cb3d>
+<https://graysonhobby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c600=
+9111f2c91&id=3Dd64fd4ba78&e=3D132b69cb3d>
+<http://GraysonHobby.com>
+*Copyright =C2=A9 2021 Grayson Hobby, All rights reserved.*
+You are receiving this email because you opted in on our website.
+
+*Our mailing address is:*
+Grayson Hobby
+220 Old Loganville Road
+Loganville, GA 30052
+
+Add us to your address book
+<https://graysonhobby.us14.list-manage.com/vcard?u=3D0b28b46a69b6c6009111f2=
+c91&id=3D15c6ea26fd>
+
+
+Want to change how you receive these emails?
+You can update your preferences
+<https://graysonhobby.us14.list-manage.com/profile?u=3D0b28b46a69b6c6009111=
+f2c91&id=3D15c6ea26fd&e=3D132b69cb3d&c=3D2ca14cf95a>
+or unsubscribe from this list
+<https://graysonhobby.us14.list-manage.com/unsubscribe?u=3D0b28b46a69b6c600=
+9111f2c91&id=3D15c6ea26fd&e=3D132b69cb3d&c=3D2ca14cf95a>
+.
+
+--000000000000c4cbab05c16d548c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Teppo testimies<div>6.7.2021</div><div>64 h</div><div><br>=
+<div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">----------=
+ Forwarded message ---------<br>From: <strong class=3D"gmail_sendername" di=
+r=3D"auto">GraysonHobby</strong> <span dir=3D"auto">&lt;<a href=3D"mailto:s=
+ales@graysonhobby.com">sales@graysonhobby.com</a>&gt;</span><br>Date: Mon, =
+May 3, 2021 at 2:21 PM<br>Subject: A Warm Welcome to GraysonHobby=C2=A0=F0=
+=9F=98=80<br>To:  &lt;<a href=3D"mailto:japsu.honkasalo@gmail.com">japsu.ho=
+nkasalo@gmail.com</a>&gt;<br></div><br><br><u></u>
+
+   =20
+       =20
+       =20
+       =20
+       =20
+       =20
+       =20
+
+   =20
+    <div style=3D"height:100%;margin:0;padding:0;width:100%">
+       =20
+        <center>
+            <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspac=
+ing=3D"0" height=3D"100%" width=3D"100%" id=3D"m_-1374760699223872902bodyTa=
+ble" style=3D"border-collapse:collapse;height:100%;margin:0;padding:0;width=
+:100%">
+                <tbody><tr>
+                    <td align=3D"center" valign=3D"top" id=3D"m_-1374760699=
+223872902bodyCell" style=3D"height:100%;margin:0;padding:0;width:100%">
+                       =20
+                        <table border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" width=3D"100%" style=3D"border-collapse:collapse">
+                            <tbody><tr>
+                                <td align=3D"center" valign=3D"top" id=3D"m=
+_-1374760699223872902templateHeader" style=3D"background:#f7f7f7 none no-re=
+peat center/cover;background-color:#f7f7f7;background-image:none;background=
+-repeat:no-repeat;background-position:center;background-size:cover;border-t=
+op:0;border-bottom:0;padding-top:54px;padding-bottom:54px">
+                                   =20
+                                    <table align=3D"center" border=3D"0" ce=
+llpadding=3D"0" cellspacing=3D"0" width=3D"100%" class=3D"m_-13747606992238=
+72902templateContainer" style=3D"border-collapse:collapse;max-width:600px!i=
+mportant">
+                                        <tbody><tr>
+                                            <td valign=3D"top" class=3D"m_-=
+1374760699223872902headerContainer" style=3D"background:transparent none no=
+-repeat center/cover;background-color:transparent;background-image:none;bac=
+kground-repeat:no-repeat;background-position:center;background-size:cover;b=
+order-top:0;border-bottom:0;padding-top:0;padding-bottom:0"><table border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"min-widt=
+h:100%;border-collapse:collapse">
+    <tbody>
+            <tr>
+                <td valign=3D"top" style=3D"padding:9px">
+                    <table align=3D"left" width=3D"100%" border=3D"0" cellp=
+adding=3D"0" cellspacing=3D"0" style=3D"min-width:100%;border-collapse:coll=
+apse">
+                        <tbody><tr>
+                            <td valign=3D"top" style=3D"padding-right:9px;p=
+adding-left:9px;padding-top:0;padding-bottom:0;text-align:center">
+
+
+                                        <img align=3D"center" alt=3D"" src=
+=3D"https://gallery.mailchimp.com/0b28b46a69b6c6009111f2c91/images/70f0d1a5=
+-ffbb-49d7-b51a-592c4bae3fff.png" width=3D"196" style=3D"max-width:196px;pa=
+dding-bottom:0;display:inline!important;vertical-align:bottom;border:0;heig=
+ht:auto;outline:none;text-decoration:none" class=3D"m_-1374760699223872902m=
+cnImage">
+
+
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+    </tbody>
+</table></td>
+                                        </tr>
+                                    </tbody></table>
+                                   =20
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align=3D"center" valign=3D"top" id=3D"m=
+_-1374760699223872902templateBody" style=3D"background:#ffffff none no-repe=
+at center/cover;background-color:#ffffff;background-image:none;background-r=
+epeat:no-repeat;background-position:center;background-size:cover;border-top=
+:0;border-bottom:0;padding-top:27px;padding-bottom:54px">
+                                   =20
+                                    <table align=3D"center" border=3D"0" ce=
+llpadding=3D"0" cellspacing=3D"0" width=3D"100%" class=3D"m_-13747606992238=
+72902templateContainer" style=3D"border-collapse:collapse;max-width:600px!i=
+mportant">
+                                        <tbody><tr>
+                                            <td valign=3D"top" class=3D"m_-=
+1374760699223872902bodyContainer" style=3D"background:transparent none no-r=
+epeat center/cover;background-color:transparent;background-image:none;backg=
+round-repeat:no-repeat;background-position:center;background-size:cover;bor=
+der-top:0;border-bottom:0;padding-top:0;padding-bottom:0"><table border=3D"=
+0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"min-width:10=
+0%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td valign=3D"top" style=3D"padding-top:9px">
+              =09
+		=09
+			=09
+                <table align=3D"left" border=3D"0" cellpadding=3D"0" cellsp=
+acing=3D"0" style=3D"max-width:100%;min-width:100%;border-collapse:collapse=
+" width=3D"100%" class=3D"m_-1374760699223872902mcnTextContentContainer">
+                    <tbody><tr>
+
+                        <td valign=3D"top" class=3D"m_-1374760699223872902m=
+cnTextContent" style=3D"padding-top:0;padding-right:18px;padding-bottom:9px=
+;padding-left:18px;word-break:break-word;color:#757575;font-family:Helvetic=
+a;font-size:16px;line-height:150%;text-align:left">
+
+                            <h1 style=3D"display:block;margin:0;padding:0;c=
+olor:#222222;font-family:Helvetica;font-size:40px;font-style:normal;font-we=
+ight:bold;line-height:150%;letter-spacing:normal;text-align:center">D</h1>
+
+                        </td>
+                    </tr>
+                </tbody></table>
+			=09
+
+			=09
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"10=
+0%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td valign=3D"top" style=3D"padding-top:9px">
+              =09
+		=09
+			=09
+                <table align=3D"left" border=3D"0" cellpadding=3D"0" cellsp=
+acing=3D"0" style=3D"max-width:100%;min-width:100%;border-collapse:collapse=
+" width=3D"100%" class=3D"m_-1374760699223872902mcnTextContentContainer">
+                    <tbody><tr>
+
+                        <td valign=3D"top" class=3D"m_-1374760699223872902m=
+cnTextContent" style=3D"padding-top:0;padding-right:18px;padding-bottom:9px=
+;padding-left:18px;word-break:break-word;color:#757575;font-family:Helvetic=
+a;font-size:16px;line-height:150%;text-align:left">
+
+                            We&#39;re so happy you are here!=C2=A0 We found=
+ed Grayson Hobby because we wanted to create a trustworthy and inspiring pl=
+ace for you to find everything you need for the RC FPV Drone and Radio Cont=
+rol Airplane.=C2=A0=C2=A0<br>
+<br>
+If you are ever in Atlanta, Georgia, we invite you to stop by and visit our=
+ brick and motor hobby shop. <a href=3D"https://graysonhobby.us14.list-mana=
+ge.com/track/click?u=3D0b28b46a69b6c6009111f2c91&amp;id=3D5165ec6e6a&amp;e=
+=3D132b69cb3d" style=3D"color:#007c89;font-weight:normal;text-decoration:un=
+derline" target=3D"_blank">(click here for the address)=C2=A0</a><br>
+<br>
+<br>
+- Basil
+                        </td>
+                    </tr>
+                </tbody></table>
+			=09
+
+			=09
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"10=
+0%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+            <tr>
+                <td valign=3D"top" style=3D"padding:9px">
+                    <table align=3D"left" width=3D"100%" border=3D"0" cellp=
+adding=3D"0" cellspacing=3D"0" style=3D"min-width:100%;border-collapse:coll=
+apse">
+                        <tbody><tr>
+                            <td valign=3D"top" style=3D"padding-right:9px;p=
+adding-left:9px;padding-top:0;padding-bottom:0;text-align:center">
+
+
+                                        <img align=3D"center" alt=3D"" src=
+=3D"https://mcusercontent.com/0b28b46a69b6c6009111f2c91/images/afb242fa-f09=
+5-48c7-a6b0-497db40cb0ce.jpeg" width=3D"NaN" style=3D"max-width:650px;paddi=
+ng-bottom:0;display:inline!important;vertical-align:bottom;border:0;height:=
+auto;outline:none;text-decoration:none" class=3D"m_-1374760699223872902mcnI=
+mage">
+
+
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"10=
+0%" class=3D"m_-1374760699223872902mcnDividerBlock" style=3D"min-width:100%=
+;border-collapse:collapse;table-layout:fixed!important">
+    <tbody>
+        <tr>
+            <td style=3D"min-width:100%;padding:18px">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"min-width:100%;border-top:2px solid #eaeaea;border-col=
+lapse:collapse">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"10=
+0%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td valign=3D"top" style=3D"padding-top:9px">
+              =09
+		=09
+			=09
+                <table align=3D"left" border=3D"0" cellpadding=3D"0" cellsp=
+acing=3D"0" style=3D"max-width:100%;min-width:100%;border-collapse:collapse=
+" width=3D"100%" class=3D"m_-1374760699223872902mcnTextContentContainer">
+                    <tbody><tr>
+
+                        <td valign=3D"top" class=3D"m_-1374760699223872902m=
+cnTextContent" style=3D"padding-top:0;padding-right:18px;padding-bottom:9px=
+;padding-left:18px;word-break:break-word;color:#757575;font-family:Helvetic=
+a;font-size:16px;line-height:150%;text-align:left">
+
+                            As promised here is your coupon code - Terms an=
+d Conditions are at the bottom
+                        </td>
+                    </tr>
+                </tbody></table>
+			=09
+
+			=09
+            </td>
+        </tr>
+    </tbody>
+</table><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" width=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody><tr>
+        <td style=3D"padding-top:9px;padding-right:18px;padding-bottom:9px;=
+padding-left:18px" valign=3D"top">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"max-width:100%;border-collapse:collapse">
+                <tbody><tr>
+                    <td valign=3D"top" style=3D"background-color:#efefef;ba=
+ckground-repeat:no-repeat;border:1px solid #999999">
+                        <table align=3D"center" border=3D"0" cellpadding=3D=
+"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:collapse">
+    <tbody><tr>
+        <td valign=3D"top" style=3D"padding-top:27px;padding-right:18px;pad=
+ding-left:18px">
+            <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspac=
+ing=3D"0" width=3D"100%" style=3D"border-collapse:collapse">
+
+                <tbody><tr>
+                    <td align=3D"center" valign=3D"middle" style=3D"padding=
+-bottom:18px">
+                        <div class=3D"m_-1374760699223872902mcnTextContent"=
+ style=3D"text-align:center;color:#555555;word-break:break-word;font-family=
+:Helvetica;font-size:16px;line-height:150%"><span style=3D"font-size:18px">=
+$5.00 off any purchase over $50.00</span><br>
+Enter the Coupon Code Below (see details for restrictions)</div>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align=3D"center" valign=3D"middle" style=3D"padding=
+-bottom:18px;word-break:break-all;color:#555555;font-family:Helvetica;font-=
+size:48px;font-style:normal;font-weight:bold">
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align=3D"center" valign=3D"middle" style=3D"font-fa=
+mily:Arial;font-size:16px;padding:15px">
+                        <table border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" width=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td style=3D"padding-top:0;padding-right:18px;padding-bottom:18=
+px;padding-left:18px" valign=3D"top" align=3D"center">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" sty=
+le=3D"border-collapse:separate!important;border:1px dotted;border-radius:5p=
+x;background-color:#fdc50e">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" style=3D=
+"font-family:Arial;font-size:16px;padding:15px">
+                                <a class=3D"m_-1374760699223872902mcnButton=
+" title=3D"Shop Now" href=3D"https://graysonhobby.us14.list-manage.com/trac=
+k/click?u=3D0b28b46a69b6c6009111f2c91&amp;id=3Dc56df49860&amp;e=3D132b69cb3=
+d" style=3D"font-weight:bold;letter-spacing:normal;line-height:100%;text-al=
+ign:center;text-decoration:none;color:#0c0c0c;display:block" target=3D"_bla=
+nk">Shop Now</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+                    </td>
+                </tr>
+
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" class=3D"m_-1374760699223872902mcnDividerBlock" style=3D"min-wi=
+dth:100%;border-collapse:collapse;table-layout:fixed!important">
+    <tbody>
+        <tr>
+            <td style=3D"min-width:100%;padding:18px">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"min-width:100%;border-top:2px solid #eaeaea;border-col=
+lapse:collapse">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"10=
+0%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td valign=3D"top" style=3D"padding-top:9px">
+              =09
+		=09
+			=09
+                <table align=3D"left" border=3D"0" cellpadding=3D"0" cellsp=
+acing=3D"0" style=3D"max-width:100%;min-width:100%;border-collapse:collapse=
+" width=3D"100%" class=3D"m_-1374760699223872902mcnTextContentContainer">
+                    <tbody><tr>
+
+                        <td valign=3D"top" class=3D"m_-1374760699223872902m=
+cnTextContent" style=3D"padding-top:0;padding-right:18px;padding-bottom:9px=
+;padding-left:18px;word-break:break-word;color:#757575;font-family:Helvetic=
+a;font-size:16px;line-height:150%;text-align:left">
+
+                            Most Popular FPV &amp; Drones
+                        </td>
+                    </tr>
+                </tbody></table>
+			=09
+
+			=09
+            </td>
+        </tr>
+    </tbody>
+</table><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" width=3D"100%" style=3D"border-collapse:collapse">
+    <tbody><tr>
+        <td align=3D"left" valign=3D"top">
+           =20
+
+
+           =20
+            <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" width=3D"100%" class=3D"m_-1374760699223872902mcnRecContentContaine=
+r" style=3D"max-width:150px;border-collapse:collapse">
+                <tbody><tr>
+                    <td align=3D"left" valign=3D"top">
+                        <table align=3D"left" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0" width=3D"100%" style=3D"max-width:100%;border-collapse:=
+collapse">
+                            <tbody><tr>
+                                <td align=3D"left" valign=3D"top" style=3D"=
+font-size:0;padding-bottom:9px">
+                                    <table align=3D"left" border=3D"0" cell=
+padding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:col=
+lapse">
+                                        <tbody><tr>
+                                            <td align=3D"center" valign=3D"=
+top" style=3D"padding-top:9px;padding-right:18px;padding-left:18px">
+                                                <a href=3D"https://graysonh=
+obby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c6009111f2c91&amp;id=
+=3Df9654102c7&amp;e=3D132b69cb3d" title=3D"Jumper R1+ 16Ch D16 Micro Receiv=
+er" target=3D"_blank">
+                                                    <img alt=3D"Jumper R1+ =
+16Ch D16 Micro Receiver" src=3D"https://d2eqefissbzcnq.cloudfront.net/media=
+/catalog/product/cache/1/image/265x/9df78eab33525d08d6e5fb8d27136e95/j/u/ju=
+mper-r1.jpg" width=3D"114" style=3D"max-width:100%;border:0;height:auto;out=
+line:none;text-decoration:none;vertical-align:bottom" class=3D"m_-137476069=
+9223872902mcnImage">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align=3D"left" valign=3D"to=
+p" class=3D"m_-1374760699223872902mcnTextContent" style=3D"padding-top:9px;=
+word-break:break-word;color:#757575;font-family:Helvetica;font-size:16px;li=
+ne-height:150%;text-align:left">
+                                                <table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:collap=
+se">
+
+    <tbody><tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;color:#202020;font-family:Helvetica;font-size:16px;font-style=
+:normal;font-weight:bold;line-height:100%;text-align:left">
+            Jumper R1+ 16Ch D16 Micro Receiver<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;font-family:Helvetica;font-size:14px;font-style:normal;font-w=
+eight:normal;line-height:100%;text-align:left">
+            9.99<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:18px">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td style=3D"padding-top:0;padding-right:18px;padding-bottom:18=
+px;padding-left:18px" valign=3D"top" align=3D"center">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"border-collapse:separate!important;border-radius:3px;b=
+ackground-color:#2baadf">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" style=3D=
+"font-family:Arial;font-size:16px;padding:15px">
+                                <a class=3D"m_-1374760699223872902mcnButton=
+" title=3D"View" href=3D"https://graysonhobby.us14.list-manage.com/track/cl=
+ick?u=3D0b28b46a69b6c6009111f2c91&amp;id=3Df9654102c7&amp;e=3D132b69cb3d" s=
+tyle=3D"font-weight:bold;letter-spacing:normal;line-height:100%;text-align:=
+center;text-decoration:none;color:#ffffff;display:block" target=3D"_blank">=
+View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+        </td>
+    </tr>
+
+</tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+
+           =20
+
+           =20
+            <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" width=3D"100%" class=3D"m_-1374760699223872902mcnRecContentContaine=
+r" style=3D"max-width:150px;border-collapse:collapse">
+                <tbody><tr>
+                    <td align=3D"left" valign=3D"top">
+                        <table align=3D"left" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0" width=3D"100%" style=3D"max-width:100%;border-collapse:=
+collapse">
+                            <tbody><tr>
+                                <td align=3D"left" valign=3D"top" style=3D"=
+font-size:0;padding-bottom:9px">
+                                    <table align=3D"left" border=3D"0" cell=
+padding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:col=
+lapse">
+                                        <tbody><tr>
+                                            <td align=3D"center" valign=3D"=
+top" style=3D"padding-top:9px;padding-right:18px;padding-left:18px">
+                                                <a href=3D"https://graysonh=
+obby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c6009111f2c91&amp;id=
+=3D88094bcab5&amp;e=3D132b69cb3d" title=3D"KingKong ET125 4S Edition - FrSk=
+y BNF" target=3D"_blank">
+                                                    <img alt=3D"KingKong ET=
+125 4S Edition - FrSky BNF" src=3D"https://d2eqefissbzcnq.cloudfront.net/me=
+dia/catalog/product/cache/1/image/265x/9df78eab33525d08d6e5fb8d27136e95/e/t=
+/et125-4s.jpg" width=3D"114" style=3D"max-width:100%;border:0;height:auto;o=
+utline:none;text-decoration:none;vertical-align:bottom" class=3D"m_-1374760=
+699223872902mcnImage">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align=3D"left" valign=3D"to=
+p" class=3D"m_-1374760699223872902mcnTextContent" style=3D"padding-top:9px;=
+word-break:break-word;color:#757575;font-family:Helvetica;font-size:16px;li=
+ne-height:150%;text-align:left">
+                                                <table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:collap=
+se">
+
+    <tbody><tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;color:#202020;font-family:Helvetica;font-size:16px;font-style=
+:normal;font-weight:bold;line-height:100%;text-align:left">
+            KingKong ET125 4S Edition - FrSky BNF<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;font-family:Helvetica;font-size:14px;font-style:normal;font-w=
+eight:normal;line-height:100%;text-align:left">
+            159.99<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:18px">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td style=3D"padding-top:0;padding-right:18px;padding-bottom:18=
+px;padding-left:18px" valign=3D"top" align=3D"center">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"border-collapse:separate!important;border-radius:3px;b=
+ackground-color:#2baadf">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" style=3D=
+"font-family:Arial;font-size:16px;padding:15px">
+                                <a class=3D"m_-1374760699223872902mcnButton=
+" title=3D"View" href=3D"https://graysonhobby.us14.list-manage.com/track/cl=
+ick?u=3D0b28b46a69b6c6009111f2c91&amp;id=3D88094bcab5&amp;e=3D132b69cb3d" s=
+tyle=3D"font-weight:bold;letter-spacing:normal;line-height:100%;text-align:=
+center;text-decoration:none;color:#ffffff;display:block" target=3D"_blank">=
+View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+        </td>
+    </tr>
+
+</tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+
+           =20
+
+           =20
+            <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" width=3D"100%" class=3D"m_-1374760699223872902mcnRecContentContaine=
+r" style=3D"max-width:150px;border-collapse:collapse">
+                <tbody><tr>
+                    <td align=3D"left" valign=3D"top">
+                        <table align=3D"left" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0" width=3D"100%" style=3D"max-width:100%;border-collapse:=
+collapse">
+                            <tbody><tr>
+                                <td align=3D"left" valign=3D"top" style=3D"=
+font-size:0;padding-bottom:9px">
+                                    <table align=3D"left" border=3D"0" cell=
+padding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:col=
+lapse">
+                                        <tbody><tr>
+                                            <td align=3D"center" valign=3D"=
+top" style=3D"padding-top:9px;padding-right:18px;padding-left:18px">
+                                                <a href=3D"https://graysonh=
+obby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c6009111f2c91&amp;id=
+=3De6dbc8d085&amp;e=3D132b69cb3d" title=3D"Diatone Taycan 3 inch Cinewhoop =
+4S FPV Drone PNP" target=3D"_blank">
+                                                    <img alt=3D"Diatone Tay=
+can 3 inch Cinewhoop 4S FPV Drone PNP" src=3D"https://d2eqefissbzcnq.cloudf=
+ront.net/media/catalog/product/cache/1/image/265x/9df78eab33525d08d6e5fb8d2=
+7136e95/d/i/diatone-taycan-min_1_1.jpg" width=3D"114" style=3D"max-width:10=
+0%;border:0;height:auto;outline:none;text-decoration:none;vertical-align:bo=
+ttom" class=3D"m_-1374760699223872902mcnImage">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align=3D"left" valign=3D"to=
+p" class=3D"m_-1374760699223872902mcnTextContent" style=3D"padding-top:9px;=
+word-break:break-word;color:#757575;font-family:Helvetica;font-size:16px;li=
+ne-height:150%;text-align:left">
+                                                <table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:collap=
+se">
+
+    <tbody><tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;color:#202020;font-family:Helvetica;font-size:16px;font-style=
+:normal;font-weight:bold;line-height:100%;text-align:left">
+            Diatone Taycan 3 inch Cinewhoop 4S FPV Drone PNP<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;font-family:Helvetica;font-size:14px;font-style:normal;font-w=
+eight:normal;line-height:100%;text-align:left">
+            $199.99<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:18px">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td style=3D"padding-top:0;padding-right:18px;padding-bottom:18=
+px;padding-left:18px" valign=3D"top" align=3D"center">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"border-collapse:separate!important;border-radius:3px;b=
+ackground-color:#2baadf">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" style=3D=
+"font-family:Arial;font-size:16px;padding:15px">
+                                <a class=3D"m_-1374760699223872902mcnButton=
+" title=3D"View" href=3D"https://graysonhobby.us14.list-manage.com/track/cl=
+ick?u=3D0b28b46a69b6c6009111f2c91&amp;id=3De6dbc8d085&amp;e=3D132b69cb3d" s=
+tyle=3D"font-weight:bold;letter-spacing:normal;line-height:100%;text-align:=
+center;text-decoration:none;color:#ffffff;display:block" target=3D"_blank">=
+View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+        </td>
+    </tr>
+
+</tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+
+           =20
+
+           =20
+            <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" width=3D"100%" class=3D"m_-1374760699223872902mcnRecContentContaine=
+r" style=3D"max-width:150px;border-collapse:collapse">
+                <tbody><tr>
+                    <td align=3D"left" valign=3D"top">
+                        <table align=3D"left" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0" width=3D"100%" style=3D"max-width:100%;border-collapse:=
+collapse">
+                            <tbody><tr>
+                                <td align=3D"left" valign=3D"top" style=3D"=
+font-size:0;padding-bottom:9px">
+                                    <table align=3D"left" border=3D"0" cell=
+padding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:col=
+lapse">
+                                        <tbody><tr>
+                                            <td align=3D"center" valign=3D"=
+top" style=3D"padding-top:9px;padding-right:18px;padding-left:18px">
+                                                <a href=3D"https://graysonh=
+obby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c6009111f2c91&amp;id=
+=3Da26f2031cf&amp;e=3D132b69cb3d" title=3D"Diatone R349 3 Inch Micro FPV Dr=
+one with TBS Unify VTX" target=3D"_blank">
+                                                    <img alt=3D"Diatone R34=
+9 3 Inch Micro FPV Drone with TBS Unify VTX" src=3D"https://d2eqefissbzcnq.=
+cloudfront.net/media/catalog/product/cache/1/image/265x/9df78eab33525d08d6e=
+5fb8d27136e95/r/3/r349-3.jpg" width=3D"114" style=3D"max-width:100%;border:=
+0;height:auto;outline:none;text-decoration:none;vertical-align:bottom" clas=
+s=3D"m_-1374760699223872902mcnImage">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align=3D"left" valign=3D"to=
+p" class=3D"m_-1374760699223872902mcnTextContent" style=3D"padding-top:9px;=
+word-break:break-word;color:#757575;font-family:Helvetica;font-size:16px;li=
+ne-height:150%;text-align:left">
+                                                <table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:collap=
+se">
+
+    <tbody><tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;color:#202020;font-family:Helvetica;font-size:16px;font-style=
+:normal;font-weight:bold;line-height:100%;text-align:left">
+            Diatone R349 3 Inch Micro FPV Drone with TBS Unify VTX<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;font-family:Helvetica;font-size:14px;font-style:normal;font-w=
+eight:normal;line-height:100%;text-align:left">
+            $159.99<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:18px">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td style=3D"padding-top:0;padding-right:18px;padding-bottom:18=
+px;padding-left:18px" valign=3D"top" align=3D"center">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"border-collapse:separate!important;border-radius:3px;b=
+ackground-color:#2baadf">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" style=3D=
+"font-family:Arial;font-size:16px;padding:15px">
+                                <a class=3D"m_-1374760699223872902mcnButton=
+" title=3D"View" href=3D"https://graysonhobby.us14.list-manage.com/track/cl=
+ick?u=3D0b28b46a69b6c6009111f2c91&amp;id=3Da26f2031cf&amp;e=3D132b69cb3d" s=
+tyle=3D"font-weight:bold;letter-spacing:normal;line-height:100%;text-align:=
+center;text-decoration:none;color:#ffffff;display:block" target=3D"_blank">=
+View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+        </td>
+    </tr>
+
+</tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+
+           =20
+
+
+
+           =20
+        </td>
+    </tr>
+</tbody></table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" class=3D"m_-1374760699223872902mcnDividerBlock" style=3D"min-wi=
+dth:100%;border-collapse:collapse;table-layout:fixed!important">
+    <tbody>
+        <tr>
+            <td style=3D"min-width:100%;padding:18px">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"min-width:100%;border-top:2px solid #eaeaea;border-col=
+lapse:collapse">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"10=
+0%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td valign=3D"top" style=3D"padding-top:9px">
+              =09
+		=09
+			=09
+                <table align=3D"left" border=3D"0" cellpadding=3D"0" cellsp=
+acing=3D"0" style=3D"max-width:100%;min-width:100%;border-collapse:collapse=
+" width=3D"100%" class=3D"m_-1374760699223872902mcnTextContentContainer">
+                    <tbody><tr>
+
+                        <td valign=3D"top" class=3D"m_-1374760699223872902m=
+cnTextContent" style=3D"padding-top:0;padding-right:18px;padding-bottom:9px=
+;padding-left:18px;word-break:break-word;color:#757575;font-family:Helvetic=
+a;font-size:16px;line-height:150%;text-align:left">
+
+                            Most Popular Fixed Wing &amp; Accessories
+                        </td>
+                    </tr>
+                </tbody></table>
+			=09
+
+			=09
+            </td>
+        </tr>
+    </tbody>
+</table><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" width=3D"100%" style=3D"border-collapse:collapse">
+    <tbody><tr>
+        <td align=3D"left" valign=3D"top">
+           =20
+
+
+           =20
+            <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" width=3D"100%" class=3D"m_-1374760699223872902mcnRecContentContaine=
+r" style=3D"max-width:150px;border-collapse:collapse">
+                <tbody><tr>
+                    <td align=3D"left" valign=3D"top">
+                        <table align=3D"left" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0" width=3D"100%" style=3D"max-width:100%;border-collapse:=
+collapse">
+                            <tbody><tr>
+                                <td align=3D"left" valign=3D"top" style=3D"=
+font-size:0;padding-bottom:9px">
+                                    <table align=3D"left" border=3D"0" cell=
+padding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:col=
+lapse">
+                                        <tbody><tr>
+                                            <td align=3D"center" valign=3D"=
+top" style=3D"padding-top:9px;padding-right:18px;padding-left:18px">
+                                                <a href=3D"https://graysonh=
+obby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c6009111f2c91&amp;id=
+=3Dc5921eb570&amp;e=3D132b69cb3d" title=3D"Dynam Waco YMF 5D - Yellow PNP" =
+target=3D"_blank">
+                                                    <img alt=3D"Dynam Waco =
+YMF 5D - Yellow PNP" src=3D"https://d2eqefissbzcnq.cloudfront.net/media/cat=
+alog/product/cache/1/image/265x/9df78eab33525d08d6e5fb8d27136e95/d/y/dynam-=
+waco.jpg" width=3D"114" style=3D"max-width:100%;border:0;height:auto;outlin=
+e:none;text-decoration:none;vertical-align:bottom" class=3D"m_-137476069922=
+3872902mcnImage">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align=3D"left" valign=3D"to=
+p" class=3D"m_-1374760699223872902mcnTextContent" style=3D"padding-top:9px;=
+word-break:break-word;color:#757575;font-family:Helvetica;font-size:16px;li=
+ne-height:150%;text-align:left">
+                                                <table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:collap=
+se">
+
+    <tbody><tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;color:#202020;font-family:Helvetica;font-size:16px;font-style=
+:normal;font-weight:bold;line-height:100%;text-align:left">
+            Dynam Waco YMF 5D - Yellow PNP<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;font-family:Helvetica;font-size:14px;font-style:normal;font-w=
+eight:normal;line-height:100%;text-align:left">
+            $199.99<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:18px">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td style=3D"padding-top:0;padding-right:18px;padding-bottom:18=
+px;padding-left:18px" valign=3D"top" align=3D"center">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"border-collapse:separate!important;border-radius:4px;b=
+ackground-color:#2baadf">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" style=3D=
+"font-family:Arial;font-size:16px;padding:18px">
+                                <a class=3D"m_-1374760699223872902mcnButton=
+" title=3D"View" href=3D"https://graysonhobby.us14.list-manage.com/track/cl=
+ick?u=3D0b28b46a69b6c6009111f2c91&amp;id=3Dc5921eb570&amp;e=3D132b69cb3d" s=
+tyle=3D"font-weight:bold;letter-spacing:normal;line-height:100%;text-align:=
+center;text-decoration:none;color:#ffffff;display:block" target=3D"_blank">=
+View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+        </td>
+    </tr>
+
+</tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+
+           =20
+
+           =20
+            <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" width=3D"100%" class=3D"m_-1374760699223872902mcnRecContentContaine=
+r" style=3D"max-width:150px;border-collapse:collapse">
+                <tbody><tr>
+                    <td align=3D"left" valign=3D"top">
+                        <table align=3D"left" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0" width=3D"100%" style=3D"max-width:100%;border-collapse:=
+collapse">
+                            <tbody><tr>
+                                <td align=3D"left" valign=3D"top" style=3D"=
+font-size:0;padding-bottom:9px">
+                                    <table align=3D"left" border=3D"0" cell=
+padding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:col=
+lapse">
+                                        <tbody><tr>
+                                            <td align=3D"center" valign=3D"=
+top" style=3D"padding-top:9px;padding-right:18px;padding-left:18px">
+                                                <a href=3D"https://graysonh=
+obby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c6009111f2c91&amp;id=
+=3D33166e8f95&amp;e=3D132b69cb3d" title=3D"2200mAh 11.1v 35C - XT60 LongBow=
+ 3S Lipo Battery Pack" target=3D"_blank">
+                                                    <img alt=3D"2200mAh 11.=
+1v 35C - XT60 LongBow 3S Lipo Battery Pack" src=3D"https://d2eqefissbzcnq.c=
+loudfront.net/media/catalog/product/cache/1/image/265x/9df78eab33525d08d6e5=
+fb8d27136e95/l/o/longbow-2200-35c-lipo-min.jpg" width=3D"114" style=3D"max-=
+width:100%;border:0;height:auto;outline:none;text-decoration:none;vertical-=
+align:bottom" class=3D"m_-1374760699223872902mcnImage">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align=3D"left" valign=3D"to=
+p" class=3D"m_-1374760699223872902mcnTextContent" style=3D"padding-top:9px;=
+word-break:break-word;color:#757575;font-family:Helvetica;font-size:16px;li=
+ne-height:150%;text-align:left">
+                                                <table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:collap=
+se">
+
+    <tbody><tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;color:#202020;font-family:Helvetica;font-size:16px;font-style=
+:normal;font-weight:bold;line-height:100%;text-align:left">
+            2200mAh 11.1v 35C - XT60 LongBow 3S Lipo Battery Pack<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;font-family:Helvetica;font-size:14px;font-style:normal;font-w=
+eight:normal;line-height:100%;text-align:left">
+            $20.00<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:18px">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td style=3D"padding-top:0;padding-right:18px;padding-bottom:18=
+px;padding-left:18px" valign=3D"top" align=3D"center">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"border-collapse:separate!important;border-radius:4px;b=
+ackground-color:#2baadf">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" style=3D=
+"font-family:Arial;font-size:16px;padding:18px">
+                                <a class=3D"m_-1374760699223872902mcnButton=
+" title=3D"View" href=3D"https://graysonhobby.us14.list-manage.com/track/cl=
+ick?u=3D0b28b46a69b6c6009111f2c91&amp;id=3D33166e8f95&amp;e=3D132b69cb3d" s=
+tyle=3D"font-weight:bold;letter-spacing:normal;line-height:100%;text-align:=
+center;text-decoration:none;color:#ffffff;display:block" target=3D"_blank">=
+View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+        </td>
+    </tr>
+
+</tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+
+           =20
+
+           =20
+            <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" width=3D"100%" class=3D"m_-1374760699223872902mcnRecContentContaine=
+r" style=3D"max-width:150px;border-collapse:collapse">
+                <tbody><tr>
+                    <td align=3D"left" valign=3D"top">
+                        <table align=3D"left" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0" width=3D"100%" style=3D"max-width:100%;border-collapse:=
+collapse">
+                            <tbody><tr>
+                                <td align=3D"left" valign=3D"top" style=3D"=
+font-size:0;padding-bottom:9px">
+                                    <table align=3D"left" border=3D"0" cell=
+padding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:col=
+lapse">
+                                        <tbody><tr>
+                                            <td align=3D"center" valign=3D"=
+top" style=3D"padding-top:9px;padding-right:18px;padding-left:18px">
+                                                <a href=3D"https://graysonh=
+obby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c6009111f2c91&amp;id=
+=3D686aa92563&amp;e=3D132b69cb3d" title=3D"Jumper R8 16 Channel Receiver fo=
+r Airplanes" target=3D"_blank">
+                                                    <img alt=3D"Jumper R8 1=
+6 Channel Receiver for Airplanes" src=3D"https://d2eqefissbzcnq.cloudfront.=
+net/media/catalog/product/cache/1/image/265x/9df78eab33525d08d6e5fb8d27136e=
+95/j/u/jumper-r8.jpg" width=3D"114" style=3D"max-width:100%;border:0;height=
+:auto;outline:none;text-decoration:none;vertical-align:bottom" class=3D"m_-=
+1374760699223872902mcnImage">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align=3D"left" valign=3D"to=
+p" class=3D"m_-1374760699223872902mcnTextContent" style=3D"padding-top:9px;=
+word-break:break-word;color:#757575;font-family:Helvetica;font-size:16px;li=
+ne-height:150%;text-align:left">
+                                                <table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:collap=
+se">
+
+    <tbody><tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;color:#202020;font-family:Helvetica;font-size:16px;font-style=
+:normal;font-weight:bold;line-height:100%;text-align:left">
+            Jumper R8 16 Channel Receiver for Airplanes<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;font-family:Helvetica;font-size:14px;font-style:normal;font-w=
+eight:normal;line-height:100%;text-align:left">
+            $14.99<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:18px">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td style=3D"padding-top:0;padding-right:18px;padding-bottom:18=
+px;padding-left:18px" valign=3D"top" align=3D"center">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"border-collapse:separate!important;border-radius:4px;b=
+ackground-color:#2baadf">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" style=3D=
+"font-family:Arial;font-size:16px;padding:18px">
+                                <a class=3D"m_-1374760699223872902mcnButton=
+" title=3D"View" href=3D"https://graysonhobby.us14.list-manage.com/track/cl=
+ick?u=3D0b28b46a69b6c6009111f2c91&amp;id=3D686aa92563&amp;e=3D132b69cb3d" s=
+tyle=3D"font-weight:bold;letter-spacing:normal;line-height:100%;text-align:=
+center;text-decoration:none;color:#ffffff;display:block" target=3D"_blank">=
+View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+        </td>
+    </tr>
+
+</tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+
+           =20
+
+           =20
+            <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" width=3D"100%" class=3D"m_-1374760699223872902mcnRecContentContaine=
+r" style=3D"max-width:150px;border-collapse:collapse">
+                <tbody><tr>
+                    <td align=3D"left" valign=3D"top">
+                        <table align=3D"left" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0" width=3D"100%" style=3D"max-width:100%;border-collapse:=
+collapse">
+                            <tbody><tr>
+                                <td align=3D"left" valign=3D"top" style=3D"=
+font-size:0;padding-bottom:9px">
+                                    <table align=3D"left" border=3D"0" cell=
+padding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:col=
+lapse">
+                                        <tbody><tr>
+                                            <td align=3D"center" valign=3D"=
+top" style=3D"padding-top:9px;padding-right:18px;padding-left:18px">
+                                                <a href=3D"https://graysonh=
+obby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c6009111f2c91&amp;id=
+=3D4b495dbc23&amp;e=3D132b69cb3d" title=3D"Dynam A10 V2 64mm EDF Jet Green =
+Camo - PNP" target=3D"_blank">
+                                                    <img alt=3D"Dynam A10 V=
+2 64mm EDF Jet Green Camo - PNP" src=3D"https://d2eqefissbzcnq.cloudfront.n=
+et/media/catalog/product/cache/1/image/265x/9df78eab33525d08d6e5fb8d27136e9=
+5/d/y/dynam_grayson_a10g-a-560x231.jpg" width=3D"114" style=3D"max-width:10=
+0%;border:0;height:auto;outline:none;text-decoration:none;vertical-align:bo=
+ttom" class=3D"m_-1374760699223872902mcnImage">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align=3D"left" valign=3D"to=
+p" class=3D"m_-1374760699223872902mcnTextContent" style=3D"padding-top:9px;=
+word-break:break-word;color:#757575;font-family:Helvetica;font-size:16px;li=
+ne-height:150%;text-align:left">
+                                                <table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:collap=
+se">
+
+    <tbody><tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;color:#202020;font-family:Helvetica;font-size:16px;font-style=
+:normal;font-weight:bold;line-height:100%;text-align:left">
+            Dynam A10 V2 64mm EDF Jet Green Camo - PNP<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;font-family:Helvetica;font-size:14px;font-style:normal;font-w=
+eight:normal;line-height:100%;text-align:left">
+            $199.99<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:18px">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td style=3D"padding-top:0;padding-right:18px;padding-bottom:18=
+px;padding-left:18px" valign=3D"top" align=3D"center">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"border-collapse:separate!important;border-radius:4px;b=
+ackground-color:#2baadf">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" style=3D=
+"font-family:Arial;font-size:16px;padding:18px">
+                                <a class=3D"m_-1374760699223872902mcnButton=
+" title=3D"View" href=3D"https://graysonhobby.us14.list-manage.com/track/cl=
+ick?u=3D0b28b46a69b6c6009111f2c91&amp;id=3D4b495dbc23&amp;e=3D132b69cb3d" s=
+tyle=3D"font-weight:bold;letter-spacing:normal;line-height:100%;text-align:=
+center;text-decoration:none;color:#ffffff;display:block" target=3D"_blank">=
+View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+        </td>
+    </tr>
+
+</tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+
+           =20
+
+
+
+           =20
+        </td>
+    </tr>
+</tbody></table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" class=3D"m_-1374760699223872902mcnDividerBlock" style=3D"min-wi=
+dth:100%;border-collapse:collapse;table-layout:fixed!important">
+    <tbody>
+        <tr>
+            <td style=3D"min-width:100%;padding:18px">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"min-width:100%;border-top:2px solid #eaeaea;border-col=
+lapse:collapse">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"10=
+0%" style=3D"border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td valign=3D"top" style=3D"padding-top:9px;padding-right:18px;=
+padding-bottom:9px;padding-left:18px">
+
+<table align=3D"right" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"background-color:#404040;border-collapse:collapse">
+    <tbody><tr>
+        <td class=3D"m_-1374760699223872902mcnImageCardBottomImageContent" =
+align=3D"left" valign=3D"top" style=3D"padding-top:0px;padding-right:0px;pa=
+dding-bottom:0;padding-left:0px">
+
+
+            <a href=3D"https://graysonhobby.us14.list-manage.com/track/clic=
+k?u=3D0b28b46a69b6c6009111f2c91&amp;id=3Dbed321baf9&amp;e=3D132b69cb3d" tit=
+le=3D"Sequire Affordable Highly Recommend Soldering Irons Unboxing &amp; Re=
+view" target=3D"_blank">
+
+
+            <img alt=3D"" src=3D"https://mcusercontent.com/0b28b46a69b6c600=
+9111f2c91/video_thumbnails_new/e0c663d3e67126a3f141b674af27804b.png" width=
+=3D"564" style=3D"max-width:640px;border:0;height:auto;outline:none;text-de=
+coration:none;vertical-align:bottom" class=3D"m_-1374760699223872902mcnImag=
+e">
+            </a>
+
+        </td>
+    </tr>
+    <tr>
+        <td class=3D"m_-1374760699223872902mcnTextContent" valign=3D"top" s=
+tyle=3D"padding:9px 18px;color:#f2f2f2;font-family:Helvetica;font-size:14px=
+;font-weight:normal;text-align:center;word-break:break-word;line-height:150=
+%" width=3D"546">
+
+        </td>
+    </tr>
+</tbody></table>
+
+
+
+
+            </td>
+        </tr>
+    </tbody>
+</table><table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" width=3D"100%" style=3D"border-collapse:collapse">
+    <tbody><tr>
+        <td align=3D"left" valign=3D"top">
+           =20
+           =20
+            <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" width=3D"100%" class=3D"m_-1374760699223872902mcnRecContentContaine=
+r" style=3D"max-width:300px;border-collapse:collapse">
+                <tbody><tr>
+                    <td align=3D"left" valign=3D"top">
+                        <table align=3D"left" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0" width=3D"100%" style=3D"max-width:100%;border-collapse:=
+collapse">
+                            <tbody><tr>
+                                <td align=3D"left" valign=3D"top" style=3D"=
+font-size:0;padding-bottom:9px">
+                                    <table align=3D"left" border=3D"0" cell=
+padding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:col=
+lapse">
+                                        <tbody><tr>
+                                            <td align=3D"center" valign=3D"=
+top" style=3D"padding-top:9px;padding-right:18px;padding-left:18px">
+                                                <a href=3D"https://graysonh=
+obby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c6009111f2c91&amp;id=
+=3D7bf286df79&amp;e=3D132b69cb3d" title=3D"Pitts 450mm Airplane Combo &amp;=
+ Electronics Bundle - DSMX/2" target=3D"_blank">
+													<img alt=3D"Pitts 450mm Airplane Combo &amp; Electronics Bundl=
+e - DSMX/2" src=3D"https://graysonhobby.com/media/catalog/product/d/w/dw_pi=
+tts_a-min.jpg" width=3D"264" style=3D"max-width:100%;border:0;height:auto;o=
+utline:none;text-decoration:none;vertical-align:bottom" class=3D"m_-1374760=
+699223872902mcnImage">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align=3D"left" valign=3D"to=
+p" class=3D"m_-1374760699223872902mcnTextContent" style=3D"padding-top:9px;=
+word-break:break-word;color:#757575;font-family:Helvetica;font-size:16px;li=
+ne-height:150%;text-align:left">
+                                                <table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:collap=
+se">
+
+    <tbody><tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;color:#202020;font-family:Helvetica;font-size:16px;font-style=
+:normal;font-weight:bold;line-height:100%;text-align:left">
+            Pitts 450mm Airplane Combo &amp; Electronics Bundle - DSMX/2<br=
+>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;font-family:Helvetica;font-size:14px;font-style:normal;font-w=
+eight:normal;line-height:100%;text-align:left">
+            $79.99<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:18px">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td style=3D"padding-top:0;padding-right:18px;padding-bottom:18=
+px;padding-left:18px" valign=3D"top" align=3D"center">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"border-collapse:separate!important;background-color:#2=
+baadf">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" style=3D=
+"font-family:Helvetica;font-size:16px;padding:15px">
+                                <a class=3D"m_-1374760699223872902mcnButton=
+" title=3D"View" href=3D"https://graysonhobby.us14.list-manage.com/track/cl=
+ick?u=3D0b28b46a69b6c6009111f2c91&amp;id=3D7bf286df79&amp;e=3D132b69cb3d" s=
+tyle=3D"font-weight:bold;letter-spacing:normal;line-height:100%;text-align:=
+center;text-decoration:none;color:#ffffff;display:block" target=3D"_blank">=
+View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+        </td>
+    </tr>
+
+</tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+
+           =20
+           =20
+            <table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" width=3D"100%" class=3D"m_-1374760699223872902mcnRecContentContaine=
+r" style=3D"max-width:300px;border-collapse:collapse">
+                <tbody><tr>
+                    <td align=3D"left" valign=3D"top">
+                        <table align=3D"left" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0" width=3D"100%" style=3D"max-width:100%;border-collapse:=
+collapse">
+                            <tbody><tr>
+                                <td align=3D"left" valign=3D"top" style=3D"=
+font-size:0;padding-bottom:9px">
+                                    <table align=3D"left" border=3D"0" cell=
+padding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:col=
+lapse">
+                                        <tbody><tr>
+                                            <td align=3D"center" valign=3D"=
+top" style=3D"padding-top:9px;padding-right:18px;padding-left:18px">
+                                                <a href=3D"https://graysonh=
+obby.us14.list-manage.com/track/click?u=3D0b28b46a69b6c6009111f2c91&amp;id=
+=3D2a6b5a0a3d&amp;e=3D132b69cb3d" title=3D"150mAh  2S 7.4V Battery Pack - J=
+ST" target=3D"_blank">
+													<img alt=3D"150mAh  2S 7.4V Battery Pack - JST" src=3D"https:/=
+/graysonhobby.com/media/catalog/product/1/5/150mah-2s-a.jpg" width=3D"264" =
+style=3D"max-width:100%;border:0;height:auto;outline:none;text-decoration:n=
+one;vertical-align:bottom" class=3D"m_-1374760699223872902mcnImage">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align=3D"left" valign=3D"to=
+p" class=3D"m_-1374760699223872902mcnTextContent" style=3D"padding-top:9px;=
+word-break:break-word;color:#757575;font-family:Helvetica;font-size:16px;li=
+ne-height:150%;text-align:left">
+                                                <table border=3D"0" cellpad=
+ding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collapse:collap=
+se">
+
+    <tbody><tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;color:#202020;font-family:Helvetica;font-size:16px;font-style=
+:normal;font-weight:bold;line-height:100%;text-align:left">
+            150mAh  2S 7.4V Battery Pack - JST<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:9px;padding-left:18px;paddi=
+ng-right:18px;font-family:Helvetica;font-size:14px;font-style:normal;font-w=
+eight:normal;line-height:100%;text-align:left">
+            $6.99<br>
+        </td>
+    </tr>
+
+    <tr>
+        <td valign=3D"top" style=3D"padding-top:18px">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td style=3D"padding-top:0;padding-right:18px;padding-bottom:18=
+px;padding-left:18px" valign=3D"top" align=3D"center">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"border-collapse:separate!important;background-color:#2=
+baadf">
+                    <tbody>
+                        <tr>
+                            <td align=3D"center" valign=3D"middle" style=3D=
+"font-family:Helvetica;font-size:16px;padding:15px">
+                                <a class=3D"m_-1374760699223872902mcnButton=
+" title=3D"View" href=3D"https://graysonhobby.us14.list-manage.com/track/cl=
+ick?u=3D0b28b46a69b6c6009111f2c91&amp;id=3D2a6b5a0a3d&amp;e=3D132b69cb3d" s=
+tyle=3D"font-weight:bold;letter-spacing:normal;line-height:100%;text-align:=
+center;text-decoration:none;color:#ffffff;display:block" target=3D"_blank">=
+View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+        </td>
+    </tr>
+
+</tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+
+           =20
+           =20
+        </td>
+    </tr>
+</tbody></table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" class=3D"m_-1374760699223872902mcnDividerBlock" style=3D"min-wi=
+dth:100%;border-collapse:collapse;table-layout:fixed!important">
+    <tbody>
+        <tr>
+            <td style=3D"min-width:100%;padding:9px 18px 0px">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"10=
+0%" style=3D"border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td valign=3D"top" style=3D"padding-top:9px;padding-right:18px;=
+padding-bottom:9px;padding-left:18px">
+
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" widt=
+h=3D"100%" style=3D"background-color:#404040;border-collapse:collapse">
+    <tbody><tr>
+        <td class=3D"m_-1374760699223872902mcnImageCardBottomImageContent" =
+align=3D"left" valign=3D"top" style=3D"padding-top:0px;padding-right:0px;pa=
+dding-bottom:0;padding-left:0px">
+
+
+            <a href=3D"https://graysonhobby.us14.list-manage.com/track/clic=
+k?u=3D0b28b46a69b6c6009111f2c91&amp;id=3D5abf0ce360&amp;e=3D132b69cb3d" tit=
+le=3D"" target=3D"_blank">
+
+
+            <img alt=3D"" src=3D"https://gallery.mailchimp.com/0b28b46a69b6=
+c6009111f2c91/images/279ae907-199d-491a-9f53-b287cffa68d2.jpg" width=3D"564=
+" style=3D"max-width:1200px;border:0;height:auto;outline:none;text-decorati=
+on:none;vertical-align:bottom" class=3D"m_-1374760699223872902mcnImage">
+            </a>
+
+        </td>
+    </tr>
+    <tr>
+        <td class=3D"m_-1374760699223872902mcnTextContent" valign=3D"top" s=
+tyle=3D"padding:9px 18px;color:#f2f2f2;font-family:Helvetica;font-size:14px=
+;font-weight:normal;text-align:center;word-break:break-word;line-height:150=
+%" width=3D"546">
+            Click the link to see all of our Tutorials!
+        </td>
+    </tr>
+</tbody></table>
+
+
+
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"10=
+0%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td valign=3D"top" style=3D"padding-top:9px">
+              =09
+		=09
+			=09
+                <table align=3D"left" border=3D"0" cellpadding=3D"0" cellsp=
+acing=3D"0" style=3D"max-width:100%;min-width:100%;border-collapse:collapse=
+" width=3D"100%" class=3D"m_-1374760699223872902mcnTextContentContainer">
+                    <tbody><tr>
+
+                        <td valign=3D"top" class=3D"m_-1374760699223872902m=
+cnTextContent" style=3D"padding:0px 18px 9px;font-family:Tahoma,Verdana,Seg=
+oe,sans-serif;font-size:9px;word-break:break-word;color:#757575;line-height=
+:150%;text-align:left">
+
+                            <span style=3D"font-size:10px">Offer valid on o=
+nline or instore purchases.=C2=A0 To redeem online promotion code must be e=
+ntered at checkout and is valid for one-time use only. Sales tax, shipping =
+&amp; handling do not qualify for discount. This offer is not redeemable fo=
+r cash or gift cards, nor is it valid toward previous purchases. Offer may =
+not be combined with any other coupons, discounts, offers, or promotions. V=
+oid if altered, copied, transferred, auctioned or sold. Offer valid on in-s=
+tock items only. No rain checks issued. Offer not valid for prior purchases=
+. Other restrictions may apply. Cash Value 1/10=C2=A2. Coupon code can expi=
+re at anytime.=C2=A0</span><br>
+<br>
+=C2=A0
+                        </td>
+                    </tr>
+                </tbody></table>
+			=09
+
+			=09
+            </td>
+        </tr>
+    </tbody>
+</table></td>
+                                        </tr>
+                                    </tbody></table>
+                                   =20
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align=3D"center" valign=3D"top" id=3D"m=
+_-1374760699223872902templateFooter" style=3D"background:#333333 none no-re=
+peat center/cover;background-color:#333333;background-image:none;background=
+-repeat:no-repeat;background-position:center;background-size:cover;border-t=
+op:0;border-bottom:0;padding-top:45px;padding-bottom:63px">
+                                   =20
+                                    <table align=3D"center" border=3D"0" ce=
+llpadding=3D"0" cellspacing=3D"0" width=3D"100%" class=3D"m_-13747606992238=
+72902templateContainer" style=3D"border-collapse:collapse;max-width:600px!i=
+mportant">
+                                        <tbody><tr>
+                                            <td valign=3D"top" class=3D"m_-=
+1374760699223872902footerContainer" style=3D"background:transparent none no=
+-repeat center/cover;background-color:transparent;background-image:none;bac=
+kground-repeat:no-repeat;background-position:center;background-size:cover;b=
+order-top:0;border-bottom:0;padding-top:0;padding-bottom:0"><table border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"min-widt=
+h:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td align=3D"center" valign=3D"top" style=3D"padding:9px">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody><tr>
+        <td align=3D"center" style=3D"padding-left:9px;padding-right:9px">
+            <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=
+=3D"100%" style=3D"min-width:100%;border-collapse:collapse">
+                <tbody><tr>
+                    <td align=3D"center" valign=3D"top" style=3D"padding-to=
+p:9px;padding-right:9px;padding-left:9px">
+                        <table align=3D"center" border=3D"0" cellpadding=3D=
+"0" cellspacing=3D"0" style=3D"border-collapse:collapse">
+                            <tbody><tr>
+                                <td align=3D"center" valign=3D"top">
+                                   =20
+
+                                       =20
+
+
+                                            <table align=3D"left" border=3D=
+"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"display:inline;border-coll=
+apse:collapse">
+                                                <tbody><tr>
+                                                    <td valign=3D"top" styl=
+e=3D"padding-right:10px;padding-bottom:9px">
+                                                        <table border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collaps=
+e:collapse">
+                                                            <tbody><tr>
+                                                                <td align=
+=3D"left" valign=3D"middle" style=3D"padding-top:5px;padding-right:10px;pad=
+ding-bottom:5px;padding-left:9px">
+                                                                    <table =
+align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"" =
+style=3D"border-collapse:collapse">
+                                                                        <tb=
+ody><tr>
+
+                                                                           =
+     <td align=3D"center" valign=3D"middle" width=3D"24">
+                                                                           =
+         <a href=3D"https://graysonhobby.us14.list-manage.com/track/click?u=
+=3D0b28b46a69b6c6009111f2c91&amp;id=3Df77f54a62b&amp;e=3D132b69cb3d" target=
+=3D"_blank"><img src=3D"https://cdn-images.mailchimp.com/icons/social-block=
+-v2/outline-light-facebook-48.png" style=3D"display:block;border:0;height:a=
+uto;outline:none;text-decoration:none" height=3D"24" width=3D"24"></a>
+                                                                           =
+     </td>
+
+
+                                                                        </t=
+r>
+                                                                    </tbody=
+></table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody></table>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+
+                                       =20
+
+                                       =20
+
+
+                                            <table align=3D"left" border=3D=
+"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"display:inline;border-coll=
+apse:collapse">
+                                                <tbody><tr>
+                                                    <td valign=3D"top" styl=
+e=3D"padding-right:10px;padding-bottom:9px">
+                                                        <table border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collaps=
+e:collapse">
+                                                            <tbody><tr>
+                                                                <td align=
+=3D"left" valign=3D"middle" style=3D"padding-top:5px;padding-right:10px;pad=
+ding-bottom:5px;padding-left:9px">
+                                                                    <table =
+align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"" =
+style=3D"border-collapse:collapse">
+                                                                        <tb=
+ody><tr>
+
+                                                                           =
+     <td align=3D"center" valign=3D"middle" width=3D"24">
+                                                                           =
+         <a href=3D"https://graysonhobby.us14.list-manage.com/track/click?u=
+=3D0b28b46a69b6c6009111f2c91&amp;id=3Dd64fd4ba78&amp;e=3D132b69cb3d" target=
+=3D"_blank"><img src=3D"https://cdn-images.mailchimp.com/icons/social-block=
+-v2/outline-light-instagram-48.png" style=3D"display:block;border:0;height:=
+auto;outline:none;text-decoration:none" height=3D"24" width=3D"24"></a>
+                                                                           =
+     </td>
+
+
+                                                                        </t=
+r>
+                                                                    </tbody=
+></table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody></table>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+
+                                       =20
+
+                                       =20
+
+
+                                            <table align=3D"left" border=3D=
+"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"display:inline;border-coll=
+apse:collapse">
+                                                <tbody><tr>
+                                                    <td valign=3D"top" styl=
+e=3D"padding-right:0;padding-bottom:9px">
+                                                        <table border=3D"0"=
+ cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"border-collaps=
+e:collapse">
+                                                            <tbody><tr>
+                                                                <td align=
+=3D"left" valign=3D"middle" style=3D"padding-top:5px;padding-right:10px;pad=
+ding-bottom:5px;padding-left:9px">
+                                                                    <table =
+align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"" =
+style=3D"border-collapse:collapse">
+                                                                        <tb=
+ody><tr>
+
+                                                                           =
+     <td align=3D"center" valign=3D"middle" width=3D"24">
+                                                                           =
+         <a href=3D"http://GraysonHobby.com" target=3D"_blank"><img src=3D"=
+https://cdn-images.mailchimp.com/icons/social-block-v2/outline-light-link-4=
+8.png" style=3D"display:block;border:0;height:auto;outline:none;text-decora=
+tion:none" height=3D"24" width=3D"24"></a>
+                                                                           =
+     </td>
+
+
+                                                                        </t=
+r>
+                                                                    </tbody=
+></table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody></table>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+
+                                       =20
+
+                                   =20
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+</tbody></table>
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"10=
+0%" class=3D"m_-1374760699223872902mcnDividerBlock" style=3D"min-width:100%=
+;border-collapse:collapse;table-layout:fixed!important">
+    <tbody>
+        <tr>
+            <td style=3D"min-width:100%;padding:18px">
+                <table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" wid=
+th=3D"100%" style=3D"min-width:100%;border-top:2px solid #505050;border-col=
+lapse:collapse">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+
+            </td>
+        </tr>
+    </tbody>
+</table><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"10=
+0%" style=3D"min-width:100%;border-collapse:collapse">
+    <tbody>
+        <tr>
+            <td valign=3D"top" style=3D"padding-top:9px">
+              =09
+		=09
+			=09
+                <table align=3D"left" border=3D"0" cellpadding=3D"0" cellsp=
+acing=3D"0" style=3D"max-width:100%;min-width:100%;border-collapse:collapse=
+" width=3D"100%" class=3D"m_-1374760699223872902mcnTextContentContainer">
+                    <tbody><tr>
+
+                        <td valign=3D"top" class=3D"m_-1374760699223872902m=
+cnTextContent" style=3D"padding-top:0;padding-right:18px;padding-bottom:9px=
+;padding-left:18px;word-break:break-word;color:#ffffff;font-family:Helvetic=
+a;font-size:12px;line-height:150%;text-align:center">
+
+                            <em>Copyright =C2=A9 2021 Grayson Hobby, All ri=
+ghts reserved.</em><br>
+ You are receiving this email because you opted in on our website.<br>
+<br>
+<strong>Our mailing address is:</strong><br>
+<div><span>Grayson Hobby</span><div><div>220 Old Loganville Road</div><span=
+>Loganville</span>, <span>GA</span>  <span>30052</span></div><br><a href=3D=
+"https://graysonhobby.us14.list-manage.com/vcard?u=3D0b28b46a69b6c6009111f2=
+c91&amp;id=3D15c6ea26fd" target=3D"_blank">Add us to your address book</a><=
+/div>
+<br>
+<br>
+Want to change how you receive these emails?<br>
+You can <a href=3D"https://graysonhobby.us14.list-manage.com/profile?u=3D0b=
+28b46a69b6c6009111f2c91&amp;id=3D15c6ea26fd&amp;e=3D132b69cb3d&amp;c=3D2ca1=
+4cf95a" style=3D"color:#ffffff;font-weight:normal;text-decoration:underline=
+" target=3D"_blank">update your preferences</a> or <a href=3D"https://grays=
+onhobby.us14.list-manage.com/unsubscribe?u=3D0b28b46a69b6c6009111f2c91&amp;=
+id=3D15c6ea26fd&amp;e=3D132b69cb3d&amp;c=3D2ca14cf95a" style=3D"color:#ffff=
+ff;font-weight:normal;text-decoration:underline" target=3D"_blank">unsubscr=
+ibe from this list</a>.<br>
+<br>
+                        </td>
+                    </tr>
+                </tbody></table>
+			=09
+
+			=09
+            </td>
+        </tr>
+    </tbody>
+</table></td>
+                                        </tr>
+                                    </tbody></table>
+                                   =20
+                                </td>
+                            </tr>
+                        </tbody></table>
+                       =20
+                    </td>
+                </tr>
+            </tbody></table>
+        </center>
+    <img src=3D"https://graysonhobby.us14.list-manage.com/track/open.php?u=
+=3D0b28b46a69b6c6009111f2c91&amp;id=3D2ca14cf95a&amp;e=3D132b69cb3d" height=
+=3D"1" width=3D"1"></div>
+</div></div></div>
+
+--000000000000c4cbab05c16d548c--

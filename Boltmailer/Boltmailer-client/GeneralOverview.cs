@@ -1,0 +1,299 @@
+﻿using Boltmailer_common;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Boltmailer_client
+{
+    public partial class GeneralOverview : Form
+    {
+        const string EMPLOYEES_ROOT_PATH = "C:\\Users\\japsu\\Desktop\\Boltmailer\\Boltmailer\\Boltmailer-mainserver\\bin\\Debug\\netcoreapp3.1\\Projektit";
+
+        readonly int checkInterval = 30;
+
+        Timer checkTicker;
+        Timer checkNotifyTicker;
+        Stopwatch checkNotifyTimer = new Stopwatch();
+
+        public GeneralOverview()
+        {
+            InitializeComponent();
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            // Start a ticker that checks for changes every checkInterval seconds.
+            checkTicker = new Timer();
+            checkTicker.Tick += new EventHandler(Refresh);
+            checkTicker.Interval = checkInterval * 1000;
+            checkTicker.Start();
+            checkNotifyTicker = new Timer();
+            checkNotifyTicker.Tick += new EventHandler(NotifyRefresh);
+            checkNotifyTicker.Interval = 1;
+            checkNotifyTicker.Start();
+            checkNotifyTimer.Start();
+
+            // Setup the DataGridView
+            ProjectsDataGrid.MultiSelect = false;
+            ProjectsDataGrid.RowHeadersVisible = false;
+            ProjectsDataGrid.AutoGenerateColumns = false;
+            ProjectsDataGrid.EnableHeadersVisualStyles = false;
+            ProjectsDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ProjectsDataGrid.ColumnHeadersDefaultCellStyle = GetHeaderStyle();
+            ProjectsDataGrid.Columns.AddRange(GetGridViewColumns());
+
+            // Refresh the projects
+            Refresh(null, null);
+        }
+
+        void Refresh(object sender, EventArgs args)
+        {
+            checkNotifyTicker.Start();
+            ProjectsDataGrid.Rows.Clear();
+            UpdateProjectGrid();
+            checkNotifyTimer.Restart();
+        }
+
+        void NotifyRefresh(object sender, EventArgs args)
+        {
+            if(((checkInterval * 1000 - checkNotifyTimer.ElapsedMilliseconds) / 1000) < checkInterval / 3)
+                DebugLabel.Text = "Päivitetään: " + ((checkInterval * 1000 - checkNotifyTimer.ElapsedMilliseconds) / 1000) + "s";
+        }
+
+        void UpdateProjectGrid()
+        {
+            // Go through all employers' folders
+            foreach (string directory in Directory.GetDirectories(EMPLOYEES_ROOT_PATH))
+            {
+                List<ProjectInfo> projects = new List<ProjectInfo>();
+
+                // Get all the projects the employee has
+                foreach (string projectPath in Directory.GetDirectories(directory))
+                {
+                    string json = File.ReadAllText(projectPath + "\\info.json");
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        WriteIndented = true,
+                        Converters =
+                        {
+                            new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+                        }
+                    };
+                    ProjectInfo info = JsonSerializer.Deserialize<ProjectInfo>(json, options);
+                    projects.Add(info);
+                }
+
+                // Add all the projects to GridView as rows
+                foreach (ProjectInfo info in projects)
+                {
+
+                    // Get the employee name, in original format, from the folder name
+                    string employee = directory.Substring(directory.LastIndexOf('\\') + 1).Replace('_', ' ').Replace('-', ' ').ToLower();
+
+                    ProjectsDataGrid.Rows.Add(GetRow(info, employee));
+                }
+            }
+            DebugLabel.Text = "Projektit päivitetty";
+        }
+
+        string[] GetRow(ProjectInfo info, string employee)
+        {
+            string[] row = new string[]
+            {
+                employee, info.ProjectName, info.State.ToString(), info.Deadline, info.TimeEstimate
+            };
+
+            return row;
+        }
+
+        void CheckUnassignedRows()
+        {
+            //// Check if the "employee" is the 'Free' project folder
+            //if (employee == "vapaa")
+            //{
+            //    row.DefaultCellStyle = GetUnassignedCellStyle();
+            //}
+            //else
+            //{
+            //    row.DefaultCellStyle = GetDefaultCellStyle();
+            //}
+        }
+
+        DataGridViewCellStyle GetUnassignedCellStyle()
+        {
+            DataGridViewCellStyle style = new DataGridViewCellStyle
+            {
+                BackColor = Color.LightSkyBlue
+            };
+            return style;
+        }
+
+        DataGridViewTextBoxColumn[] GetGridViewColumns()
+        {
+            DataGridViewTextBoxColumn[] cols = new DataGridViewTextBoxColumn[]
+            {
+                new DataGridViewTextBoxColumn()
+                {
+                    DefaultCellStyle = GetDefaultCellStyle(),
+                    HeaderText = "Työntekijä"
+                },
+                new DataGridViewTextBoxColumn()
+                {
+                    DefaultCellStyle = GetDefaultCellStyle(),
+                    HeaderText = "Projektin nimi"
+                },
+                new DataGridViewTextBoxColumn()
+                {
+                    DefaultCellStyle = GetDefaultCellStyle(),
+                    HeaderText = "Tila"
+                },
+                new DataGridViewTextBoxColumn()
+                {
+                    DefaultCellStyle = GetDefaultCellStyle(),
+                    HeaderText = "Deadline"
+                },
+                new DataGridViewTextBoxColumn()
+                {
+                    DefaultCellStyle = GetDefaultCellStyle(),
+                    HeaderText = "Aika-arvio"
+                }
+            }; 
+
+            return cols;
+        }
+
+        DataGridViewCellStyle GetDefaultCellStyle()
+        {
+            DataGridViewCellStyle style = new DataGridViewCellStyle
+            {
+
+            };
+            return style;
+        }
+
+        DataGridViewCellStyle GetHeaderStyle()
+        {
+            DataGridViewCellStyle style = new DataGridViewCellStyle
+            {
+                BackColor = Color.LightGray
+            };
+            return style;
+        }
+
+        void ProjectsDataGrid_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                DataGridView.HitTestInfo hitTest = ProjectsDataGrid.HitTest(e.X, e.Y);
+
+                if (hitTest.Type == DataGridViewHitTestType.None)
+                {
+                    ProjectsDataGrid.ClearSelection();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Virhe: " + ex);
+            }
+        }
+
+        #region Cell combining stuff
+
+        bool CompareCellValues(int column, int row)
+        {
+            DataGridViewCell cell1 = ProjectsDataGrid[column, row];
+            DataGridViewCell cell2 = ProjectsDataGrid[column, row - 1];
+            if (cell1.Value == null || cell2.Value == null)
+            {
+                return false;
+            }
+            return cell1.Value.ToString() == cell2.Value.ToString();
+        }
+
+        private void ProjectsDataGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.None;
+            if (e.RowIndex < 1 || e.ColumnIndex < 0)
+                return;
+            if (CompareCellValues(e.ColumnIndex, e.RowIndex))
+            {
+                e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.None;
+            }
+            else
+            {
+                e.AdvancedBorderStyle.Top = ProjectsDataGrid.AdvancedCellBorderStyle.Top;
+            }
+        }
+
+        private void ProjectsDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex == 0)
+                return;
+            if (CompareCellValues(e.ColumnIndex, e.RowIndex))
+            {
+                e.Value = "";
+                e.FormattingApplied = true;
+            }
+        }
+
+        #endregion
+    }
+
+    /*void InstantiateProjectsForList()
+    {
+        // Instantiate all projects
+        foreach (string directory in Directory.GetDirectories(EMPLOYEES_ROOT_PATH))
+        {
+            ListViewItem entry = new ListViewItem();
+            List<ProjectInfo> projects = new List<ProjectInfo>();
+
+            // Get all the projects the employee has
+            foreach (string projectPath in Directory.GetDirectories(directory))
+            {
+                string json = File.ReadAllText(projectPath + "\\info.txt");
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    Converters =
+                    {
+                        new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+                    }
+                };
+                ProjectInfo info = JsonSerializer.Deserialize<ProjectInfo>(json, options);
+                projects.Add(info);
+            }
+
+            // Get the employee name, in original format
+            string employeeName = directory.Substring(directory.LastIndexOf('\\') + 1).Replace('_', ' ').Replace('-', ' ');
+
+            // Check if the "employee" is the 'Free' project folder
+            if (employeeName.ToLower() == "vapaa")
+            {
+                entry.Text = "Vapaat Projektit";
+                entry.ForeColor = Color.Red;
+            }
+            else
+            {
+                entry.Text = employeeName;
+            }
+
+            // Add the projects to the employee
+            entry.SubItems.AddRange(projects.Select(n => n.ProjectName).ToArray());
+
+            // Instantiate the row to the list
+            ProjectsList.Items.Add(entry);
+        }
+        DebugLabel.Text = "Projektit päivitetty";
+    }*/
+}

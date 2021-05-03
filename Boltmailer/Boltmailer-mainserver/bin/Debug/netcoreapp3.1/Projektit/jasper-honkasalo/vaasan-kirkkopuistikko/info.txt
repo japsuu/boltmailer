@@ -1,6 +1,0 @@
-{
-  "Header": "DO NOT MODIFY THIS FILE",
-  "ProjectName": "vaasan kirkkopuistikko",
-  "Deadline": "21.8.2021",
-  "Ready": false
-}

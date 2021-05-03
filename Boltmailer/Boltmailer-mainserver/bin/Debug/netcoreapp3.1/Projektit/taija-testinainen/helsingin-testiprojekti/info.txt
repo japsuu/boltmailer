@@ -1,6 +1,0 @@
-{
-  "Header": "DO NOT MODIFY THIS FILE",
-  "ProjectName": "helsingin testiprojekti",
-  "Deadline": "12.8.2021",
-  "Ready": false
-}

@@ -1,6 +1,0 @@
-{
-  "Header": "DO NOT MODIFY THIS FILE",
-  "ProjectName": "puumalan silta",
-  "Deadline": "22.5.2022",
-  "Ready": false
-}
