@@ -90,29 +90,72 @@ namespace Boltmailer_client
                             new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
                         }
                     };
-                    ProjectInfo info = JsonSerializer.Deserialize<ProjectInfo>(json, options);
-                    projects.Add(info);
+                    try
+                    {
+                        ProjectInfo info = JsonSerializer.Deserialize<ProjectInfo>(json, options);
+                        projects.Add(info);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Virheellinen info.json tiedosto, projekti skipataan, ja sitä ei ladata.\n\n" + ex.Message + "\n\n'" + projectPath + "'\n\n", "Virhe ladatessa projektia");
+                    }
                 }
 
                 // Add all the projects to GridView as rows
-                foreach (ProjectInfo info in projects)
+                for (int i = 0; i < projects.Count; i++)
                 {
+                    ProjectInfo info = projects[i];
 
                     // Get the employee name, in original format, from the folder name
                     string employee = directory.Substring(directory.LastIndexOf('\\') + 1).Replace('_', ' ').Replace('-', ' ').ToLower();
 
-                    ProjectsDataGrid.Rows.Add(GetRow(info, employee));
+                    // Only add the divider for the last row
+                    if (i == projects.Count - 1)
+                        ProjectsDataGrid.Rows.Add(GetRow(info, employee, true));
+                    else
+                        ProjectsDataGrid.Rows.Add(GetRow(info, employee, false));
                 }
             }
+            ProjectsDataGrid.ClearSelection();
             DebugLabel.Text = "Projektit päivitetty";
         }
 
-        string[] GetRow(ProjectInfo info, string employee)
+        DataGridViewRow GetRow(ProjectInfo info, string employee, bool last)
         {
-            string[] row = new string[]
+            DataGridViewRow row = new DataGridViewRow();
+
+            row.Cells.AddRange(new DataGridViewTextBoxCell[]
             {
-                employee, info.ProjectName, info.State.ToString(), info.Deadline, info.TimeEstimate
-            };
+                new DataGridViewTextBoxCell { Value = employee },
+                new DataGridViewTextBoxCell { Value = info.ProjectName },
+                new DataGridViewTextBoxCell { Value = info.State.ToString() },
+                new DataGridViewTextBoxCell { Value = info.Deadline },
+                new DataGridViewTextBoxCell { Value = info.TimeEstimate }
+            });
+
+            switch (info.State)
+            {
+                case ProjectState.Aloittamaton:
+                    {
+                        row.Cells[2].Style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(255, 132, 132) };
+                    }
+                    break;
+                case ProjectState.Kesken:
+                    {
+                        row.Cells[2].Style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(255, 255, 132) };
+                    }
+                    break;
+                case ProjectState.Valmis:
+                    {
+                        row.Cells[2].Style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(132, 255, 132) };
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            if (last)
+                row.DividerHeight = 10;
 
             return row;
         }
@@ -208,7 +251,7 @@ namespace Boltmailer_client
             }
         }
 
-        #region Cell combining stuff
+        #region Cell merging stuff
 
         bool CompareCellValues(int column, int row)
         {
@@ -226,7 +269,8 @@ namespace Boltmailer_client
             e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.None;
             if (e.RowIndex < 1 || e.ColumnIndex < 0)
                 return;
-            if (CompareCellValues(e.ColumnIndex, e.RowIndex))
+
+            if (CompareCellValues(e.ColumnIndex, e.RowIndex) && e.ColumnIndex == 0)
             {
                 e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.None;
             }
@@ -238,7 +282,7 @@ namespace Boltmailer_client
 
         private void ProjectsDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex == 0)
+            if (e.RowIndex == 0 || e.ColumnIndex != 0)
                 return;
             if (CompareCellValues(e.ColumnIndex, e.RowIndex))
             {

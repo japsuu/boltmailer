@@ -65,7 +65,7 @@ namespace Boltmailer_mainserver
                     message.WriteTo($"{path}\\{projectName}_{rnd.Next(1000, 9999)}.eml");
 
                     // Create the info file
-                    ProjectInfo info = new ProjectInfo() { ProjectName = message.Subject, Deadline = projectDeadline, TimeEstimate = "Ei annettu", State = ProjectState.NotStarted };
+                    ProjectInfo info = new ProjectInfo() { ProjectName = message.Subject, Deadline = projectDeadline, TimeEstimate = "Ei annettu", State = ProjectState.Aloittamaton };
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
                         WriteIndented = true,

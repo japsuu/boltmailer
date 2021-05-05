@@ -12,8 +12,8 @@ namespace Boltmailer_common
 
     public enum ProjectState
     {
-        NotStarted,
-        InProgress,
-        Ready
+        Aloittamaton,
+        Kesken,
+        Valmis
     }
 }
