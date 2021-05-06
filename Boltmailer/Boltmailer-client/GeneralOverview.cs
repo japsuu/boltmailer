@@ -21,9 +21,11 @@ namespace Boltmailer_client
 
         readonly int checkInterval = 30;
 
+        Dictionary<ProjectInfo, string> projectPaths = new Dictionary<ProjectInfo, string>();
+
         Timer checkTicker;
         Timer checkNotifyTicker;
-        Stopwatch checkNotifyTimer = new Stopwatch();
+        readonly Stopwatch checkNotifyTimer = new Stopwatch();
 
         public GeneralOverview()
         {
@@ -73,11 +75,14 @@ namespace Boltmailer_client
 
         void UpdateProjectGrid()
         {
+            // Reset the projectPaths dictionary
+            projectPaths = new Dictionary<ProjectInfo, string>();
+
             // Go through all employers' folders
             foreach (string directory in Directory.GetDirectories(EMPLOYEES_ROOT_PATH))
             {
+                // Reset the projects list
                 List<ProjectInfo> projects = new List<ProjectInfo>();
-
                 // Get all the projects the employee has
                 foreach (string projectPath in Directory.GetDirectories(directory))
                 {
@@ -94,6 +99,7 @@ namespace Boltmailer_client
                     {
                         ProjectInfo info = JsonSerializer.Deserialize<ProjectInfo>(json, options);
                         projects.Add(info);
+                        projectPaths.Add(info, projectPath);
                     }
                     catch (Exception ex)
                     {
@@ -130,7 +136,8 @@ namespace Boltmailer_client
                 new DataGridViewTextBoxCell { Value = info.ProjectName },
                 new DataGridViewTextBoxCell { Value = info.State.ToString() },
                 new DataGridViewTextBoxCell { Value = info.Deadline },
-                new DataGridViewTextBoxCell { Value = info.TimeEstimate }
+                new DataGridViewTextBoxCell { Value = info.TimeEstimate },
+                new DataGridViewTextBoxCell { ValueType = typeof(ProjectInfo), Value = info }
             });
 
             switch (info.State)
@@ -210,6 +217,10 @@ namespace Boltmailer_client
                 {
                     DefaultCellStyle = GetDefaultCellStyle(),
                     HeaderText = "Aika-arvio"
+                },
+                new DataGridViewTextBoxColumn()
+                {
+                    Visible = false
                 }
             }; 
 
@@ -286,58 +297,28 @@ namespace Boltmailer_client
                 return;
             if (CompareCellValues(e.ColumnIndex, e.RowIndex))
             {
-                e.Value = "";
+                e.Value = "          \u21B3";
                 e.FormattingApplied = true;
             }
         }
 
         #endregion
-    }
 
-    /*void InstantiateProjectsForList()
-    {
-        // Instantiate all projects
-        foreach (string directory in Directory.GetDirectories(EMPLOYEES_ROOT_PATH))
+        private void ProjectsDataGrid_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            ListViewItem entry = new ListViewItem();
-            List<ProjectInfo> projects = new List<ProjectInfo>();
-
-            // Get all the projects the employee has
-            foreach (string projectPath in Directory.GetDirectories(directory))
-            {
-                string json = File.ReadAllText(projectPath + "\\info.txt");
-                JsonSerializerOptions options = new JsonSerializerOptions
-                {
-                    WriteIndented = true,
-                    Converters =
-                    {
-                        new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
-                    }
-                };
-                ProjectInfo info = JsonSerializer.Deserialize<ProjectInfo>(json, options);
-                projects.Add(info);
-            }
-
-            // Get the employee name, in original format
-            string employeeName = directory.Substring(directory.LastIndexOf('\\') + 1).Replace('_', ' ').Replace('-', ' ');
-
-            // Check if the "employee" is the 'Free' project folder
-            if (employeeName.ToLower() == "vapaa")
-            {
-                entry.Text = "Vapaat Projektit";
-                entry.ForeColor = Color.Red;
-            }
-            else
-            {
-                entry.Text = employeeName;
-            }
-
-            // Add the projects to the employee
-            entry.SubItems.AddRange(projects.Select(n => n.ProjectName).ToArray());
-
-            // Instantiate the row to the list
-            ProjectsList.Items.Add(entry);
+            
         }
-        DebugLabel.Text = "Projektit päivitetty";
-    }*/
+
+        private void ProjectsDataGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // Get the ProjectInfo
+            ProjectInfo info = (ProjectInfo)ProjectsDataGrid.Rows[e.RowIndex].Cells[ProjectsDataGrid.Rows[e.RowIndex].Cells.Count - 1].Value;
+
+            // Get the project path
+            projectPaths.TryGetValue(info, out string path);
+
+            ProjectOverview overview = new ProjectOverview(info, path);
+            overview.ShowDialog();
+        }
+    }
 }

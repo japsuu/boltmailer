@@ -4,5 +4,8 @@
     <Compile Update="GeneralOverview.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ProjectOverview.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

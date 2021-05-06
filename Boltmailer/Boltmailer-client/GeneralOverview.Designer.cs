@@ -56,10 +56,12 @@
             this.ProjectsDataGrid.MultiSelect = false;
             this.ProjectsDataGrid.Name = "ProjectsDataGrid";
             this.ProjectsDataGrid.ReadOnly = true;
+            this.ProjectsDataGrid.RowHeadersWidth = 51;
             this.ProjectsDataGrid.RowTemplate.Height = 25;
             this.ProjectsDataGrid.Size = new System.Drawing.Size(850, 369);
             this.ProjectsDataGrid.TabIndex = 2;
             this.ProjectsDataGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ProjectsDataGrid_CellFormatting);
+            this.ProjectsDataGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ProjectsDataGrid_CellMouseDoubleClick);
             this.ProjectsDataGrid.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.ProjectsDataGrid_CellPainting);
             this.ProjectsDataGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ProjectsDataGrid_MouseDown);
             // 
@@ -81,7 +83,9 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ProjectsDataGrid);
             this.Controls.Add(this.DebugLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "GeneralOverview";
             this.Text = "Boltmailer";
             ((System.ComponentModel.ISupportInitialize)(this.ProjectsDataGrid)).EndInit();

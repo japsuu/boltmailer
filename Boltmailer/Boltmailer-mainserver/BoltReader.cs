@@ -31,18 +31,18 @@ namespace Boltmailer_mainserver
 
         public void Read(object sender, EventArgs args)
         {
-            try
+            using var client = new ImapClient();
+            Console.Write(".");
+            client.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
+            client.Authenticate("0481664@gmail.com", "Thejapsu1");
+
+            client.Inbox.Open(FolderAccess.ReadWrite);
+
+            var uids = client.Inbox.Search(SearchQuery.NotSeen);
+
+            foreach (var uid in uids)
             {
-                using var client = new ImapClient();
-                Console.Write(".");
-                client.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
-                client.Authenticate("0481664@gmail.com", "Thejapsu1");
-
-                client.Inbox.Open(FolderAccess.ReadWrite);
-
-                var uids = client.Inbox.Search(SearchQuery.NotSeen);
-
-                foreach (var uid in uids)
+                try
                 {
                     var message = client.Inbox.GetMessage(uid);
                     string projectName = message.Subject;
@@ -62,6 +62,8 @@ namespace Boltmailer_mainserver
 
                     DirectoryInfo path = Directory.CreateDirectory("Projektit" + "\\" + assignedEmployee + "\\" + projectName);
 
+                    File.CreateText(path + "\\" + "notes");
+
                     message.WriteTo($"{path}\\{projectName}_{rnd.Next(1000, 9999)}.eml");
 
                     // Create the info file
@@ -70,23 +72,22 @@ namespace Boltmailer_mainserver
                     {
                         WriteIndented = true,
                         Converters =
-                        {
-                            new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
-                        }
+                    {
+                        new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+                    }
                     };
                     string json = JsonSerializer.Serialize(info, typeof(ProjectInfo), options);
                     File.WriteAllText(path.FullName + "\\info.json", json);
-
-
-                    client.Inbox.SetFlags(uid, MessageFlags.Seen, false);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"\n\nFound an email that cannot be saved (full html?). Marking it as read anyways to prevent future exceptions:\n{ex.Message}\n\n");
                 }
 
-                client.Disconnect(true);
+                client.Inbox.SetFlags(uid, MessageFlags.Seen, false);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error reading the mailbox: " + ex);
-            }
+
+            client.Disconnect(true);
         }
 
         public static string FilenameFromTitle(string name)
