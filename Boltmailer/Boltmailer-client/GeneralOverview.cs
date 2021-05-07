@@ -130,6 +130,16 @@ namespace Boltmailer_client
         {
             DataGridViewRow row = new DataGridViewRow();
 
+            // Check if the project is unassigned
+            if (employee == "vapaa")
+            {
+                row.DefaultCellStyle = GetUnassignedCellStyle();
+            }
+            else
+            {
+                row.DefaultCellStyle = GetDefaultCellStyle();
+            }
+
             row.Cells.AddRange(new DataGridViewTextBoxCell[]
             {
                 new DataGridViewTextBoxCell { Value = employee },
@@ -167,24 +177,20 @@ namespace Boltmailer_client
             return row;
         }
 
-        void CheckUnassignedRows()
-        {
-            //// Check if the "employee" is the 'Free' project folder
-            //if (employee == "vapaa")
-            //{
-            //    row.DefaultCellStyle = GetUnassignedCellStyle();
-            //}
-            //else
-            //{
-            //    row.DefaultCellStyle = GetDefaultCellStyle();
-            //}
-        }
-
         DataGridViewCellStyle GetUnassignedCellStyle()
         {
             DataGridViewCellStyle style = new DataGridViewCellStyle
             {
                 BackColor = Color.LightSkyBlue
+            };
+            return style;
+        }
+
+        DataGridViewCellStyle GetDefaultCellStyle()
+        {
+            DataGridViewCellStyle style = new DataGridViewCellStyle
+            {
+
             };
             return style;
         }
@@ -225,15 +231,6 @@ namespace Boltmailer_client
             }; 
 
             return cols;
-        }
-
-        DataGridViewCellStyle GetDefaultCellStyle()
-        {
-            DataGridViewCellStyle style = new DataGridViewCellStyle
-            {
-
-            };
-            return style;
         }
 
         DataGridViewCellStyle GetHeaderStyle()
@@ -319,6 +316,31 @@ namespace Boltmailer_client
 
             ProjectOverview overview = new ProjectOverview(info, path);
             overview.ShowDialog();
+        }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if(e.ClickedItem.Name == "HelpButton")
+            {
+                HelpBox hbox = new HelpBox();
+                hbox.Show();
+            }
+
+            if(e.ClickedItem.Name == "AboutButton")
+            {
+                AboutBox abox = new AboutBox();
+                abox.ShowDialog();
+            }
+        }
+
+        private void GeneralOverview_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

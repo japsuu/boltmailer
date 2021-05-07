@@ -62,7 +62,8 @@ namespace Boltmailer_mainserver
 
                     DirectoryInfo path = Directory.CreateDirectory("Projektit" + "\\" + assignedEmployee + "\\" + projectName);
 
-                    File.CreateText(path + "\\" + "notes");
+                    StreamWriter notesStream = File.CreateText(path + "\\" + "notes");
+                    notesStream.Close();
 
                     message.WriteTo($"{path}\\{projectName}_{rnd.Next(1000, 9999)}.eml");
 

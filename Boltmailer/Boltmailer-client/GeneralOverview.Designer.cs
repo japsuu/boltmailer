@@ -30,14 +30,17 @@
         {
             this.DebugLabel = new System.Windows.Forms.Label();
             this.ProjectsDataGrid = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.MenuStrip = new System.Windows.Forms.MenuStrip();
+            this.HelpButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.AboutButton = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ProjectsDataGrid)).BeginInit();
+            this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // DebugLabel
             // 
             this.DebugLabel.AutoSize = true;
-            this.DebugLabel.Location = new System.Drawing.Point(47, 459);
+            this.DebugLabel.Location = new System.Drawing.Point(47, 429);
             this.DebugLabel.Name = "DebugLabel";
             this.DebugLabel.Size = new System.Drawing.Size(65, 15);
             this.DebugLabel.TabIndex = 1;
@@ -65,30 +68,62 @@
             this.ProjectsDataGrid.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.ProjectsDataGrid_CellPainting);
             this.ProjectsDataGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ProjectsDataGrid_MouseDown);
             // 
-            // button1
+            // MenuStrip
             // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(891, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(45, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Apua";
-            this.button1.UseVisualStyleBackColor = true;
+            this.MenuStrip.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.HelpButton,
+            this.AboutButton});
+            this.MenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.MenuStrip.Name = "MenuStrip";
+            this.MenuStrip.Padding = new System.Windows.Forms.Padding(10, 2, 10, 2);
+            this.MenuStrip.Size = new System.Drawing.Size(948, 24);
+            this.MenuStrip.TabIndex = 4;
+            this.MenuStrip.Text = "menuStrip1";
+            this.MenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.MenuStrip_ItemClicked);
+            // 
+            // HelpButton
+            // 
+            this.HelpButton.AutoToolTip = true;
+            this.HelpButton.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.HelpButton.CheckOnClick = true;
+            this.HelpButton.ForeColor = System.Drawing.SystemColors.Window;
+            this.HelpButton.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.HelpButton.Name = "HelpButton";
+            this.HelpButton.Size = new System.Drawing.Size(47, 20);
+            this.HelpButton.Text = "Apua";
+            this.HelpButton.ToolTipText = "Täältä löydät apua sovelluksen käyttämiseen";
+            // 
+            // AboutButton
+            // 
+            this.AboutButton.AutoToolTip = true;
+            this.AboutButton.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.AboutButton.CheckOnClick = true;
+            this.AboutButton.ForeColor = System.Drawing.SystemColors.Window;
+            this.AboutButton.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.AboutButton.Name = "AboutButton";
+            this.AboutButton.Size = new System.Drawing.Size(51, 20);
+            this.AboutButton.Text = "Tietoa";
+            this.AboutButton.ToolTipText = "Tietoa sovelluksesta ja sen tekijöistä";
             // 
             // GeneralOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 487);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(948, 453);
             this.Controls.Add(this.ProjectsDataGrid);
             this.Controls.Add(this.DebugLabel);
+            this.Controls.Add(this.MenuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MainMenuStrip = this.MenuStrip;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "GeneralOverview";
             this.Text = "Boltmailer";
+            this.Load += new System.EventHandler(this.GeneralOverview_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ProjectsDataGrid)).EndInit();
+            this.MenuStrip.ResumeLayout(false);
+            this.MenuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -97,7 +132,9 @@
         #endregion
         private System.Windows.Forms.Label DebugLabel;
         private System.Windows.Forms.DataGridView ProjectsDataGrid;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.MenuStrip MenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem HelpButton;
+        private System.Windows.Forms.ToolStripMenuItem AboutButton;
     }
 }
 

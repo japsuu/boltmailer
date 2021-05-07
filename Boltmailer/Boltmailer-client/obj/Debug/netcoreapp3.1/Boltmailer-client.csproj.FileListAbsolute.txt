@@ -18,3 +18,5 @@ C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-client\obj\Debug\netcore
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-client\obj\Debug\netcoreapp3.1\Boltmailer_client.GeneralOverview.resources
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-client\obj\Debug\netcoreapp3.1\Boltmailer_client.Properties.Resources.resources
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-client\obj\Debug\netcoreapp3.1\Boltmailer_client.ProjectOverview.resources
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-client\obj\Debug\netcoreapp3.1\Boltmailer_client.HelpBox.resources
+C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-client\obj\Debug\netcoreapp3.1\Boltmailer_client.AboutBox.resources
