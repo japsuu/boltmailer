@@ -1,0 +1,149 @@
+Delivered-To: 0481664@gmail.com
+Received: by 2002:a02:94ac:0:0:0:0:0 with SMTP id x41csp2032249jah;
+        Sun, 9 May 2021 05:09:23 -0700 (PDT)
+X-Received: by 2002:a7b:c4c9:: with SMTP id g9mr31631229wmk.90.1620562163590;
+        Sun, 09 May 2021 05:09:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1620562163; cv=none;
+        d=google.com; s=arc-20160816;
+        b=YV0P0apMlupetwTPUe2prdDxZPz2oN3JW6stw7P1/p3G//g34zIJdrAnS4WWxoI2JT
+         WZlt3JoviSPUCpSUnaX0rOR/XOFyQbzHnfppwJKh+a3b4qdKHwl2Q9OzGBH/ZJnDRFqh
+         ZYfusMCQXzaL7x0pkCu5ArhHuoGGNxbx5CrOu4FtT2YLnu+gxm2sjSwXTDEQMYAP9hpb
+         LjLx4dTipw5WvIh+mZGI22SSp1CGv86CIL8Gk9/hzJRDySSgZdvJngkTavxwdWSuDKx1
+         oglI0cBxrGAsjFlG9cXdOscb1ljPfwLZyva4ybXZMz0wpd0rUkPbX7SNMfwwABwLwpmq
+         42hQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=FJlD5JprauoS3B8LwZbmYR8Lr1EvRvGWbKeLSMZ33Cw=;
+        b=gI/9tfsYwVgKHUlNzPKGaLAfMM/x1tx2qiP6baAolddxSTsSadRtDYg9HeAOy1tpxR
+         OCzsUkqCiM8K46/FqYqVHTnVZU0LgsQlT+e9lE69u0Ei8ObbNhkjrOsM+fRhvxdmjuaZ
+         yOkymlJU2SC5+FEGaGlNKZjOeBS0Exhg8T9sUO/3i7V7ADGy8pvYo8cDwINjmBBEMqaN
+         bsT0a+cM5TC8pm6LvZADGgc24eDKkKASiDpumM+BkSEo4tDDF/hImHD6t0v9KL+1VeRq
+         XjW5QDeczoOagpixUbtl7YnW4WuZcD8kw6jfCOiqqv0kSJmLdQWKbyFEUCoo0rLKHL9O
+         yt3Q==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=KIerRB76;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <japsu.honkasalo@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id a11sor5786543wrc.3.2021.05.09.05.09.23
+        for <0481664@gmail.com>
+        (Google Transport Security);
+        Sun, 09 May 2021 05:09:23 -0700 (PDT)
+Received-SPF: pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=KIerRB76;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=FJlD5JprauoS3B8LwZbmYR8Lr1EvRvGWbKeLSMZ33Cw=;
+        b=KIerRB76EGO+cEeCZLhib38fjTlZ75jkGbfAWWceScjn1m3MPdndZBq4JLyHUPIrp2
+         rUsc/vvLDUVUoQX/5KuntSS8tAGaGfxGKCSSIrXbEWGoEZ0e3yjqbyhuFhTNkbuvOZgV
+         EdaIE6i85cKHYqONo7SW2yEYHAJ/Gt/0FtOUeHn13wMCs8lpVuesVNiI4R+3lCd/xMej
+         aYBHF7vAnqly26NNGF5saalgipdAAIlMzbi9HPOTuom6zQPH82Uejgj7r51Un6iYbiBC
+         SWbHZZQs77tQsa8wHGMj/FJzeTNF78jELUBHcFwgpN9OlrHFf8UwTkSv6kKihvYyV6SP
+         5iUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=FJlD5JprauoS3B8LwZbmYR8Lr1EvRvGWbKeLSMZ33Cw=;
+        b=rYSs8wEkDO5fXVR/MWZ03kWgcIeElkWSf3zWE/icYrbKdM+VMqflaSp3IWaTK/+NeS
+         nlnYAtuM4neIXMZe2LcTHPD2boLqiHtWGxqGNmIPEbVDR18QmV3yV/EITwZixOf9/kd8
+         QA8hTrFSUIIZyaVTwrdQhA8lojD3hLOXwz87TvS5uWmITyyCkccsC4/9mSRsDh7VSW04
+         oktTHO65hBYzPwAmvBzFssu5VS6SD7B0MD9NnFjekbjREKe5s5O0vcMtRyk7dUkQdmiX
+         QATDQKXXMteLpLCF/xFa1EUklDT6/lKMq19oItRj8NUMERqdhXtAlLIry4+gzRHixgt+
+         pk7Q==
+X-Gm-Message-State: AOAM532tiYwdoMJQ9tLO909M6fAvpF4Sw2Ia97eQEjaj4WkiSE6kOM5S
+	FQzXsL9LqYi88QTtSPz5RNS14vNQ4W+BMeb57EdKjwFEdJtFTQ==
+X-Google-Smtp-Source: ABdhPJwtyAXyLlgfFzfGn1MFlcOrQGb90J/88DrKp5bbXSPMLF3hNUQPm3ZJDzadwexjGo7QWu6iEAhCN5iavzOKppw=
+X-Received: by 2002:adf:efca:: with SMTP id i10mr25062966wrp.284.1620562163068;
+ Sun, 09 May 2021 05:09:23 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAKNULYpkagAbsf_gBsfX8PKMRsUNEfRrWZ-NwLk3G86rhJrK7w@mail.gmail.com>
+ <CAKNULYr1Mt7M3e7eqr5z2CmS=gA593f67H7Thqhe5zDPOqH42w@mail.gmail.com>
+In-Reply-To: <CAKNULYr1Mt7M3e7eqr5z2CmS=gA593f67H7Thqhe5zDPOqH42w@mail.gmail.com>
+From: Jasper Honkasalo <japsu.honkasalo@gmail.com>
+Date: Sun, 9 May 2021 15:09:10 +0300
+Message-ID: <CAKNULYq6tONnu_VZR_yb7V_3qXYsDncnRbThuNMrkJ=DU-VVRg@mail.gmail.com>
+Subject: testiprojekti 3
+To: 0481664@gmail.com
+Content-Type: multipart/mixed; boundary="00000000000011b0c905c1e48848"
+
+--00000000000011b0c905c1e48848
+Content-Type: multipart/related; boundary="00000000000011b0c805c1e48847"
+
+--00000000000011b0c805c1e48847
+Content-Type: multipart/alternative; boundary="00000000000011b0c705c1e48846"
+
+--00000000000011b0c705c1e48846
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+jasper honkasalo
+13.8.2021
+11h
+
+t=C3=A4m=C3=A4 on testiviesti, jonka tarkoituksena on kokeilla j=C3=A4rjest=
+elm=C3=A4n
+toimivuutta. Viesti my=C3=B6s sis=C3=A4lt=C3=A4=C3=A4 yhden kuvan, sek=C3=
+=A4 yhden tiedoston.
+[image: 340.png]
+
+--00000000000011b0c705c1e48846
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr"><div class=3D"=
+gmail_quote"><div class=3D"gmail_attr">jasper honkasalo</div><div dir=3D"lt=
+r"><div>13.8.2021</div><div>11h</div><div><br></div><div>t=C3=A4m=C3=A4 on =
+testiviesti, jonka tarkoituksena on kokeilla j=C3=A4rjestelm=C3=A4n toimivu=
+utta. Viesti my=C3=B6s sis=C3=A4lt=C3=A4=C3=A4 yhden kuvan, sek=C3=A4 yhden=
+ tiedoston.</div><div><img src=3D"cid:ii_koh3vu9q0" alt=3D"340.png" width=
+=3D"182" height=3D"182" style=3D"margin-right:0px"><br></div><div><br></div=
+></div>
+</div></div>
+</div></div>
+
+--00000000000011b0c705c1e48846--
+--00000000000011b0c805c1e48847
+Content-Type: image/png; name="340.png"
+Content-Disposition: inline; filename="340.png"
+Content-Transfer-Encoding: base64
+Content-ID: <ii_koh3vu9q0>
+X-Attachment-Id: ii_koh3vu9q0
+
+iVBORw0KGgoAAAANSUhEUgAAAVQAAAFUBAMAAACJvNmGAAAAG1BMVEXMzMyWlpacnJyqqqrFxcWx
+sbGjo6O3t7e+vr6He3KoAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEKUlEQVR4nO3dzW/aSBjH8cfm
+9ciYhHDECavNEbpbbY/2kq16BA49g4SUHiErZa8h7R++84xNMDWoSCsPXen7kbAd/Ej+aTwvdg6J
+CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH5Kf8XRh/ywZnRbf/f2xQ8q
+ZRLfvVQcr6BtrFF2vHUBNvaL6VmVLfvFtZeUTqoButlxbHaJbs6ptIGttZ+c1jL61l6aFz1sGA0Q
+mlV9bJIzKiXuJRNz5StpXS9Vy+5r6gJsevpFuQeUK1tmITL21gNaGqpuBno8vtUAcf/tix9UhtrE
+aeQras3dUdMR7aSvZhdm2XdnU+2JeUuWKrOUzaxLeNB0vTLWeGEvNNp4GmyW3daG5t5mHbdUKZuu
+Kzk2W1Sh/Y9oSy403pUGaLghvc1Gej22kZfXxytlpvNEezd/+VHLuuFUA2T3Oe1lZ2aRzTI8Xinj
+/lt4Xz4to8SmiEQDZPc5yAdLaKbNwsx5UClLN08dGYGVsavTyu62N8Wo2cJpe+7VJjpRuYva8R41
+XrgALkS+1TjduH+iUmIXMvYb1fbPhv0ciWrXzsWJygtElfbMLkRpV450ADuOimvsQeUFOoCO4mtZ
+DuXIsLKnuqcqLzCsRNf9to7z8mRlx1V0qtL3ZPXpm7hk+uip+gdLgGbarUalSt9LQOoyBfsABwur
+rgG7p7xSpe+FNeuU232Ag8cVffJbdk9U+n5cCd0oyhsxGyzuITAf1vapKn9aOVLpUqZGPGno/W7n
+NzksPVqnJmnm46Zc6fnR2k5GiZ0tR/sABy8s9u7XTf9EpecXFplpv4uSfYDia6BrxHHvRKXv18Ca
+Xm4lhQCFl+tQD9I8TbnS88u1fI2jP6QYoPAri412hNpuPSpVev6VBQAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAL4X5J//gZ8uqol+P3Hmu6gd+1NgjJFIJOxI9gfyJ/GjyEezkmAgEleb
+VDr1306cORLVbXsv8pxHrf+SfLWbh3kSfJHWsuqo8qe8u5MwadmDxu1IgnlHd7XbmUad30lzbc8U
+ot4s5DGPWptmm8YoeJbmpvqojdXHaW2dyt/y+eG9BCu3+/ygjRTYU+2BvC9G7dy3B3nUMMk29UEQ
+vrxW3bFtBwiT+qA9mq8/yNC2X5C43VBSjWpPyaP92E6t/dRFfW6u86jBbtMJWovHqqPaYeUaa3C/
+GGgcvbLuOru+2pHXmv6t/n2rhk9SblX5dVB5q+q1tOkWXxYyzNLprtCq4VwOojaupdxXZTb1EFX7
+qszXT1N5TiaaR3f7viqtm8Oo7ge3LcwAUv0krJe0M4BskzSRVnyvF9TdfgaQ1uBI1KyTTMxuXvUQ
+9QxNf//k4r96unSAswX3l04AABX4FxXVo8CbBwwSAAAAAElFTkSuQmCC
+--00000000000011b0c805c1e48847--
+--00000000000011b0c905c1e48848
+Content-Type: text/plain; charset="US-ASCII"; name="TestiTekstiTiedosto.txt"
+Content-Disposition: attachment; filename="TestiTekstiTiedosto.txt"
+Content-Transfer-Encoding: base64
+Content-ID: <f_koh3w5oa1>
+X-Attachment-Id: f_koh3w5oa1
+
+TWluw6QgcGlkw6RuIHNpc8OkbGzDpG5pIGthaWtlbmxhaXN0YSB0aWV0b2EgcHJvamVrdGlzdGE=
+--00000000000011b0c905c1e48848--

@@ -35,6 +35,7 @@ namespace Boltmailer_client
             this.projectTimeEstLabel = new System.Windows.Forms.Label();
             this.projectstatusLabel = new System.Windows.Forms.Label();
             this.FolderOpenButton = new System.Windows.Forms.Button();
+            this.StatusComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // NotesTitle
@@ -93,11 +94,21 @@ namespace Boltmailer_client
             this.FolderOpenButton.UseVisualStyleBackColor = true;
             this.FolderOpenButton.Click += new System.EventHandler(this.FolderOpenButton_Click);
             // 
+            // StatusComboBox
+            // 
+            this.StatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.StatusComboBox.FormattingEnabled = true;
+            this.StatusComboBox.Location = new System.Drawing.Point(211, 63);
+            this.StatusComboBox.Name = "StatusComboBox";
+            this.StatusComboBox.Size = new System.Drawing.Size(95, 23);
+            this.StatusComboBox.TabIndex = 7;
+            // 
             // ProjectOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(318, 277);
+            this.Controls.Add(this.StatusComboBox);
             this.Controls.Add(this.FolderOpenButton);
             this.Controls.Add(this.projectstatusLabel);
             this.Controls.Add(this.projectTimeEstLabel);
@@ -121,5 +132,7 @@ namespace Boltmailer_client
         private System.Windows.Forms.Label projectTimeEstLabel;
         private System.Windows.Forms.Label projectstatusLabel;
         private System.Windows.Forms.Button FolderOpenButton;
+        private System.Windows.Forms.ComboBox StatusDropdown;
+        private System.Windows.Forms.ComboBox StatusComboBox;
     }
 }

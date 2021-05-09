@@ -62,13 +62,16 @@ namespace Boltmailer_mainserver
 
                     DirectoryInfo path = Directory.CreateDirectory("Projektit" + "\\" + assignedEmployee + "\\" + projectName);
 
-                    StreamWriter notesStream = File.CreateText(path + "\\" + "notes");
-                    notesStream.Close();
+                    // Create notes file
+                    using (File.CreateText(path + "\\" + "notes"))
+                    {
+
+                    }
 
                     message.WriteTo($"{path}\\{projectName}_{rnd.Next(1000, 9999)}.eml");
 
                     // Create the info file
-                    ProjectInfo info = new ProjectInfo() { ProjectName = message.Subject, Deadline = projectDeadline, TimeEstimate = "Ei annettu", State = ProjectState.Aloittamaton };
+                    ProjectInfo info = new ProjectInfo() { ProjectName = message.Subject, Deadline = projectDeadline, TimeEstimate = "Ei annettu", Status = ProjectStatus.Aloittamaton };
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
                         WriteIndented = true,

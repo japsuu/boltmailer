@@ -50,22 +50,31 @@ namespace Boltmailer_client
             // Set proj name to header
             Text = info.ProjectName;
 
-            // Set state
-            switch (info.State)
+            // Set Status selection ComboBox values
+            StatusComboBox.DataSource = new StatusComboItem[]
             {
-                case ProjectState.Aloittamaton:
+                new StatusComboItem(ProjectStatus.Aloittamaton, "Aloittamaton"),
+                new StatusComboItem(ProjectStatus.Kesken, "Kesken"),
+                new StatusComboItem(ProjectStatus.Valmis, "Valmis")
+            };
+            StatusComboBox.SelectedItem = new StatusComboItem(info.Status, info.Status.ToString());
+
+            // Set status
+            switch (info.Status)
+            {
+                case ProjectStatus.Aloittamaton:
                     projectstatusLabel.ForeColor = Color.Red;
                     break;
-                case ProjectState.Kesken:
+                case ProjectStatus.Kesken:
                     projectstatusLabel.ForeColor = Color.Orange;
                     break;
-                case ProjectState.Valmis:
+                case ProjectStatus.Valmis:
                     projectstatusLabel.ForeColor = Color.Green;
                     break;
                 default:
                     break;
             }
-            projectstatusLabel.Text = "Status: " + info.State.ToString();
+            projectstatusLabel.Text = "Status: " + info.Status.ToString();
 
             // Set deadline
             projectDeadlineLabel.Text = "Deadline: " + info.Deadline;
@@ -142,6 +151,23 @@ namespace Boltmailer_client
         private void FolderOpenButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("explorer.exe", projectPath);
+        }
+    }
+
+    public class StatusComboItem
+    {
+        public ProjectStatus Status { get; set; }
+        public string Text { get; set; }
+
+        public StatusComboItem(ProjectStatus status, string text)
+        {
+            Status = status;
+            Text = text;
+        }
+
+        public override string ToString()
+        {
+            return Text;
         }
     }
 }

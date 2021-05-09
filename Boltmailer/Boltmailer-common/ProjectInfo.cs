@@ -7,10 +7,10 @@ namespace Boltmailer_common
         public string ProjectName { get; set; }
         public string Deadline { get; set; }
         public string TimeEstimate { get; set; }
-        public ProjectState State { get; set; }
+        public ProjectStatus Status { get; set; }
     }
 
-    public enum ProjectState
+    public enum ProjectStatus
     {
         Aloittamaton,
         Kesken,

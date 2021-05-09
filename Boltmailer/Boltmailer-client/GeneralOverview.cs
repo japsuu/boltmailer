@@ -83,6 +83,7 @@ namespace Boltmailer_client
             {
                 // Reset the projects list
                 List<ProjectInfo> projects = new List<ProjectInfo>();
+
                 // Get all the projects the employee has
                 foreach (string projectPath in Directory.GetDirectories(directory))
                 {
@@ -144,25 +145,25 @@ namespace Boltmailer_client
             {
                 new DataGridViewTextBoxCell { Value = employee },
                 new DataGridViewTextBoxCell { Value = info.ProjectName },
-                new DataGridViewTextBoxCell { Value = info.State.ToString() },
+                new DataGridViewTextBoxCell { Value = info.Status.ToString() },
                 new DataGridViewTextBoxCell { Value = info.Deadline },
                 new DataGridViewTextBoxCell { Value = info.TimeEstimate },
                 new DataGridViewTextBoxCell { ValueType = typeof(ProjectInfo), Value = info }
             });
 
-            switch (info.State)
+            switch (info.Status)
             {
-                case ProjectState.Aloittamaton:
+                case ProjectStatus.Aloittamaton:
                     {
                         row.Cells[2].Style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(255, 132, 132) };
                     }
                     break;
-                case ProjectState.Kesken:
+                case ProjectStatus.Kesken:
                     {
                         row.Cells[2].Style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(255, 255, 132) };
                     }
                     break;
-                case ProjectState.Valmis:
+                case ProjectStatus.Valmis:
                     {
                         row.Cells[2].Style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(132, 255, 132) };
                     }
@@ -202,27 +203,32 @@ namespace Boltmailer_client
                 new DataGridViewTextBoxColumn()
                 {
                     DefaultCellStyle = GetDefaultCellStyle(),
-                    HeaderText = "Työntekijä"
+                    HeaderText = "Työntekijä",
+                    SortMode = DataGridViewColumnSortMode.NotSortable
                 },
                 new DataGridViewTextBoxColumn()
                 {
                     DefaultCellStyle = GetDefaultCellStyle(),
-                    HeaderText = "Projektin nimi"
+                    HeaderText = "Projektin nimi",
+                    SortMode = DataGridViewColumnSortMode.NotSortable
                 },
                 new DataGridViewTextBoxColumn()
                 {
                     DefaultCellStyle = GetDefaultCellStyle(),
-                    HeaderText = "Tila"
+                    HeaderText = "Tila",
+                    SortMode = DataGridViewColumnSortMode.NotSortable
                 },
                 new DataGridViewTextBoxColumn()
                 {
                     DefaultCellStyle = GetDefaultCellStyle(),
-                    HeaderText = "Deadline"
+                    HeaderText = "Deadline",
+                    SortMode = DataGridViewColumnSortMode.NotSortable
                 },
                 new DataGridViewTextBoxColumn()
                 {
                     DefaultCellStyle = GetDefaultCellStyle(),
-                    HeaderText = "Aika-arvio"
+                    HeaderText = "Aika-arvio",
+                    SortMode = DataGridViewColumnSortMode.NotSortable
                 },
                 new DataGridViewTextBoxColumn()
                 {
