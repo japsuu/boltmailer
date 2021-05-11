@@ -63,25 +63,25 @@ namespace Boltmailer_mainserver
                     DirectoryInfo path = Directory.CreateDirectory("Projektit" + "\\" + assignedEmployee + "\\" + projectName);
 
                     // Create notes file
-                    using (File.CreateText(path + "\\" + "notes"))
-                    {
-
-                    }
+                    File.CreateText(path + "\\" + "notes").Close();
 
                     message.WriteTo($"{path}\\{projectName}_{rnd.Next(1000, 9999)}.eml");
 
                     // Create the info file
                     ProjectInfo info = new ProjectInfo() { ProjectName = message.Subject, Deadline = projectDeadline, TimeEstimate = "Ei annettu", Status = ProjectStatus.Aloittamaton };
-                    JsonSerializerOptions options = new JsonSerializerOptions
-                    {
-                        WriteIndented = true,
-                        Converters =
-                    {
-                        new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
-                    }
-                    };
-                    string json = JsonSerializer.Serialize(info, typeof(ProjectInfo), options);
-                    File.WriteAllText(path.FullName + "\\info.json", json);
+
+                    JsonTools.WriteJson(info, path.FullName);
+
+                    //JsonSerializerOptions options = new JsonSerializerOptions
+                    //{
+                    //    WriteIndented = true,
+                    //    Converters =
+                    //    {
+                    //    new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+                    //    }
+                    //};
+                    //string json = JsonSerializer.Serialize(info, typeof(ProjectInfo), options);
+                    //File.WriteAllText(path.FullName + "\\info.json", json);
                 }
                 catch (Exception ex)
                 {

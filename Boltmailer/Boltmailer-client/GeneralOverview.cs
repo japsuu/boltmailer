@@ -19,13 +19,14 @@ namespace Boltmailer_client
     {
         const string EMPLOYEES_ROOT_PATH = "C:\\Users\\japsu\\Desktop\\Boltmailer\\Boltmailer\\Boltmailer-mainserver\\bin\\Debug\\netcoreapp3.1\\Projektit";
 
-        readonly int checkInterval = 30;
+        //readonly int checkInterval = 30;
+        FileSystemWatcher watcher;
 
         Dictionary<ProjectInfo, string> projectPaths = new Dictionary<ProjectInfo, string>();
 
-        Timer checkTicker;
-        Timer checkNotifyTicker;
-        readonly Stopwatch checkNotifyTimer = new Stopwatch();
+        //Timer checkTicker;
+        //Timer checkNotifyTicker;
+        //readonly Stopwatch checkNotifyTimer = new Stopwatch();
 
         public GeneralOverview()
         {
@@ -36,15 +37,15 @@ namespace Boltmailer_client
         void Initialize()
         {
             // Start a ticker that checks for changes every checkInterval seconds.
-            checkTicker = new Timer();
-            checkTicker.Tick += new EventHandler(Refresh);
-            checkTicker.Interval = checkInterval * 1000;
-            checkTicker.Start();
-            checkNotifyTicker = new Timer();
-            checkNotifyTicker.Tick += new EventHandler(NotifyRefresh);
-            checkNotifyTicker.Interval = 1;
-            checkNotifyTicker.Start();
-            checkNotifyTimer.Start();
+            //checkTicker = new Timer();
+            //checkTicker.Tick += new EventHandler(Refresh);
+            //checkTicker.Interval = checkInterval * 1000;
+            //checkTicker.Start();
+            //checkNotifyTicker = new Timer();
+            //checkNotifyTicker.Tick += new EventHandler(NotifyRefresh);
+            //checkNotifyTicker.Interval = 1;
+            //checkNotifyTicker.Start();
+            //checkNotifyTimer.Start();
 
             // Setup the DataGridView
             ProjectsDataGrid.MultiSelect = false;
@@ -55,22 +56,52 @@ namespace Boltmailer_client
             ProjectsDataGrid.ColumnHeadersDefaultCellStyle = GetHeaderStyle();
             ProjectsDataGrid.Columns.AddRange(GetGridViewColumns());
 
+            // Setup the filesystemWatcher
+            watcher = new FileSystemWatcher(EMPLOYEES_ROOT_PATH);
+            watcher.NotifyFilter = NotifyFilters.CreationTime
+                                 | NotifyFilters.DirectoryName
+                                 | NotifyFilters.FileName
+                                 | NotifyFilters.LastAccess
+                                 | NotifyFilters.LastWrite
+                                 | NotifyFilters.Size;
+
+            watcher.Changed += InvokeRefresh;
+            watcher.Created += InvokeRefresh;
+            watcher.Deleted += InvokeRefresh;
+            watcher.Renamed += InvokeRefresh;
+
+            watcher.Filter = "";
+            watcher.IncludeSubdirectories = true;
+            watcher.EnableRaisingEvents = true;
+
             // Refresh the projects
-            Refresh(null, null);
+            RefreshView();
         }
 
-        void Refresh(object sender, EventArgs args)
+        void RefreshView()
         {
-            checkNotifyTicker.Start();
+            //checkNotifyTicker.Start();
             ProjectsDataGrid.Rows.Clear();
             UpdateProjectGrid();
-            checkNotifyTimer.Restart();
+            NotifyRefresh();
+            //checkNotifyTimer.Restart();
         }
 
-        void NotifyRefresh(object sender, EventArgs args)
+        void InvokeRefresh(object sender, FileSystemEventArgs e)
         {
-            if(((checkInterval * 1000 - checkNotifyTimer.ElapsedMilliseconds) / 1000) < checkInterval / 3)
-                DebugLabel.Text = "Päivitetään: " + ((checkInterval * 1000 - checkNotifyTimer.ElapsedMilliseconds) / 1000) + "s";
+            InvokeUI(RefreshView);
+        }
+
+        private void InvokeUI(Action a)
+        {
+            this.BeginInvoke(new MethodInvoker(a));
+        }
+
+        void NotifyRefresh()
+        {
+            //if(((checkInterval * 1000 - checkNotifyTimer.ElapsedMilliseconds) / 1000) < checkInterval / 3)
+            //    DebugLabel.Text = "Päivitetään: " + ((checkInterval * 1000 - checkNotifyTimer.ElapsedMilliseconds) / 1000) + "s";
+            DebugLabel.Text = "Päivitetty: " + DateTime.Now.ToString("HH:mm");
         }
 
         void UpdateProjectGrid()
@@ -87,24 +118,18 @@ namespace Boltmailer_client
                 // Get all the projects the employee has
                 foreach (string projectPath in Directory.GetDirectories(directory))
                 {
-                    string json = File.ReadAllText(projectPath + "\\info.json");
-                    JsonSerializerOptions options = new JsonSerializerOptions
+                    IProjectInfo info = JsonTools.ReadJson(projectPath);
+
+                    // If it's the info
+                    if (typeof(ProjectInfo).IsAssignableFrom(info.GetType()))
                     {
-                        WriteIndented = true,
-                        Converters =
-                        {
-                            new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
-                        }
-                    };
-                    try
-                    {
-                        ProjectInfo info = JsonSerializer.Deserialize<ProjectInfo>(json, options);
-                        projects.Add(info);
-                        projectPaths.Add(info, projectPath);
+                        projects.Add((ProjectInfo)info);
+                        projectPaths.Add((ProjectInfo)info, projectPath);
                     }
-                    catch (Exception ex)
+                    else // It's the error
                     {
-                        MessageBox.Show("Virheellinen info.json tiedosto, projekti skipataan, ja sitä ei ladata.\n\n" + ex.Message + "\n\n'" + projectPath + "'\n\n", "Virhe ladatessa projektia");
+                        ProjectInfoError error = (ProjectInfoError)info;
+                        MessageBox.Show(error.Error + "\n\n" + error.Exception);
                     }
                 }
 
