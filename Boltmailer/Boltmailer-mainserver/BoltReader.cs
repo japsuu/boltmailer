@@ -6,6 +6,7 @@ using MailKit.Security;
 using MimeKit;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.Json;
@@ -17,22 +18,27 @@ namespace Boltmailer_mainserver
     class BoltReader
     {
         Timer ticker;
-        Random rnd = new Random();
+        Timer notifyTicker;
+        readonly Random rnd = new Random();
+        int timeToRefresh;
 
         public void StartTicking()
         {
-            Console.WriteLine("Started monitoring for incoming mails");
             ticker = new Timer();
+            notifyTicker = new Timer();
             ticker.Elapsed += new ElapsedEventHandler(Read);
+            notifyTicker.Elapsed += new ElapsedEventHandler(NotifyRefresh);
             ticker.Interval = 10000;
+            notifyTicker.Interval = 1000;
+            timeToRefresh = (int)ticker.Interval / 1000;
             ticker.Start();
+            notifyTicker.Start();
             Read(null, null);
         }
 
-        public void Read(object sender, EventArgs args)
+        private void Read(object sender, EventArgs args)
         {
             using var client = new ImapClient();
-            Console.Write(".");
             client.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
             client.Authenticate("0481664@gmail.com", "Thejapsu1");
 
@@ -63,10 +69,7 @@ namespace Boltmailer_mainserver
                     DirectoryInfo path = Directory.CreateDirectory("Projektit" + "\\" + assignedEmployee + "\\" + projectName);
 
                     // Create notes file
-                    using (File.CreateText(path + "\\" + "notes"))
-                    {
-
-                    }
+                    File.CreateText(path + "\\" + "notes").Close();
 
                     message.WriteTo($"{path}\\{projectName}_{rnd.Next(1000, 9999)}.eml");
 
@@ -76,25 +79,47 @@ namespace Boltmailer_mainserver
                     {
                         WriteIndented = true,
                         Converters =
-                    {
+                        {
                         new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
-                    }
+                        }
                     };
                     string json = JsonSerializer.Serialize(info, typeof(ProjectInfo), options);
                     File.WriteAllText(path.FullName + "\\info.json", json);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"\n\nFound an email that cannot be saved (full html?). Marking it as read anyways to prevent future exceptions:\n{ex.Message}\n\n");
+                    DirectoryInfo directory = Directory.CreateDirectory("Virheelliset" + "\\");
+                    string path = directory.FullName + DateTime.Now.ToString("dd.MM") + "_" + rnd.Next(1000, 9999);
+
+                    Console.WriteLine($"\n\nFound an email that cannot be saved (full html?):\n{ex.Message}.\nSaving at: {path}\n\n");
+
+                    try
+                    {
+                        var message = client.Inbox.GetMessage(uid);
+
+                        message.WriteTo($"{path}.eml");
+                    }
+                    catch
+                    {
+                    }
                 }
 
                 client.Inbox.SetFlags(uid, MessageFlags.Seen, false);
             }
 
             client.Disconnect(true);
+
+            timeToRefresh = (int)ticker.Interval / 1000;
         }
 
-        public static string FilenameFromTitle(string name)
+        private void NotifyRefresh(object sender, EventArgs args)
+        {
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
+            Console.WriteLine("Next refresh in: " + timeToRefresh);
+            timeToRefresh--;
+        }
+
+        private static string FilenameFromTitle(string name)
         {
             // first trim the raw string
             string safe = name.Trim();
