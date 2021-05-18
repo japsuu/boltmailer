@@ -1,4 +1,5 @@
-﻿using MimeKit;
+﻿using Boltmailer_common;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,18 +9,73 @@ namespace Boltmailer_mainserver
 {
     class Program
     {
+        static bool quit;
+
         static void Main(string[] args)
         {
-            Console.WriteLine(GetTitle());
+            Console.WriteLine(GetTitleText());
+            Console.WriteLine("Open help with '#help'");
 
-            BoltReader boltReader = new BoltReader();
-            boltReader.StartTicking();
+            BoltReader boltReader = null;
 
-            //Console.WriteLine("CLI Ready for other actions.");
-            Console.ReadKey();
+            while (!quit)
+            {
+                string input = Console.ReadLine();
+
+                if (input.StartsWith('#'))
+                {
+                    if (input == "#quit")
+                        quit = true;
+
+                    if (input == "#help")
+                        ShowHelp();
+
+                    if (input == "#start")
+                    {
+                        boltReader = new BoltReader();
+                        boltReader.StartTicking();
+
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Initialization successfull, reading started!");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.WriteLine("Open help with '#help'");
+                    }
+
+                    if (input == "#stop")
+                    {
+                        if (boltReader != null)
+                            boltReader = null;
+
+                        Console.WriteLine("Reader stopped.");
+                    }
+                }
+            }
         }
 
-        static string GetTitle()
+        static void ShowHelp()
+        {
+            string help =
+                $@"
+Boltmailer Server version {Versioning.GetServerVersion()}" + @"
+-------------------------------------------------
+|                                               |
+|                                               |
+|   #help   -   Show this box.                  |
+|                                               |
+|   #quit   -   Close the server.               |
+|                                               |
+|   #start  -   Starts reading mails            |
+|                                               |
+|   #stop   -   Stops reading mails             |
+|                                               |
+|                                               |
+-------------------------------------------------
+                ";
+
+            Console.WriteLine(help);
+        }
+
+        static string GetTitleText()
         {
             string title =
                 @"
@@ -29,15 +85,6 @@ namespace Boltmailer_mainserver
 ██   ██ ██    ██ ██      ██    ██║╚██╔╝██║██╔══██║██║██║     ██╔══╝  ██╔══██╗
 ██████   ██████  ███████ ██    ██║ ╚═╝ ██║██║  ██║██║███████╗███████╗██║  ██║
                                ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
-
-   _____ _             _   _                                
-  / ____| |           | | (_)                               
- | (___ | |_ __ _ _ __| |_ _ _ __   __ _   _   _ _ __       
-  \___ \| __/ _` | '__| __| | '_ \ / _` | | | | | '_ \      
-  ____) | || (_| | |  | |_| | | | | (_| | | |_| | |_) | _ _ 
- |_____/ \__\__,_|_|   \__|_|_| |_|\__, |  \__,_| .__(_|_|_)
-                                    __/ |       | |         
-                                   |___/        |_|         
                 ";
 
             return title;

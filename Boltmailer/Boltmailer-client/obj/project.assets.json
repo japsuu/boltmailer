@@ -28,40 +28,38 @@
   },
   "packageFolders": {
     "C:\\Users\\japsu\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\japsu\\Desktop\\Boltmailer\\Boltmailer\\Boltmailer-client\\Boltmailer-client.csproj",
+      "projectUniqueName": "C:\\Users\\japsu\\Desktop\\boltmailer\\Boltmailer\\Boltmailer-client\\Boltmailer-client.csproj",
       "projectName": "Boltmailer-client",
-      "projectPath": "C:\\Users\\japsu\\Desktop\\Boltmailer\\Boltmailer\\Boltmailer-client\\Boltmailer-client.csproj",
+      "projectPath": "C:\\Users\\japsu\\Desktop\\boltmailer\\Boltmailer\\Boltmailer-client\\Boltmailer-client.csproj",
       "packagesPath": "C:\\Users\\japsu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\japsu\\Desktop\\Boltmailer\\Boltmailer\\Boltmailer-client\\obj\\",
+      "outputPath": "C:\\Users\\japsu\\Desktop\\boltmailer\\Boltmailer\\Boltmailer-client\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\japsu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://www.nuget.org/api/v2": {}
+        "C:\\Users\\japsu\\Downloads": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\japsu\\Desktop\\Boltmailer\\Boltmailer\\Boltmailer-common\\Boltmailer-common.csproj": {
-              "projectPath": "C:\\Users\\japsu\\Desktop\\Boltmailer\\Boltmailer\\Boltmailer-common\\Boltmailer-common.csproj"
+            "C:\\Users\\japsu\\Desktop\\boltmailer\\Boltmailer\\Boltmailer-common\\Boltmailer-common.csproj": {
+              "projectPath": "C:\\Users\\japsu\\Desktop\\boltmailer\\Boltmailer\\Boltmailer-common\\Boltmailer-common.csproj"
             }
           }
         }
@@ -93,7 +91,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

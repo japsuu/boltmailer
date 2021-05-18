@@ -12,5 +12,6 @@ namespace Boltmailer_mainserver
         public string Username { get; set; }
         public string Password { get; set; }
         public int RefreshFrequency { get; set; }
+        public bool StartReaderOnOpen { get; set; }
     }
 }

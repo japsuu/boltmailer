@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "WfZHrjgGrY4VFo9v+Y3HeLB6k3yYhEDojxHl76Z1PgYds7U7Pl3bkRBnxJWP4w2v9t/Nm+NOt82SScsuFHSj4w==",
+  "dgSpecHash": "bV1gtEtRJ27v96tJkJ9p43UQzWTVdnAWAGxqBwvt1So37XBzehcWK+3GNfAzzcxPG9+zPieXlOPtA+xJwwJ2jA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\japsu\\Desktop\\Boltmailer\\Boltmailer\\Boltmailer-mainserver\\Boltmailer-mainserver.csproj",
+  "projectFilePath": "C:\\Users\\japsu\\Desktop\\boltmailer\\Boltmailer\\Boltmailer-mainserver\\Boltmailer-mainserver.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\japsu\\.nuget\\packages\\mailkit\\2.11.1\\mailkit.2.11.1.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\japsu\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Users\\japsu\\.nuget\\packages\\mimekit\\2.11.0\\mimekit.2.11.0.nupkg.sha512",
     "C:\\Users\\japsu\\.nuget\\packages\\portable.bouncycastle\\1.8.10\\portable.bouncycastle.1.8.10.nupkg.sha512",
     "C:\\Users\\japsu\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
