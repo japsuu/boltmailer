@@ -102,6 +102,7 @@ namespace Boltmailer_client
             this.StatusComboBox.Name = "StatusComboBox";
             this.StatusComboBox.Size = new System.Drawing.Size(95, 23);
             this.StatusComboBox.TabIndex = 7;
+            this.StatusComboBox.SelectedValueChanged += new System.EventHandler(this.StatusComboBox_SelectedValueChanged);
             // 
             // ProjectOverview
             // 

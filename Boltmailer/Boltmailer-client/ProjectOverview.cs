@@ -16,6 +16,7 @@ namespace Boltmailer_client
         string lockPath;
         string notesPath;
         bool canEdit = false;
+        ProjectInfo info;
         FileSystemWatcher watcher;
 
         public ProjectOverview(ProjectInfo info, string notesFilePath)
@@ -29,9 +30,10 @@ namespace Boltmailer_client
 
         }
 
-        void SetInfo(ProjectInfo info, string projectPath)
+        void SetInfo(ProjectInfo _info, string projectPath)
         {
             this.projectPath = projectPath;
+            this.info = _info;
             lockPath = projectPath + "\\lock";
             notesPath = projectPath + "\\notes";
 
@@ -49,6 +51,13 @@ namespace Boltmailer_client
 
             // Set proj name to header
             Text = info.ProjectName;
+            var selectionIndex = info.Status switch
+            {
+                ProjectStatus.Aloittamaton => 0,
+                ProjectStatus.Kesken => 1,
+                ProjectStatus.Valmis => 2,
+                _ => 0,
+            };
 
             // Set Status selection ComboBox values
             StatusComboBox.DataSource = new StatusComboItem[]
@@ -57,7 +66,7 @@ namespace Boltmailer_client
                 new StatusComboItem(ProjectStatus.Kesken, "Kesken"),
                 new StatusComboItem(ProjectStatus.Valmis, "Valmis")
             };
-            StatusComboBox.SelectedItem = new StatusComboItem(info.Status, info.Status.ToString());
+            StatusComboBox.SelectedIndex = selectionIndex;
 
             // Set status
             switch (info.Status)
@@ -151,6 +160,29 @@ namespace Boltmailer_client
         private void FolderOpenButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("explorer.exe", projectPath);
+        }
+
+        private void StatusComboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            StatusComboItem item = (StatusComboItem)StatusComboBox.SelectedValue;
+
+            switch (item.Status)
+            {
+                case ProjectStatus.Aloittamaton:
+                    projectstatusLabel.ForeColor = Color.Red;
+                    break;
+                case ProjectStatus.Kesken:
+                    projectstatusLabel.ForeColor = Color.Orange;
+                    break;
+                case ProjectStatus.Valmis:
+                    projectstatusLabel.ForeColor = Color.Green;
+                    break;
+                default:
+                    break;
+            }
+            projectstatusLabel.Text = "Status: " + item.Text;
+            info.Status = item.Status;
+            JsonTools.WriteJson(info, projectPath);
         }
     }
 

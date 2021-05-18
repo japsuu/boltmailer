@@ -75,6 +75,7 @@ namespace Boltmailer_mainserver
 
                     // Create the info file
                     ProjectInfo info = new ProjectInfo() { ProjectName = message.Subject, Deadline = projectDeadline, TimeEstimate = "Ei annettu", Status = ProjectStatus.Aloittamaton };
+<<<<<<< HEAD
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
                         WriteIndented = true,
@@ -85,6 +86,7 @@ namespace Boltmailer_mainserver
                     };
                     string json = JsonSerializer.Serialize(info, typeof(ProjectInfo), options);
                     File.WriteAllText(path.FullName + "\\info.json", json);
+=======
 
                     JsonTools.WriteJson(info, path.FullName);
 
@@ -98,6 +100,7 @@ namespace Boltmailer_mainserver
                     //};
                     //string json = JsonSerializer.Serialize(info, typeof(ProjectInfo), options);
                     //File.WriteAllText(path.FullName + "\\info.json", json);
+>>>>>>> 46efd4b9cbaa43321f56304957851d4d5ae1045d
                 }
                 catch (Exception ex)
                 {
