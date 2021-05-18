@@ -15,7 +15,7 @@ namespace Boltmailer_mainserver
             BoltReader boltReader = new BoltReader();
             boltReader.StartTicking();
 
-            Console.WriteLine("CLI Ready for other actions.");
+            //Console.WriteLine("CLI Ready for other actions.");
             Console.ReadKey();
         }
 

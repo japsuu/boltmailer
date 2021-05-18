@@ -18,21 +18,14 @@ namespace Boltmailer_mainserver
     class BoltReader
     {
         Timer ticker;
-        Timer notifyTicker;
         readonly Random rnd = new Random();
-        int timeToRefresh;
 
         public void StartTicking()
         {
             ticker = new Timer();
-            notifyTicker = new Timer();
             ticker.Elapsed += new ElapsedEventHandler(Read);
-            notifyTicker.Elapsed += new ElapsedEventHandler(NotifyRefresh);
             ticker.Interval = 10000;
-            notifyTicker.Interval = 1000;
-            timeToRefresh = (int)ticker.Interval / 1000;
             ticker.Start();
-            notifyTicker.Start();
             Read(null, null);
         }
 
@@ -122,14 +115,9 @@ namespace Boltmailer_mainserver
 
             client.Disconnect(true);
 
-            timeToRefresh = (int)ticker.Interval / 1000;
-        }
 
-        private void NotifyRefresh(object sender, EventArgs args)
-        {
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
-            Console.WriteLine("Next refresh in: " + timeToRefresh);
-            timeToRefresh--;
+            Console.WriteLine("Messages refreshed " + DateTime.Now.ToString("HH:mm:ss"));
         }
 
         private static string FilenameFromTitle(string name)
