@@ -36,6 +36,8 @@
             this.SearchBox = new System.Windows.Forms.TextBox();
             this.SearchBoxLabel = new System.Windows.Forms.Label();
             this.AlwaysOnTopCheckbox = new System.Windows.Forms.CheckBox();
+            this.FilterEmployeesLabel = new System.Windows.Forms.Label();
+            this.FilterEmployeesBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ProjectsDataGrid)).BeginInit();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -137,12 +139,33 @@
             this.AlwaysOnTopCheckbox.TabIndex = 7;
             this.AlwaysOnTopCheckbox.Text = "Aina päällimmäisenä:";
             this.AlwaysOnTopCheckbox.UseVisualStyleBackColor = true;
+            this.AlwaysOnTopCheckbox.CheckedChanged += new System.EventHandler(this.AlwaysOnTopCheckbox_CheckedChanged);
+            // 
+            // FilterEmployeesLabel
+            // 
+            this.FilterEmployeesLabel.AutoSize = true;
+            this.FilterEmployeesLabel.Location = new System.Drawing.Point(47, 31);
+            this.FilterEmployeesLabel.Name = "FilterEmployeesLabel";
+            this.FilterEmployeesLabel.Size = new System.Drawing.Size(100, 15);
+            this.FilterEmployeesLabel.TabIndex = 8;
+            this.FilterEmployeesLabel.Text = "Suodata käyttäjiä:";
+            this.FilterEmployeesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // FilterEmployeesBox
+            // 
+            this.FilterEmployeesBox.Location = new System.Drawing.Point(153, 28);
+            this.FilterEmployeesBox.Name = "FilterEmployeesBox";
+            this.FilterEmployeesBox.Size = new System.Drawing.Size(243, 23);
+            this.FilterEmployeesBox.TabIndex = 9;
+            this.FilterEmployeesBox.TextChanged += new System.EventHandler(this.FilterEmployeesBox_TextChanged);
             // 
             // GeneralOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(948, 453);
+            this.Controls.Add(this.FilterEmployeesBox);
+            this.Controls.Add(this.FilterEmployeesLabel);
             this.Controls.Add(this.AlwaysOnTopCheckbox);
             this.Controls.Add(this.SearchBoxLabel);
             this.Controls.Add(this.SearchBox);
@@ -174,6 +197,8 @@
         private System.Windows.Forms.TextBox SearchBox;
         private System.Windows.Forms.Label SearchBoxLabel;
         private System.Windows.Forms.CheckBox AlwaysOnTopCheckbox;
+        private System.Windows.Forms.Label FilterEmployeesLabel;
+        private System.Windows.Forms.TextBox FilterEmployeesBox;
     }
 }
 

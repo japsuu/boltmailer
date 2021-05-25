@@ -21,8 +21,6 @@ namespace Boltmailer_client
 
         FileSystemWatcher watcher;
 
-        DataTable dataTable = new DataTable();
-
         Dictionary<ProjectInfo, string> projectPaths = new Dictionary<ProjectInfo, string>();
 
         public GeneralOverview()
@@ -155,22 +153,21 @@ namespace Boltmailer_client
             DebugLabel.Text = "Projektit päivitetty";
         }
 
-        void Highlight(string _query)
+        void FilterEmployees(string employee)
         {
-            string query = _query.ToLower();
+            string query = employee.ToLower();
             if (!string.IsNullOrEmpty(query))
             {
                 foreach (DataGridViewRow row in ProjectsDataGrid.Rows)
                 {
-                    for (int i = 0; i < row.Cells.Count; i++)
+                    if (row.Cells[0].Value.ToString().ToLower().Contains(query) || row.Cells[0].Value.ToString().ToLower().Contains("vapaa"))
                     {
-                        if (row.Cells[i].Value.ToString().ToLower().Contains(query) || row.Cells[i].Value.ToString().ToLower().Contains("vapaa"))
-                        {
-                            row.Visible = true;
-                            break;
-                        }
-                        else
-                            row.Visible = false;
+                        row.Visible = true;
+                        continue;
+                    }
+                    else
+                    {
+                        row.Visible = false;
                     }
                 }
             }
@@ -181,20 +178,6 @@ namespace Boltmailer_client
                     row.Visible = true;
                 }
             }
-
-            //dt.DefaultView.RowFilter = string.Format("Field = '{0}'", _query);
-            //string query = _query.ToLower();
-            //foreach (DataGridViewRow row in ProjectsDataGrid.Rows)
-            //{
-            //    for (int i = 0; i < ProjectsDataGrid.Columns.Count; i++)
-            //    {
-            //        if (row.Cells[i].Value.ToString().ToLower().Contains(query))
-            //        {
-            //            DataGridViewCellStyle style = new DataGridViewCellStyle(row.Cells[i].Style) { BackColor = Color.Chartreuse };
-            //            row.Cells[i].Style = style;
-            //        }
-            //    }
-            //}
         }
 
         void RunDelayedAction(int millisecond, Action action)
@@ -234,49 +217,12 @@ namespace Boltmailer_client
                 new DataGridViewTextBoxCell { ValueType = typeof(ProjectInfo), Value = info }
             });
 
-            switch (info.Status)
-            {
-                case ProjectStatus.Aloittamaton:
-                    {
-                        row.Cells[2].Style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(255, 132, 132) };
-                    }
-                    break;
-                case ProjectStatus.Kesken:
-                    {
-                        row.Cells[2].Style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(255, 255, 132) };
-                    }
-                    break;
-                case ProjectStatus.Valmis:
-                    {
-                        row.Cells[2].Style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(132, 255, 132) };
-                    }
-                    break;
-                default:
-                    break;
-            }
+            row.Cells[2].Style = GetStatusCellStyle(info.Status);
 
             if (last)
                 row.DividerHeight = 10;
 
             return row;
-        }
-
-        void SetDataRow(ProjectInfo info, string employee, bool isLast)
-        {
-            DataRow row = dataTable.NewRow();
-
-            DataCell[] items = new DataCell[]
-            {
-                new DataCell(employee, employee, GetDefaultCellStyle()),
-                new DataCell(info.ProjectName, info.ProjectName, GetDefaultCellStyle()),
-                new DataCell(info.Status, info.Status.ToString(), GetStatusCellStyle(info.Status)),
-                new DataCell(info.Deadline, info.Deadline, GetDefaultCellStyle()),
-                new DataCell(info.TimeEstimate, info.TimeEstimate, GetDefaultCellStyle()),
-                new DataCell(info, isLast.ToString(), GetDefaultCellStyle())
-            };
-
-            row.ItemArray = items;
-            ProjectsDataGrid.Rows.Add(row);
         }
 
         DataGridViewCellStyle GetUnassignedCellStyle()
@@ -329,31 +275,31 @@ namespace Boltmailer_client
             {
                 new DataGridViewTextBoxColumn()
                 {
-                    DefaultCellStyle = GetDefaultCellStyle(),
+                    //DefaultCellStyle = GetDefaultCellStyle(),
                     HeaderText = "Työntekijä",
                     SortMode = DataGridViewColumnSortMode.NotSortable
                 },
                 new DataGridViewTextBoxColumn()
                 {
-                    DefaultCellStyle = GetDefaultCellStyle(),
+                    //DefaultCellStyle = GetDefaultCellStyle(),
                     HeaderText = "Projektin nimi",
                     SortMode = DataGridViewColumnSortMode.NotSortable
                 },
                 new DataGridViewTextBoxColumn()
                 {
-                    DefaultCellStyle = GetDefaultCellStyle(),
+                    //DefaultCellStyle = GetDefaultCellStyle(),
                     HeaderText = "Tila",
                     SortMode = DataGridViewColumnSortMode.NotSortable
                 },
                 new DataGridViewTextBoxColumn()
                 {
-                    DefaultCellStyle = GetDefaultCellStyle(),
+                    //DefaultCellStyle = GetDefaultCellStyle(),
                     HeaderText = "Deadline",
                     SortMode = DataGridViewColumnSortMode.NotSortable
                 },
                 new DataGridViewTextBoxColumn()
                 {
-                    DefaultCellStyle = GetDefaultCellStyle(),
+                    //DefaultCellStyle = GetDefaultCellStyle(),
                     HeaderText = "Aika-arvio",
                     SortMode = DataGridViewColumnSortMode.NotSortable
                 },
@@ -390,6 +336,31 @@ namespace Boltmailer_client
 
         private void ProjectsDataGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
+            /*
+             * DataGridViewCell cell = ProjectsDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                ProjectInfo info = (ProjectInfo)ProjectsDataGrid.Rows[e.RowIndex].Cells[5].Value;
+                string employee = (string)ProjectsDataGrid.Rows[e.RowIndex].Cells[0].Value;
+
+                // Apply colors based on unassigned or not
+                if (employee == "vapaa")
+                {
+                    ProjectsDataGrid.Rows[e.RowIndex].DefaultCellStyle = GetUnassignedCellStyle();
+                }
+                else
+                {
+                    ProjectsDataGrid.Rows[e.RowIndex].DefaultCellStyle = GetDefaultCellStyle();
+                }
+
+                // Apply colors based on status
+                ProjectsDataGrid.Rows[e.RowIndex].Cells[2].Style = GetStatusCellStyle(info.Status);
+
+                // Highlight the Searched cells
+                if (!string.IsNullOrEmpty(SearchBox.Text) && e.Value.ToString().ToLower().Contains(SearchBox.Text.ToLower()))
+                {
+                    cell.Style = new DataGridViewCellStyle(cell.Style) { BackColor = Color.Chartreuse };
+                }
+             */
+
             e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.None;
             if (e.RowIndex < 1 || e.ColumnIndex < 0)
                 return;
@@ -480,23 +451,22 @@ namespace Boltmailer_client
 
         private void SearchBox_TextChanged(object sender, EventArgs e)
         {
-            Highlight(SearchBox.Text);
+            ProjectsDataGrid.Refresh();
+        }
+
+        private void AlwaysOnTopCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AlwaysOnTopCheckbox.Checked)
+                TopMost = true;
+            else
+                TopMost = false;
+        }
+
+        private void FilterEmployeesBox_TextChanged(object sender, EventArgs e)
+        {
+            FilterEmployees(FilterEmployeesBox.Text);
         }
 
         #endregion
-    }
-
-    public class DataCell
-    {
-        public object Value { get; set; }
-        public string DisplayValue { get; set; }
-        public DataGridViewCellStyle DisplayStyle { get; set; }
-
-        public DataCell(object value, string displayValue, DataGridViewCellStyle displayStyle)
-        {
-            Value = value;
-            DisplayValue = displayValue;
-            DisplayStyle = displayStyle;
-        }
     }
 }
