@@ -33,6 +33,9 @@
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.HelpButton = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.SearchBox = new System.Windows.Forms.TextBox();
+            this.SearchBoxLabel = new System.Windows.Forms.Label();
+            this.AlwaysOnTopCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ProjectsDataGrid)).BeginInit();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +58,7 @@
             this.ProjectsDataGrid.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.ProjectsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ProjectsDataGrid.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.ProjectsDataGrid.Location = new System.Drawing.Point(47, 41);
+            this.ProjectsDataGrid.Location = new System.Drawing.Point(47, 57);
             this.ProjectsDataGrid.MultiSelect = false;
             this.ProjectsDataGrid.Name = "ProjectsDataGrid";
             this.ProjectsDataGrid.ReadOnly = true;
@@ -106,11 +109,43 @@
             this.AboutButton.Text = "Tietoa";
             this.AboutButton.ToolTipText = "Tietoa sovelluksesta ja sen tekijöistä";
             // 
+            // SearchBox
+            // 
+            this.SearchBox.Location = new System.Drawing.Point(796, 28);
+            this.SearchBox.Name = "SearchBox";
+            this.SearchBox.Size = new System.Drawing.Size(100, 23);
+            this.SearchBox.TabIndex = 5;
+            this.SearchBox.TextChanged += new System.EventHandler(this.SearchBox_TextChanged);
+            // 
+            // SearchBoxLabel
+            // 
+            this.SearchBoxLabel.AutoSize = true;
+            this.SearchBoxLabel.Location = new System.Drawing.Point(762, 31);
+            this.SearchBoxLabel.Name = "SearchBoxLabel";
+            this.SearchBoxLabel.Size = new System.Drawing.Size(28, 15);
+            this.SearchBoxLabel.TabIndex = 6;
+            this.SearchBoxLabel.Text = "Etsi:";
+            this.SearchBoxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // AlwaysOnTopCheckbox
+            // 
+            this.AlwaysOnTopCheckbox.AutoSize = true;
+            this.AlwaysOnTopCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.AlwaysOnTopCheckbox.Location = new System.Drawing.Point(800, 428);
+            this.AlwaysOnTopCheckbox.Name = "AlwaysOnTopCheckbox";
+            this.AlwaysOnTopCheckbox.Size = new System.Drawing.Size(139, 19);
+            this.AlwaysOnTopCheckbox.TabIndex = 7;
+            this.AlwaysOnTopCheckbox.Text = "Aina päällimmäisenä:";
+            this.AlwaysOnTopCheckbox.UseVisualStyleBackColor = true;
+            // 
             // GeneralOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(948, 453);
+            this.Controls.Add(this.AlwaysOnTopCheckbox);
+            this.Controls.Add(this.SearchBoxLabel);
+            this.Controls.Add(this.SearchBox);
             this.Controls.Add(this.ProjectsDataGrid);
             this.Controls.Add(this.DebugLabel);
             this.Controls.Add(this.MenuStrip);
@@ -135,6 +170,10 @@
         private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem HelpButton;
         private System.Windows.Forms.ToolStripMenuItem AboutButton;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.TextBox SearchBox;
+        private System.Windows.Forms.Label SearchBoxLabel;
+        private System.Windows.Forms.CheckBox AlwaysOnTopCheckbox;
     }
 }
 

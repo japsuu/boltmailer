@@ -36,6 +36,7 @@ namespace Boltmailer_client
             this.projectstatusLabel = new System.Windows.Forms.Label();
             this.FolderOpenButton = new System.Windows.Forms.Button();
             this.StatusComboBox = new System.Windows.Forms.ComboBox();
+            this.TimeEstimateBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // NotesTitle
@@ -70,9 +71,9 @@ namespace Boltmailer_client
             this.projectTimeEstLabel.AutoSize = true;
             this.projectTimeEstLabel.Location = new System.Drawing.Point(12, 63);
             this.projectTimeEstLabel.Name = "projectTimeEstLabel";
-            this.projectTimeEstLabel.Size = new System.Drawing.Size(109, 15);
+            this.projectTimeEstLabel.Size = new System.Drawing.Size(64, 15);
             this.projectTimeEstLabel.TabIndex = 4;
-            this.projectTimeEstLabel.Text = "Projektin aika-arvio";
+            this.projectTimeEstLabel.Text = "Aika-arvio:";
             // 
             // projectstatusLabel
             // 
@@ -104,11 +105,19 @@ namespace Boltmailer_client
             this.StatusComboBox.TabIndex = 7;
             this.StatusComboBox.SelectedValueChanged += new System.EventHandler(this.StatusComboBox_SelectedValueChanged);
             // 
+            // TimeEstimateBox
+            // 
+            this.TimeEstimateBox.Location = new System.Drawing.Point(13, 82);
+            this.TimeEstimateBox.Name = "TimeEstimateBox";
+            this.TimeEstimateBox.Size = new System.Drawing.Size(108, 23);
+            this.TimeEstimateBox.TabIndex = 8;
+            // 
             // ProjectOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(318, 277);
+            this.Controls.Add(this.TimeEstimateBox);
             this.Controls.Add(this.StatusComboBox);
             this.Controls.Add(this.FolderOpenButton);
             this.Controls.Add(this.projectstatusLabel);
@@ -135,5 +144,6 @@ namespace Boltmailer_client
         private System.Windows.Forms.Button FolderOpenButton;
         private System.Windows.Forms.ComboBox StatusDropdown;
         private System.Windows.Forms.ComboBox StatusComboBox;
+        private System.Windows.Forms.TextBox TimeEstimateBox;
     }
 }

@@ -19,14 +19,11 @@ namespace Boltmailer_client
     {
         const string EMPLOYEES_ROOT_PATH = "C:\\Users\\japsu\\Desktop\\Boltmailer\\Boltmailer\\Boltmailer-mainserver\\bin\\Debug\\netcoreapp3.1\\Projektit";
 
-        //readonly int checkInterval = 30;
         FileSystemWatcher watcher;
 
-        Dictionary<ProjectInfo, string> projectPaths = new Dictionary<ProjectInfo, string>();
+        DataTable dataTable = new DataTable();
 
-        //Timer checkTicker;
-        //Timer checkNotifyTicker;
-        //readonly Stopwatch checkNotifyTimer = new Stopwatch();
+        Dictionary<ProjectInfo, string> projectPaths = new Dictionary<ProjectInfo, string>();
 
         public GeneralOverview()
         {
@@ -36,17 +33,6 @@ namespace Boltmailer_client
 
         void Initialize()
         {
-            // Start a ticker that checks for changes every checkInterval seconds.
-            //checkTicker = new Timer();
-            //checkTicker.Tick += new EventHandler(Refresh);
-            //checkTicker.Interval = checkInterval * 1000;
-            //checkTicker.Start();
-            //checkNotifyTicker = new Timer();
-            //checkNotifyTicker.Tick += new EventHandler(NotifyRefresh);
-            //checkNotifyTicker.Interval = 1;
-            //checkNotifyTicker.Start();
-            //checkNotifyTimer.Start();
-
             // Setup the DataGridView
             ProjectsDataGrid.MultiSelect = false;
             ProjectsDataGrid.RowHeadersVisible = false;
@@ -57,13 +43,10 @@ namespace Boltmailer_client
             ProjectsDataGrid.Columns.AddRange(GetGridViewColumns());
 
             // Setup the filesystemWatcher
-            watcher = new FileSystemWatcher(EMPLOYEES_ROOT_PATH);
-            watcher.NotifyFilter = NotifyFilters.CreationTime
-                                 | NotifyFilters.DirectoryName
-                                 | NotifyFilters.FileName
-                                 | NotifyFilters.LastAccess
-                                 | NotifyFilters.LastWrite
-                                 | NotifyFilters.Size;
+            watcher = new FileSystemWatcher(EMPLOYEES_ROOT_PATH)
+            {
+                NotifyFilter = NotifyFilters.LastWrite
+            };
 
             watcher.Changed += InvokeRefresh;
             watcher.Created += InvokeRefresh;
@@ -75,32 +58,52 @@ namespace Boltmailer_client
             watcher.EnableRaisingEvents = true;
 
             // Refresh the projects
-            RefreshView();
-        }
-
-        void RefreshView()
-        {
-            //checkNotifyTicker.Start();
-            ProjectsDataGrid.Rows.Clear();
-            UpdateProjectGrid();
-            NotifyRefresh();
-            //checkNotifyTimer.Restart();
+            InvokeRefresh("Initial refresh", null);
         }
 
         void InvokeRefresh(object sender, FileSystemEventArgs e)
         {
-            InvokeUI(RefreshView);
+            try
+            {
+                watcher.EnableRaisingEvents = false;
+                // Don't update for lockfile changes
+                if (e != null && e.FullPath.Contains("/lock"))
+                    return;
+
+                //if (e != null)
+                //    MessageBox.Show("List updated by: " + sender + " because: " + e.FullPath + " " + e.ChangeType);
+                //else
+                //    MessageBox.Show("List updated by: " + sender + " because: Initial refresh");
+
+                if (sender is FileSystemWatcher)
+                {
+                    InvokeUI(RefreshView);
+                }
+                else
+                {
+                    RefreshView();
+                }
+            }
+            finally
+            {
+                watcher.EnableRaisingEvents = true;
+            }
         }
 
-        private void InvokeUI(Action a)
+        void InvokeUI(Action a)
         {
-            this.BeginInvoke(new MethodInvoker(a));
+            this.BeginInvoke(new MethodInvoker(new Action(() => { RunDelayedAction(500, a); })));
+        }
+
+        void RefreshView()
+        {
+            ProjectsDataGrid.Rows.Clear();
+            UpdateProjectGrid();
+            NotifyRefresh();
         }
 
         void NotifyRefresh()
         {
-            //if(((checkInterval * 1000 - checkNotifyTimer.ElapsedMilliseconds) / 1000) < checkInterval / 3)
-            //    DebugLabel.Text = "Päivitetään: " + ((checkInterval * 1000 - checkNotifyTimer.ElapsedMilliseconds) / 1000) + "s";
             DebugLabel.Text = "Päivitetty: " + DateTime.Now.ToString("HH:mm");
         }
 
@@ -129,7 +132,7 @@ namespace Boltmailer_client
                     else // It's the error
                     {
                         ProjectInfoError error = (ProjectInfoError)info;
-                        MessageBox.Show(error.Error + "\n\n" + error.Exception);
+                        MessageBox.Show(error.Error);
                     }
                 }
 
@@ -150,6 +153,61 @@ namespace Boltmailer_client
             }
             ProjectsDataGrid.ClearSelection();
             DebugLabel.Text = "Projektit päivitetty";
+        }
+
+        void Highlight(string _query)
+        {
+            string query = _query.ToLower();
+            if (!string.IsNullOrEmpty(query))
+            {
+                foreach (DataGridViewRow row in ProjectsDataGrid.Rows)
+                {
+                    for (int i = 0; i < row.Cells.Count; i++)
+                    {
+                        if (row.Cells[i].Value.ToString().ToLower().Contains(query) || row.Cells[i].Value.ToString().ToLower().Contains("vapaa"))
+                        {
+                            row.Visible = true;
+                            break;
+                        }
+                        else
+                            row.Visible = false;
+                    }
+                }
+            }
+            else
+            {
+                foreach (DataGridViewRow row in ProjectsDataGrid.Rows)
+                {
+                    row.Visible = true;
+                }
+            }
+
+            //dt.DefaultView.RowFilter = string.Format("Field = '{0}'", _query);
+            //string query = _query.ToLower();
+            //foreach (DataGridViewRow row in ProjectsDataGrid.Rows)
+            //{
+            //    for (int i = 0; i < ProjectsDataGrid.Columns.Count; i++)
+            //    {
+            //        if (row.Cells[i].Value.ToString().ToLower().Contains(query))
+            //        {
+            //            DataGridViewCellStyle style = new DataGridViewCellStyle(row.Cells[i].Style) { BackColor = Color.Chartreuse };
+            //            row.Cells[i].Style = style;
+            //        }
+            //    }
+            //}
+        }
+
+        void RunDelayedAction(int millisecond, Action action)
+        {
+            var timer = new Timer();
+            timer.Tick += delegate
+            {
+                timer.Stop();
+                action.Invoke();
+            };
+
+            timer.Interval = millisecond;
+            timer.Start();
         }
 
         DataGridViewRow GetRow(ProjectInfo info, string employee, bool last)
@@ -203,6 +261,24 @@ namespace Boltmailer_client
             return row;
         }
 
+        void SetDataRow(ProjectInfo info, string employee, bool isLast)
+        {
+            DataRow row = dataTable.NewRow();
+
+            DataCell[] items = new DataCell[]
+            {
+                new DataCell(employee, employee, GetDefaultCellStyle()),
+                new DataCell(info.ProjectName, info.ProjectName, GetDefaultCellStyle()),
+                new DataCell(info.Status, info.Status.ToString(), GetStatusCellStyle(info.Status)),
+                new DataCell(info.Deadline, info.Deadline, GetDefaultCellStyle()),
+                new DataCell(info.TimeEstimate, info.TimeEstimate, GetDefaultCellStyle()),
+                new DataCell(info, isLast.ToString(), GetDefaultCellStyle())
+            };
+
+            row.ItemArray = items;
+            ProjectsDataGrid.Rows.Add(row);
+        }
+
         DataGridViewCellStyle GetUnassignedCellStyle()
         {
             DataGridViewCellStyle style = new DataGridViewCellStyle
@@ -218,6 +294,32 @@ namespace Boltmailer_client
             {
 
             };
+            return style;
+        }
+
+        DataGridViewCellStyle GetStatusCellStyle(ProjectStatus status)
+        {
+            DataGridViewCellStyle style = new DataGridViewCellStyle(GetDefaultCellStyle());
+            switch (status)
+            {
+                case ProjectStatus.Aloittamaton:
+                    {
+                        style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(255, 132, 132) };
+                    }
+                    break;
+                case ProjectStatus.Kesken:
+                    {
+                        style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(255, 255, 132) };
+                    }
+                    break;
+                case ProjectStatus.Valmis:
+                    {
+                        style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(132, 255, 132) };
+                    }
+                    break;
+                default:
+                    break;
+            }
             return style;
         }
 
@@ -273,23 +375,6 @@ namespace Boltmailer_client
             return style;
         }
 
-        void ProjectsDataGrid_MouseDown(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                DataGridView.HitTestInfo hitTest = ProjectsDataGrid.HitTest(e.X, e.Y);
-
-                if (hitTest.Type == DataGridViewHitTestType.None)
-                {
-                    ProjectsDataGrid.ClearSelection();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Virhe: " + ex);
-            }
-        }
-
         #region Cell merging stuff
 
         bool CompareCellValues(int column, int row)
@@ -332,6 +417,25 @@ namespace Boltmailer_client
 
         #endregion
 
+        #region Events
+
+        void ProjectsDataGrid_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                DataGridView.HitTestInfo hitTest = ProjectsDataGrid.HitTest(e.X, e.Y);
+
+                if (hitTest.Type == DataGridViewHitTestType.None)
+                {
+                    ProjectsDataGrid.ClearSelection();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Virhe: " + ex);
+            }
+        }
+
         private void ProjectsDataGrid_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             
@@ -372,6 +476,27 @@ namespace Boltmailer_client
         private void GeneralOverview_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void SearchBox_TextChanged(object sender, EventArgs e)
+        {
+            Highlight(SearchBox.Text);
+        }
+
+        #endregion
+    }
+
+    public class DataCell
+    {
+        public object Value { get; set; }
+        public string DisplayValue { get; set; }
+        public DataGridViewCellStyle DisplayStyle { get; set; }
+
+        public DataCell(object value, string displayValue, DataGridViewCellStyle displayStyle)
+        {
+            Value = value;
+            DisplayValue = displayValue;
+            DisplayStyle = displayStyle;
         }
     }
 }

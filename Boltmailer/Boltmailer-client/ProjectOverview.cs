@@ -89,7 +89,7 @@ namespace Boltmailer_client
             projectDeadlineLabel.Text = "Deadline: " + info.Deadline;
 
             // Set time est
-            projectTimeEstLabel.Text = "Aika-arvio: " + info.TimeEstimate;
+            TimeEstimateBox.Text = info.TimeEstimate;
 
             // Set notes
             try
@@ -108,6 +108,7 @@ namespace Boltmailer_client
         {
             MessageBox.Show("Joku muu muokkaa projektin tietoja parhaillaan.\nMuokkaamistila on sammutettu tämän ajaksi.", "Varoitus");
             ProjectNotesBox.Enabled = false;
+            TimeEstimateBox.Enabled = false;
 
             watcher = new FileSystemWatcher(projectPath)
             {
@@ -128,6 +129,9 @@ namespace Boltmailer_client
         {
             if(e.Name.ToLower() == "notes")
                 ProjectNotesBox.Invoke(new Action(() => SetNotes(File.ReadAllText(e.FullPath))));
+
+            if (e.Name.ToLower() == "info.json")
+                ProjectNotesBox.Invoke(new Action(() => SetTimeEstimate(File.ReadAllText(e.FullPath))));
         }
 
         private void OnDeleted(object sender, FileSystemEventArgs e)
@@ -141,10 +145,18 @@ namespace Boltmailer_client
             ProjectNotesBox.Text = content;
         }
 
+        void SetTimeEstimate(string content)
+        {
+            TimeEstimateBox.Text = content;
+        }
+
         private void ProjectOverview_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (canEdit)
             {
+                info.TimeEstimate = TimeEstimateBox.Text;
+                JsonTools.WriteJson(info, projectPath);
+
                 File.WriteAllText(notesPath, ProjectNotesBox.Text);
                 try
                 {

@@ -6,8 +6,8 @@ namespace Boltmailer_common
 {
     public static class Versioning
     {
-        private static readonly int SERVER_VERSION_NUMBER = 9;
-        private static readonly int CLIENT_VERSION_NUMBER = 13;
+        private static readonly int SERVER_VERSION_NUMBER = 11;
+        private static readonly int CLIENT_VERSION_NUMBER = 26;
 
         /// <summary>
         /// Current version number of the main server.

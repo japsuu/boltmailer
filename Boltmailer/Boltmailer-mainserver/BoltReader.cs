@@ -1,6 +1,7 @@
 ﻿using Boltmailer_common;
 using MailKit;
 using MailKit.Net.Imap;
+using MailKit.Net.Smtp;
 using MailKit.Search;
 using MailKit.Security;
 using MimeKit;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -40,14 +42,18 @@ namespace Boltmailer_mainserver
             Read(null, null);
         }
 
-        private void Read(object sender, EventArgs args)
+        private void Read(object arg1, EventArgs arg2)
         {
             // Create connection and log on to the mail server
-            using var client = new ImapClient();
+            using var imapClient = new ImapClient();
+            using var smtpClient = new SmtpClient();
             try
             {
-                client.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
-                client.Authenticate("0481664@gmail.com", "Thejapsu1");
+                imapClient.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
+                imapClient.Authenticate("0481664@gmail.com", "Thejapsu1");
+                smtpClient.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                smtpClient.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
+                smtpClient.Authenticate("0481664@gmail.com", "Thejapsu1");
                 LOG("Logging on... ", true);
             }
             catch (Exception ex)
@@ -59,7 +65,7 @@ namespace Boltmailer_mainserver
             // Open the inbox
             try
             {
-                client.Inbox.Open(FolderAccess.ReadWrite);
+                imapClient.Inbox.Open(FolderAccess.ReadWrite);
                 LOG("Opening inbox...", true);
             }
             catch (Exception ex)
@@ -69,84 +75,104 @@ namespace Boltmailer_mainserver
             }
 
             // Read the inbox contents
-            var uids = client.Inbox.Search(SearchQuery.NotSeen);
+            var uids = imapClient.Inbox.Search(SearchQuery.NotSeen);
 
             foreach (var uid in uids)
             {
+                bool isUpdate = false;
+                var message = imapClient.Inbox.GetMessage(uid);
+                string sender = message.From.OfType<MailboxAddress>().Single().Address;
+                string projectName = message.Subject;
+                string assignedEmployee = "";
+                string projectDeadline;
+                string timeEstimate;
+
                 try
                 {
-                    var message = client.Inbox.GetMessage(uid);
-                    string projectName = message.Subject;
-                    string assignedEmployee;
-                    string projectDeadline;
-
                     using (var reader = new StringReader(message.TextBody))
                     {
                         assignedEmployee = reader.ReadLine();
                         projectDeadline = reader.ReadLine();
+
+                        if (string.IsNullOrEmpty(projectDeadline))
+                        {
+                            throw new Exception("Missing Parameters :(");
+                        }
+
+                        isUpdate = projectDeadline.ToLower().Contains("update");
+                        if(!isUpdate)
+                            timeEstimate = reader.ReadLine();
                     }
 
-                    Console.WriteLine($"\nWriting project '{projectName}' for '{assignedEmployee}' with deadline '{projectDeadline}' to file...");
-
-                    projectName = FilenameFromTitle(projectName).ToLower();
-                    assignedEmployee = FilenameFromTitle(assignedEmployee);
-
-                    DirectoryInfo path = Directory.CreateDirectory("Projektit" + "\\" + assignedEmployee + "\\" + projectName);
-
-                    // Create notes file
-                    File.CreateText(path + "\\" + "notes").Close();
-
-                    message.WriteTo($"{path}\\{projectName}_{rnd.Next(1000, 9999)}.eml");
-
-                    // Create the info file
-                    ProjectInfo info = new ProjectInfo() { ProjectName = message.Subject, Deadline = projectDeadline, TimeEstimate = "Ei annettu", Status = ProjectStatus.Aloittamaton };
-                    JsonSerializerOptions options = new JsonSerializerOptions
+                    if (!isUpdate)
                     {
-                        WriteIndented = true,
-                        Converters =
+                        if (!projectDeadline.Contains("update"))
                         {
-                        new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+                            projectName = FilenameFromTitle(projectName).ToLower();
+                            assignedEmployee = FilenameFromTitle(assignedEmployee);
+
+                            DirectoryInfo path = Directory.CreateDirectory("Projektit" + "\\" + assignedEmployee + "\\" + projectName);
+
+                            // Create notes file if needed
+                            if (!File.Exists(path + "\\" + "notes"))
+                            {
+                                File.CreateText(path + "\\" + "notes").Close();
+                            }
+
+                            message.WriteTo($"{path}\\{projectName}_{rnd.Next(1000, 9999)}.eml");
+
+                            // Create the info file if needed
+                            if (!File.Exists(path + "\\info.json"))
+                            {
+                                ProjectInfo info = new ProjectInfo() { ProjectName = message.Subject, Deadline = projectDeadline, TimeEstimate = "Ei annettu", Status = ProjectStatus.Aloittamaton };
+                                JsonTools.WriteJson(info, path.FullName);
+                            }
+                            Console.WriteLine($"\nWrote project '{projectName}' for '{assignedEmployee}' with deadline '{projectDeadline}' to file.");
                         }
-                    };
-                    string json = JsonSerializer.Serialize(info, typeof(ProjectInfo), options);
-                    File.WriteAllText(path.FullName + "\\info.json", json);
+                    }
+                    else
+                    {
+                        projectName = FilenameFromTitle(projectName).ToLower();
+                        assignedEmployee = FilenameFromTitle(assignedEmployee);
 
-                    JsonTools.WriteJson(info, path.FullName);
+                        if(Directory.Exists("Projektit" + "\\" + assignedEmployee + "\\" + projectName))
+                        {
+                            DirectoryInfo path = Directory.CreateDirectory("Projektit" + "\\" + assignedEmployee + "\\" + projectName);
 
-                    //JsonSerializerOptions options = new JsonSerializerOptions
-                    //{
-                    //    WriteIndented = true,
-                    //    Converters =
-                    //    {
-                    //    new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
-                    //    }
-                    //};
-                    //string json = JsonSerializer.Serialize(info, typeof(ProjectInfo), options);
-                    //File.WriteAllText(path.FullName + "\\info.json", json);
+                            message.WriteTo($"{path}\\{projectName}_update_{rnd.Next(1000, 9999)}.eml");
+
+                            Console.WriteLine($"\nWrote update to project '{projectName}' for '{assignedEmployee}' to file.");
+                        }
+                        else    // Project to update doesn't exist, notify sender.
+                        {
+                            SendErrorReply(smtpClient, sender, projectName, assignedEmployee, isUpdate);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
                     DirectoryInfo directory = Directory.CreateDirectory("Virheelliset" + "\\");
                     string path = directory.FullName + DateTime.Now.ToString("dd.MM") + "_" + rnd.Next(1000, 9999);
 
-                    Console.WriteLine($"\n\nFound an email that cannot be saved (full html?):\n{ex.Message}.\nSaving at: {path}\n\n");
+                    Console.WriteLine($"\n\nError parsing a mail:\n{ex}.\nSaving at: {path}\nAnd notifying the sender of the mail.");
 
                     try
                     {
-                        var message = client.Inbox.GetMessage(uid);
+                        var mesg = imapClient.Inbox.GetMessage(uid);
 
-                        message.WriteTo($"{path}.eml");
+                        mesg.WriteTo($"{path}.eml");
                     }
                     catch
                     {
                     }
+                    SendErrorReply(smtpClient, sender, projectName, assignedEmployee, isUpdate, ex);
                 }
 
-                client.Inbox.SetFlags(uid, MessageFlags.Seen, false);
+                imapClient.Inbox.SetFlags(uid, MessageFlags.Seen, false);
             }
             LOG("Reading inbox contents...", true);
 
-            client.Disconnect(true);
+            imapClient.Disconnect(true);
 
             if (firstStart)
             {
@@ -160,6 +186,62 @@ namespace Boltmailer_mainserver
             //    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
             //    Console.WriteLine("Messages refreshed " + DateTime.Now.ToString("HH:mm:ss"));
             //}
+        }
+
+        private void SendErrorReply(SmtpClient smtpClient, string Recipient, string projectName, string assignedEmployee, bool update, Exception ex = null)
+        {
+            Console.WriteLine($"\nTried to update non-existant project '{projectName}' for '{assignedEmployee}', notifying email sender ({Recipient}).");
+
+            var reply = new MimeMessage();
+            var bodyBuilder = new BodyBuilder();
+
+            // from
+            reply.From.Add(new MailboxAddress("Boltmailer Mainserver", "0481664@gmail.com"));
+            // to
+            reply.To.Add(new MailboxAddress(Recipient, Recipient));
+            // reply to
+            reply.ReplyTo.Add(new MailboxAddress("NoReply", "noReply"));
+
+            reply.Subject = "Virhe / Error";
+            if (update)
+            {
+                bodyBuilder.HtmlBody =
+                $@"
+<h1>Suomeksi:</h1>
+<h4>Tämä on automaattinen viesti Boltmailer Serveriltä. <b>Ethän yritä vastata tähän viestiin.</b></h4>
+<h3>Projektia jota yritit päivittää ({projectName}) ei ole olemassa käyttäjälle '{assignedEmployee}'.</h3>
+<h4>Jos uskot tämän olevan virhe, ota yhteyttä ylläpitäjiin.</h4>
+
+</br></br>
+
+<h1>In English:</h1>
+<h4>This is an automated message sent by the Boltmailer Mainserver. <b>Please do not try to reply to this email.</b></h4>
+<h3>The project you have tried to update ({projectName}) does not exist for the user '{assignedEmployee}'.</h3>
+<h4>If you believe this is an error, please contact the Administrators.</h4>
+                                ";
+            }
+            else
+            {
+                bodyBuilder.HtmlBody =
+                $@"
+<h1>Suomeksi:</h1>
+<h4>Tämä on automaattinen viesti Boltmailer Serveriltä. <b>Ethän yritä vastata tähän viestiin.</b></h4>
+<h3>Projektin ({projectName}) lisäämisessä käyttäjälle '{assignedEmployee}' on tapahtunut virhe:</h3>
+<h4>{ex.Message}</h4>
+
+</br></br>
+
+<h1>In English:</h1>
+<h4>This is an automated message sent by the Boltmailer Mainserver. <b>Please do not try to reply to this email.</b></h4>
+<h3>There's been an error adding a project ({projectName}) for the user '{assignedEmployee}':</h3>
+<h4>{ex.Message}</h4>
+                                ";
+            }
+            
+            reply.Body = bodyBuilder.ToMessageBody();
+
+            smtpClient.Send(reply);
+            smtpClient.Disconnect(true);
         }
 
         private void LOG(string text, bool ok, string exception = null)

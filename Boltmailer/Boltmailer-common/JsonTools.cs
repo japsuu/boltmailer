@@ -32,12 +32,12 @@ namespace Boltmailer_common
             }
             catch (Exception ex)
             {
-                return new ProjectInfoError("Virheellinen info.json tiedosto! Projekti skipataan, ja sitä ei ladata.", ex.Message, path);
+                return new ProjectInfoError($"Virheellinen info.json tiedosto sijainnissa '{path}'! Projekti skipataan, ja sitä ei ladata.", ex.Message, path);
             }
         }
 
         /// <summary>
-        /// Writes the info.json file to the path provided.
+        /// Writes the info.json file to the path provided. If the file exists, it is overwritten.
         /// </summary>
         /// <param name="info"></param>
         /// <param name="path">Path where to write, without the file name.</param>

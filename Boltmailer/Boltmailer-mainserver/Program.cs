@@ -36,7 +36,7 @@ namespace Boltmailer_mainserver
                         boltReader.StartTicking();
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Initialization successfull, reading started!");
+                        Console.WriteLine("Initialization successful, reading started!");
                         Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Open help with '#help'");
                     }
