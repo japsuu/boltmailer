@@ -45,8 +45,14 @@ namespace Boltmailer_client
             else
             {
                 canEdit = true;
-                FileStream stream = File.Create(lockPath);
-                stream.Close();
+                File.Create(lockPath).Close();
+                try
+                {
+                    File.SetAttributes(lockPath, FileAttributes.Hidden);
+                }
+                catch
+                {
+                }
             }
 
             // Set proj name to header
@@ -99,8 +105,14 @@ namespace Boltmailer_client
             catch (Exception)
             {
                 MessageBox.Show($"Huomio-tiedostoa ei ole olemassa.\n\nTiedosto luodaan.", "Varoitus");
-                StreamWriter writer = File.CreateText(notesPath);
-                writer.Close();
+                File.CreateText(notesPath).Close();
+                try
+                {
+                    File.SetAttributes(notesPath, FileAttributes.Hidden);
+                }
+                catch
+                {
+                }
             }
         }
 

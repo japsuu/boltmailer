@@ -7,6 +7,7 @@ using MailKit.Security;
 using MimeKit;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -37,7 +38,10 @@ namespace Boltmailer_mainserver
 
             ticker = new System.Timers.Timer();
             ticker.Elapsed += new ElapsedEventHandler(Read);
-            ticker.Interval = 10000;
+            int refreshFrequency = int.Parse(ConfigurationManager.AppSettings.Get("EmailRefreshFrequency"));
+            if (refreshFrequency < 10000)
+                refreshFrequency = 10000;
+            ticker.Interval = refreshFrequency;
             ticker.Start();
             Read(null, null);
         }
@@ -49,11 +53,36 @@ namespace Boltmailer_mainserver
             using var smtpClient = new SmtpClient();
             try
             {
-                imapClient.Connect("imap.gmail.com", 993, SecureSocketOptions.SslOnConnect);
-                imapClient.Authenticate("0481664@gmail.com", "Thejapsu1");
+                string imapHost = ConfigurationManager.AppSettings.Get("EmailImapHost");
+                string imapPort = ConfigurationManager.AppSettings.Get("EmailImapPort");
+                string imapUseSSL = ConfigurationManager.AppSettings.Get("EmailImapUseSSL");
+                string smtpHost = ConfigurationManager.AppSettings.Get("EmailSmtpHost");
+                string smtpPort = ConfigurationManager.AppSettings.Get("EmailSmtpPort");
+                string smtpUseSSL = ConfigurationManager.AppSettings.Get("EmailSmtpUseSSL");
+                string username = ConfigurationManager.AppSettings.Get("EmailUsername");
+                string password = ConfigurationManager.AppSettings.Get("EmailPassword");
+                // Authenticate imap client
+                if (imapUseSSL != "false")
+                {
+                    imapClient.Connect(imapHost, int.Parse(imapPort), SecureSocketOptions.SslOnConnect);
+                }
+                else
+                {
+                    imapClient.Connect(imapHost, int.Parse(imapPort), SecureSocketOptions.None);
+                }
+                imapClient.Authenticate(username, password);
+
+                // Authenticate smtp client
                 smtpClient.ServerCertificateValidationCallback = (s, c, h, e) => true;
-                smtpClient.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
-                smtpClient.Authenticate("0481664@gmail.com", "Thejapsu1");
+                if(smtpUseSSL != "false")
+                {
+                    smtpClient.Connect(smtpHost, int.Parse(smtpPort), SecureSocketOptions.SslOnConnect);
+                }
+                else
+                {
+                    smtpClient.Connect(smtpHost, int.Parse(smtpPort), SecureSocketOptions.None);
+                }
+                smtpClient.Authenticate(username, password);
                 LOG("Logging on... ", true);
             }
             catch (Exception ex)
@@ -117,6 +146,13 @@ namespace Boltmailer_mainserver
                             if (!File.Exists(path + "\\" + "notes"))
                             {
                                 File.CreateText(path + "\\" + "notes").Close();
+                                try
+                                {
+                                    File.SetAttributes(path + "\\" + "notes", FileAttributes.Hidden);
+                                }
+                                catch
+                                {
+                                }
                             }
 
                             message.WriteTo($"{path}\\{projectName}_{rnd.Next(1000, 9999)}.eml");
@@ -126,6 +162,13 @@ namespace Boltmailer_mainserver
                             {
                                 ProjectInfo info = new ProjectInfo() { ProjectName = message.Subject, Deadline = projectDeadline, TimeEstimate = "Ei annettu", Status = ProjectStatus.Aloittamaton };
                                 JsonTools.WriteJson(info, path.FullName);
+                                try
+                                {
+                                    File.SetAttributes(path + "\\info.json", FileAttributes.Hidden);
+                                }
+                                catch
+                                {
+                                }
                             }
                             Console.WriteLine($"\nWrote project '{projectName}' for '{assignedEmployee}' with deadline '{projectDeadline}' to file.");
                         }

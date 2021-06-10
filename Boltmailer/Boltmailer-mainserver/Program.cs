@@ -1,4 +1,6 @@
-﻿using Boltmailer_common;
+﻿using System.Configuration;
+using System.Collections.Specialized;
+using Boltmailer_common;
 using MimeKit;
 using System;
 using System.Collections.Generic;
@@ -10,13 +12,17 @@ namespace Boltmailer_mainserver
     class Program
     {
         static bool quit;
+        static BoltReader boltReader = null;
 
         static void Main(string[] args)
         {
             Console.WriteLine(GetTitleText());
             Console.WriteLine("Open help with '#help'");
-
-            BoltReader boltReader = null;
+            string startOnOpen = ConfigurationManager.AppSettings.Get("StartReaderOnOpen");
+            if (startOnOpen != "false")
+            {
+                Start();
+            }
 
             while (!quit)
             {
@@ -32,13 +38,7 @@ namespace Boltmailer_mainserver
 
                     if (input == "#start")
                     {
-                        boltReader = new BoltReader();
-                        boltReader.StartTicking();
-
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Initialization successful, reading started!");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                        Console.WriteLine("Open help with '#help'");
+                        Start();
                     }
 
                     if (input == "#stop")
@@ -50,6 +50,17 @@ namespace Boltmailer_mainserver
                     }
                 }
             }
+        }
+
+        static void Start()
+        {
+            boltReader = new BoltReader();
+            boltReader.StartTicking();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Initialization successful, reading started!");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("Open help with '#help'");
         }
 
         static void ShowHelp()
