@@ -38,6 +38,7 @@
             this.AlwaysOnTopCheckbox = new System.Windows.Forms.CheckBox();
             this.FilterEmployeesLabel = new System.Windows.Forms.Label();
             this.FilterEmployeesBox = new System.Windows.Forms.TextBox();
+            this.ConfigButton = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ProjectsDataGrid)).BeginInit();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -78,7 +79,8 @@
             this.MenuStrip.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.HelpButton,
-            this.AboutButton});
+            this.AboutButton,
+            this.ConfigButton});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Padding = new System.Windows.Forms.Padding(10, 2, 10, 2);
@@ -117,6 +119,7 @@
             this.SearchBox.Name = "SearchBox";
             this.SearchBox.Size = new System.Drawing.Size(100, 23);
             this.SearchBox.TabIndex = 5;
+            this.SearchBox.Visible = false;
             this.SearchBox.TextChanged += new System.EventHandler(this.SearchBox_TextChanged);
             // 
             // SearchBoxLabel
@@ -128,6 +131,7 @@
             this.SearchBoxLabel.TabIndex = 6;
             this.SearchBoxLabel.Text = "Etsi:";
             this.SearchBoxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.SearchBoxLabel.Visible = false;
             // 
             // AlwaysOnTopCheckbox
             // 
@@ -158,6 +162,15 @@
             this.FilterEmployeesBox.Size = new System.Drawing.Size(243, 23);
             this.FilterEmployeesBox.TabIndex = 9;
             this.FilterEmployeesBox.TextChanged += new System.EventHandler(this.FilterEmployeesBox_TextChanged);
+            // 
+            // ConfigButton
+            // 
+            this.ConfigButton.AutoToolTip = true;
+            this.ConfigButton.CheckOnClick = true;
+            this.ConfigButton.ForeColor = System.Drawing.SystemColors.Window;
+            this.ConfigButton.Name = "ConfigButton";
+            this.ConfigButton.Size = new System.Drawing.Size(119, 20);
+            this.ConfigButton.Text = "Avaa konfiguraatio";
             // 
             // GeneralOverview
             // 
@@ -199,6 +212,7 @@
         private System.Windows.Forms.CheckBox AlwaysOnTopCheckbox;
         private System.Windows.Forms.Label FilterEmployeesLabel;
         private System.Windows.Forms.TextBox FilterEmployeesBox;
+        private System.Windows.Forms.ToolStripMenuItem ConfigButton;
     }
 }
 

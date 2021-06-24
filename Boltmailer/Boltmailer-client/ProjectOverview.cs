@@ -183,6 +183,7 @@ namespace Boltmailer_client
 
         private void FolderOpenButton_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(projectPath);
             System.Diagnostics.Process.Start("explorer.exe", projectPath);
         }
 

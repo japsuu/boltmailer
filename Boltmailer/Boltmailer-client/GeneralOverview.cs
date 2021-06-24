@@ -1,36 +1,44 @@
 ﻿using Boltmailer_common;
+using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
+using System.Configuration;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows.ApplicationModel.Activation;
+using Windows.Foundation.Collections;
 
 namespace Boltmailer_client
 {
     public partial class GeneralOverview : Form
     {
-        const string EMPLOYEES_ROOT_PATH = "C:\\Users\\japsu\\Desktop\\Boltmailer\\Boltmailer\\Boltmailer-mainserver\\bin\\Debug\\netcoreapp3.1\\Projektit";
+        readonly string EMPLOYEES_ROOT_PATH = ConfigurationManager.AppSettings.Get("employeesRootPath");
 
-        FileSystemWatcher watcher;
+        FileSystemWatcher allProjectsWatcher;
+        FileSystemWatcher userProjectsWatcher;
 
         Dictionary<ProjectInfo, string> projectPaths = new Dictionary<ProjectInfo, string>();
 
         public GeneralOverview()
         {
             InitializeComponent();
-            Initialize();
+
+            try
+            {
+                Initialize();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Virhe");
+            }
         }
 
         void Initialize()
         {
+            // Try to set the search term based on saved string
+            string searchTerm = ConfigurationManager.AppSettings.Get("employeeSearchTerm");
+
             // Setup the DataGridView
             ProjectsDataGrid.MultiSelect = false;
             ProjectsDataGrid.RowHeadersVisible = false;
@@ -40,38 +48,72 @@ namespace Boltmailer_client
             ProjectsDataGrid.ColumnHeadersDefaultCellStyle = GetHeaderStyle();
             ProjectsDataGrid.Columns.AddRange(GetGridViewColumns());
 
-            // Setup the filesystemWatcher
-            watcher = new FileSystemWatcher(EMPLOYEES_ROOT_PATH)
+            // Setup the filesystemWatcher for all projects
+            allProjectsWatcher = new FileSystemWatcher(EMPLOYEES_ROOT_PATH)
             {
                 NotifyFilter = NotifyFilters.LastWrite
             };
 
-            watcher.Changed += InvokeRefresh;
-            watcher.Created += InvokeRefresh;
-            watcher.Deleted += InvokeRefresh;
-            watcher.Renamed += InvokeRefresh;
+            allProjectsWatcher.Created += InvokeRefresh;
+            allProjectsWatcher.Changed += InvokeRefresh;
+            allProjectsWatcher.Deleted += InvokeRefresh;
+            allProjectsWatcher.Renamed += InvokeRefresh;
 
-            watcher.Filter = "";
-            watcher.IncludeSubdirectories = true;
-            watcher.EnableRaisingEvents = true;
+            allProjectsWatcher.Filter = "";
+            allProjectsWatcher.IncludeSubdirectories = true;
+            allProjectsWatcher.EnableRaisingEvents = true;
+
+            // Setup the filesystemwatcher for user's projects
+            userProjectsWatcher = new FileSystemWatcher(EMPLOYEES_ROOT_PATH)
+            {
+                EnableRaisingEvents = true,
+                IncludeSubdirectories = true,
+                NotifyFilter = NotifyFilters.Attributes
+                                 | NotifyFilters.CreationTime
+                                 | NotifyFilters.DirectoryName
+                                 | NotifyFilters.FileName
+                                 | NotifyFilters.LastAccess
+                                 | NotifyFilters.LastWrite
+                                 | NotifyFilters.Security
+                                 | NotifyFilters.Size
+            };
+            userProjectsWatcher.Created += SendCreatedNotification;
+
+            FilterEmployeesBox.Text = searchTerm;
 
             // Refresh the projects
             InvokeRefresh("Initial refresh", null);
+        }
+
+        private void SendCreatedNotification(object sender, FileSystemEventArgs e)
+        {
+            if (
+                e.FullPath.ToLower().Contains(FilterEmployeesBox.Text) &&
+                !(e.FullPath.Substring(e.FullPath.LastIndexOf('\\') + 1) == "lock") &&
+                !(e.FullPath.Substring(e.FullPath.LastIndexOf('\\') + 1) == "notes") &&
+                !(e.FullPath.Substring(e.FullPath.LastIndexOf('\\') + 1) == "info.json"))
+            {
+                if (e != null)
+                {
+                    new ToastContentBuilder()
+                        .AddArgument("action", "openProj")
+                        .AddArgument("path", e.FullPath)
+                        .AddText("Uusi Projekti / Päivitys projektiin:")
+                        .AddText(e.FullPath.Substring(e.FullPath.LastIndexOf('\\') + 1))
+                        .Show();
+                }
+            }
         }
 
         void InvokeRefresh(object sender, FileSystemEventArgs e)
         {
             try
             {
-                watcher.EnableRaisingEvents = false;
+                allProjectsWatcher.EnableRaisingEvents = false;
+
                 // Don't update for lockfile changes
                 if (e != null && e.FullPath.Contains("/lock"))
                     return;
-
-                //if (e != null)
-                //    MessageBox.Show("List updated by: " + sender + " because: " + e.FullPath + " " + e.ChangeType);
-                //else
-                //    MessageBox.Show("List updated by: " + sender + " because: Initial refresh");
 
                 if (sender is FileSystemWatcher)
                 {
@@ -84,7 +126,7 @@ namespace Boltmailer_client
             }
             finally
             {
-                watcher.EnableRaisingEvents = true;
+                allProjectsWatcher.EnableRaisingEvents = true;
             }
         }
 
@@ -149,8 +191,10 @@ namespace Boltmailer_client
                         ProjectsDataGrid.Rows.Add(GetRow(info, employee, false));
                 }
             }
-            ProjectsDataGrid.ClearSelection();
+            FilterEmployees(FilterEmployeesBox.Text);
             DebugLabel.Text = "Projektit päivitetty";
+            ProjectsDataGrid.ClearSelection();
+            ProjectsDataGrid.CurrentCell = null;
         }
 
         void FilterEmployees(string employee)
@@ -424,11 +468,6 @@ namespace Boltmailer_client
             overview.ShowDialog();
         }
 
-        private void HelpButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void MenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if(e.ClickedItem.Name == "HelpButton")
@@ -441,6 +480,13 @@ namespace Boltmailer_client
             {
                 AboutBox abox = new AboutBox();
                 abox.ShowDialog();
+            }
+
+            if(e.ClickedItem.Name == "ConfigButton")
+            {
+                MessageBox.Show("Muokkaathan konfiguraatiota vain, jos tiedät mitä teet.", "Muistutus!");
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                System.Diagnostics.Process.Start("explorer.exe", config.FilePath);
             }
         }
 
@@ -464,6 +510,9 @@ namespace Boltmailer_client
 
         private void FilterEmployeesBox_TextChanged(object sender, EventArgs e)
         {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["employeeSearchTerm"].Value = FilterEmployeesBox.Text;
+            config.Save(ConfigurationSaveMode.Modified);
             FilterEmployees(FilterEmployeesBox.Text);
         }
 
