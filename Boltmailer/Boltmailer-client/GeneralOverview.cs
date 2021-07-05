@@ -6,8 +6,6 @@ using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation.Collections;
 
 namespace Boltmailer_client
 {
@@ -20,6 +18,10 @@ namespace Boltmailer_client
 
         Dictionary<ProjectInfo, string> projectPaths = new Dictionary<ProjectInfo, string>();
 
+        bool sendNotifications;
+        bool showCompleted;
+        bool initialized;
+
         public GeneralOverview()
         {
             InitializeComponent();
@@ -30,14 +32,29 @@ namespace Boltmailer_client
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Virhe");
+                MessageBox.Show("Ohjelman käynnistämisessä tapahtui virhe:\n\n" + ex.ToString(), "Virhe");
             }
         }
 
         void Initialize()
         {
             // Try to set the search term based on saved string
-            string searchTerm = ConfigurationManager.AppSettings.Get("employeeSearchTerm");
+            try
+            {
+                FilterEmployeesBox.Text = ConfigurationManager.AppSettings.Get("employeeSearchTerm");
+
+                AlwaysOnTopCheckbox.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("alwaysOnTop"));
+
+                sendNotifications = bool.Parse(ConfigurationManager.AppSettings.Get("sendNotifications"));
+                SendNotificationsCheckbox.Checked = sendNotifications;
+
+                showCompleted = bool.Parse(ConfigurationManager.AppSettings.Get("showCompletedProjects"));
+                ShowCompletedProjectsCheckbox.Checked = showCompleted;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Virheellinen Config-tiedosto:\n\n" + ex, "Virhe");
+            }
 
             // Setup the DataGridView
             ProjectsDataGrid.MultiSelect = false;
@@ -53,6 +70,9 @@ namespace Boltmailer_client
             {
                 NotifyFilter = NotifyFilters.LastWrite
             };
+
+            // Setup FSW filters
+            allProjectsWatcher.Filters.Add("*.eml");
 
             allProjectsWatcher.Created += InvokeRefresh;
             allProjectsWatcher.Changed += InvokeRefresh;
@@ -79,7 +99,8 @@ namespace Boltmailer_client
             };
             userProjectsWatcher.Created += SendCreatedNotification;
 
-            FilterEmployeesBox.Text = searchTerm;
+            // Set the initialization flag, to get around the "Checkbox checked -called" -error
+            initialized = true;
 
             // Refresh the projects
             InvokeRefresh("Initial refresh", null);
@@ -91,9 +112,10 @@ namespace Boltmailer_client
                 e.FullPath.ToLower().Contains(FilterEmployeesBox.Text) &&
                 !(e.FullPath.Substring(e.FullPath.LastIndexOf('\\') + 1) == "lock") &&
                 !(e.FullPath.Substring(e.FullPath.LastIndexOf('\\') + 1) == "notes") &&
-                !(e.FullPath.Substring(e.FullPath.LastIndexOf('\\') + 1) == "info.json"))
+                !(e.FullPath.Substring(e.FullPath.LastIndexOf('\\') + 1) == "info.json") &&
+                !(e.FullPath.Substring(e.FullPath.LastIndexOf('.') + 1) == "eml"))
             {
-                if (e != null)
+                if (e != null && sendNotifications)
                 {
                     new ToastContentBuilder()
                         .AddArgument("action", "openProj")
@@ -112,11 +134,12 @@ namespace Boltmailer_client
                 allProjectsWatcher.EnableRaisingEvents = false;
 
                 // Don't update for lockfile changes
-                if (e != null && e.FullPath.Contains("/lock"))
+                if (e != null && e.FullPath.Contains("\\lock"))
                     return;
 
                 if (sender is FileSystemWatcher)
                 {
+                    System.Diagnostics.Debug.WriteLine("FS kutsuu päivityksen koska: " + e.FullPath + "\n" + e.ChangeType.ToString());
                     InvokeUI(RefreshView);
                 }
                 else
@@ -149,6 +172,8 @@ namespace Boltmailer_client
 
         void UpdateProjectGrid()
         {
+            ProjectsDataGrid.Rows.Clear();
+
             // Reset the projectPaths dictionary
             projectPaths = new Dictionary<ProjectInfo, string>();
 
@@ -161,13 +186,29 @@ namespace Boltmailer_client
                 // Get all the projects the employee has
                 foreach (string projectPath in Directory.GetDirectories(directory))
                 {
-                    IProjectInfo info = JsonTools.ReadJson(projectPath);
+                    IProjectInfo info = FileTools.ReadJson(projectPath);
 
                     // If it's the info
                     if (typeof(ProjectInfo).IsAssignableFrom(info.GetType()))
                     {
-                        projects.Add((ProjectInfo)info);
-                        projectPaths.Add((ProjectInfo)info, projectPath);
+                        // Only add Completed projects, if user wants so
+                        if (showCompleted)
+                        {
+                            projects.Add((ProjectInfo)info);
+                            projectPaths.Add((ProjectInfo)info, projectPath);
+                        }
+                        else
+                        {
+                            // Get the info object and compare if the state is Completed
+                            ProjectInfo pinfo = (ProjectInfo)info;
+
+                            if(pinfo.Status != ProjectStatus.Palautettu)
+                            {
+                                projects.Add((ProjectInfo)info);
+                                projectPaths.Add((ProjectInfo)info, projectPath);
+                            }
+                        }
+
                     }
                     else // It's the error
                     {
@@ -185,43 +226,60 @@ namespace Boltmailer_client
                     string employee = directory.Substring(directory.LastIndexOf('\\') + 1).Replace('_', ' ').Replace('-', ' ').ToLower();
 
                     // Only add the divider for the last row
-                    if (i == projects.Count - 1)
-                        ProjectsDataGrid.Rows.Add(GetRow(info, employee, true));
-                    else
+                    //if (i == projects.Count - 1)
+                    //    ProjectsDataGrid.Rows.Add(GetRow(info, employee, true));
+                    //else
                         ProjectsDataGrid.Rows.Add(GetRow(info, employee, false));
                 }
             }
             FilterEmployees(FilterEmployeesBox.Text);
-            DebugLabel.Text = "Projektit päivitetty";
             ProjectsDataGrid.ClearSelection();
             ProjectsDataGrid.CurrentCell = null;
+            //MessageBox.Show("Päivitetty");
         }
 
         void FilterEmployees(string employee)
         {
             string query = employee.ToLower();
-            if (!string.IsNullOrEmpty(query))
+            foreach (DataGridViewRow row in ProjectsDataGrid.Rows)
             {
-                foreach (DataGridViewRow row in ProjectsDataGrid.Rows)
-                {
-                    if (row.Cells[0].Value.ToString().ToLower().Contains(query) || row.Cells[0].Value.ToString().ToLower().Contains("vapaa"))
-                    {
-                        row.Visible = true;
-                        continue;
-                    }
-                    else
-                    {
-                        row.Visible = false;
-                    }
-                }
-            }
-            else
-            {
-                foreach (DataGridViewRow row in ProjectsDataGrid.Rows)
+                if (row.Cells[0].Value.ToString().ToLower().Contains(query) || row.Cells[0].Value.ToString().ToLower().Contains("vapaa"))
                 {
                     row.Visible = true;
+                    continue;
                 }
+                else
+                {
+                    row.Visible = false;
+                }
+                /////if (showCompleted)  //TODO: Now why the fuck does this work without contents of this check?
+                /////{
+                /////    
+                /////}
+                /////else
+                /////{
+                /////    ProjectInfo info = (ProjectInfo)row.Cells[5].Value;
+                /////    if ((row.Cells[0].Value.ToString().ToLower().Contains(query) || row.Cells[0].Value.ToString().ToLower().Contains("vapaa")) && info.Status != ProjectStatus.Palautettu)
+                /////    {
+                /////        row.Visible = true;
+                /////        continue;
+                /////    }
+                /////    else
+                /////    {
+                /////        row.Visible = false;
+                /////    }
+                /////}
             }
+            //if (!string.IsNullOrEmpty(query))
+            //{
+            //}
+            //else
+            //{
+            //    foreach (DataGridViewRow row in ProjectsDataGrid.Rows)
+            //    {
+            //        row.Visible = true;
+            //    }
+            //}
         }
 
         void RunDelayedAction(int millisecond, Action action)
@@ -302,7 +360,7 @@ namespace Boltmailer_client
                         style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(255, 255, 132) };
                     }
                     break;
-                case ProjectStatus.Valmis:
+                case ProjectStatus.Palautettu:
                     {
                         style = new DataGridViewCellStyle() { BackColor = Color.FromArgb(132, 255, 132) };
                     }
@@ -367,17 +425,6 @@ namespace Boltmailer_client
 
         #region Cell merging stuff
 
-        bool CompareCellValues(int column, int row)
-        {
-            DataGridViewCell cell1 = ProjectsDataGrid[column, row];
-            DataGridViewCell cell2 = ProjectsDataGrid[column, row - 1];
-            if (cell1.Value == null || cell2.Value == null)
-            {
-                return false;
-            }
-            return cell1.Value.ToString() == cell2.Value.ToString();
-        }
-
         private void ProjectsDataGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             /*
@@ -417,16 +464,70 @@ namespace Boltmailer_client
             {
                 e.AdvancedBorderStyle.Top = ProjectsDataGrid.AdvancedCellBorderStyle.Top;
             }
+
+            //if (ProjectsDataGrid.Rows.Count > e.RowIndex + 1)
+            //{
+            //    int comparedRow = 1;
+            //    while ((ProjectsDataGrid.Rows.Count > e.RowIndex + comparedRow) && !ProjectsDataGrid.Rows[comparedRow].Visible)
+            //    {
+            //        if (ProjectsDataGrid.Rows.Count > e.RowIndex + comparedRow)
+            //        {
+            //            break;
+            //        }
+            //        comparedRow++;
+            //    }
+            //    //TODO: Try with .Equals on the two objects?
+            //    if (ProjectsDataGrid.Rows[e.RowIndex].Cells[0].ToolTipText != ProjectsDataGrid.Rows[e.RowIndex + comparedRow].Cells[0].ToolTipText)
+            //    {
+            //        ProjectsDataGrid.Rows[e.RowIndex].DividerHeight = 10;
+            //    }
+            //}
+
+            //if (ProjectsDataGrid.Rows.Count > e.RowIndex + 1)
+            //{
+            //    //TODO: It's a bit hacky, but it works!
+            //    if (ProjectsDataGrid.Rows[e.RowIndex].Cells[0].ToolTipText != ProjectsDataGrid.Rows[e.RowIndex + 1].Cells[0].ToolTipText)
+            //    {
+            //
+            //
+            //        ProjectsDataGrid.Rows[e.RowIndex].DividerHeight = 10;
+            //    }
+            //}
+        }
+
+        /// <summary>
+        /// Compares only visible cells. Given cell and the one below it.
+        /// </summary>
+        /// <param name="column"></param>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        bool CompareCellValues(int column, int row)
+        {
+            DataGridViewCell cell1 = ProjectsDataGrid[column, row];
+            DataGridViewCell cell2 = ProjectsDataGrid[column, row - 1];
+
+            if (cell1.Value == null || cell2.Value == null)
+            {
+                return false;
+            }
+
+            return cell1.Value.ToString() == cell2.Value.ToString();
         }
 
         private void ProjectsDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex == 0 || e.ColumnIndex != 0)
                 return;
+
             if (CompareCellValues(e.ColumnIndex, e.RowIndex))
             {
                 e.Value = "          \u21B3";
                 e.FormattingApplied = true;
+            }
+
+            if(!CompareCellValues(e.ColumnIndex, e.RowIndex))
+            {
+                ProjectsDataGrid.Rows[e.RowIndex - 1].DividerHeight = 10;
             }
         }
 
@@ -465,6 +566,7 @@ namespace Boltmailer_client
             projectPaths.TryGetValue(info, out string path);
 
             ProjectOverview overview = new ProjectOverview(info, path);
+            overview.TopMost = AlwaysOnTopCheckbox.Checked;
             overview.ShowDialog();
         }
 
@@ -473,12 +575,14 @@ namespace Boltmailer_client
             if(e.ClickedItem.Name == "HelpButton")
             {
                 HelpBox hbox = new HelpBox();
+                hbox.TopMost = AlwaysOnTopCheckbox.Checked;
                 hbox.Show();
             }
 
             if(e.ClickedItem.Name == "AboutButton")
             {
                 AboutBox abox = new AboutBox();
+                abox.TopMost = AlwaysOnTopCheckbox.Checked;
                 abox.ShowDialog();
             }
 
@@ -502,20 +606,51 @@ namespace Boltmailer_client
 
         private void AlwaysOnTopCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            if (AlwaysOnTopCheckbox.Checked)
-                TopMost = true;
-            else
-                TopMost = false;
+            TopMost = AlwaysOnTopCheckbox.Checked;
+
+            ModifyConfig("alwaysOnTop", AlwaysOnTopCheckbox.Checked.ToString().ToLower());
+        }
+
+        private void SendNotificationsCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            sendNotifications = SendNotificationsCheckbox.Checked;
+
+            ModifyConfig("sendNotifications", SendNotificationsCheckbox.Checked.ToString().ToLower());
+        }
+
+        private void ShowCompletedProjectsCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            showCompleted = ShowCompletedProjectsCheckbox.Checked;
+
+            ModifyConfig("showCompletedProjects", ShowCompletedProjectsCheckbox.Checked.ToString().ToLower());
+
+            if (initialized)
+            {
+                UpdateProjectGrid();
+            }
         }
 
         private void FilterEmployeesBox_TextChanged(object sender, EventArgs e)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["employeeSearchTerm"].Value = FilterEmployeesBox.Text;
-            config.Save(ConfigurationSaveMode.Modified);
+            ModifyConfig("employeeSearchTerm", FilterEmployeesBox.Text);
+
             FilterEmployees(FilterEmployeesBox.Text);
         }
 
         #endregion
+
+        /// <summary>
+        /// Assigns the value to key in the config file.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        private static void ModifyConfig(string key, string value)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            config.AppSettings.Settings[key].Value = value;
+
+            config.Save(ConfigurationSaveMode.Modified);
+        }
     }
 }

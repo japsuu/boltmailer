@@ -1,0 +1,648 @@
+Delivered-To: 0481664@gmail.com
+Received: by 2002:a02:c808:0:0:0:0:0 with SMTP id p8csp4744326jao;
+        Tue, 29 Jun 2021 02:44:53 -0700 (PDT)
+X-Received: by 2002:a5d:64a4:: with SMTP id m4mr33407604wrp.251.1624959893038;
+        Tue, 29 Jun 2021 02:44:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1624959893; cv=none;
+        d=google.com; s=arc-20160816;
+        b=PqVdiZv4rNGjDk7zGEfSruzRuAWd+ZYe2FaagN/+eIgjtW5wV1Dcr/j5rnfWl709aR
+         zS9dt7ISp83CyESO6dRAqPfPmmnnzui5k7EsAQwpmt8EYTATFmJjmo5k7PSHTQQJm2+M
+         0bK6zgiuWlvFootbEjwauhpD5oRVtzUr058/VVp+qYFyYF7zijsWEoWjbIpkazosVnh5
+         X6av8sBte65vn9XrC6EBUwXhi9cHizWMzod02xZjBApWQEJN18AFZpHUAbu9FJVKJ1MK
+         Rn0CuL0ZD1vMOHQOzamCeNimLo/u/dTlQbYtH9UjhuBBafNEpVeoA1nD9Y/afOHY0kiM
+         gg8Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=izqUKJD8CSUCPYo21Ed1jWar8RkrpZXtIDXhqrlzgLA=;
+        b=hNHEs/ttG8iHafP9MVhuiqt1JZZZ2yYnOOnKorZMQnyEu+kzPrbYn00MyKKxEl7MIi
+         +rHo1r6SL0N4HHd4ukBjospUg2nBKR6Fo3tUwhQsOyUZduV1PdqrnWZoAh5N/hE4Yo0z
+         VTcBz/t8+bYhRABxIfArPTzHl82jZWT1Tc0MAieApddMhrdD5RanKiPdVV+eQTg+15Yk
+         iZlSLdIHoigYhusxlTwurS5yNk49HCmn/Pa+yHhkKEA7uztPmt0ZucEj1G3YqTN2Lt6H
+         ZR0MSAc7eCWjf2wOo32GIweqnj3GvDAtm1e+CMfmfE2cguui/PjwlPjz6RiUbZ6KlFL6
+         sD7A==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=i9bisTgH;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <japsu.honkasalo@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id t16sor1234759wmq.5.2021.06.29.02.44.52
+        for <0481664@gmail.com>
+        (Google Transport Security);
+        Tue, 29 Jun 2021 02:44:53 -0700 (PDT)
+Received-SPF: pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=i9bisTgH;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=izqUKJD8CSUCPYo21Ed1jWar8RkrpZXtIDXhqrlzgLA=;
+        b=i9bisTgHT1nuZa9yJEAspKvZqR+g9nDK0zGOwgwRQRE37v0YFGUKdFZBBzDK8hJS02
+         wrklSAoNUZr2acCKoFpjCmDaq5W7g/CCidHU7Fqraay8wJBcbLphPEc1azMH8YWLJnDz
+         J1gH3k34AQS7zVJBqMrWQ13QixlfYZGRH3sKx2Ixj+tgnRVTqeoWYxSrsugNNwz9w8IT
+         idzDBPrrk6tZ70SxLu6dnrScjgA5MjVde3hmo1CgDx7mKELdZ4jEzS+owyuhEYBYQtkT
+         PrM8gYxOWQiDcpHhToaWDE+B3cmOgWXHxfHbMtgj8USAawKqDKPlwqG6oXwzvNzVPp72
+         EIpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=izqUKJD8CSUCPYo21Ed1jWar8RkrpZXtIDXhqrlzgLA=;
+        b=uUYOi4r0K3+G/9r1uAg0B5Lzlv6QttTWP0mDITbVnnANuP5naUf117SFY2X3icf8wN
+         I8IRumM08tDHveKpE8EYXLAGMll7elgkfMxZzOpYS+eQxLDO4Jn/wEGFatk2sn+r0tPK
+         WEt/GZjYWuHknFMtqIM6Dd/CbF6ELmiyg8giEGWfndjbcKbdFJZSRv2uryuhTj01morl
+         385h4/bTKNLZHbx/mvL8hugvq1uw1rifDA/hD1EQ4swbQUuy6hWXm+jKFS2y0TeuJOpQ
+         2UML9iykIRcr0jV/t0k6SF7A2MVJvigVJHRcffX9au1MrnhBOhDNixkwHtC520n2OyoG
+         //pQ==
+X-Gm-Message-State: AOAM5315k9iBH5iXI4r4e2auD/6Mlt09H4XFDl8+ByAIBijR7oW7fecS
+	XLMAwDWG7DPnuEfnMMz84D7lBOfCuKvPjQp0nWjjkV6W0BM=
+X-Google-Smtp-Source: ABdhPJzPhggJgz4sYiXl1yzULZj5zE421yGk2vJcib/HmBwkKq0mDXqKozXzy0j9Z0tm/le28KkEHH+Qt8bunLs2qGo=
+X-Received: by 2002:a1c:5985:: with SMTP id n127mr31321319wmb.75.1624959892426;
+ Tue, 29 Jun 2021 02:44:52 -0700 (PDT)
+MIME-Version: 1.0
+References: <CABy1Kx3RO_PT+EuK-fYTymL=dCj-Hz_o7NJ9tysyCgsAwfmFVw@mail.gmail.com>
+In-Reply-To: <CABy1Kx3RO_PT+EuK-fYTymL=dCj-Hz_o7NJ9tysyCgsAwfmFVw@mail.gmail.com>
+From: Jasper Honkasalo <japsu.honkasalo@gmail.com>
+Date: Tue, 29 Jun 2021 12:44:40 +0300
+Message-ID: <CAKNULYoRnj16rOU1Bc2P7SBM2ktedX3YvcxSeuCT1Gi5-d0=yQ@mail.gmail.com>
+Subject: Fwd: [ASM] Assembly Summer 2021 - fall edition - ticket sales
+To: 0481664@gmail.com
+Content-Type: multipart/alternative; boundary="00000000000029929705c5e47571"
+
+--00000000000029929705c5e47571
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+pertti puurtaja
+6.2.2023
+124h
+
+---------- Forwarded message ---------
+From: Assembly Events <assembly-list@assembly.org>
+Date: Mon, Jun 14, 2021 at 7:21 PM
+Subject: [ASM] Assembly Summer 2021 - fall edition - ticket sales
+To: <visitors@assembly.org>
+
+
+ASSEMBLY SUMMER=E2=80=9921 FALL EDITION
+
+Uutiskirje / Newsletter 06/2021
+
+
+
+Assembly Summer=E2=80=9921 Fall Edition tapahtuman lipunmyynti on nyt auki!=
+! T=C3=A4ss=C3=A4
+uutiskirjess=C3=A4 lis=C3=A4=C3=A4 infoa tapahtumasta, lipunmyynnist=C3=A4 =
+ja
+lippukategorioista.
+
+
+
+English recap at end
+
+
+
+---
+
+
+
+ASSEMBLY SUMMER=E2=80=9921 FALL EDITION
+
+Tapahtuma j=C3=A4rjestet=C3=A4=C3=A4n 21. =E2=80=93 24.10.2021. Tapahtuma j=
+=C3=A4rjestet=C3=A4=C3=A4n Asm
+Winterien kokoisena (k=C3=A4yt=C3=B6ss=C3=A4 hallit 4 ja 5) ja konepaikkoja=
+ on noin 2000
+kappaletta! Normaalia pienemm=C3=A4st=C3=A4 koosta huolimatta tapahtumaan t=
+ulee
+mahtumaan paljon summereille tuttua toimintaa: compoja, cosplayta,
+turnauksia, e-sportia ja taidetta. Tapahtumassa noudatetaan silloisen
+koronatilanteen suosituksia ja rajoituksia. Jos olet kipe=C3=A4 tai sinulla=
+ on
+muita koronaan viittaavia oireita, j=C3=A4=C3=A4th=C3=A4n kotiin.
+
+
+
+P=C3=A4=C3=A4sylippujen ja konepaikkojen lis=C3=A4ksi nettisivujen kaupasta=
+ voi ostaa my=C3=B6s
+tapahtuma T-paitoja sek=C3=A4 et=C3=A4osallistumisen mahdollistavan Online-=
+lipun!
+
+
+
+KONEPAIKAT
+
+Kaikki konepaikat ovat t=C3=A4ss=C3=A4 tapahtumassa 100 cm leveit=C3=A4. Pr=
+emium ja Family
+-paikkoja on tehostettu 1Gb/s nettiyhteydell=C3=A4 ja aikaisemmalla
+sis=C3=A4=C3=A4np=C3=A4=C3=A4syll=C3=A4. Premium K22 ja Family -paikoilta l=
+=C3=B6ytyy my=C3=B6s jalkojen alta
+mukavuutta lis=C3=A4=C3=A4v=C3=A4 matto.
+
+Konepaikkakategoriat: Standard, Premium, Premium K22, Family, Oldskool.
+
+Standard ja Standard+ paikat ovat j=C3=A4lleen yksinkertaistettu
+Standard-paikoiksi, ja Standard-paikkoja l=C3=B6ytyy niin p=C3=A4=C3=A4lava=
+n yhteydest=C3=A4
+kuin rauhallisemmaltakin alueelta
+
+Kaikkiin konepaikkalippuihin ja p=C3=A4iv=C3=A4lippuihin on saatavilla Loun=
+ge access,
+k=C3=A4vij=C3=A4loungesta l=C3=B6yd=C3=A4t viikonlopun ajan kahvia ja pient=
+=C3=A4 naposteltavaa.
+
+
+
+ONLINE-LIPPU
+
+Uusi lipputyyppi! Osallistu ASSEMBLYille kotoasi. T=C3=A4ll=C3=A4 lipulla v=
+oi
+osallistua turnauksiin, kaikkiin compoihin ja =C3=A4=C3=A4nest=C3=A4=C3=A4 =
+compoja et=C3=A4n=C3=A4!
+
+
+
+Osta lippuja: https://assembly.org/summer21/liput
+
+
+
+OHJELMA
+
+
+
+COMPOT
+
+Mukana on 1K Intro, 4K Intro, Oldskool, Fantasy Console, Game Development,
+Real Wild, Freestyle Graphics, Pixel Graphics, Photo, Fast Graphics, 3D
+Graphics, 8CH Tracked Music, Listening Music, Fast Music ja Tuplain. Deadli=
+ne
+kaikille compoentryille on 15.10.2021.
+
+
+
+Compot ja tarkemmat ohjeistukset l=C3=B6ytyv=C3=A4t nettisivuiltamme.
+<https://assembly.org/summer21/program/demoscene-compos>
+
+
+
+ESPORTS
+
+Luvassa j=C3=A4lleen kerran toiminnan t=C3=A4ytteisi=C3=A4 turnauksia ja j=
+=C3=A4nnitt=C3=A4vi=C3=A4
+k=C3=A4=C3=A4nteit=C3=A4. Lis=C3=A4infoa kasuaaliturnauksista ja muusta esp=
+orts -toiminnasta
+tulossa l=C3=A4hemp=C3=A4n=C3=A4 tapahtumaa, tarkoituksena on olla j=C3=A4t=
+t=C3=A4m=C3=A4tt=C3=A4 ket=C3=A4=C3=A4n
+kylm=C3=A4ksi!
+
+
+
+MUUTA
+
+Tapahtumaan on viel=C3=A4 aikaa, joten ohjelmajulkaisut lis=C3=A4=C3=A4ntyv=
+=C3=A4t lokakuun
+l=C3=A4hestyess=C3=A4. Tuttuun tapaan tapahtumassa n=C3=A4hd=C3=A4=C3=A4n k=
+uitenkin cosplayta,
+digitaalista taidetta, erilaisia turnauksia e-sportsien ulkopuolelta ja
+musiikkia!
+
+
+
+LIPUNMYYNTI LOKAKUUN SUMMER 2021 -TAPAHTUMAAN
+
+Lipunmyynti tulee tapahtumaan suoraan assembly.org nettisivujen kautta.
+
+
+
+RYHM=C3=84ALENNUS
+
+Yli 15 hengen ryhm=C3=A4t ovat oikeutettuja alennukseen. Alennuksen saamise=
+ksi
+tulee l=C3=A4hett=C3=A4=C3=A4 s=C3=A4hk=C3=B6postia liveton asiakaspalveluu=
+n (
+asiakaspalvelu@liveto.io) ja pyyt=C3=A4=C3=A4 alennuskoodia tapahtumaan.
+
+
+
+
+
+Lopuksi
+
+
+
+Tapahtumaan on viel=C3=A4 aikaa, mutta pid=C3=A4mme teid=C3=A4t ajan tasall=
+a tulevasta.
+Pysyk=C3=A4=C3=A4 tervein=C3=A4 ja muistakaa nauttia kes=C3=A4st=C3=A4 tila=
+nteesta huolimatta.
+
+
+
+---
+
+
+In English
+
+The event will be held on 21. - 24.10.2021. Size of the event will be
+closer to Winter=E2=80=99s capacity with around 2000 computer places. We di=
+d some
+revamping on the computer places, making them more spacious and increasing
+the network bandwidth for Premium and Family categories. Tickets and the
+categories can be found on our website <https://www.assembly.org>.
+
+
+
+Merchandise (t-shirts and other awesome stuff) will be available closer to
+the event!
+
+
+
+
+
+Demo competitions have been published on pouet
+<https://www.pouet.net/topic.php?which=3D12120>. Entry deadlines are
+15.10.2021.
+
+The Summer 2021 Fall Edition event will feature e-sport tournaments,
+cosplay, art and music.
+
+
+
+We will be closely monitoring the corona situation in Finland and the event
+will be held under the current limitations and regulations of the Finnish
+government.
+
+
+
+
+
+TICKET SALES TO OCTOBER ASSEMBLY SUMMER 2021
+
+
+
+Tickets are sold directly through the assembly.org website.
+
+
+
+Groups consisting of 15+ people, you=E2=80=99re eligible for a sale. Send a=
+n e-mail
+to liveton=E2=80=99s customer service (asiakaspalvelu@liveto.io) and ask fo=
+r a
+sales code for the event.
+
+
+
+_______________________________________________
+Visitors mailing list
+Visitors@assembly.org
+
+This email comes to you because you have visited the ASSEMBLY demoparty
+events. If you want to unsubscribe from the mailing list, please visit
+http://justiina.assembly.org/mailman/listinfo/visitors
+Enter your email address in the "Change your subscription" input box in the
+bottom of the page and follow the instructions.
+
+--00000000000029929705c5e47571
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">pertti puurtaja<div>6.2.2023</div><div>124h<br><br><div cl=
+ass=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">---------- Forwar=
+ded message ---------<br>From: <strong class=3D"gmail_sendername" dir=3D"au=
+to">Assembly Events</strong> <span dir=3D"auto">&lt;<a href=3D"mailto:assem=
+bly-list@assembly.org">assembly-list@assembly.org</a>&gt;</span><br>Date: M=
+on, Jun 14, 2021 at 7:21 PM<br>Subject: [ASM] Assembly Summer 2021 - fall e=
+dition - ticket sales<br>To:  &lt;<a href=3D"mailto:visitors@assembly.org">=
+visitors@assembly.org</a>&gt;<br></div><br><br><div dir=3D"ltr"><span id=3D=
+"m_-7711301580562270732gmail-docs-internal-guid-1d1a19ca-7fff-aa9d-694d-ec9=
+f5b02c0d5"><p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-b=
+ottom:0pt"><span style=3D"font-size:25pt;font-family:&quot;Roboto Mono&quot=
+;,monospace;color:rgb(0,0,0);background-color:transparent;font-weight:700;f=
+ont-style:italic;font-variant-numeric:normal;font-variant-east-asian:normal=
+;vertical-align:baseline;white-space:pre-wrap">ASSEMBLY SUMMER=E2=80=9921 F=
+ALL EDITION</span><span style=3D"font-size:7pt;font-family:&quot;Roboto Mon=
+o&quot;,monospace;color:rgb(0,0,0);background-color:transparent;font-weight=
+:700;font-variant-numeric:normal;font-variant-east-asian:normal;vertical-al=
+ign:baseline;white-space:pre-wrap">=C2=A0</span></p><p dir=3D"ltr" style=3D=
+"line-height:1.44;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-siz=
+e:12pt;font-family:&quot;Roboto Mono&quot;,monospace;color:rgb(67,67,67);ba=
+ckground-color:transparent;font-weight:700;font-variant-numeric:normal;font=
+-variant-east-asian:normal;vertical-align:baseline;white-space:pre-wrap">Uu=
+tiskirje / Newsletter 06/2021</span><span style=3D"font-size:14pt;font-fami=
+ly:&quot;Roboto Mono&quot;,monospace;color:rgb(67,67,67);background-color:t=
+ransparent;font-weight:700;font-variant-numeric:normal;font-variant-east-as=
+ian:normal;vertical-align:baseline;white-space:pre-wrap">=C2=A0</span></p><=
+p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-bottom:0pt">=
+=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-bo=
+ttom:0pt"><span style=3D"font-size:11pt;font-family:Arial;color:rgb(67,67,6=
+7);background-color:transparent;font-style:italic;font-variant-numeric:norm=
+al;font-variant-east-asian:normal;vertical-align:baseline;white-space:pre-w=
+rap">Assembly Summer=E2=80=9921 Fall Edition tapahtuman lipunmyynti on nyt =
+auki!! T=C3=A4ss=C3=A4 uutiskirjess=C3=A4 lis=C3=A4=C3=A4 infoa tapahtumast=
+a, lipunmyynnist=C3=A4 ja lippukategorioista.</span></p><p dir=3D"ltr" styl=
+e=3D"line-height:1.44;margin-top:0pt;margin-bottom:0pt">=C2=A0</p><p dir=3D=
+"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-bottom:0pt"><span sty=
+le=3D"font-size:10pt;font-family:Arial;color:rgb(0,0,0);background-color:tr=
+ansparent;font-weight:700;font-variant-numeric:normal;font-variant-east-asi=
+an:normal;vertical-align:baseline;white-space:pre-wrap">English recap at en=
+d</span></p><p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-=
+bottom:0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0=
+pt;margin-bottom:0pt"><span style=3D"font-size:10pt;font-family:Arial;color=
+:rgb(0,0,0);background-color:transparent;font-weight:700;font-variant-numer=
+ic:normal;font-variant-east-asian:normal;vertical-align:baseline;white-spac=
+e:pre-wrap">---</span></p><p dir=3D"ltr" style=3D"line-height:1.38;margin-t=
+op:0pt;margin-bottom:0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1.4=
+4;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:18pt;font-fami=
+ly:&quot;Roboto Mono&quot;,monospace;color:rgb(0,0,0);background-color:tran=
+sparent;font-weight:700;font-variant-numeric:normal;font-variant-east-asian=
+:normal;vertical-align:baseline;white-space:pre-wrap">ASSEMBLY SUMMER=E2=80=
+=9921 FALL EDITION=C2=A0=C2=A0</span></p><p dir=3D"ltr" style=3D"line-heigh=
+t:1.38;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:11pt;font=
+-family:Arial;color:rgb(0,0,0);background-color:transparent;font-variant-nu=
+meric:normal;font-variant-east-asian:normal;vertical-align:baseline;white-s=
+pace:pre-wrap">Tapahtuma j=C3=A4rjestet=C3=A4=C3=A4n 21. =E2=80=93 24.10.20=
+21. Tapahtuma j=C3=A4rjestet=C3=A4=C3=A4n Asm Winterien kokoisena (k=C3=A4y=
+t=C3=B6ss=C3=A4 hallit 4 ja 5) ja konepaikkoja on noin 2000 kappaletta! Nor=
+maalia pienemm=C3=A4st=C3=A4 koosta huolimatta tapahtumaan tulee mahtumaan =
+paljon summereille tuttua toimintaa: compoja, cosplayta, turnauksia, e-spor=
+tia ja taidetta. Tapahtumassa noudatetaan silloisen koronatilanteen suositu=
+ksia ja rajoituksia. Jos olet kipe=C3=A4 tai sinulla on muita koronaan viit=
+taavia oireita, j=C3=A4=C3=A4th=C3=A4n kotiin.=C2=A0</span></p><p dir=3D"lt=
+r" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt">=C2=A0</p><p=
+ dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt"><s=
+pan style=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);background-c=
+olor:transparent;font-variant-numeric:normal;font-variant-east-asian:normal=
+;vertical-align:baseline;white-space:pre-wrap">P=C3=A4=C3=A4sylippujen ja k=
+onepaikkojen lis=C3=A4ksi nettisivujen kaupasta voi ostaa my=C3=B6s tapahtu=
+ma T-paitoja sek=C3=A4 et=C3=A4osallistumisen mahdollistavan Online-lipun!<=
+/span></p><p dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-bo=
+ttom:0pt;padding:12pt 0pt 0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-heigh=
+t:1.44;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:14pt;font=
+-family:&quot;Roboto Mono&quot;,monospace;color:rgb(0,0,0);background-color=
+:transparent;font-weight:700;font-variant-numeric:normal;font-variant-east-=
+asian:normal;vertical-align:baseline;white-space:pre-wrap">KONEPAIKAT</span=
+></p><p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-bottom:=
+0pt"><span style=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);backg=
+round-color:transparent;font-variant-numeric:normal;font-variant-east-asian=
+:normal;vertical-align:baseline;white-space:pre-wrap">Kaikki konepaikat ova=
+t t=C3=A4ss=C3=A4 tapahtumassa 100 cm leveit=C3=A4. Premium ja Family -paik=
+koja on tehostettu 1Gb/s nettiyhteydell=C3=A4 ja aikaisemmalla sis=C3=A4=C3=
+=A4np=C3=A4=C3=A4syll=C3=A4. Premium K22 ja Family -paikoilta l=C3=B6ytyy m=
+y=C3=B6s jalkojen alta mukavuutta lis=C3=A4=C3=A4v=C3=A4 matto.</span></p><=
+p dir=3D"ltr" style=3D"line-height:1.2;margin-top:0pt;margin-bottom:0pt;pad=
+ding:12pt 0pt 0pt"><span style=3D"font-size:11pt;font-family:Arial;color:rg=
+b(0,0,0);background-color:transparent;font-weight:700;font-variant-numeric:=
+normal;font-variant-east-asian:normal;vertical-align:baseline;white-space:p=
+re-wrap">Konepaikkakategoriat</span><span style=3D"font-size:11pt;font-fami=
+ly:Arial;color:rgb(0,0,0);background-color:transparent;font-variant-numeric=
+:normal;font-variant-east-asian:normal;vertical-align:baseline;white-space:=
+pre-wrap">: Standard, Premium, Premium K22, Family, Oldskool.</span></p><p =
+dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt;padd=
+ing:12pt 0pt 0pt"><span style=3D"font-size:11pt;font-family:Arial;color:rgb=
+(0,0,0);background-color:transparent;font-variant-numeric:normal;font-varia=
+nt-east-asian:normal;vertical-align:baseline;white-space:pre-wrap">Standard=
+ ja Standard+ paikat ovat j=C3=A4lleen yksinkertaistettu Standard-paikoiksi=
+, ja Standard-paikkoja l=C3=B6ytyy niin p=C3=A4=C3=A4lavan yhteydest=C3=A4 =
+kuin rauhallisemmaltakin alueelta</span></p><p dir=3D"ltr" style=3D"line-he=
+ight:1.38;margin-top:0pt;margin-bottom:0pt;padding:12pt 0pt 0pt"><span styl=
+e=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);background-color:tra=
+nsparent;font-variant-numeric:normal;font-variant-east-asian:normal;vertica=
+l-align:baseline;white-space:pre-wrap">Kaikkiin konepaikkalippuihin ja p=C3=
+=A4iv=C3=A4lippuihin on saatavilla Lounge access, k=C3=A4vij=C3=A4loungesta=
+ l=C3=B6yd=C3=A4t viikonlopun ajan kahvia ja pient=C3=A4 naposteltavaa.</sp=
+an></p><p dir=3D"ltr" style=3D"line-height:1.38;margin-top:0pt;margin-botto=
+m:0pt;padding:12pt 0pt 0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1=
+.44;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:14pt;font-fa=
+mily:&quot;Roboto Mono&quot;,monospace;color:rgb(0,0,0);background-color:tr=
+ansparent;font-weight:700;font-variant-numeric:normal;font-variant-east-asi=
+an:normal;vertical-align:baseline;white-space:pre-wrap">ONLINE-LIPPU</span>=
+</p><p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-bottom:0=
+pt"><span style=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);backgr=
+ound-color:transparent;font-variant-numeric:normal;font-variant-east-asian:=
+normal;vertical-align:baseline;white-space:pre-wrap">Uusi lipputyyppi! Osal=
+listu ASSEMBLYille kotoasi. T=C3=A4ll=C3=A4 lipulla voi osallistua turnauks=
+iin, kaikkiin compoihin ja =C3=A4=C3=A4nest=C3=A4=C3=A4 compoja et=C3=A4n=
+=C3=A4!</span></p><p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;m=
+argin-bottom:0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1.44;margin=
+-top:0pt;margin-bottom:0pt"><span style=3D"font-size:14pt;font-family:&quot=
+;Roboto Mono&quot;,monospace;color:rgb(0,0,0);background-color:transparent;=
+font-weight:700;font-variant-numeric:normal;font-variant-east-asian:normal;=
+vertical-align:baseline;white-space:pre-wrap">Osta lippuja: </span><a href=
+=3D"https://assembly.org/summer21/liput" style=3D"text-decoration-line:none=
+" target=3D"_blank"><span style=3D"font-size:14pt;font-family:&quot;Roboto =
+Mono&quot;,monospace;background-color:transparent;font-weight:700;font-vari=
+ant-numeric:normal;font-variant-east-asian:normal;text-decoration-line:unde=
+rline;vertical-align:baseline;white-space:pre-wrap">https://assembly.org/su=
+mmer21/liput</span></a><span style=3D"font-size:14pt;font-family:&quot;Robo=
+to Mono&quot;,monospace;color:rgb(0,0,0);background-color:transparent;font-=
+weight:700;font-variant-numeric:normal;font-variant-east-asian:normal;verti=
+cal-align:baseline;white-space:pre-wrap">=C2=A0</span></p><p dir=3D"ltr" st=
+yle=3D"line-height:1.44;margin-top:0pt;margin-bottom:0pt">=C2=A0</p><p dir=
+=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-bottom:0pt"><span =
+style=3D"font-size:16pt;font-family:&quot;Roboto Mono&quot;,monospace;color=
+:rgb(0,0,0);background-color:transparent;font-weight:700;font-variant-numer=
+ic:normal;font-variant-east-asian:normal;vertical-align:baseline;white-spac=
+e:pre-wrap">OHJELMA</span></p><p dir=3D"ltr" style=3D"line-height:1.44;marg=
+in-top:0pt;margin-bottom:0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height=
+:1.44;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:14pt;font-=
+family:&quot;Roboto Mono&quot;,monospace;color:rgb(0,0,0);background-color:=
+transparent;font-weight:700;font-variant-numeric:normal;font-variant-east-a=
+sian:normal;vertical-align:baseline;white-space:pre-wrap">COMPOT</span></p>=
+<p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-bottom:0pt">=
+<span style=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);background=
+-color:transparent;font-variant-numeric:normal;font-variant-east-asian:norm=
+al;vertical-align:baseline;white-space:pre-wrap">Mukana on 1K Intro, 4K Int=
+ro, Oldskool, Fantasy Console, Game Development, Real Wild, Freestyle Graph=
+ics, Pixel Graphics, Photo, Fast Graphics, 3D Graphics, 8CH Tracked Music, =
+Listening Music, Fast Music ja Tuplain. </span><span style=3D"font-size:11p=
+t;font-family:Arial;color:rgb(0,0,0);background-color:transparent;font-weig=
+ht:700;font-variant-numeric:normal;font-variant-east-asian:normal;vertical-=
+align:baseline;white-space:pre-wrap">Deadline kaikille compoentryille on 15=
+.10.2021</span><span style=3D"font-size:11pt;font-family:Arial;color:rgb(0,=
+0,0);background-color:transparent;font-variant-numeric:normal;font-variant-=
+east-asian:normal;vertical-align:baseline;white-space:pre-wrap">.</span><sp=
+an style=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);background-co=
+lor:transparent;font-weight:700;font-variant-numeric:normal;font-variant-ea=
+st-asian:normal;vertical-align:baseline;white-space:pre-wrap">=C2=A0</span>=
+</p><p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-bottom:0=
+pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margi=
+n-bottom:0pt"><span style=3D"font-size:11pt;font-family:Arial;color:rgb(0,0=
+,0);background-color:transparent;font-variant-numeric:normal;font-variant-e=
+ast-asian:normal;vertical-align:baseline;white-space:pre-wrap">Compot ja ta=
+rkemmat ohjeistukset l=C3=B6ytyv=C3=A4t </span><a href=3D"https://assembly.=
+org/summer21/program/demoscene-compos" style=3D"text-decoration-line:none" =
+target=3D"_blank"><span style=3D"font-size:11pt;font-family:Arial;backgroun=
+d-color:transparent;font-variant-numeric:normal;font-variant-east-asian:nor=
+mal;text-decoration-line:underline;vertical-align:baseline;white-space:pre-=
+wrap">nettisivuiltamme.=C2=A0</span></a></p><p dir=3D"ltr" style=3D"line-he=
+ight:1.44;margin-top:0pt;margin-bottom:0pt">=C2=A0</p><p dir=3D"ltr" style=
+=3D"line-height:1.44;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-=
+size:14pt;font-family:&quot;Roboto Mono&quot;,monospace;color:rgb(0,0,0);ba=
+ckground-color:transparent;font-weight:700;font-variant-numeric:normal;font=
+-variant-east-asian:normal;vertical-align:baseline;white-space:pre-wrap">ES=
+PORTS</span></p><p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;mar=
+gin-bottom:0pt"><span style=3D"font-size:11pt;font-family:Arial;color:rgb(0=
+,0,0);background-color:transparent;font-variant-numeric:normal;font-variant=
+-east-asian:normal;vertical-align:baseline;white-space:pre-wrap">Luvassa j=
+=C3=A4lleen kerran toiminnan t=C3=A4ytteisi=C3=A4 turnauksia ja j=C3=A4nnit=
+t=C3=A4vi=C3=A4 k=C3=A4=C3=A4nteit=C3=A4. Lis=C3=A4infoa kasuaaliturnauksis=
+ta ja muusta esports -toiminnasta tulossa l=C3=A4hemp=C3=A4n=C3=A4 tapahtum=
+aa, tarkoituksena on olla j=C3=A4tt=C3=A4m=C3=A4tt=C3=A4 ket=C3=A4=C3=A4n k=
+ylm=C3=A4ksi!=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.44;marg=
+in-top:0pt;margin-bottom:0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height=
+:1.44;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:14pt;font-=
+family:&quot;Roboto Mono&quot;,monospace;color:rgb(0,0,0);background-color:=
+transparent;font-weight:700;font-variant-numeric:normal;font-variant-east-a=
+sian:normal;vertical-align:baseline;white-space:pre-wrap">MUUTA</span></p><=
+p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-bottom:0pt"><=
+span style=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);background-=
+color:transparent;font-variant-numeric:normal;font-variant-east-asian:norma=
+l;vertical-align:baseline;white-space:pre-wrap">Tapahtumaan on viel=C3=A4 a=
+ikaa, joten ohjelmajulkaisut lis=C3=A4=C3=A4ntyv=C3=A4t lokakuun l=C3=A4hes=
+tyess=C3=A4. Tuttuun tapaan tapahtumassa n=C3=A4hd=C3=A4=C3=A4n kuitenkin c=
+osplayta, digitaalista taidetta, erilaisia turnauksia e-sportsien ulkopuole=
+lta ja musiikkia!</span></p><p dir=3D"ltr" style=3D"line-height:1.44;margin=
+-top:0pt;margin-bottom:0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1=
+.44;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:14pt;font-fa=
+mily:&quot;Roboto Mono&quot;,monospace;color:rgb(0,0,0);background-color:tr=
+ansparent;font-weight:700;font-variant-numeric:normal;font-variant-east-asi=
+an:normal;vertical-align:baseline;white-space:pre-wrap">LIPUNMYYNTI LOKAKUU=
+N SUMMER 2021 -TAPAHTUMAAN</span></p><p dir=3D"ltr" style=3D"line-height:1.=
+44;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:11pt;font-fam=
+ily:Arial;color:rgb(0,0,0);background-color:transparent;font-variant-numeri=
+c:normal;font-variant-east-asian:normal;vertical-align:baseline;white-space=
+:pre-wrap">Lipunmyynti tulee tapahtumaan suoraan <a href=3D"http://assembly=
+.org" target=3D"_blank">assembly.org</a> nettisivujen kautta.=C2=A0</span><=
+/p><p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-bottom:0p=
+t">=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin=
+-bottom:0pt"><span style=3D"font-size:12pt;font-family:&quot;Roboto Mono&qu=
+ot;,monospace;color:rgb(0,0,0);background-color:transparent;font-weight:700=
+;font-variant-numeric:normal;font-variant-east-asian:normal;vertical-align:=
+baseline;white-space:pre-wrap">RYHM=C3=84ALENNUS</span></p><p dir=3D"ltr" s=
+tyle=3D"line-height:1.44;margin-top:0pt;margin-bottom:0pt"><span style=3D"f=
+ont-size:11pt;font-family:Arial;color:rgb(0,0,0);background-color:transpare=
+nt;font-variant-numeric:normal;font-variant-east-asian:normal;vertical-alig=
+n:baseline;white-space:pre-wrap">Yli 15 hengen ryhm=C3=A4t ovat oikeutettuj=
+a alennukseen. Alennuksen saamiseksi tulee l=C3=A4hett=C3=A4=C3=A4 s=C3=A4h=
+k=C3=B6postia liveton asiakaspalveluun (<a href=3D"mailto:asiakaspalvelu@li=
+veto.io" target=3D"_blank">asiakaspalvelu@liveto.io</a>) ja pyyt=C3=A4=C3=
+=A4 alennuskoodia tapahtumaan.=C2=A0</span></p><p dir=3D"ltr" style=3D"line=
+-height:1.656;margin-top:0pt;margin-bottom:0pt">=C2=A0</p><p dir=3D"ltr" st=
+yle=3D"line-height:1.656;margin-top:0pt;margin-bottom:0pt">=C2=A0</p><p dir=
+=3D"ltr" style=3D"line-height:1.44;margin-top:0pt;margin-bottom:0pt"><span =
+style=3D"font-size:14pt;font-family:&quot;Roboto Mono&quot;,monospace;color=
+:rgb(0,0,0);background-color:transparent;font-weight:700;font-variant-numer=
+ic:normal;font-variant-east-asian:normal;vertical-align:baseline;white-spac=
+e:pre-wrap">Lopuksi</span></p><p dir=3D"ltr" style=3D"line-height:1.38;marg=
+in-top:0pt;margin-bottom:0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height=
+:1.44;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:11pt;font-=
+family:Arial;color:rgb(0,0,0);background-color:transparent;font-variant-num=
+eric:normal;font-variant-east-asian:normal;vertical-align:baseline;white-sp=
+ace:pre-wrap">Tapahtumaan on viel=C3=A4 aikaa, mutta pid=C3=A4mme teid=C3=
+=A4t ajan tasalla tulevasta. Pysyk=C3=A4=C3=A4 tervein=C3=A4 ja muistakaa n=
+auttia kes=C3=A4st=C3=A4 tilanteesta huolimatta.=C2=A0</span></p><p dir=3D"=
+ltr" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt">=C2=A0</p>=
+<p dir=3D"ltr" style=3D"line-height:1.656;margin-top:0pt;margin-bottom:0pt"=
+><span style=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);backgroun=
+d-color:transparent;font-variant-numeric:normal;font-variant-east-asian:nor=
+mal;vertical-align:baseline;white-space:pre-wrap">---</span></p><p dir=3D"l=
+tr" style=3D"line-height:1.38;margin-top:0pt;margin-bottom:0pt">=C2=A0</p><=
+h3 dir=3D"ltr" style=3D"line-height:1.656;margin-top:0pt;margin-bottom:0pt;=
+padding:16pt 0pt 4pt"><span style=3D"font-size:14pt;font-family:&quot;Robot=
+o Mono&quot;,monospace;color:rgb(0,0,0);background-color:transparent;font-v=
+ariant-numeric:normal;font-variant-east-asian:normal;vertical-align:baselin=
+e;white-space:pre-wrap">In English</span></h3><p dir=3D"ltr" style=3D"line-=
+height:1.656;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:11p=
+t;font-family:Arial;color:rgb(0,0,0);background-color:transparent;font-vari=
+ant-numeric:normal;font-variant-east-asian:normal;vertical-align:baseline;w=
+hite-space:pre-wrap">The event will be held on 21. - 24.10.2021. Size of th=
+e event will be closer to Winter=E2=80=99s capacity with around 2000 comput=
+er places. We did some revamping on the computer places, making them more s=
+pacious and increasing the network bandwidth for Premium and Family categor=
+ies. Tickets and the categories can be found on our </span><a href=3D"https=
+://www.assembly.org" style=3D"text-decoration-line:none" target=3D"_blank">=
+<span style=3D"font-size:11pt;font-family:Arial;background-color:transparen=
+t;font-variant-numeric:normal;font-variant-east-asian:normal;text-decoratio=
+n-line:underline;vertical-align:baseline;white-space:pre-wrap">website</spa=
+n></a><span style=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);back=
+ground-color:transparent;font-variant-numeric:normal;font-variant-east-asia=
+n:normal;vertical-align:baseline;white-space:pre-wrap">.=C2=A0</span></p><p=
+ dir=3D"ltr" style=3D"line-height:1.656;margin-top:0pt;margin-bottom:0pt">=
+=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1.656;margin-top:0pt;margin-b=
+ottom:0pt"><span style=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0)=
+;background-color:transparent;font-variant-numeric:normal;font-variant-east=
+-asian:normal;vertical-align:baseline;white-space:pre-wrap">Merchandise (t-=
+shirts and other awesome stuff) will be available closer to the event!</spa=
+n></p><p dir=3D"ltr" style=3D"line-height:1.656;margin-top:0pt;margin-botto=
+m:0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1.656;margin-top:0pt;m=
+argin-bottom:0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1.656;margi=
+n-top:0pt;margin-bottom:0pt"><span style=3D"font-size:11pt;font-family:Aria=
+l;color:rgb(0,0,0);background-color:transparent;font-variant-numeric:normal=
+;font-variant-east-asian:normal;vertical-align:baseline;white-space:pre-wra=
+p">Demo competitions have been published on </span><a href=3D"https://www.p=
+ouet.net/topic.php?which=3D12120" style=3D"text-decoration-line:none" targe=
+t=3D"_blank"><span style=3D"font-size:11pt;font-family:Arial;background-col=
+or:transparent;font-variant-numeric:normal;font-variant-east-asian:normal;t=
+ext-decoration-line:underline;vertical-align:baseline;white-space:pre-wrap"=
+>pouet</span></a><span style=3D"font-size:11pt;font-family:Arial;color:rgb(=
+0,0,0);background-color:transparent;font-variant-numeric:normal;font-varian=
+t-east-asian:normal;vertical-align:baseline;white-space:pre-wrap">. Entry d=
+eadlines are 15.10.2021.=C2=A0</span></p><p dir=3D"ltr" style=3D"line-heigh=
+t:1.656;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:11pt;fon=
+t-family:Arial;color:rgb(0,0,0);background-color:transparent;font-variant-n=
+umeric:normal;font-variant-east-asian:normal;vertical-align:baseline;white-=
+space:pre-wrap">The Summer 2021 Fall Edition event will feature e-sport tou=
+rnaments, cosplay, art and music.=C2=A0</span></p><p dir=3D"ltr" style=3D"l=
+ine-height:1.656;margin-top:0pt;margin-bottom:0pt">=C2=A0</p><p dir=3D"ltr"=
+ style=3D"line-height:1.656;margin-top:0pt;margin-bottom:0pt"><span style=
+=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);background-color:tran=
+sparent;font-variant-numeric:normal;font-variant-east-asian:normal;vertical=
+-align:baseline;white-space:pre-wrap">We will be closely monitoring the cor=
+ona situation in Finland and the event will be held under the current limit=
+ations and regulations of the Finnish government.=C2=A0=C2=A0</span></p><p =
+dir=3D"ltr" style=3D"line-height:1.656;margin-top:0pt;margin-bottom:0pt">=
+=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1.656;margin-top:0pt;margin-b=
+ottom:0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1.656;margin-top:0=
+pt;margin-bottom:0pt"><span style=3D"font-size:14pt;font-family:&quot;Robot=
+o Mono&quot;,monospace;color:rgb(0,0,0);background-color:transparent;font-w=
+eight:700;font-variant-numeric:normal;font-variant-east-asian:normal;vertic=
+al-align:baseline;white-space:pre-wrap">TICKET SALES TO OCTOBER ASSEMBLY SU=
+MMER 2021</span></p><p dir=3D"ltr" style=3D"line-height:1.656;margin-top:0p=
+t;margin-bottom:0pt">=C2=A0</p><p dir=3D"ltr" style=3D"line-height:1.656;ma=
+rgin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:11pt;font-family:A=
+rial;color:rgb(0,0,0);background-color:transparent;font-variant-numeric:nor=
+mal;font-variant-east-asian:normal;vertical-align:baseline;white-space:pre-=
+wrap">Tickets are sold directly through the <a href=3D"http://assembly.org"=
+ target=3D"_blank">assembly.org</a> website.</span></p><p dir=3D"ltr" style=
+=3D"line-height:1.656;margin-top:0pt;margin-bottom:0pt">=C2=A0</p><p dir=3D=
+"ltr" style=3D"line-height:1.656;margin-top:0pt;margin-bottom:0pt"><span st=
+yle=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);background-color:t=
+ransparent;font-variant-numeric:normal;font-variant-east-asian:normal;verti=
+cal-align:baseline;white-space:pre-wrap">Groups consisting of 15+ people, y=
+ou=E2=80=99re eligible for a sale. Send an e-mail to liveton=E2=80=99s cust=
+omer service (</span><a href=3D"mailto:asiakaspalvelu@liveto.io" style=3D"t=
+ext-decoration-line:none" target=3D"_blank"><span style=3D"font-size:11pt;f=
+ont-family:Arial;background-color:transparent;font-variant-numeric:normal;f=
+ont-variant-east-asian:normal;text-decoration-line:underline;vertical-align=
+:baseline;white-space:pre-wrap">asiakaspalvelu@liveto.io</span></a><span st=
+yle=3D"font-size:11pt;font-family:Arial;color:rgb(0,0,0);background-color:t=
+ransparent;font-variant-numeric:normal;font-variant-east-asian:normal;verti=
+cal-align:baseline;white-space:pre-wrap">) and ask for a sales code for the=
+ event.=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.656;margin-to=
+p:0pt;margin-bottom:0pt">=C2=A0</p></span><br></div>
+_______________________________________________<br>
+Visitors mailing list<br>
+<a href=3D"mailto:Visitors@assembly.org" target=3D"_blank">Visitors@assembl=
+y.org</a><br>
+<br>
+This email comes to you because you have visited the ASSEMBLY demoparty eve=
+nts. If you want to unsubscribe from the mailing list, please visit <a href=
+=3D"http://justiina.assembly.org/mailman/listinfo/visitors" rel=3D"noreferr=
+er" target=3D"_blank">http://justiina.assembly.org/mailman/listinfo/visitor=
+s</a><br>
+Enter your email address in the &quot;Change your subscription&quot; input =
+box in the bottom of the page and follow the instructions.<br>
+</div></div></div>
+
+--00000000000029929705c5e47571--

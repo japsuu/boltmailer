@@ -1,0 +1,863 @@
+Delivered-To: 0481664@gmail.com
+Received: by 2002:a02:c808:0:0:0:0:0 with SMTP id p8csp4701417jao;
+        Tue, 29 Jun 2021 01:34:11 -0700 (PDT)
+X-Received: by 2002:a5d:4d06:: with SMTP id z6mr32275388wrt.405.1624955651537;
+        Tue, 29 Jun 2021 01:34:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1624955651; cv=none;
+        d=google.com; s=arc-20160816;
+        b=XfPWp7XEubiiIm6A8bkShV6/IAeG1/jzqy5RMUqhrC6ZDvt12u4u7vVOLvKE0t9ihy
+         3/u2WtgC7kgqg/OOKvvHpldUgG0c3ahYDmiymFyFq82Bt3z3qlTREEByNbsmEvThKpZr
+         Ap8dV4Uf47oxQbEWGn11S7VgRUKyy75MAOW7VOEteCYmYNO9AaAfr5wfgu0+oBYJ2NBO
+         rhkKGyc+zruCQ5xjd0yutgugUJfdZnKwgc/L/Do9fRvSsfWaDk6Y31sQUzwbE8g5HdYl
+         Fnd3CP/vGM7vOh0JGATCJU5Ej5bAZMKxgl9FyNib4izu7UqbXpi4jei4jnWXB75MHTH6
+         KWEw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=osfdyOzxhdlHk4cKCNz+0AII8YtN711uSp4XdZtGri0=;
+        b=lvp+bm/YQmwEVK/fARdehGkm3KbmA7JDRTADdoDiBKmh3qYpUvL1b3u9W2cIrgvjm/
+         ZaWfhUHWmK+ZRL0Johb3VBgCe/ykC31+vte0Khoc/4xVHYsXINdIAIbsJOoZQNU+tfpQ
+         KX+XfVUQCTWXz5RhkimKrugzdZrq4hJCqCDJiXQtTd9ZK5xmeFW/yqaMBq0lcsJQCSom
+         7uoSQe7fcDBi0UTxTQUYw1eLCfzovc6iyzvZbKWGJXmot9v19x6fZtwuiPJFxoJMm2Uv
+         a2DA0fvedUY5PUXT2XaXeWSX/CqkqRbxLBkp97DjAa+n7DCAIpCHgzGRCI1jYLz+wrqq
+         oeSA==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=Zoz9Qbky;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <japsu.honkasalo@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id i1sor1109262wmq.28.2021.06.29.01.34.11
+        for <0481664@gmail.com>
+        (Google Transport Security);
+        Tue, 29 Jun 2021 01:34:11 -0700 (PDT)
+Received-SPF: pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=Zoz9Qbky;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=osfdyOzxhdlHk4cKCNz+0AII8YtN711uSp4XdZtGri0=;
+        b=Zoz9QbkyR/9x4t4hNCkdWep0pszLK3gMn5y6PwP0BiNdrz3WLAjtF4Btw/Z5M3tzVg
+         r3whnnPdGn22YqIv1K2FmVjwPkBjPzR9u/mJSPwsaKof5f8CGO7onwr3PY6oVeEIrZ7J
+         mb5MlExS3i5oggX7UpgMaON9YIRH3IC+c7CuYn+pw2udWIsMeC8xoFHUbk0M2/nF0G6I
+         Yg/1q88I4wuBAJWodY0jxdQdSvQ5BFoI8u74lWc8u89NQKxW5nekM+fEH26pMNB8qLHW
+         oBuT9QEwx1j8D7mI6ZGhoEwJAAWnHcB2iuWYiPVYuoX2kHEQ9LVO6anOdtzPBVSpCzK8
+         jjaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=osfdyOzxhdlHk4cKCNz+0AII8YtN711uSp4XdZtGri0=;
+        b=PpiwC+/Dl8hMbEKBFoQ+K4/fSS04Tx4/0Ql6D2Z+eKNJknKC+cJ4eEjdornHVqhv/h
+         4SIhShlPIWbjNQUQP6X+velpP8gZpQMZVRmB+EQ7EHLAxwy8VhCh3hyuWqiCpE8wjKEg
+         HeCO7O3xdOV81Vf0adLUygys5zqw8tMGjK2i3Di0cKiXKkDrTMFoYv3iPCsYyhr1mDnL
+         FQKf65MVcjQ6Eddlr4exukgqtZHt3Ypb8JYE6UEUs4+6jzPrRgYwX9XqnujdGu8SfKMN
+         GybmmIwyfbrWgKX903IzNnieuKyAJuPN+jXkx2X/uI4GLyJZdMO7xPWr6junf/a4PAtP
+         ZIEw==
+X-Gm-Message-State: AOAM5304MwOmcnDioVauf7lXHkiADTzByq8n7c5YXvy7Y5YsrrSET0+R
+	2Oq+INcb5NRgIgB74hRVEi8S70OSqK2RoVbf9ls9ucze9Sg=
+X-Google-Smtp-Source: ABdhPJw01qGYXDhwHFcjC2UcLcLOxLh7xOIQr8qWO+4mivU7m5Z4b0yplLqc2Gs9Tbv8U7n+Hzf7GiKYfdWbbLBREBc=
+X-Received: by 2002:a1c:c911:: with SMTP id f17mr31440703wmb.60.1624955651094;
+ Tue, 29 Jun 2021 01:34:11 -0700 (PDT)
+MIME-Version: 1.0
+References: <1624424751499.a2232b3f-8849-4883-9fce-a94cb5cac012@2865645t.cs.hubspotemail.net>
+In-Reply-To: <1624424751499.a2232b3f-8849-4883-9fce-a94cb5cac012@2865645t.cs.hubspotemail.net>
+From: Jasper Honkasalo <japsu.honkasalo@gmail.com>
+Date: Tue, 29 Jun 2021 11:33:59 +0300
+Message-ID: <CAKNULYqxZh1YiFdXiaPu_WX1h-82QUMi9vKVNCNrdkAjfbiNZQ@mail.gmail.com>
+Subject: Fwd: Tiedote koskien EU:n ulkopuolisista verkkokaupoista tilaamista
+To: 0481664@gmail.com
+Content-Type: multipart/alternative; boundary="0000000000005bfa3005c5e3788a"
+
+--0000000000005bfa3005c5e3788a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+pasi puskanen
+8.4.2022
+63h
+
+---------- Forwarded message ---------
+From: Posti <no-reply@posti.com>
+Date: Wed, Jun 23, 2021 at 8:13 AM
+Subject: Tiedote koskien EU:n ulkopuolisista verkkokaupoista tilaamista
+To: <japsu.honkasalo@gmail.com>
+
+
+Meddelande om best=C3=A4llning av produkter i webbutiker utanf=C3=B6r EU |
+Announcement about ordering from online stores outside the EU
+[image: Posti Group Oyj]
+
+Hei Jasper
+
+Jos tilaat tuotteita EU:n ulkopuolisista verkkokaupoista, t=C3=A4m=C3=A4 ti=
+edote
+sis=C3=A4lt=C3=A4=C3=A4 t=C3=A4rke=C3=A4=C3=A4 tietoa sinulle.
+
+Koko EU:n alueella astuu voimaan verkkokaupan arvonlis=C3=A4verouudistus
+1.7.2021. Jatkossa my=C3=B6s alle 22 euron arvoisista tavaral=C3=A4hetyksis=
+t=C3=A4 on
+maksettava arvonlis=C3=A4vero ja teht=C3=A4v=C3=A4 tullaus. Muutos koskee m=
+y=C3=B6s EU:n
+ulkopuolelta l=C3=A4hetettyj=C3=A4 lehti=C3=A4. Posti on varautunut
+arvonlis=C3=A4verouudistukseen ja tullaustapoja 1.7. alkaen on kolme:
+
+
+*1. ALV maksetaan verkkokaupassa*Jos verkkokauppa tarjoaa siihen
+mahdollisuuden, maksat arvonlis=C3=A4veron ostoksen yhteydess=C3=A4. L=C3=
+=A4hetyksen
+tiedot v=C3=A4littyv=C3=A4t Postille suoraan verkkokaupasta ja Posti toimit=
+taa
+tulli-ilmoituksen Tullille. Kustannus on 0 =E2=82=AC ja sinun ei tarvitse t=
+ehd=C3=A4
+toimenpiteit=C3=A4.
+
+
+*2. Digitaalinen tullaus*Digitaalinen tullaus toimii OmaPostissa, jota voit
+k=C3=A4ytt=C3=A4=C3=A4 sovelluksena tai selaimessa osoitteessa posti.fi/oma=
+posti. Saat
+ilmoituksen, kun sinulle on saapumassa tullattava l=C3=A4hetys. Voit my=C3=
+=B6s itse
+lis=C3=A4t=C3=A4 l=C3=A4hetyksen seurantaan sy=C3=B6tt=C3=A4m=C3=A4ll=C3=A4=
+ l=C3=A4hetyksenseurantakoodin. Seuraa
+ohjeita ja tee digitaalinen tullaus ennen l=C3=A4hetyksen saapumista Suomee=
+n.
+Koskee korkeintaan 150 euron arvoisia ostoksia. Kustannus 0,90 =E2=82=AC + =
+ALV.
+
+
+*3. Tullaus Tullin sivuilla ja Postin k=C3=A4sittelymaksu Postin sivuilla*S=
+aat
+saapumisilmoituksen l=C3=A4hetyksen saavuttua Suomeen, v=C3=A4liaikaiseen v=
+arastoon.
+Tee tullaus ja maksa ALV Tullin verkkosivuilla ja maksa Postin
+k=C3=A4sittelymaksu 2,90 =E2=82=AC Postin sivuilla.
+Voit valita t=C3=A4m=C3=A4n tullausvaihtoehdon aina, jos haluat tehd=C3=A4 =
+tullauksen
+itse. T=C3=A4m=C3=A4 vaihtoehto tulee valita, kun l=C3=A4hetyksen arvo on y=
+li 150 =E2=82=AC tai
+l=C3=A4hetyksen tiedoissa on puutteita.
+
+Jotta tullausprosessi on sujuva, verkkokaupassa on t=C3=A4rke=C3=A4=C3=A4 a=
+ntaa oikea
+matkapuhelinnumero sek=C3=A4 s=C3=A4hk=C3=B6postiosoite.
+
+*Postin maksuton ALV-neuvontapuhelin palvelee tullaukseen liittyviss=C3=A4
+asioissa numerossa 0100 2215 ma-pe klo 8-18, la klo 9-16.*
+Lis=C3=A4tietoa muutoksesta l=C3=B6yd=C3=A4t osoitteesta posti.fi/alv-muuto=
+s
+<https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmP_5nx=
+HXV3Zsc37Cg-LKW2jPfT-2hrk0yVZC09q2y9hGfVw-yvB5wFZwlW1TdSJB3LLJChW4swjjf7n3G=
+NFW8XsbBM22YLnpW7291v28Bp9XXW8yM0pQ1BwVS6W2vTNxm2wtPgnW5LF9_T4LwXn5W2FSnMl8=
+N0nPzW3ZXKHS4JB0jXW1tyS1q1Y46XZW4d-g4717hywLW5llflt2wQ8LTW33Y5mv7yB4F6W36pm=
+VY35shyMW6L1xLm54bwVwW6nBgVC5bp8S6N4bBvdn5T9h6W3Nj9JM1bSm8gN8yBMMKxt7GgW1Wc=
+g8B1hcc7FVfJsfS6lCRz6W4JV9Nn81LXw9W1fyrXg89cJ50W3tGCyp14lCXpW77BKlG61YClmW8=
+1tPlZ29zt8jW7nPgTJ1ctRjsVSfb4m3q5936W2DMN04190bK_W5F8gKW3CGDNWW4qNCtR7n2M47=
+W7dLb9v3DkXM8W66zvB71zf3G1W3zd-8-95fbsMW72C2PP563dxlW8N_3jX7l8QddW8S0gRn6Hc=
+Sz4N4-x3VS25Nw4N9lmR03XLd4RW5Z9T066q-4kMN6fY7wHK05Ds3gbB1>
+
+Yst=C3=A4v=C3=A4llisin terveisin,
+Postin v=C3=A4ki
+------------------------------
+
+
+
+Hej Jasper
+
+Detta meddelande inneh=C3=A5ller viktig information f=C3=B6r dig, om du bes=
+t=C3=A4ller
+produkter i webbutiker utanf=C3=B6r EU.
+
+Den nya reformen av merv=C3=A4rdesbeskattningen f=C3=B6r e-handel tr=C3=A4d=
+er i kraft i
+hela EU den 1.7.2021. I forts=C3=A4ttningen ska man =C3=A4ven betala merv=
+=C3=A4rdesskatt
+p=C3=A5 och f=C3=B6rtulla varuf=C3=B6rs=C3=A4ndelser som =C3=A4r v=C3=A4rda=
+ under 22 euro. F=C3=B6r=C3=A4ndringen
+g=C3=A4ller =C3=A4ven tidningar som skickas fr=C3=A5n l=C3=A4nder utanf=C3=
+=B6r EU. Posti har
+f=C3=B6rberett sig p=C3=A5 reformen av merv=C3=A4rdesbeskattningen och fr=
+=C3=A5n och med den 1
+juni finns det tre f=C3=B6rtullningss=C3=A4tt:
+
+
+*1. MOMS betalas i webbutiken*Betala merv=C3=A4rdesskatten i samband med
+ink=C3=B6pet, om webbutiken erbjuder den m=C3=B6jligheten. F=C3=B6rs=C3=A4n=
+delsens uppgifter
+f=C3=B6rmedlas till Posti direkt fr=C3=A5n webbutiken och Posti s=C3=A4nder=
+ en
+tulldeklaration till Tullen. Kostnaden =C3=A4r 0 euro och du beh=C3=B6ver i=
+nte g=C3=B6ra
+n=C3=A5gonting.
+
+
+*2. Digital f=C3=B6rtullning*Digital f=C3=B6rtullning g=C3=B6rs i OmaPosti =
+som du kan
+anv=C3=A4nda antingen som app eller i webbl=C3=A4saren p=C3=A5 adressen pos=
+ti.fi/omaposti.
+Du f=C3=A5r ett meddelande n=C3=A4r du kommer att f=C3=A5 en f=C3=B6rs=C3=
+=A4ndelse som du m=C3=A5ste
+f=C3=B6rtulla. Du kan ocks=C3=A5 sj=C3=A4lv l=C3=A4gga till en f=C3=B6rsend=
+elsekod f=C3=B6r att uppf=C3=B6lja
+en f=C3=B6rs=C3=A4ndelse. F=C3=B6lj instruktionerna och g=C3=B6r en digital=
+ f=C3=B6rtullning innan
+f=C3=B6rs=C3=A4ndelsen anl=C3=A4nder till Finland. G=C3=A4ller ink=C3=B6p v=
+=C3=A4rda h=C3=B6gst 150 euro.
+Kostnad 0,90 =E2=82=AC + moms.
+
+
+*3. F=C3=B6rtullning p=C3=A5 Tullens webbplats och Postis hanteringsavgift =
+p=C3=A5 Postis
+webbplats*Du f=C3=A5r en ankomstavi n=C3=A4r f=C3=B6rs=C3=A4ndelsen har anl=
+=C3=A4nt till Finland
+till ett tillf=C3=A4lligt lager. G=C3=B6r f=C3=B6rtullningen och betala mer=
+v=C3=A4rdesskatten
+p=C3=A5 Tullens webbplats och betala Postis hanteringsavgift 2,90 =E2=82=AC=
+ p=C3=A5 Postis
+webbplats.
+Det h=C3=A4r f=C3=B6rtullningsalternativet kan du v=C3=A4lja alltid om du v=
+ill g=C3=B6ra
+f=C3=B6rtullningen sj=C3=A4lv. V=C3=A4lj det h=C3=A4r alternativet, om f=C3=
+=B6rs=C3=A4ndelsens v=C3=A4rde =C3=A4r
+=C3=B6ver 150 euro eller om det finns brister i f=C3=B6rs=C3=A4ndelsens upp=
+gifter.
+
+Det =C3=A4r viktigt att uppge r=C3=A4tt mobiltelefonnummer och e-postadress=
+ i
+webbutiken f=C3=B6r att f=C3=B6rtullningsprocessen ska l=C3=B6pa smidigt.
+*Postis avgiftsfria momsr=C3=A5dgivning svarar p=C3=A5 fr=C3=A5gor som g=C3=
+=A4ller f=C3=B6rtullning
+p=C3=A5 numret 0100 2215 m=C3=A5=E2=80=93fr kl. 8=E2=80=9318, l=C3=B6 kl. 9=
+=E2=80=9316.*
+Mer information om f=C3=B6r=C3=A4ndringen hittar du p=C3=A5 adressen posti.=
+fi/alv-muutos
+<https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmP_5nx=
+HXV3Zsc37CgF2kW6Wm1JB2PkwphW5YmGk_597SsTW1HgG6s7PJZr2W2rfrNr81XJxpW553xBx79=
+4SNCW2kmWWb8ttjstW4KnZq46FGnV5VpXK7v93DSrcW2yKsTz2dN2SvW1G3_xT3XDCQVW8P7l3S=
+5LG8XQW5g_w_m2cFRz4W355MwN4rLdqcW4B_FRl1QWB6MVTFCpX5qSc3MV6ms9z3YtMvKW7gN8Y=
+03nQcnCVMPnr48DrbWpW7sqs3q2L4nfBW8jWKn75fwS-CN6ZK2tGgLVDZW5jkdHH4nVpVzW3T_F=
+xw8KG1nKW5S2LhN3ryn-CW3K_fFq42Hx1DW4j_0Wh95W3w8W1vS6SC2r1fnCN3YXHPVbJd5VW4V=
+RMP745BDf-W2VNNg-6pyv-0W6v8Bh38zFXM0W68vPQv741_gRW7GhjL17GXpjjW1dPk4V6J-Lh3=
+W6mY7Xn4QXFCkW4qc1wC83j54lW7lYcxQ3815qHW1T3Z1m3mzLvFW8BhxX98pQ_C6W5CVk426ZX=
+LBXW689mKG3Lzfb1W1L9DJL3WGTl5Vbx_WT4-KfB1W5sjpdK75R_jJ2gv1>
+
+Med v=C3=A4nlig h=C3=A4lsning
+Posti
+------------------------------
+
+
+
+Hello Jasper
+
+If you order goods from online stores outside the EU, this announcement
+contains important information for you.
+
+On July 1, 2021, the e-commerce VAT reform will enter into force throughout
+the EU. The reform means that all items worth less than EUR 22 will also be
+subject to VAT and customs clearance. The change also applies to
+publications sent from outside the EU. Posti has prepared for the VAT
+reform and, from July 1, there will be three ways to clear an item through
+customs:
+
+
+*1. Paying VAT in the online store*You can pay VAT in connection with your
+purchase if the online store you are buying from offers this option. The
+information about the item will be sent to Posti directly from the online
+store, and Posti will submit the customs declaration to Finnish Customs.
+This costs EUR 0 and you will not need to take any action.
+
+
+*2. Digital customs clearance*Digital customs clearance can be done in
+OmaPosti, which you can use in the app or on a browser at posti.fi/omaposti=
+.
+You will get a notification when you are about to receive an item that
+requires customs clearance. You can also add items to tracking by manually
+inserting the tracking code. Please follow the instructions and do digital
+customs clearance before the item arrives in Finland. Available for
+purchases worth up to EUR 150. Digital customs clearance costs EUR 0.90 +
+VAT.
+
+
+*3. Clearing the item on the Finnish Customs website and paying the
+handling fee on Posti=E2=80=99s website*You will get a notice of arrival on=
+ce the
+item has arrived in Finland and is being stored temporarily in a warehouse.
+Clear the item and pay VAT on the Finnish Customs website and also pay
+Posti=E2=80=99s handling fee of EUR 2.90 on Posti=E2=80=99s website.
+You may always choose this customs clearance option if you want to clear
+the item yourself. This option must always be chosen if the item is worth
+more than EUR 150 or if the information about the item is incomplete.
+
+To make sure that the customs clearance process goes smoothly, please
+provide your real mobile phone number and email address when buying from an
+online store.
+*For help with matters related to customs clearance, please call Posti=E2=
+=80=99s
+free VAT helpline at 0100 2215, open Mon=E2=80=93Fri 8 a.m.=E2=80=936 p.m. =
+and Sat 9 a.m.=E2=80=934
+p.m.*
+You can learn more about the VAT reform at posti.fi/alv-muutos.
+<https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmQh5nx=
+JcV3Zsc37CgVYKW73mxVh4zX5nSW3CB27z2S_QyGW2S0qTf3r2f7_W8TqVXW4Z79jvW66wGrV4t=
+hVrsW4vBGTD2rySzKVQQB004sJ7YXVZ9-Yd6MR-67W8HM8fb3wqQwtW6G_3xC5DxWghN3Bnt8Br=
+KfPsW4_5GpC2-rB1nW9hM5f07tQXPDW6gdqtX2lzTcCW2N3b_h2XgrCkW5M71yq1qpf76W60xgV=
+-1K9XT4W4P0xh97TyvRLW2cz9FQ5-C7y7W84MR0K2qdJ88W5pkfT89cbHZlMrvllg_sKRcW77Jf=
+z_8wp0lzW8RmTd71Fq466W6Hwlwb2_Gl3qW8Jc16j7zq2FzW4Gy-wc4KDR2TW7N_Xvp5mkWrpN4=
+vZVcZStymdW3DwHcR6hXL5cW65k59v1vyNMpW576YSn7W43GhN7q2xNrTzsVxW3zvFf-5hlbJKW=
+5mTpxg3FSqYdW78jgwc1PmJ0nW3TN0Sr8XJ6wVW7H7LRJ9cz61JW7C04rq91rb8yW8crM0X5J8y=
+6dW6ss67D3l_f3JW6K58zy15dQhYW5w25vV2fd5CXW2x6pBm7z_-bgW7f_yn52f4MqpW1_9dJC7=
+KrGmR36Nt1>
+
+Best regards,
+Posti
+[image: Posti Group Oyj]
+<https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmPp3p_=
+97V1-WJV7CgMhtW3qLZHG3hZjLcW81SMHf6tYBdKW4Ngvkh4H0j47W33xylf5NW4GbW58_1D-5f=
+qpQRW4WgZpg8zgZp1W8kJHHD12c0fWN4VrC_g2hl9zW1rng4S5l8rwFW5SgKRP4WWC-nW47qp_M=
+3FK09GW82rS5h4R5t6QW8pcVXl6k2mW5W93w1VQ3CT_8zW6KVb_q8djfQyVklydM7hk8T_W7D9Z=
+s95Q_bfNN6ZDFCnPgf6yW2qR9t778GTkZW4L_jdw3Hm9_nW1QfZrT4bk14QW8wnvG33NyDK5VBB=
+mmz7P-S2gW246vSM8r2p-b31g41>
+  [image: Facebook]
+<https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmPJ3p_=
+9rV1-WJV7CgWKwW3CMDZ24f5f94VTkhbL8jCyrdW5b3vC32bschKW7xjvMb8z0fqPW2Q1F_w8VC=
+XtbW1PvPpN6fMqFBVk78_f132153W2YG4bB1S46RzW8R4-Vk8FM1VbW25psHz6RLrkxW3g5-P35=
+NnTBhVPKWgZ6RDY0VW4rZ8LL7f80FbW2XpgDh90LdK0W5v_sCV2g-R4TW6Y1RWm3vRfx7W3MmR2=
+42Zn4KnW7D8-ZQ1R-6Y3N7gb9md2ZJYBW67ZxLp1qPKWFW97h6mY1y5fZxW1FQ2PL2XbYwkW36l=
+B9H8q6DzsVSGlcS8M0LtSW11QZld95f7M9N1MGKqxylkMk23J1>
+  [image: Twitter]
+<https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmPJ3p_=
+9rV1-WJV7CgNkwW13KfzZ6BXcGBW3q1Kzw771j7_W64CLRw7YWC3TW8J54yd7ZS25tW8JjFYT56=
+XwC1N93R-HRl4SX0N8RVwqXY-ZcSW30H53L2-4PMmN2TZ_fkl9tDvVFl_xk8SqX52W2lNGbV5z9=
+FjPW3P9l2v1-C8d8V9DS6q7K-Vy9W5S08HK5wrJNDW6k5TT36l4zb6W34GqKn45-HcLW7XH2d78=
+1H3f8V8Qwr96cpfHlW4_fnYV3lyRJzVX_slx99_JpqW18GKX24917CwW6Phdq11K6HJBW122gR2=
+56CrKqN35dQvWPkZPqW66yPX98lL6BwW4QV2M34ZR2gl37Ph1>
+  [image: LinkedIn]
+<https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmPJ3p_=
+9rV1-WJV7CgJf7W6n-5rn7D22X5W7-ztdR7JH9kQN6b1V3D4CZm5N6Sfkyp3xnL6W5Pcp0w2XXW=
+FfW2RB16C4lbmm7W79wXwj26-LH7N4SpB3Ts4wVpW204lWm92_3lxW22lrP05LbwR-W5bvJjM74=
+t77-W23v87S6FNY0qV3qXvF5Fgty5VS5R_06n5f2CW4mDLCx4p-_FSW90T5Ns3QbzvLW6-g9mF3=
+LkDKkW37PpF_4Xl4FKVD9bJC4SdnqMW4JFgvf4XtSVtW80FjbS3MKjFkW72cfKC5MW3c4W8cSwc=
+w2y7WNXW2YX5NN2h-S_9W90C3rQ85J433W1QLzFw3StRw_36nZ1>
+  [image: Youtube]
+<https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmPJ3p_=
+9rV1-WJV7CgFRqW3fbJbt7ZP-CsW5j_ZB51JLZ0RW4khjck6PvCD-W75XJYv3gmXYnW6zv3DT18=
+DPsCW4MdHhF3zdFTwW8W6kMF84RhTDW5FfGx296-vJCW3CnPN04PjjgZW51djjV76N1NwW80MlL=
+z8sTcLsW4r61vC57GSRfW54wKKs2CrzMQW5HxDtn94rlsKW4-BxWt4g_MDdW6J8t8K7V88xJW3D=
+_KDg3r84XgW4JY6MZ89NqV-N75-_sLBxJxNW5z6FSS5vgtDRW6Hpd8l4w2C5YW8ZcxNm4qC_C7W=
+1GHKrQ8knGtgW8w2DW06GJHHTW7Vnc3k1CM2L2W3QFNRV3Xpmxw3ljz1>
+
+Saat t=C3=A4m=C3=A4n viestin, koska olet rekister=C3=B6itynyt Posti Group -=
+konsernin
+s=C3=A4hk=C3=B6isten
+palveluiden
+<https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmP55nx=
+H1V3Zsc37CgRyXW1SmDzX5lCRD0V4ftm45jpMf_N3DMswLgXv1xW5x3QhQ3JSw95W30m2g22KjM=
+-_W3BfvBR1yHyjDW2Z25Qw74WLplW2ZWm7B4kbk6pW3724cK7G3w5HW1Rk8q-2nynQPW2YHrlQ3=
+hsPsTW9fWCTF2WlZ43W18Z-pS3xGwjvW5wtV784jYSw3W3Z7xwv4V0MDCW39WwHk41_f2sW2KVS=
+y87R2hvzW1v3CzQ4LXRTzW5PM-4T91VNcLDX7kbLfSP1W8j_1q52LpyP_W8dPXz56zBdrmW9lL2=
+QF5Y-JykW16kMcs7W0B8JW8Tx1y210-FqbW5Hhjpg15DTrcW7NrJyX7ZwQwLW198Brl5wTLKMVL=
+hRG21VRpCXW7lLnFs7Bk8ZZW7L3KbT1VyRtdW1VrqDC3qSnH7N5f9Vdl-8WnSW3s80Lb8jBY4KW=
+6xPgb35kf61dN8vKPCHV6SnDW19TJzS4tdCBHW6WVPgL2HPhgt36gh1>
+k=C3=A4ytt=C3=A4j=C3=A4ksi.
+
+Du f=C3=A5r detta meddelande i och med att du har registrerat dig som anv=
+=C3=A4ndare
+i Posti Group-koncernens elektroniska tj=C3=A4nster
+<https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmP55nx=
+H1V3Zsc37CgJpMVkD1st44kFx7W814g_04S4SYNW99Z0Fy68nPDsN7pC4N1s0pwvW2DDZlY7GZJ=
+_KW3S-vQg5gMdstW2f13zk4KS-TcW5Cc-_N1Tc3xRW7j8Vfb6z9JNHW3BDbkr27wjqPW3zMspJ5=
+DkHLjVyV1Sz7zz_2DMsyp_0LfqYgW8WrR7k663rZVVss7yJ3r0ddnW5t0R8R5w-69YW4s1bTr45=
+FRkcW2H8Zzm2mc1-yN3MV50n267Y6W1BPqWM8fp1F4VLLKHs4BMtNfW8VW4kY8rr862W1wv-4q3=
+NxJT8V3yTpH6Rj4jrW4JbXNT7MT0JCW6RYlJX2Xh7KcW4P2hf31qHlHLW54h9YX8VD585VyfZMg=
+8hY027W5ztMNh51TZpQW3_zhXB1Hvb7pW8lnmzZ53z9J4W8Z76Fh46jyB8W9fghw84RJtJ6W6cp=
+cpW3FnNxBW81SBVq7FWSQhW2bJ54x3kTT6bW5krcJq7PgFJQ3f5g1>.
+
+
+You received this message because you have registered as user of Posti
+Group=E2=80=99s electronic services
+<https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmPp5nx=
+HkV3Zsc37CgPTzW7T7jhX4XFf65N5jqf728-S0mN29gklKz9S0gW5G2C3-6W-HMCW5wtq2L7Q2M=
+FzW8Mw-Jj743YXdW86j4Gj80b78yW26zQdM9lhpnSW4dfly983d_x2W8cV8Wz2BvHXwW1_4twz2=
+pwT6_W7H38282Z7sGjW7bP_9x1bMtFdW5CsBjR6DBCPMW28w5Jf1Xt6Z5W81Nq2S1Zsyf4Lcm4J=
+_6RVLW6G06mP3QF91fW2VBj-08nGB6PW1qgz4W1yN8sXN1jKh7xyPYnSW3L9QYd7CJdRzW29-MH=
+V6sFZNsW3DHGLN7h7_gSW7VJsYV6PSsP7W44Vv-W1gTYpfW62Vnc16XGNN8W2KQL968cP87HW5l=
+gjn55W3447W3fbgWp4KxlGgW7l2t7f6hXJVTW2j2Xm94BrnPJW7QZ1yp41dwkCW1-NSsN4xzZvS=
+W8N_MDQ7j7V4nW6z5tXS2Y6BhvW2cdwtx25DHx1W2FH0ZP6FMrdBW2jt6fT4PyXV8V-wLJC4nV8=
+BJ3pmv1>.
+
+--0000000000005bfa3005c5e3788a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">pasi puskanen<div>8.4.2022</div><div>63h<br><br><div class=
+=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">---------- Forwarded=
+ message ---------<br>From: <strong class=3D"gmail_sendername" dir=3D"auto"=
+>Posti</strong> <span dir=3D"auto">&lt;<a href=3D"mailto:no-reply@posti.com=
+">no-reply@posti.com</a>&gt;</span><br>Date: Wed, Jun 23, 2021 at 8:13 AM<b=
+r>Subject: Tiedote koskien EU:n ulkopuolisista verkkokaupoista tilaamista<b=
+r>To:  &lt;<a href=3D"mailto:japsu.honkasalo@gmail.com">japsu.honkasalo@gma=
+il.com</a>&gt;<br></div><br><br><u></u>
+   =20
+   =20
+   =20
+   =20
+   =20
+   =20
+   =20
+   =20
+   =20
+   =20
+   =20
+   =20
+   =20
+ =20
+  <div style=3D"color:#3b4a57;font-family:Montserrat,Arial,Helvetica,sans-s=
+erif;font-size:17px;line-height:1.556em;word-break:break-word;padding:0!imp=
+ortant;margin:0!important;display:block!important;min-width:100%!important;=
+width:100%!important;background:#e5e5e5">
+   =20
+    <div id=3D"m_9181073828640105298preview_text" style=3D"display:none;fon=
+t-size:1px;color:#e5e5e5;line-height:1px;max-height:0px;max-width:0px;opaci=
+ty:0;overflow:hidden">
+      Meddelande om best=C3=A4llning av produkter i webbutiker utanf=C3=B6r=
+ EU | Announcement about ordering from online stores outside the EU
+    </div>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0" =
+bgcolor=3D"#E5E5E5">
+      <tbody><tr>
+        <td align=3D"center" valign=3D"top" style=3D"color:#3b4a57;font-fam=
+ily:Montserrat,Arial,Helvetica,sans-serif;font-size:17px;line-height:1.556e=
+m;word-break:break-word">
+          <table width=3D"760" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" class=3D"m_9181073828640105298mobile-shell">
+            <tbody><tr>
+              <td class=3D"m_9181073828640105298td" style=3D"color:#3b4a57;=
+font-family:Montserrat,Arial,Helvetica,sans-serif;word-break:break-word;wid=
+th:760px;min-width:760px;font-size:0pt;line-height:0pt;padding:0;margin:0;f=
+ont-weight:normal" width=3D"760"><table width=3D"100%" border=3D"0" cellspa=
+cing=3D"0" cellpadding=3D"0">
+                  <tbody><tr>
+                    <td class=3D"m_9181073828640105298header" style=3D"colo=
+r:#3b4a57;font-family:Montserrat,Arial,Helvetica,sans-serif;font-size:17px;=
+line-height:1.556em;word-break:break-word;padding:30px 60px;background-colo=
+r:#ffffff" bgcolor=3D"#ffffff">                  =20
+                      <table width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0">
+                        <tbody><tr>
+                          <td class=3D"m_9181073828640105298logo" valign=3D=
+"bottom" style=3D"color:#3b4a57;font-family:Montserrat,Arial,Helvetica,sans=
+-serif;word-break:break-word;text-align:left;width:100px;font-size:0pt;line=
+-height:0pt" align=3D"left" width=3D"100">
+                              <img src=3D"https://minun.posti.fi/hs-fs/hubf=
+s/newsletters/layout/posti-logo_email_black_142px.png?noresize&amp;width=3D=
+142&amp;upscale=3Dtrue&amp;name=3Dposti-logo_email_black_142px.png" alt=3D"=
+Posti Group Oyj" width=3D"71" style=3D"height:auto;width:71px" height=3D"au=
+to"></td></tr>
+                      </tbody></table>
+                    </td>
+                  </tr>
+                </tbody></table>           =20
+               =20
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+  <tbody><tr>
+    <td class=3D"m_9181073828640105298content" style=3D"color:#3b4a57;font-=
+family:Montserrat,Arial,Helvetica,sans-serif;font-size:17px;line-height:1.5=
+56em;word-break:break-word;padding-bottom:50px;background-color:#ffffff" bg=
+color=3D"#ffffff">             =20
+     <div id=3D"m_9181073828640105298hs_cos_wrapper_module_159826940875519"=
+ style=3D"color:inherit;font-size:inherit;line-height:inherit">
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+  <tbody><tr>
+    <td class=3D"m_9181073828640105298hero" style=3D"color:#3b4a57;font-fam=
+ily:Montserrat,Arial,Helvetica,sans-serif;font-size:17px;line-height:1.556e=
+m;word-break:break-word;padding-top:0px;padding-bottom:30px">
+      <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0=
+">
+        <tbody><tr>
+          <td class=3D"m_9181073828640105298hero-inner" style=3D"color:#3b4=
+a57;font-family:Montserrat,Arial,Helvetica,sans-serif;font-size:17px;line-h=
+eight:1.556em;word-break:break-word;padding:0;background-size:cover;backgro=
+und-position:center;background-repeat:no-repeat">        =20
+            <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpaddin=
+g=3D"0">
+              <tbody><tr>
+                <td class=3D"m_9181073828640105298text-align-center" style=
+=3D"color:#3b4a57;font-family:Montserrat,Arial,Helvetica,sans-serif;font-si=
+ze:17px;line-height:1.556em;word-break:break-word;text-align:center" align=
+=3D"center">     =20
+                  <img alt=3D"" width=3D"760" style=3D"width:100%;height:au=
+to;max-width:100%" height=3D"auto">
+                </td>
+              </tr>
+            </tbody></table>           =20
+          </td>
+        </tr>
+      </tbody></table>           =20
+    </td>
+  </tr>
+</tbody></table><table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpa=
+dding=3D"0">
+  <tbody><tr>
+    <td class=3D"m_9181073828640105298text m_9181073828640105298section-pad=
+ding-x" style=3D"color:#3b4a57;font-family:Montserrat,Arial,Helvetica,sans-=
+serif;font-size:17px;line-height:1.556em;word-break:break-word;padding-left=
+:60px;padding-right:60px;padding-top:0px;padding-bottom:60px">
+      <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0=
+">
+        <tbody><tr>
+          <td class=3D"m_9181073828640105298text-inner" style=3D"color:#3b4=
+a57;font-family:Montserrat,Arial,Helvetica,sans-serif;font-size:17px;line-h=
+eight:1.556em;word-break:break-word">
+            <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpaddin=
+g=3D"0">
+              <tbody><tr>
+                <td style=3D"color:#3b4a57;font-family:Montserrat,Arial,Hel=
+vetica,sans-serif;font-size:17px;line-height:1.556em;word-break:break-word"=
+><p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px">Hei Jasper </p>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px">Jos tilaat tuottei=
+ta EU:n ulkopuolisista verkkokaupoista, t=C3=A4m=C3=A4 tiedote sis=C3=A4lt=
+=C3=A4=C3=A4 t=C3=A4rke=C3=A4=C3=A4 tietoa sinulle.<br><br>Koko EU:n alueel=
+la astuu voimaan verkkokaupan arvonlis=C3=A4verouudistus 1.7.2021. Jatkossa=
+ my=C3=B6s alle 22 euron arvoisista tavaral=C3=A4hetyksist=C3=A4 on maksett=
+ava arvonlis=C3=A4vero ja teht=C3=A4v=C3=A4 tullaus. Muutos koskee my=C3=B6=
+s EU:n ulkopuolelta l=C3=A4hetettyj=C3=A4 lehti=C3=A4. Posti on varautunut =
+arvonlis=C3=A4verouudistukseen ja tullaustapoja 1.7. alkaen on kolme:</p>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px;padding-left:40px">=
+<strong>1. ALV maksetaan verkkokaupassa<br></strong>Jos verkkokauppa tarjoa=
+a siihen mahdollisuuden, maksat arvonlis=C3=A4veron ostoksen yhteydess=C3=
+=A4. L=C3=A4hetyksen tiedot v=C3=A4littyv=C3=A4t Postille suoraan verkkokau=
+pasta ja Posti toimittaa tulli-ilmoituksen Tullille. Kustannus on 0 =E2=82=
+=AC ja sinun ei tarvitse tehd=C3=A4 toimenpiteit=C3=A4.</p>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px;padding-left:40px">=
+<strong>2. Digitaalinen tullaus<br></strong>Digitaalinen tullaus toimii Oma=
+Postissa, jota voit k=C3=A4ytt=C3=A4=C3=A4 sovelluksena tai selaimessa osoi=
+tteessa <a href=3D"http://posti.fi/omaposti" target=3D"_blank">posti.fi/oma=
+posti</a>. Saat ilmoituksen, kun sinulle on saapumassa tullattava l=C3=A4he=
+tys. Voit my=C3=B6s itse lis=C3=A4t=C3=A4 l=C3=A4hetyksen seurantaan sy=C3=
+=B6tt=C3=A4m=C3=A4ll=C3=A4 l=C3=A4hetyksenseurantakoodin. Seuraa ohjeita ja=
+ tee digitaalinen tullaus ennen l=C3=A4hetyksen saapumista Suomeen. Koskee =
+korkeintaan 150 euron arvoisia ostoksia. Kustannus 0,90 =E2=82=AC + ALV.</p=
+>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px;padding-left:40px">=
+<strong>3. Tullaus Tullin sivuilla ja Postin k=C3=A4sittelymaksu Postin siv=
+uilla<br></strong>Saat saapumisilmoituksen l=C3=A4hetyksen saavuttua Suomee=
+n, v=C3=A4liaikaiseen varastoon. Tee tullaus ja maksa ALV Tullin verkkosivu=
+illa ja maksa Postin k=C3=A4sittelymaksu 2,90 =E2=82=AC Postin sivuilla.<br=
+>Voit valita t=C3=A4m=C3=A4n tullausvaihtoehdon aina, jos haluat tehd=C3=A4=
+ tullauksen itse. T=C3=A4m=C3=A4 vaihtoehto tulee valita, kun l=C3=A4hetyks=
+en arvo on yli 150 =E2=82=AC tai l=C3=A4hetyksen tiedoissa on puutteita.<br=
+><br>Jotta tullausprosessi on sujuva, verkkokaupassa on t=C3=A4rke=C3=A4=C3=
+=A4 antaa oikea matkapuhelinnumero sek=C3=A4 s=C3=A4hk=C3=B6postiosoite.<br=
+><br><strong>Postin maksuton ALV-neuvontapuhelin palvelee tullaukseen liitt=
+yviss=C3=A4 asioissa numerossa 0100 2215 ma-pe klo 8-18, la klo 9-16.</stro=
+ng><br>Lis=C3=A4tietoa muutoksesta l=C3=B6yd=C3=A4t osoitteesta <a href=3D"=
+https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmP_5nxH=
+XV3Zsc37Cg-LKW2jPfT-2hrk0yVZC09q2y9hGfVw-yvB5wFZwlW1TdSJB3LLJChW4swjjf7n3GN=
+FW8XsbBM22YLnpW7291v28Bp9XXW8yM0pQ1BwVS6W2vTNxm2wtPgnW5LF9_T4LwXn5W2FSnMl8N=
+0nPzW3ZXKHS4JB0jXW1tyS1q1Y46XZW4d-g4717hywLW5llflt2wQ8LTW33Y5mv7yB4F6W36pmV=
+Y35shyMW6L1xLm54bwVwW6nBgVC5bp8S6N4bBvdn5T9h6W3Nj9JM1bSm8gN8yBMMKxt7GgW1Wcg=
+8B1hcc7FVfJsfS6lCRz6W4JV9Nn81LXw9W1fyrXg89cJ50W3tGCyp14lCXpW77BKlG61YClmW81=
+tPlZ29zt8jW7nPgTJ1ctRjsVSfb4m3q5936W2DMN04190bK_W5F8gKW3CGDNWW4qNCtR7n2M47W=
+7dLb9v3DkXM8W66zvB71zf3G1W3zd-8-95fbsMW72C2PP563dxlW8N_3jX7l8QddW8S0gRn6HcS=
+z4N4-x3VS25Nw4N9lmR03XLd4RW5Z9T066q-4kMN6fY7wHK05Ds3gbB1" rel=3D"noopener" =
+style=3D"color:#0051c2;text-decoration:none" target=3D"_blank">posti.fi/alv=
+-muutos</a><br><br>Yst=C3=A4v=C3=A4llisin terveisin,<br>Postin v=C3=A4ki</p=
+>
+<hr>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px">=C2=A0</p>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px">Hej Jasper <br><br=
+>Detta meddelande inneh=C3=A5ller viktig information f=C3=B6r dig, om du be=
+st=C3=A4ller produkter i webbutiker utanf=C3=B6r EU.<br><br>Den nya reforme=
+n av merv=C3=A4rdesbeskattningen f=C3=B6r e-handel tr=C3=A4der i kraft i he=
+la EU den 1.7.2021. I forts=C3=A4ttningen ska man =C3=A4ven betala merv=C3=
+=A4rdesskatt p=C3=A5 och f=C3=B6rtulla varuf=C3=B6rs=C3=A4ndelser som =C3=
+=A4r v=C3=A4rda under 22 euro. F=C3=B6r=C3=A4ndringen g=C3=A4ller =C3=A4ven=
+ tidningar som skickas fr=C3=A5n l=C3=A4nder utanf=C3=B6r EU. Posti har f=
+=C3=B6rberett sig p=C3=A5 reformen av merv=C3=A4rdesbeskattningen och fr=C3=
+=A5n och med den 1 juni finns det tre f=C3=B6rtullningss=C3=A4tt:</p>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px;padding-left:40px">=
+<strong>1. MOMS betalas i webbutiken<br></strong>Betala merv=C3=A4rdesskatt=
+en i samband med ink=C3=B6pet, om webbutiken erbjuder den m=C3=B6jligheten.=
+ F=C3=B6rs=C3=A4ndelsens uppgifter f=C3=B6rmedlas till Posti direkt fr=C3=
+=A5n webbutiken och Posti s=C3=A4nder en tulldeklaration till Tullen. Kostn=
+aden =C3=A4r 0 euro och du beh=C3=B6ver inte g=C3=B6ra n=C3=A5gonting.</p>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px;padding-left:40px">=
+<strong>2. Digital f=C3=B6rtullning<br></strong>Digital f=C3=B6rtullning g=
+=C3=B6rs i OmaPosti som du kan anv=C3=A4nda antingen som app eller i webbl=
+=C3=A4saren p=C3=A5 adressen <a href=3D"http://posti.fi/omaposti" target=3D=
+"_blank">posti.fi/omaposti</a>. Du f=C3=A5r ett meddelande n=C3=A4r du komm=
+er att f=C3=A5 en f=C3=B6rs=C3=A4ndelse som du m=C3=A5ste f=C3=B6rtulla. Du=
+ kan ocks=C3=A5 sj=C3=A4lv l=C3=A4gga till en f=C3=B6rsendelsekod f=C3=B6r =
+att uppf=C3=B6lja en f=C3=B6rs=C3=A4ndelse. F=C3=B6lj instruktionerna och g=
+=C3=B6r en digital f=C3=B6rtullning innan f=C3=B6rs=C3=A4ndelsen anl=C3=A4n=
+der till Finland. G=C3=A4ller ink=C3=B6p v=C3=A4rda h=C3=B6gst 150 euro. Ko=
+stnad 0,90 =E2=82=AC + moms.</p>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px;padding-left:40px">=
+<strong>3. F=C3=B6rtullning p=C3=A5 Tullens webbplats och Postis hanterings=
+avgift p=C3=A5 Postis webbplats<br></strong>Du f=C3=A5r en ankomstavi n=C3=
+=A4r f=C3=B6rs=C3=A4ndelsen har anl=C3=A4nt till Finland till ett tillf=C3=
+=A4lligt lager. G=C3=B6r f=C3=B6rtullningen och betala merv=C3=A4rdesskatte=
+n p=C3=A5 Tullens webbplats och betala Postis hanteringsavgift 2,90 =E2=82=
+=AC p=C3=A5 Postis webbplats.<br>Det h=C3=A4r f=C3=B6rtullningsalternativet=
+ kan du v=C3=A4lja alltid om du vill g=C3=B6ra f=C3=B6rtullningen sj=C3=A4l=
+v. V=C3=A4lj det h=C3=A4r alternativet, om f=C3=B6rs=C3=A4ndelsens v=C3=A4r=
+de =C3=A4r =C3=B6ver 150 euro eller om det finns brister i f=C3=B6rs=C3=A4n=
+delsens uppgifter.<br><br>Det =C3=A4r viktigt att uppge r=C3=A4tt mobiltele=
+fonnummer och e-postadress i webbutiken f=C3=B6r att f=C3=B6rtullningsproce=
+ssen ska l=C3=B6pa smidigt.<br><strong>Postis avgiftsfria momsr=C3=A5dgivni=
+ng svarar p=C3=A5 fr=C3=A5gor som g=C3=A4ller f=C3=B6rtullning p=C3=A5 numr=
+et 0100 2215 m=C3=A5=E2=80=93fr kl. 8=E2=80=9318, l=C3=B6 kl. 9=E2=80=9316.=
+</strong><br>Mer information om f=C3=B6r=C3=A4ndringen hittar du p=C3=A5 ad=
+ressen <a href=3D"https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3=
+m4t7Gn5N54gmP_5nxHXV3Zsc37CgF2kW6Wm1JB2PkwphW5YmGk_597SsTW1HgG6s7PJZr2W2rfr=
+Nr81XJxpW553xBx794SNCW2kmWWb8ttjstW4KnZq46FGnV5VpXK7v93DSrcW2yKsTz2dN2SvW1G=
+3_xT3XDCQVW8P7l3S5LG8XQW5g_w_m2cFRz4W355MwN4rLdqcW4B_FRl1QWB6MVTFCpX5qSc3MV=
+6ms9z3YtMvKW7gN8Y03nQcnCVMPnr48DrbWpW7sqs3q2L4nfBW8jWKn75fwS-CN6ZK2tGgLVDZW=
+5jkdHH4nVpVzW3T_Fxw8KG1nKW5S2LhN3ryn-CW3K_fFq42Hx1DW4j_0Wh95W3w8W1vS6SC2r1f=
+nCN3YXHPVbJd5VW4VRMP745BDf-W2VNNg-6pyv-0W6v8Bh38zFXM0W68vPQv741_gRW7GhjL17G=
+XpjjW1dPk4V6J-Lh3W6mY7Xn4QXFCkW4qc1wC83j54lW7lYcxQ3815qHW1T3Z1m3mzLvFW8BhxX=
+98pQ_C6W5CVk426ZXLBXW689mKG3Lzfb1W1L9DJL3WGTl5Vbx_WT4-KfB1W5sjpdK75R_jJ2gv1=
+" rel=3D"noopener" style=3D"color:#0051c2;text-decoration:none" target=3D"_=
+blank">posti.fi/alv-muutos</a><br><br>Med v=C3=A4nlig h=C3=A4lsning<br>Post=
+i</p>
+<hr>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px">=C2=A0</p>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px">Hello Jasper <br><=
+br>If you order goods from online stores outside the EU, this announcement =
+contains important information for you.<br><br>On July 1, 2021, the e-comme=
+rce VAT reform will enter into force throughout the EU. The reform means th=
+at all items worth less than EUR 22 will also be subject to VAT and customs=
+ clearance. The change also applies to publications sent from outside the E=
+U. Posti has prepared for the VAT reform and, from July 1, there will be th=
+ree ways to clear an item through customs:</p>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px;padding-left:40px">=
+<strong>1. Paying VAT in the online store<br></strong>You can pay VAT in co=
+nnection with your purchase if the online store you are buying from offers =
+this option. The information about the item will be sent to Posti directly =
+from the online store, and Posti will submit the customs declaration to Fin=
+nish Customs. This costs EUR 0 and you will not need to take any action.</p=
+>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px;padding-left:40px">=
+<strong>2. Digital customs clearance<br></strong>Digital customs clearance =
+can be done in OmaPosti, which you can use in the app or on a browser at <a=
+ href=3D"http://posti.fi/omaposti" target=3D"_blank">posti.fi/omaposti</a>.=
+ You will get a notification when you are about to receive an item that req=
+uires customs clearance. You can also add items to tracking by manually ins=
+erting the tracking code. Please follow the instructions and do digital cus=
+toms clearance before the item arrives in Finland. Available for purchases =
+worth up to EUR 150. Digital customs clearance costs EUR 0.90 + VAT.</p>
+<p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px;padding-left:40px">=
+<strong>3. Clearing the item on the Finnish Customs website and paying the =
+handling fee on Posti=E2=80=99s website<br></strong>You will get a notice o=
+f arrival once the item has arrived in Finland and is being stored temporar=
+ily in a warehouse. Clear the item and pay VAT on the Finnish Customs websi=
+te and also pay Posti=E2=80=99s handling fee of EUR 2.90 on Posti=E2=80=99s=
+ website.<br>You may always choose this customs clearance option if you wan=
+t to clear the item yourself. This option must always be chosen if the item=
+ is worth more than EUR 150 or if the information about the item is incompl=
+ete.<br><br>To make sure that the customs clearance process goes smoothly, =
+please provide your real mobile phone number and email address when buying =
+from an online store.<br><strong>For help with matters related to customs c=
+learance, please call Posti=E2=80=99s free VAT helpline at 0100 2215, open =
+Mon=E2=80=93Fri 8 a.m.=E2=80=936 p.m. and Sat 9 a.m.=E2=80=934 p.m.</strong=
+><br>You can learn more about the VAT reform at <a href=3D"https://my.posti=
+.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmQh5nxJcV3Zsc37CgVYKW73=
+mxVh4zX5nSW3CB27z2S_QyGW2S0qTf3r2f7_W8TqVXW4Z79jvW66wGrV4thVrsW4vBGTD2rySzK=
+VQQB004sJ7YXVZ9-Yd6MR-67W8HM8fb3wqQwtW6G_3xC5DxWghN3Bnt8BrKfPsW4_5GpC2-rB1n=
+W9hM5f07tQXPDW6gdqtX2lzTcCW2N3b_h2XgrCkW5M71yq1qpf76W60xgV-1K9XT4W4P0xh97Ty=
+vRLW2cz9FQ5-C7y7W84MR0K2qdJ88W5pkfT89cbHZlMrvllg_sKRcW77Jfz_8wp0lzW8RmTd71F=
+q466W6Hwlwb2_Gl3qW8Jc16j7zq2FzW4Gy-wc4KDR2TW7N_Xvp5mkWrpN4vZVcZStymdW3DwHcR=
+6hXL5cW65k59v1vyNMpW576YSn7W43GhN7q2xNrTzsVxW3zvFf-5hlbJKW5mTpxg3FSqYdW78jg=
+wc1PmJ0nW3TN0Sr8XJ6wVW7H7LRJ9cz61JW7C04rq91rb8yW8crM0X5J8y6dW6ss67D3l_f3JW6=
+K58zy15dQhYW5w25vV2fd5CXW2x6pBm7z_-bgW7f_yn52f4MqpW1_9dJC7KrGmR36Nt1" rel=
+=3D"noopener" style=3D"color:#0051c2;text-decoration:none" target=3D"_blank=
+">posti.fi/alv-muutos.</a><br><br>Best regards,<br>Posti</p>               =
+  =20
+                </td>
+              </tr>
+            </tbody></table></td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>=20
+</tbody></table></div>
+    </td>
+  </tr>
+</tbody></table>
+
+<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+  <tbody><tr>
+    <td class=3D"m_9181073828640105298footer" style=3D"color:#3b4a57;font-f=
+amily:Montserrat,Arial,Helvetica,sans-serif;font-size:17px;line-height:1.55=
+6em;word-break:break-word;padding:90px 60px;background-color:#f6f7f9" bgcol=
+or=3D"#f6f7f9">                    =20
+      <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0=
+">
+        <tbody><tr>
+          <td class=3D"m_9181073828640105298footer-logo" style=3D"color:#3b=
+4a57;font-family:Montserrat,Arial,Helvetica,sans-serif;font-size:17px;line-=
+height:1.556em;word-break:break-word;text-align:left;width:100px" width=3D"=
+100" align=3D"left">
+            <a href=3D"https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-d=
+VGwS3m4t7Gn5N54gmPp3p_97V1-WJV7CgMhtW3qLZHG3hZjLcW81SMHf6tYBdKW4Ngvkh4H0j47=
+W33xylf5NW4GbW58_1D-5fqpQRW4WgZpg8zgZp1W8kJHHD12c0fWN4VrC_g2hl9zW1rng4S5l8r=
+wFW5SgKRP4WWC-nW47qp_M3FK09GW82rS5h4R5t6QW8pcVXl6k2mW5W93w1VQ3CT_8zW6KVb_q8=
+djfQyVklydM7hk8T_W7D9Zs95Q_bfNN6ZDFCnPgf6yW2qR9t778GTkZW4L_jdw3Hm9_nW1QfZrT=
+4bk14QW8wnvG33NyDK5VBBmmz7P-S2gW246vSM8r2p-b31g41" style=3D"color:inherit;t=
+ext-decoration:underline" target=3D"_blank">
+              <img src=3D"https://minun.posti.fi/hs-fs/hubfs/newsletters/la=
+yout/posti-logo_email_black_142px.png?noresize&amp;width=3D142&amp;upscale=
+=3Dtrue&amp;name=3Dposti-logo_email_black_142px.png" alt=3D"Posti Group Oyj=
+" width=3D"71" style=3D"height:auto;width:71px" height=3D"auto">
+            </a></td>
+          <td class=3D"m_9181073828640105298footer-text" style=3D"font-fami=
+ly:Montserrat,Arial,Helvetica,sans-serif;word-break:break-word;color:#00000=
+0;font-size:17px;line-height:1.56;text-align:left;width:290px" width=3D"290=
+" align=3D"left"></td>
+          <td class=3D"m_9181073828640105298footer-social" style=3D"color:#=
+3b4a57;font-family:Montserrat,Arial,Helvetica,sans-serif;font-size:17px;lin=
+e-height:1.556em;word-break:break-word;text-align:right" align=3D"right">
+            <table align=3D"center" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"0">
+              <tbody><tr>
+                <td style=3D"color:#3b4a57;font-family:Montserrat,Arial,Hel=
+vetica,sans-serif;font-size:17px;line-height:1.556em;word-break:break-word"=
+>
+                  =C2=A0
+                 =20
+                  <a aria-label=3D": Facebook" title=3D": Facebook" href=3D=
+"https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmPJ3p_=
+9rV1-WJV7CgWKwW3CMDZ24f5f94VTkhbL8jCyrdW5b3vC32bschKW7xjvMb8z0fqPW2Q1F_w8VC=
+XtbW1PvPpN6fMqFBVk78_f132153W2YG4bB1S46RzW8R4-Vk8FM1VbW25psHz6RLrkxW3g5-P35=
+NnTBhVPKWgZ6RDY0VW4rZ8LL7f80FbW2XpgDh90LdK0W5v_sCV2g-R4TW6Y1RWm3vRfx7W3MmR2=
+42Zn4KnW7D8-ZQ1R-6Y3N7gb9md2ZJYBW67ZxLp1qPKWFW97h6mY1y5fZxW1FQ2PL2XbYwkW36l=
+B9H8q6DzsVSGlcS8M0LtSW11QZld95f7M9N1MGKqxylkMk23J1" style=3D"color:inherit;=
+text-decoration:underline" target=3D"_blank"><img src=3D"https://my.posti.f=
+i/hubfs/newsletters/layout/facebook-1.png" style=3D"width:24px;max-width:24=
+px;max-width:24px!important;height:auto;border:none" alt=3D"Facebook" width=
+=3D"24" height=3D"auto"></a>
+                  =C2=A0
+                 =20
+                 =20
+                  <a aria-label=3D": Twitter" title=3D": Twitter" href=3D"h=
+ttps://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmPJ3p_9r=
+V1-WJV7CgNkwW13KfzZ6BXcGBW3q1Kzw771j7_W64CLRw7YWC3TW8J54yd7ZS25tW8JjFYT56Xw=
+C1N93R-HRl4SX0N8RVwqXY-ZcSW30H53L2-4PMmN2TZ_fkl9tDvVFl_xk8SqX52W2lNGbV5z9Fj=
+PW3P9l2v1-C8d8V9DS6q7K-Vy9W5S08HK5wrJNDW6k5TT36l4zb6W34GqKn45-HcLW7XH2d781H=
+3f8V8Qwr96cpfHlW4_fnYV3lyRJzVX_slx99_JpqW18GKX24917CwW6Phdq11K6HJBW122gR256=
+CrKqN35dQvWPkZPqW66yPX98lL6BwW4QV2M34ZR2gl37Ph1" style=3D"color:inherit;tex=
+t-decoration:underline" target=3D"_blank"><img src=3D"https://my.posti.fi/h=
+ubfs/newsletters/layout/twitter-1.png" style=3D"width:24px;max-width:24px;m=
+ax-width:24px!important;height:auto;border:none" alt=3D"Twitter" width=3D"2=
+4" height=3D"auto"></a>
+                  =C2=A0
+                 =20
+                 =20
+                  <a aria-label=3D": LinkedIn" title=3D": LinkedIn" href=3D=
+"https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmPJ3p_=
+9rV1-WJV7CgJf7W6n-5rn7D22X5W7-ztdR7JH9kQN6b1V3D4CZm5N6Sfkyp3xnL6W5Pcp0w2XXW=
+FfW2RB16C4lbmm7W79wXwj26-LH7N4SpB3Ts4wVpW204lWm92_3lxW22lrP05LbwR-W5bvJjM74=
+t77-W23v87S6FNY0qV3qXvF5Fgty5VS5R_06n5f2CW4mDLCx4p-_FSW90T5Ns3QbzvLW6-g9mF3=
+LkDKkW37PpF_4Xl4FKVD9bJC4SdnqMW4JFgvf4XtSVtW80FjbS3MKjFkW72cfKC5MW3c4W8cSwc=
+w2y7WNXW2YX5NN2h-S_9W90C3rQ85J433W1QLzFw3StRw_36nZ1" style=3D"color:inherit=
+;text-decoration:underline" target=3D"_blank"><img src=3D"https://my.posti.=
+fi/hubfs/newsletters/layout/linkedin-1.png" style=3D"width:24px;max-width:2=
+4px;max-width:24px!important;height:auto;border:none" alt=3D"LinkedIn" widt=
+h=3D"24" height=3D"auto"></a>
+                  =C2=A0
+                 =20
+                 =20
+                  <a aria-label=3D": YouTube" title=3D": YouTube" href=3D"h=
+ttps://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmPJ3p_9r=
+V1-WJV7CgFRqW3fbJbt7ZP-CsW5j_ZB51JLZ0RW4khjck6PvCD-W75XJYv3gmXYnW6zv3DT18DP=
+sCW4MdHhF3zdFTwW8W6kMF84RhTDW5FfGx296-vJCW3CnPN04PjjgZW51djjV76N1NwW80MlLz8=
+sTcLsW4r61vC57GSRfW54wKKs2CrzMQW5HxDtn94rlsKW4-BxWt4g_MDdW6J8t8K7V88xJW3D_K=
+Dg3r84XgW4JY6MZ89NqV-N75-_sLBxJxNW5z6FSS5vgtDRW6Hpd8l4w2C5YW8ZcxNm4qC_C7W1G=
+HKrQ8knGtgW8w2DW06GJHHTW7Vnc3k1CM2L2W3QFNRV3Xpmxw3ljz1" style=3D"color:inhe=
+rit;text-decoration:underline" target=3D"_blank"><img src=3D"https://my.pos=
+ti.fi/hubfs/newsletters/layout/youtube-1.png" style=3D"width:24px;max-width=
+:24px;max-width:24px!important;height:auto;border:none" alt=3D"Youtube" wid=
+th=3D"24" height=3D"auto"></a>
+                 =20
+                </td>                             =20
+              </tr>
+            </tbody></table>                         =20
+          </td>
+        </tr>
+      </tbody></table>
+      <div>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+          <tbody><tr>
+            <td class=3D"m_9181073828640105298footer-text" style=3D"font-fa=
+mily:Montserrat,Arial,Helvetica,sans-serif;word-break:break-word;color:#000=
+000;font-size:17px;line-height:1.56;text-align:left;padding-top:20px" align=
+=3D"left">
+              <p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px">Saat=
+ t=C3=A4m=C3=A4n viestin, koska olet rekister=C3=B6itynyt Posti Group -kons=
+ernin <a href=3D"https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m=
+4t7Gn5N54gmP55nxH1V3Zsc37CgRyXW1SmDzX5lCRD0V4ftm45jpMf_N3DMswLgXv1xW5x3QhQ3=
+JSw95W30m2g22KjM-_W3BfvBR1yHyjDW2Z25Qw74WLplW2ZWm7B4kbk6pW3724cK7G3w5HW1Rk8=
+q-2nynQPW2YHrlQ3hsPsTW9fWCTF2WlZ43W18Z-pS3xGwjvW5wtV784jYSw3W3Z7xwv4V0MDCW3=
+9WwHk41_f2sW2KVSy87R2hvzW1v3CzQ4LXRTzW5PM-4T91VNcLDX7kbLfSP1W8j_1q52LpyP_W8=
+dPXz56zBdrmW9lL2QF5Y-JykW16kMcs7W0B8JW8Tx1y210-FqbW5Hhjpg15DTrcW7NrJyX7ZwQw=
+LW198Brl5wTLKMVLhRG21VRpCXW7lLnFs7Bk8ZZW7L3KbT1VyRtdW1VrqDC3qSnH7N5f9Vdl-8W=
+nSW3s80Lb8jBY4KW6xPgb35kf61dN8vKPCHV6SnDW19TJzS4tdCBHW6WVPgL2HPhgt36gh1" re=
+l=3D"noopener" style=3D"color:#0051c2;font-weight:400;text-decoration:none"=
+ target=3D"_blank">s=C3=A4hk=C3=B6isten palveluiden</a> k=C3=A4ytt=C3=A4j=
+=C3=A4ksi. </p><p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px">Du =
+f=C3=A5r detta meddelande i och med att du har registrerat dig som anv=C3=
+=A4ndare i Posti Group-koncernens <a href=3D"https://my.posti.fi/e2t/tc/VWC=
+C392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5N54gmP55nxH1V3Zsc37CgJpMVkD1st44kFx7W814g=
+_04S4SYNW99Z0Fy68nPDsN7pC4N1s0pwvW2DDZlY7GZJ_KW3S-vQg5gMdstW2f13zk4KS-TcW5C=
+c-_N1Tc3xRW7j8Vfb6z9JNHW3BDbkr27wjqPW3zMspJ5DkHLjVyV1Sz7zz_2DMsyp_0LfqYgW8W=
+rR7k663rZVVss7yJ3r0ddnW5t0R8R5w-69YW4s1bTr45FRkcW2H8Zzm2mc1-yN3MV50n267Y6W1=
+BPqWM8fp1F4VLLKHs4BMtNfW8VW4kY8rr862W1wv-4q3NxJT8V3yTpH6Rj4jrW4JbXNT7MT0JCW=
+6RYlJX2Xh7KcW4P2hf31qHlHLW54h9YX8VD585VyfZMg8hY027W5ztMNh51TZpQW3_zhXB1Hvb7=
+pW8lnmzZ53z9J4W8Z76Fh46jyB8W9fghw84RJtJ6W6cpcpW3FnNxBW81SBVq7FWSQhW2bJ54x3k=
+TT6bW5krcJq7PgFJQ3f5g1" rel=3D"noopener" style=3D"color:#0051c2;font-weight=
+:400;text-decoration:none" target=3D"_blank">elektroniska tj=C3=A4nster</a>=
+. </p><p style=3D"margin-bottom:1em;padding:0;margin:0 0 15px">You received=
+ this message because you have registered as user of Posti Group=E2=80=99s =
+<a href=3D"https://my.posti.fi/e2t/tc/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn5=
+N54gmPp5nxHkV3Zsc37CgPTzW7T7jhX4XFf65N5jqf728-S0mN29gklKz9S0gW5G2C3-6W-HMCW=
+5wtq2L7Q2MFzW8Mw-Jj743YXdW86j4Gj80b78yW26zQdM9lhpnSW4dfly983d_x2W8cV8Wz2BvH=
+XwW1_4twz2pwT6_W7H38282Z7sGjW7bP_9x1bMtFdW5CsBjR6DBCPMW28w5Jf1Xt6Z5W81Nq2S1=
+Zsyf4Lcm4J_6RVLW6G06mP3QF91fW2VBj-08nGB6PW1qgz4W1yN8sXN1jKh7xyPYnSW3L9QYd7C=
+JdRzW29-MHV6sFZNsW3DHGLN7h7_gSW7VJsYV6PSsP7W44Vv-W1gTYpfW62Vnc16XGNN8W2KQL9=
+68cP87HW5lgjn55W3447W3fbgWp4KxlGgW7l2t7f6hXJVTW2j2Xm94BrnPJW7QZ1yp41dwkCW1-=
+NSsN4xzZvSW8N_MDQ7j7V4nW6z5tXS2Y6BhvW2cdwtx25DHx1W2FH0ZP6FMrdBW2jt6fT4PyXV8=
+V-wLJC4nV8BJ3pmv1" rel=3D"noopener" style=3D"color:#0051c2;font-weight:400;=
+text-decoration:none" target=3D"_blank">electronic services</a>. </p><br><b=
+r>
+             =20
+             =20
+            </td>
+          </tr>
+        </tbody></table>
+      </div>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<img src=3D"https://my.posti.fi/e2t/to/VWCC392km7JKW4QK4z52Qm9-dVGwS3m4t7Gn=
+5W54gmyc1gXC_M112" alt=3D"" width=3D"1" height=3D"1" border=3D"0" style=3D"=
+display:none!important;min-height:1px!important;width:1px!important;border-=
+width:0!important;margin-top:0!important;margin-bottom:0!important;margin-r=
+ight:0!important;margin-left:0!important;padding-top:0!important;padding-bo=
+ttom:0!important;padding-right:0!important;padding-left:0!important"></div>=
+</div></div></div>
+
+--0000000000005bfa3005c5e3788a--

@@ -1,0 +1,86 @@
+Delivered-To: 0481664@gmail.com
+Received: by 2002:a02:6f1a:0:0:0:0:0 with SMTP id x26csp1697934jab;
+        Mon, 5 Jul 2021 01:11:11 -0700 (PDT)
+X-Received: by 2002:a7b:c316:: with SMTP id k22mr13398540wmj.56.1625472671840;
+        Mon, 05 Jul 2021 01:11:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1625472671; cv=none;
+        d=google.com; s=arc-20160816;
+        b=mYcCiNz+NNUqmj4LfdbRykGe98cg+TOXndDd3RP3+8kHMyYbBRPiTYc2NO5s/9hDiI
+         C1/XgdXXtLtGieU3f5cfdYKHqTcxEH3HJ5oLR/i8XbCQxmG09mAbonmefQXxbeZygL4z
+         BDjwu4ZnckCG8irXGHDlHmA6PbX2X3/gvQfm23CJ/78RmjriHfirO1ccjiAheZNl2G82
+         /uO9dU1F9UrmTZkktMpaY28bcfYcrxLWx8PaZ669ziwn1YIuogXCNWECx213ITjkbOjR
+         Jg3t29tGr9esoZCAjGUCmmoGliGQclpjz8XVKadhHLfNicsWIXIMdFGdcXaIXepLSSJR
+         MSxg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=cPJ0aMb0PXJkITwnsZjbdAZyfeW+5lvKyZGS2m3jcgw=;
+        b=D3ctQ/c75PSWxV7+WPS1AKpezihYRD7jPb3zKcUomN1wT+EBzK4Fwh7ILFSchJnPPX
+         yLOQl63ST9SpZmi9l7KN1x7DAT1jBAWzcGAY+pwOY3+tCFBhvJMtx58QIv694qxkmAec
+         oGKaoIM2d/FSdCyLcscSQTps6cRGtoTjO4HhRqq8R7nWoDjK6ccerZDMbqtjWq46PUhE
+         5bWfwGiv7d9o5LPR82Lg03SHxiwNRF1WeftPIjKNjZ1Wa+DM5UQln4IrMyBF7JKJZMCP
+         Ra2WRXgeKy3ybOhoPfMQh94q3swCtFxUWHSofwJv0JVI/rQPH7WmiQi7iNNqmZhR0adt
+         Vziw==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=gXjk+pAX;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <japsu.honkasalo@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id i1sor5150767wrx.39.2021.07.05.01.11.11
+        for <0481664@gmail.com>
+        (Google Transport Security);
+        Mon, 05 Jul 2021 01:11:11 -0700 (PDT)
+Received-SPF: pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=gXjk+pAX;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=cPJ0aMb0PXJkITwnsZjbdAZyfeW+5lvKyZGS2m3jcgw=;
+        b=gXjk+pAXzvyYZA3xj1YGQWaIZJAkKDKgKr/4eXglgM4+cduffqPIr2SfHRUODWfPWc
+         1RlmFmW+4QSmlQVy6nnDq86rA2nljDb8EDqrOL0GQK6EmSW6To/+2Q6j5ibs9md7BdTg
+         2zqyEFM3l85KY4euA6rl0hr7BuAJK93TGGJrDo0q7qeM+trWv1ra79Z21HRx4Gw6gixr
+         Lf/oq8g2c5F9PGZBhEZvAnBxfUgSUwh5YE6kYqgz6eV3UZOwB/8mEbJYGpsI8dnoUqlr
+         Xa4nHceV8hQ5wpLjbGyKixD0LYu6U0yqE+6LUWb68Msa6IePc+aUs2/ZLhYAYiHVLGcs
+         qJNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=cPJ0aMb0PXJkITwnsZjbdAZyfeW+5lvKyZGS2m3jcgw=;
+        b=YcXmW/5Tz1aDiCmcOWgzSgj2Im3luVl7i1/xIMaSoz6D3WdEXd/nagtrm74GqbsayT
+         yrhDJT/YW9eYEdtb2HyEIbTxgrwR16WOCkjNqY5GAmxk7WGo8k9qqw0wZNz5Xyx8yg0B
+         KzCyLz1Hty3rfDTj1Vf/A/is2A6IJ5jvrEyQoHfR0y87piswMTfvIUGnYRDSX/oklc1t
+         rFeMoCXbC4vlc16qaUPGX2MGqZPSjvAjT+tmYHIIP1aq4DcdIMAQRP9Ic2gTzSgLyqcd
+         UbsHB+HFh6mnDioodL4PNJTQdlsRdQNfOeIKvyqOGP501YK8AAKrEe2U8rKeoWIHaQg8
+         porw==
+X-Gm-Message-State: AOAM533Gp9VKwYcrmHDbto6xPcyqTTCEPun2VQrTSlHRr/Wbq/qGR06I
+	T3kfd3nXT5dDSz690CvKhNSUvZoqcgsPuTKUbHp5x0DcqpdpcA==
+X-Google-Smtp-Source: ABdhPJwwNkrc1Uo6Dxqgqlt3hCHhFGEt1IVqJxLiWOac8TSZZsR/UO07ZPK4Jc4m74IOJoAllQBOAUZZNnCArB6T+Xo=
+X-Received: by 2002:adf:fc47:: with SMTP id e7mr14603400wrs.284.1625472671401;
+ Mon, 05 Jul 2021 01:11:11 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAKNULYpgfhoCAVukckEzXFMVfd1V1xCnJ8WG70fbXu=_e9FW4g@mail.gmail.com>
+In-Reply-To: <CAKNULYpgfhoCAVukckEzXFMVfd1V1xCnJ8WG70fbXu=_e9FW4g@mail.gmail.com>
+From: Jasper Honkasalo <japsu.honkasalo@gmail.com>
+Date: Mon, 5 Jul 2021 11:11:00 +0300
+Message-ID: <CAKNULYp8pCXOBTMR2aW7HWQaRjewfg-DcrRHFfh2tcZZgpwUTw@mail.gmail.com>
+Subject: Fwd: asdqwerty
+To: 0481664@gmail.com
+Content-Type: multipart/alternative; boundary="0000000000002bc97205c65bd9eb"
+
+--0000000000002bc97205c65bd9eb
+Content-Type: text/plain; charset="UTF-8"
+
+update
+
+--0000000000002bc97205c65bd9eb
+Content-Type: text/html; charset="UTF-8"
+
+<div dir="ltr"><div class="gmail_quote"><div dir="ltr">update</div>
+</div></div>
+
+--0000000000002bc97205c65bd9eb--

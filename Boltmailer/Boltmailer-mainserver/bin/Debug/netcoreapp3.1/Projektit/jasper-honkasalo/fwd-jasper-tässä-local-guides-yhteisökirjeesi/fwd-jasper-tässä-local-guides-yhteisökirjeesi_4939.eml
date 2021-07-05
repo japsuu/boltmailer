@@ -1,0 +1,1896 @@
+Delivered-To: 0481664@gmail.com
+Received: by 2002:a02:c808:0:0:0:0:0 with SMTP id p8csp4643146jao;
+        Mon, 28 Jun 2021 23:59:28 -0700 (PDT)
+X-Received: by 2002:a7b:c4da:: with SMTP id g26mr30371839wmk.3.1624949968531;
+        Mon, 28 Jun 2021 23:59:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1624949968; cv=none;
+        d=google.com; s=arc-20160816;
+        b=roTTxLSrLSoE/3+94X15vYZx2jJBzPE1teVJ8ue0KpEsjf6ExoLe0+Ku+3CaEYE5ay
+         Lq13S2R4S+zqWpr7sEpCckpyLrIkn3cDMD8U+3WPOnWOLJH7eamaGa09BUj3kHJJ3jh2
+         b+BkRfi7FDXRo2mpNFRThGzI/s9ptR2iLt+vJ4Da7wJtbAHxjiEd4Pg64VYJAPvizMx0
+         zZ/p/ldbiBrFuIbpRzAPYcOsXBwpq11M8XnN80Ux+AGaMy6cu0TksISzEG63HxVbDMvK
+         druxN5QDEdLx0FKa7bQhkH3ibTUTY75zCe+Z1KhjhYUXddIseA0ueDcmkyHLWWDbD+uk
+         HwIw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=Hg9rZEtLzgJGhTbCi9JTHPy9ycVuwDRiIYSva8q3CMw=;
+        b=Rp3YJ37KIiCYqlP5984V3HP1WgC8L1CWT0bjAbCAU1FnTp2zvA8uekWdTJO6uQ8qh4
+         rAgAmiosK9J6LclQSMZCUQhwM5GPNOTCnXgeCFH6zfsI8pPNfDI003GRHBC/FoUaHHai
+         ao48qnnOZbM9GN+mol+5q1qokq0oX59UHWQsZ5ajQPc+MvbNc970c8+ncEQAjEcG48Kk
+         OMsbs37KBsAqkZHUANmDsdtEpPpxx6pbesIqflceeZPc+twVO7fvh6ySX0e3SXfxn+LZ
+         DPoxcZzDzcDijpKteLkkaGxorRJA8AlJEqaaL64jl/e8ewLKVI1iHveZvoGFZ/Jx304Q
+         YzMA==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b="Yppr/cpj";
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <japsu.honkasalo@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id d6sor3830398wrx.52.2021.06.28.23.59.28
+        for <0481664@gmail.com>
+        (Google Transport Security);
+        Mon, 28 Jun 2021 23:59:28 -0700 (PDT)
+Received-SPF: pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b="Yppr/cpj";
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=Hg9rZEtLzgJGhTbCi9JTHPy9ycVuwDRiIYSva8q3CMw=;
+        b=Yppr/cpjip/P3pIpJTbM3aiIc59roZjZzdIE7Vr9D2GZ7ASLqtYfo7FxsjUa/ck6PR
+         kKgvBG22nUqHDEONeCU7j9dMHgfMzvuQiJ+6keNJEs2aqF4yfM3Z4O+GK9vzkRXBYxM/
+         QFPVCakHJAQC4jjJNgGtTQczfiJZYRqz6sqH7sn8AOz9ZuN4mYeERtN5tTt096hQxVAZ
+         ujkhgK0ACvMzEpL7aP8o55xffGcu5AZV5EFRgvwj57JZFrPj2Ei/AYgkcqb+TPLncyPi
+         CPNeFvlntE8krulRCvAsajXvTrc8s6qp/FrfPkLPvWdIhzZmxcJB+3Ea1N1ac64q6SdD
+         mw2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=Hg9rZEtLzgJGhTbCi9JTHPy9ycVuwDRiIYSva8q3CMw=;
+        b=fzDAk/vrdTpyq+KAb9BXZL599nWjAuH2/b2rU/4i4u6Ia1r7Jor2xG2C7JFzMrPy5K
+         WgtJPh9Hh2/CyoteOQBaZnE+nwrDp0Os8BL7O2sOp0c2fA5eflDmQt9ijFMOA6cM81Bm
+         iTk1UebfegIeOIGEtKd95jY7+zZzDTsORvGxwBsRwbVRUjy92xJN453vGu1KKi6+2r34
+         BvgTx6tDlw4iC5hpUcgwy3UpSAT/JqtwkYc4LtH8OD5Y24fdW4sfY0vXL47Npmlg98LT
+         806ORi6UgNYvBWX/3QwWjqJE6zv0Ln0/S1m/sM6wwg4NDksJkf6DVhqNK1Qnx3csd3qr
+         69ag==
+X-Gm-Message-State: AOAM533vQe73NwWBNaM4VQOQVRoVS+HtdONyPVlip/F0FV39jYKuAzWb
+	FD0HNewYOtU9nzAVdkabEYGbXrEomOdEiVqcHxm4CcR66wg=
+X-Google-Smtp-Source: ABdhPJyvDEenHl+pmmox2s6hfTWVAJ7073SNDqRkXUCR93xBsbGgL1CEZVrEBgWdqPXQy7vZJm4T8SxNXCWwBYhCv3E=
+X-Received: by 2002:a5d:4291:: with SMTP id k17mr14488827wrq.211.1624949968133;
+ Mon, 28 Jun 2021 23:59:28 -0700 (PDT)
+MIME-Version: 1.0
+References: <cb62e0875bd391e5d2f2f0f9c072b37adc2a98b8-20164216-110973286@google.com>
+In-Reply-To: <cb62e0875bd391e5d2f2f0f9c072b37adc2a98b8-20164216-110973286@google.com>
+From: Jasper Honkasalo <japsu.honkasalo@gmail.com>
+Date: Tue, 29 Jun 2021 09:59:16 +0300
+Message-ID: <CAKNULYoAxCMKTtvHic7gVYC2CVukTNS75B90Vyx21N5nh9iAww@mail.gmail.com>
+Subject: =?UTF-8?B?RndkOiBKYXNwZXIsIHTDpHNzw6QgTG9jYWwgR3VpZGVzIOKAkXlodGVpc8O2a2lyamVlcw==?=
+	=?UTF-8?B?aQ==?=
+To: 0481664@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000a0e21d05c5e22532"
+
+--000000000000a0e21d05c5e22532
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+ jasper honkasalo
+21.7.2021
+6h
+
+---------- Forwarded message ---------
+From: Google Local Guides <noreply-local-guides@google.com>
+Date: Thu, Jun 24, 2021 at 6:03 PM
+Subject: Jasper, t=C3=A4ss=C3=A4 Local Guides =E2=80=91yhteis=C3=B6kirjeesi
+To: <japsu.honkasalo@gmail.com>
+
+
+Ole mukana Pridessa k=C3=A4ytt=C3=A4m=C3=A4ll=C3=A4 Mapsin ty=C3=B6kaluja
+=E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=
+=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =
+=E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=
+=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D
+=E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=
+=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =
+=E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=
+=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D
+=E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=
+=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=
+=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =
+=E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D =E2=80=8D
+
+Olet ansainnut palkinnon! Vierit=C3=A4 alasp=C3=A4in ja lunasta se!
+Hei Jasper
+<https://notifications.google.com/g/p/AD-FnEzeuaTf_6VRuDa0ytcAswyIfjiTZbB1i=
+ujuhi1UtC3MpvRsucLZD30zmwGc1DzhVzsNn0LGRmvcmHoCk0wq1dZ24pPOxpu7rzLQN57bLDWu=
+2HQ4nfJ7pi_vZY0WUYk2NyTq9gtsmDdSo5Xj3w>
+Taso 4 =C2=B7 351 pistett=C3=A4
+T=C3=A4m=C3=A4 uutiskirje keskittyy kansainv=C3=A4liseen Local Guides =E2=
+=80=91yhteis=C3=B6=C3=B6mme. Jaamme
+kuukausittain hy=C3=B6dyllist=C3=A4, opettavaista, viihdytt=C3=A4v=C3=A4=C3=
+=A4 ja inspiroivaa
+sis=C3=A4lt=C3=B6=C3=A4. Pid=C3=A4 hauskaa!
+KES=C3=84KUUN 2021 UUTISKIRJE
+Pride maailman kartalle
+<https://notifications.google.com/g/p/AD-FnExqlffgTBlqbwGieN3xs7s5Q2oPbOYtg=
+ZLXcfGUBIk_XtWYZDAML6XU8r11ZUQUqZyfvzWDFfog-TwaesFRuPyUBQAaJuuC37Ad-wzSNZLT=
+tidmwb9ixVErIrx4-KIP3sTO0M-1Sl23uxaTLybzmo95rd8>
+Samalla kun juhlistamme HLBTQ-yst=C3=A4vi=C3=A4mme t=C3=A4ss=C3=A4 kuussa, =
+on t=C3=A4rke=C3=A4=C3=A4 my=C3=B6s
+antaa tunnustusta paikallisille yrityksille, jotka toivottavat
+sateenkaariv=C3=A4en tervetulleeksi. Vastaa kysymyksiin Google Mapsissa ja =
+auta
+muita l=C3=B6yt=C3=A4m=C3=A4=C3=A4n esimerkiksi HLBTQ-yst=C3=A4v=C3=A4llisi=
+=C3=A4 paikkoja,
+transsukupuolisille turvallisia paikkoja ja sukupuolineutraaleja wc-tiloja.
+<https://notifications.google.com/g/p/AD-FnExQS97iDzwhocSrvmasbPRjDo5j8abhi=
+0_h9PglXh_rz5O1q1qo0wVFhY-WWgv4Jm2zsxcSSfitCaM1IcPaAmpUNOTZ7KNNP6x2yAKNJC1p=
+_I8lNWjQYJ7YolIlLnlnnq7IpPkKMSl0c-ebfNAY1ybLPVaB>
+Lue lis=C3=A4=C3=A4
+<https://notifications.google.com/g/p/AD-FnExQS97iDzwhocSrvmasbPRjDo5j8abhi=
+0_h9PglXh_rz5O1q1qo0wVFhY-WWgv4Jm2zsxcSSfitCaM1IcPaAmpUNOTZ7KNNP6x2yAKNJC1p=
+_I8lNWjQYJ7YolIlLnlnnq7IpPkKMSl0c-ebfNAY1ybLPVaB>
+<https://notifications.google.com/g/p/AD-FnExQS97iDzwhocSrvmasbPRjDo5j8abhi=
+0_h9PglXh_rz5O1q1qo0wVFhY-WWgv4Jm2zsxcSSfitCaM1IcPaAmpUNOTZ7KNNP6x2yAKNJC1p=
+_I8lNWjQYJ7YolIlLnlnnq7IpPkKMSl0c-ebfNAY1ybLPVaB>
+<https://notifications.google.com/g/p/AD-FnExqlffgTBlqbwGieN3xs7s5Q2oPbOYtg=
+ZLXcfGUBIk_XtWYZDAML6XU8r11ZUQUqZyfvzWDFfog-TwaesFRuPyUBQAaJuuC37Ad-wzSNZLT=
+tidmwb9ixVErIrx4-KIP3sTO0M-1Sl23uxaTLybzmo95rd8>
+TIESITK=C3=96?
+Voit ansaita erilaisia merkkej=C3=A4 lis=C3=A4=C3=A4m=C3=A4ll=C3=A4 arvoste=
+luita, kuvia, muokkauksia
+tai videoita Mapsiin. Merkit ovat pysyvi=C3=A4 ja n=C3=A4kyv=C3=A4t Google =
+Maps
+=E2=80=91profiilissasi kaikille k=C3=A4ytt=C3=A4jille. Lis=C3=A4=C3=A4 jatk=
+ossakin sis=C3=A4lt=C3=B6=C3=A4 Mapsiin,
+niin voit ansaita korkeampien tasojen merkkej=C3=A4. Lue lis=C3=A4=C3=A4
+<https://notifications.google.com/g/p/AD-FnEwwRQxFl1fXkpS8HtCwEt9TjZsjudNEY=
+7L08xb354x8oDo-eUU3-OdU552W28zLET-yo7QmDr5BLVqvtSs1gKKqy2UGnPRcGUhfkLdjOIkC=
+IKQYQ67bWQZ8nKk_h3ZYa1-AOXjGQgr8vjRyFE6jI7uknRk>
+<https://notifications.google.com/g/p/AD-FnEwa1YmBKqUMc8dcP3cvbzQ9nibLNr9ck=
+9VU6r7lSbb7RuQdNzgbM0BZOCInokUOhl4C9EwlgR1mKHj6bFKHmclNizTAEP6XyDJk50VF7eNv=
+cnZy1ujZkiLbxtYvqwH8d7So0NPVbfUpgfHuLoAoWOPV_vCekea3UM3OIAQ5qhIp7ZBj0pnZCvQ=
+GahG6HE4ZVwfFDlo>
+Ansaitse rajoitetun er=C3=A4n merkkej=C3=A4
+Seuraavan kahden kuukauden aikana kaikki nykyiset ja uudet merkit
+p=C3=A4ivitet=C3=A4=C3=A4n rajoitetun er=C3=A4n merkkeihin.
+<https://notifications.google.com/g/p/AD-FnEyGbBR1OywZzMB5N7dHnB2XWKT_gbLHq=
+qgxlqKTu90CoQvV5VoWYHWeBKawPoxjWPUd-V4RzHUXHTWCvyhdf3DTJFn_sW5ZahhJp9awbf35=
+4glyBj3PI4jGsSOXi_zUP6VP8dxaqOGZVGA_-mPpeT5on0WS6loMPxzNMBszX8OlRPKt_0mCtjs=
+xH0K0vPYEmVni7SUS>
+Katso merkkisi
+<https://notifications.google.com/g/p/AD-FnEyGbBR1OywZzMB5N7dHnB2XWKT_gbLHq=
+qgxlqKTu90CoQvV5VoWYHWeBKawPoxjWPUd-V4RzHUXHTWCvyhdf3DTJFn_sW5ZahhJp9awbf35=
+4glyBj3PI4jGsSOXi_zUP6VP8dxaqOGZVGA_-mPpeT5on0WS6loMPxzNMBszX8OlRPKt_0mCtjs=
+xH0K0vPYEmVni7SUS>
+<https://notifications.google.com/g/p/AD-FnEyGbBR1OywZzMB5N7dHnB2XWKT_gbLHq=
+qgxlqKTu90CoQvV5VoWYHWeBKawPoxjWPUd-V4RzHUXHTWCvyhdf3DTJFn_sW5ZahhJp9awbf35=
+4glyBj3PI4jGsSOXi_zUP6VP8dxaqOGZVGA_-mPpeT5on0WS6loMPxzNMBszX8OlRPKt_0mCtjs=
+xH0K0vPYEmVni7SUS>
+Mit=C3=A4 mielt=C3=A4 olet rajoitetun er=C3=A4n merkeist=C3=A4?
+[image: Very dissatisfied]
+<https://notifications.google.com/g/p/AD-FnEwaV9zV0DvqmyX0Z3pd6awc3Sz7x9BRq=
+hAANuQYnEvxhWEdSMbGn-EeVU6VhsgVP0ClmSYrg0d02d7QZD8cI0JQNU_9F8_tAWyl6SQ68rbO=
+nvHkmAPuxFdRpY0BZfEWQjUiIFV8>
+[image:
+Dissatisfied]
+<https://notifications.google.com/g/p/AD-FnEy9xK2sFTX8eIGVdldtxrmmhQJTeGdea=
+gxF6GC8NDU9DBqMKhxPUjGHIztjk5TVZD7F_jdn_42dpAAvYYNzdtF_8cgGxl40qkVNAjuVRZWJ=
+GkCekF0b0RoJycYH10IRiLu52dGS>
+[image:
+Neutral]
+<https://notifications.google.com/g/p/AD-FnEx91viHiEzLD7l5HmRQwCJv-VKFGlk8j=
+-0Skn1rFOU-AjUqWGp9FPsZROjEcDPPTEUmn4vskIVmZYCBt7p7qgIcJKvMt3xInys2bV3Vm4o9=
+qEINIPa_36tMSlyLgsZezYp3Dv5p>
+[image:
+Satisfied]
+<https://notifications.google.com/g/p/AD-FnEwmPQsjeUmoAtlBJ2-pxYXiUoCAp-HBC=
+iqyYfARWYSKz4C6XiXDUM3LKzbJYprTkWgJAe669s-LKKm78-ErKi9hwJ2BbZuC4PK7iEmqZKnB=
+4zyX9sK4g8j1EhY6rTeuir3t4Ff8>
+[image:
+Very satisfied]
+<https://notifications.google.com/g/p/AD-FnEx55LBIBI9t6Y79-GDqwNkoiK_s5N67E=
+7kZYCqREo1bRRmH4FggNUMS8p1sfm8MSx6pBjCMdEuGJgU_gUpLUJOEpUwbfqMUtkV9c3ItyBMf=
+m30vG3cnQVJKe4cxI-O-dRJyYfdE>
+Huono Ei hyv=C3=A4 eik=C3=A4 huono Erinomainen
+<https://notifications.google.com/g/p/AD-FnEzFJg1urjma4n9n_dMPLYTDX5Mhe1Ip3=
+fHKllZKoQaD2QtFuu8Jxwy9VyqwZeL5XAfJUbnow92_NBHDEIc0EVNDfyq9vhtYO9mNcTG-3e-Z=
+ZGcB_tRTE1z99f7mYhF_mrTtwcQm8eu4EUx51CxN3sGab6FvvfIjXvzyLawnlqU6wQgM6FEYNS8=
+McTtPewHL>
+Helpompi tapa p=C3=A4ivitt=C3=A4=C3=A4 teit=C3=A4
+Huomasitko tien, joka kaipaa p=C3=A4ivityst=C3=A4? Nyt voit tehd=C3=A4 sen =
+helposti
+uudella Road Editor =E2=80=91ty=C3=B6p=C3=B6yt=C3=A4sovelluksella, jolla te=
+iden piirt=C3=A4minen,
+uudelleennime=C3=A4minen tai tietojen p=C3=A4ivitt=C3=A4minen sujuu vaivatt=
+omasti.
+<https://notifications.google.com/g/p/AD-FnEyqbomWr-5iRUrqqAmKW0hjECFqGEdQq=
+wSO6yXKmw2kGl5SlYhFzODwNc801W9jaCcrw1NBgnPeH1HR7d2l_zAwAMiboLW1D11HlqjZa5yP=
+967qjvioFp9M589r1CEDEkAju5Acl33BhSHv6RgJn9sNvaQ0ZXyc7WQMF_bnPhfWUnLIJn3vJqi=
+CKFHEs8npIA>
+Lue lis=C3=A4=C3=A4
+<https://notifications.google.com/g/p/AD-FnEyqbomWr-5iRUrqqAmKW0hjECFqGEdQq=
+wSO6yXKmw2kGl5SlYhFzODwNc801W9jaCcrw1NBgnPeH1HR7d2l_zAwAMiboLW1D11HlqjZa5yP=
+967qjvioFp9M589r1CEDEkAju5Acl33BhSHv6RgJn9sNvaQ0ZXyc7WQMF_bnPhfWUnLIJn3vJqi=
+CKFHEs8npIA>
+<https://notifications.google.com/g/p/AD-FnEyqbomWr-5iRUrqqAmKW0hjECFqGEdQq=
+wSO6yXKmw2kGl5SlYhFzODwNc801W9jaCcrw1NBgnPeH1HR7d2l_zAwAMiboLW1D11HlqjZa5yP=
+967qjvioFp9M589r1CEDEkAju5Acl33BhSHv6RgJn9sNvaQ0ZXyc7WQMF_bnPhfWUnLIJn3vJqi=
+CKFHEs8npIA>
+<https://notifications.google.com/g/p/AD-FnEzFJg1urjma4n9n_dMPLYTDX5Mhe1Ip3=
+fHKllZKoQaD2QtFuu8Jxwy9VyqwZeL5XAfJUbnow92_NBHDEIc0EVNDfyq9vhtYO9mNcTG-3e-Z=
+ZGcB_tRTE1z99f7mYhF_mrTtwcQm8eu4EUx51CxN3sGab6FvvfIjXvzyLawnlqU6wQgM6FEYNS8=
+McTtPewHL>
+LOCAL GUIDE =E2=80=91OPAS ESITTELYSS=C3=84
+Inklusiivinen kartoittaja:
+Ralph H
+Ralph H tiet=C3=A4=C3=A4, ett=C3=A4 ihmiset kaipaavat paikkoja, joihin he t=
+untevat
+olevansa tervetulleita. Sateenkaariyhteis=C3=B6n j=C3=A4senen=C3=A4 h=C3=A4=
+nelle on t=C3=A4rke=C3=A4=C3=A4
+tuntea paikat, jotka ovat turvallisia ja joissa h=C3=A4n saa olla oma itsen=
+s=C3=A4.
+H=C3=A4n luo Google Mapsiin s=C3=A4=C3=A4nn=C3=B6llisesti listoja inklusiiv=
+ista paikoista,
+jotta my=C3=B6s muut h=C3=A4nen kaltaisensa voivat l=C3=B6yt=C3=A4=C3=A4 ne=
+.
+"Pride tarkoittaa, ett=C3=A4 voin olla h=C3=A4peilem=C3=A4tt=C3=A4 aito oma=
+ itseni."
+Ralph H, Chicago, Illinois =E2=80=93 Taso 9
+Lue lis=C3=A4=C3=A4 Ralphista h=C3=A4nen Connect-sivultaan
+<https://notifications.google.com/g/p/AD-FnExEEgBKs6dqPo8AMX-vPXpDJWV353lhF=
+ApElomKg5YbpToVrozhJhalzgRw1Nc8Gkvhyj6iPTxlFhdVWw4rll7Nys_Zmw9CyHpvlDBuPTX1=
+Ea3Fj8oZa96NYbT2C5Wnb5rzfgPTwalobpm9MFYaohsOTYT4bNkygXT6qBqjLARD1zfZHnl0Olt=
+AfQ>
+ja tutustu h=C3=A4nen lis=C3=A4=C3=A4m=C3=A4=C3=A4ns=C3=A4 sis=C3=A4lt=C3=
+=B6=C3=B6n Google Mapsissa
+<https://notifications.google.com/g/p/AD-FnEz81oZAQ-znD1AnqkqVtwPzhEWPRDQQw=
+1zhYPBkdjs0St_PWDsmZmQhqz4P5CPkYM_UFTwMVkA9dx6A43nKT--phPP7Rgb4EiJzTcnsim5P=
+lR1sO4j0L3bLtpBywDddyhVB9yEHCW5ocJS6B5wCRCbPwRjQPmsMHTDpzVF2TsI7kg>.
+
+LOCAL GUIDE =E2=80=91OPAS ESITTELYSS=C3=84
+Inklusiivinen kartoittaja:
+Ralph H
+Ralph H tiet=C3=A4=C3=A4, ett=C3=A4 ihmiset kaipaavat paikkoja, joihin he t=
+untevat
+olevansa tervetulleita. Sateenkaariyhteis=C3=B6n j=C3=A4senen=C3=A4 h=C3=A4=
+nelle on t=C3=A4rke=C3=A4=C3=A4
+tuntea paikat, jotka ovat turvallisia ja joissa h=C3=A4n saa olla oma itsen=
+s=C3=A4.
+H=C3=A4n luo Google Mapsiin s=C3=A4=C3=A4nn=C3=B6llisesti listoja inklusiiv=
+ista paikoista,
+jotta my=C3=B6s muut h=C3=A4nen kaltaisensa voivat l=C3=B6yt=C3=A4=C3=A4 ne=
+.
+"Pride tarkoittaa, ett=C3=A4 voin olla h=C3=A4peilem=C3=A4tt=C3=A4 aito oma=
+ itseni."
+Ralph H, Chicago, Illinois =E2=80=93 Taso 9
+Lue lis=C3=A4=C3=A4 Ralphista h=C3=A4nen Connect-sivultaan
+<https://notifications.google.com/g/p/AD-FnExEEgBKs6dqPo8AMX-vPXpDJWV353lhF=
+ApElomKg5YbpToVrozhJhalzgRw1Nc8Gkvhyj6iPTxlFhdVWw4rll7Nys_Zmw9CyHpvlDBuPTX1=
+Ea3Fj8oZa96NYbT2C5Wnb5rzfgPTwalobpm9MFYaohsOTYT4bNkygXT6qBqjLARD1zfZHnl0Olt=
+AfQ>
+ja tutustu h=C3=A4nen lis=C3=A4=C3=A4m=C3=A4=C3=A4ns=C3=A4 sis=C3=A4lt=C3=
+=B6=C3=B6n Google Mapsissa
+<https://notifications.google.com/g/p/AD-FnEz81oZAQ-znD1AnqkqVtwPzhEWPRDQQw=
+1zhYPBkdjs0St_PWDsmZmQhqz4P5CPkYM_UFTwMVkA9dx6A43nKT--phPP7Rgb4EiJzTcnsim5P=
+lR1sO4j0L3bLtpBywDddyhVB9yEHCW5ocJS6B5wCRCbPwRjQPmsMHTDpzVF2TsI7kg>.
+
+<#m_-3497613914257182907_m_-156416996691339358_>
+Jatka samaan malliin
+Hienoa, ett=C3=A4 olet luotettava Local Guide =E2=80=91opas. Katsotaan, mit=
+=C3=A4 j=C3=A4nnitt=C3=A4v=C3=A4=C3=A4
+uutta sis=C3=A4lt=C3=B6=C3=A4 voit jakaa seuraavaksi.
+<https://notifications.google.com/g/p/AD-FnEy81tqxyfP7-A-mrn9YR7VQjrl5eW8EF=
+Mae9YEvACHtKnmob8tft3bsT5daBRUncd0iYusoLtxf5eSbjpNFRlFLzVLDTPqef6hSQyemlLBa=
+GV7N4_-oawvtwhlDMX9bafan8cWgCe7qZOroPkscORFlw5tjgg>
+Lis=C3=A4=C3=A4 taas sis=C3=A4lt=C3=B6=C3=A4
+<https://notifications.google.com/g/p/AD-FnEy81tqxyfP7-A-mrn9YR7VQjrl5eW8EF=
+Mae9YEvACHtKnmob8tft3bsT5daBRUncd0iYusoLtxf5eSbjpNFRlFLzVLDTPqef6hSQyemlLBa=
+GV7N4_-oawvtwhlDMX9bafan8cWgCe7qZOroPkscORFlw5tjgg>
+<https://notifications.google.com/g/p/AD-FnEy81tqxyfP7-A-mrn9YR7VQjrl5eW8EF=
+Mae9YEvACHtKnmob8tft3bsT5daBRUncd0iYusoLtxf5eSbjpNFRlFLzVLDTPqef6hSQyemlLBa=
+GV7N4_-oawvtwhlDMX9bafan8cWgCe7qZOroPkscORFlw5tjgg>
+Koronavirus (COVID-19)
+Google Hausta
+<https://notifications.google.com/g/p/AD-FnEwmiD25ZbopWh4q9uVrXrSxHiFbgYs7e=
+AG1-GEqsn9fs9aBII6sqjYFtp1DQZ5khURoQ04ObC1UJeXToV29jjVWjQbzGIo5irYtr4J1dw>
+l=C3=B6yd=C3=A4t tuoreimmat uutiset ja linkkej=C3=A4 luotettaviin l=C3=A4ht=
+eisiin.
+Piditk=C3=B6 t=C3=A4st=C3=A4 viestist=C3=A4?
+[image: Rate dissatisfied]
+<https://notifications.google.com/g/p/AD-FnEy6xHAT2tvpc7vpXCKdKj0dluctW_c5P=
+Bq_UFuTXjZC3LiBHw5Jp4Llff8EqmHNDZeSb91LTJ93NiF2lYKJDled071ja0JSDjdnvduVJAqb=
+vJmGlkv_d_nF4b3IDStQxoQA5F2LhQNLSplJMNp2>
+  [image: Rate neutral]
+<https://notifications.google.com/g/p/AD-FnEyMQxQLvW-b55Z97OHg6olQoHcmHzZAz=
+62AFpgqaj-4lvrTNO5A4c1-g6i1adeDQM3HJI3k0AgoIxD5jSRJJZF-UxvLmSLRaG32gBJJQSM_=
+r72VymseyoiAxAMVJtQslWPUdyYNs9pegFoUZkMu>
+  [image: Rate satisfied]
+<https://notifications.google.com/g/p/AD-FnEwtNBwRwqXZrt7C8U6kEvOx4pDC8Cg0w=
+FFtcvUuk32Dt49ICB5QHtATGbC8oTOcadLuOlgrfRYBSN9rpsU0piBozAylChFUSGdspXDOYzrP=
+5mJsPx5VMswlhpt1u3Lqd9WGoKiA_Bz56xHqg1B3qA>
+  [image: Siirry Google Mapsin Instagram-sivulle]
+<https://notifications.google.com/g/p/AD-FnEzFHEoKTkdXdYtWGDyvdcZUB11uQwh7C=
+1cvHurs_6YS9LuESjjhXzwO0DLXOjOn2YcrStZJsrrYFPN0pcqSvwJ-fCDBrwi4bw>
+  [image: Siirry Google Mapsin YouTube-kanavalle]
+<https://notifications.google.com/g/p/AD-FnExUkRWVGHcmYFTyw1u8AELQHErhq-vmj=
+opnazIV7JzZ0858hBXine36cFHWLXw-mt1pxYjCl21JbbS7xdDv5kMY7GOaEAisbAmO>
+  [image: Siirry Google Mapsin Facebook-sivulle]
+<https://notifications.google.com/g/p/AD-FnEywekl3sD4tx85Td2XEfCwLLA3ic2shW=
+u5J_6AfIWDrD2tKk3UoyX20JwdJg-4f-EduLiKOlpB7XdsP1AlD6YYC7rP9qhUq>
+  [image: Siirry Google Mapsin Twitter-sivulle]
+<https://notifications.google.com/g/p/AD-FnEz5pe8wNXsd-t5tYBund-xxts9RGsZ_q=
+VOPc7tsvs6zfOmZp8vzptp5Mks4vU2v38C6APELZWDFRUn31oj1UBFc>
+
+Sait t=C3=A4m=C3=A4n viestin, koska olet ilmoittanut haluavasi vastaanottaa=
+ Local
+Guides =E2=80=91ohjelman uutisia ja tuotep=C3=A4ivityksi=C3=A4 koskevia vie=
+stej=C3=A4
+s=C3=A4hk=C3=B6postiisi. Voit peruuttaa tilauksen
+<https://notifications.google.com/g/optout/AD-FnEx3jZwVxIFT_B0UbWJyeDh134k7=
+GUEaywt9pBZ9CxvT3wDMkDrE6Cb-d4v6poISyutJ85RPWUAbREVSZ-pywFfQdQGC6MkY9eCMbdc=
+NPW8I6p071hsomdghJjMNtA?hl=3Dfi>
+tai p=C3=A4ivitt=C3=A4=C3=A4 s=C3=A4hk=C3=B6postiasetuksesi
+<https://notifications.google.com/g/p/AD-FnEwkt7tbhu9-D9FXadvfp6_NTT4-gEajw=
+WAUtfEOEtAdAINuWxhhLVGun2E0Ghtm3WC8lS5kmXLHTaJR20IrAYOsteDt1NYbzpoKXb9y46H1=
+j8OM77GStA>
+Local Guides =E2=80=91asetussivulla.
+=C2=A9 2021 Google Ireland Ltd, Gordon House, Barrow Street, Dublin 4, Irel=
+and.
+<#m_-3497613914257182907_m_-156416996691339358_>
+
+--000000000000a0e21d05c5e22532
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">=C2=A0jasper honkasalo<div>21.7.2021</div><div>6h</div><di=
+v><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">----=
+------ Forwarded message ---------<br>From: <strong class=3D"gmail_senderna=
+me" dir=3D"auto">Google Local Guides</strong> <span dir=3D"auto">&lt;<a hre=
+f=3D"mailto:noreply-local-guides@google.com" target=3D"_blank">noreply-loca=
+l-guides@google.com</a>&gt;</span><br>Date: Thu, Jun 24, 2021 at 6:03 PM<br=
+>Subject: Jasper, t=C3=A4ss=C3=A4 Local Guides =E2=80=91yhteis=C3=B6kirjees=
+i<br>To:  &lt;<a href=3D"mailto:japsu.honkasalo@gmail.com" target=3D"_blank=
+">japsu.honkasalo@gmail.com</a>&gt;<br></div><br><br>
+
+
+
+
+=20
+=20
+<u></u>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style=3D"margin:0 auto;padding:0px" bgcolor=3D"#ffffff">
+<p style=3D"display:none;font-size:0px;line-height:0px">Ole mukana Pridessa=
+ k=C3=A4ytt=C3=A4m=C3=A4ll=C3=A4 Mapsin ty=C3=B6kaluja</p>
+
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0=
+=E2=80=8D=C2=A0=E2=80=8D=C2=A0=E2=80=8D=C2=A0
+
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" width=3D"100%" align=3D"center">
+<tbody><tr>
+<td align=3D"center" valign=3D"top" bgcolor=3D"#ffffff" style=3D"padding-to=
+p:10px">
+
+
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" width=3D"720" align=3D"center">
+
+
+<tbody><tr>
+<td>
+
+
+</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" width=3D"100%" align=3D"center">
+
+<tbody><tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" width=3D"100%" align=3D"center">
+<tbody><tr>
+<td align=3D"center" valign=3D"top" bgcolor=3D"#ffffff">
+<table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" border=3D"=
+0" width=3D"100%">
+<tbody><tr>
+<td valign=3D"top" align=3D"center">
+<table role=3D"presentation" width=3D"720" cellpadding=3D"0" cellspacing=3D=
+"0" border=3D"0">
+<tbody><tr>
+<td valign=3D"top" align=3D"center" bgcolor=3D"#E8F0FE">
+<table role=3D"presentation" width=3D"720" cellpadding=3D"0" cellspacing=3D=
+"0" border=3D"0">
+<tbody><tr>
+<td valign=3D"top" align=3D"center" style=3D"padding:0px 20px 0px">
+<table role=3D"presentation" align=3D"center" cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"left" valign=3D"top" style=3D"padding-left:20px">
+<table role=3D"presentation" align=3D"center" cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"left" valign=3D"top" style=3D"padding-top:12px">
+<img aria-hidden=3D"true" src=3D"https://www.gstatic.com/gumdrop/files/loca=
+l-guides-reward-blue-transparent-w40px-h42px-2x.png" width=3D"20" height=3D=
+"auto" style=3D"display:block">
+</td>
+</tr>
+</tbody></table>
+</td>
+<td align=3D"left" valign=3D"top">
+<table role=3D"presentation" align=3D"center" cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"left" valign=3D"top" style=3D"font-family:Google Sans,Roboto,H=
+elvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;co=
+lor:#202124;padding:12px 0px 13px 13px">
+Olet ansainnut palkinnon! Vierit=C3=A4 alasp=C3=A4in ja lunasta se!
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"padding-top:12px;padding-botto=
+m:30px">
+<table align=3D"center" role=3D"presentation" width=3D"720" cellpadding=3D"=
+0" cellspacing=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"left" valign=3D"top">
+<table role=3D"presentation" width=3D"427" cellpadding=3D"0" cellspacing=3D=
+"0" border=3D"0">
+<tbody><tr>
+<td align=3D"left" valign=3D"top">
+<table role=3D"presentation" width=3D"283" cellpadding=3D"0" cellspacing=3D=
+"0" border=3D"0">
+<tbody><tr>
+<td align=3D"left" valign=3D"top" style=3D"padding-left:16px">
+<table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" border=3D"=
+0">
+<tbody><tr>
+<td aria-hidden=3D"true" align=3D"center" valign=3D"top" style=3D"padding:0=
+px 0 0px 0px">
+<img src=3D"https://services.google.com/fh/files/emails/avatar_badge_level_=
+4.png" alt=3D"" title=3D"" width=3D"36" height=3D"auto" style=3D"display:bl=
+ock">
+</td>
+<td align=3D"left" valign=3D"middle">
+<table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" border=3D"=
+0">
+<tbody><tr>
+<td align=3D"left" valign=3D"top" style=3D"font-family:Google Sans,Roboto,H=
+elvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;line-height:21px;co=
+lor:#202124;padding:2px 0px 0px 10px;font-weight:500;letter-spacing:0.55px"=
+>Hei <a href=3D"https://notifications.google.com/g/p/AD-FnEzeuaTf_6VRuDa0yt=
+cAswyIfjiTZbB1iujuhi1UtC3MpvRsucLZD30zmwGc1DzhVzsNn0LGRmvcmHoCk0wq1dZ24pPOx=
+pu7rzLQN57bLDWu2HQ4nfJ7pi_vZY0WUYk2NyTq9gtsmDdSo5Xj3w" aria-label=3D"Siirry=
+ Local Guides =E2=80=91profiilisivulle" style=3D"color:#1a73e8;text-decorat=
+ion:none" target=3D"_blank">Jasper</a></td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top" style=3D"font-family:Google Sans,Roboto,H=
+elvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;line-height:21px;co=
+lor:#666666;padding:0px 0px 0px 10px;font-weight:500;letter-spacing:0.5px">=
+Taso 4 =C2=B7 351 pistett=C3=A4</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+<td align=3D"right" valign=3D"middle" style=3D"padding:0px 0 0px">
+<table role=3D"presentation" align=3D"center" border=3D"0" cellspacing=3D"0=
+" cellpadding=3D"0">
+<tbody><tr>
+<td aria-hidden=3D"true" align=3D"right" valign=3D"middle">
+<img alt=3D"" src=3D"https://www.gstatic.com/gumdrop/files/lg-new-logo.png"=
+ width=3D"134" title=3D"" style=3D"display:block;width:134px" aria-hidden=
+=3D"true">
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+
+<tr>
+<td align=3D"left" valign=3D"top" style=3D"padding-top:3px">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" width=3D"100%" align=3D"center">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" dir=3D"ltr" width=3D"592">
+<tbody>
+<tr>
+
+<td align=3D"center" style=3D"border:1px solid #d8d8d8;border-radius:8px 8p=
+x 8px 8px" valign=3D"top">
+<table role=3D"presentation" align=3D"center" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0" dir=3D"ltr" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" width=3D"100%" cellspacing=3D"0" cellpadding=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"center" style=3D"width:19px;padding:24px 11px 0 13px" valign=
+=3D"top"><img alt=3D"" height=3D"auto" src=3D"https://www.gstatic.com/gumdr=
+op/files/lg-feb-star.png" style=3D"display:block" title=3D"" width=3D"19"><=
+/td>
+</tr>
+</tbody></table>
+</td>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" dir=3D"ltr" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"left" height=3D"5" style=3D"border-collapse:collapse;line-heig=
+ht:5px" valign=3D"top"><img alt=3D"" border=3D"0" height=3D"1" src=3D"https=
+://www.gstatic.com/gumdrop/files/spacer-11.gif" style=3D"display:block" wid=
+th=3D"1"></td>
+</tr>
+<tr>
+<td align=3D"left" dir=3D"ltr" style=3D"font-family:Google Sans,Roboto,Helv=
+etica Neue,Helvetica,Arial,sans-serif;color:#5f6368;font-size:14px;line-hei=
+ght:22px;padding:9px 5px 9px 0px" valign=3D"top">T=C3=A4m=C3=A4 uutiskirje =
+keskittyy kansainv=C3=A4liseen Local Guides =E2=80=91yhteis=C3=B6=C3=B6mme.=
+ Jaamme kuukausittain hy=C3=B6dyllist=C3=A4, opettavaista, viihdytt=C3=A4v=
+=C3=A4=C3=A4 ja inspiroivaa sis=C3=A4lt=C3=B6=C3=A4. Pid=C3=A4 hauskaa!</td=
+>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td aria-hidden=3D"true" height=3D"25" align=3D"center" valign=3D"top" styl=
+e=3D"line-height:2px"><img src=3D"https://www.gstatic.com/gumdrop/files/spa=
+cer-11.gif" height=3D"25" width=3D"1" border=3D"0" alt=3D"" style=3D"displa=
+y:block" aria-hidden=3D"true"></td>
+</tr>
+
+<tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" width=3D"100%" align=3D"center" cellpadding=3D=
+"0" cellspacing=3D"0">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;color:#5f6368;p=
+adding:0px 0px 7px;font-weight:500;letter-spacing:1.4px">
+KES=C3=84KUUN 2021 UUTISKIRJE
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" width=3D"100%" align=3D"center" cellpadding=3D=
+"0" cellspacing=3D"0">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica,Arial,sans-serif;font-size:36px;line-height:44px;color:#202124;p=
+adding:3px 110px 0px">
+Pride maailman kartalle
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"padding:24px 0px 0px 0px;displ=
+ay:none">
+<a aria-label=3D"Google Mapsin ohjekeskuksesta l=C3=B6yd=C3=A4t tietoja sii=
+t=C3=A4, miten voit kysy=C3=A4 tiettyyn yritykseen tai paikkaan liittyvi=C3=
+=A4 kysymyksi=C3=A4 tai vastata niihin." href=3D"https://notifications.goog=
+le.com/g/p/AD-FnExqlffgTBlqbwGieN3xs7s5Q2oPbOYtgZLXcfGUBIk_XtWYZDAML6XU8r11=
+ZUQUqZyfvzWDFfog-TwaesFRuPyUBQAaJuuC37Ad-wzSNZLTtidmwb9ixVErIrx4-KIP3sTO0M-=
+1Sl23uxaTLybzmo95rd8" style=3D"text-decoration:none;display:block;width:457=
+px" target=3D"_blank"><img src=3D"https://www.gstatic.com/gumdrop/files/loc=
+al-guides-june-pride-1-mob-transparent-w648px-h315px-2x.png" alt=3D"" title=
+=3D"" width=3D"457" height=3D"auto" style=3D"display:block"></a>
+</td>
+</tr>
+
+<tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" width=3D"470" align=3D"center" cellpadding=3D"=
+0" cellspacing=3D"0">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;color:#5f6368;p=
+adding:12px 0px 21px">
+Samalla kun juhlistamme HLBTQ-yst=C3=A4vi=C3=A4mme t=C3=A4ss=C3=A4 kuussa, =
+on t=C3=A4rke=C3=A4=C3=A4 my=C3=B6s antaa tunnustusta paikallisille yrityks=
+ille, jotka toivottavat sateenkaariv=C3=A4en tervetulleeksi. Vastaa kysymyk=
+siin Google Mapsissa ja auta muita l=C3=B6yt=C3=A4m=C3=A4=C3=A4n esimerkiks=
+i HLBTQ-yst=C3=A4v=C3=A4llisi=C3=A4 paikkoja, transsukupuolisille turvallis=
+ia paikkoja ja sukupuolineutraaleja wc-tiloja.
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+
+<tr>
+<td align=3D"center" style=3D"padding:0px 0px 0px 0px">
+<table role=3D"presentation" align=3D"center" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0">
+<tbody><tr>
+<td aria-hidden=3D"true" height=3D"6" align=3D"center" valign=3D"top" style=
+=3D"line-height:6px"><a href=3D"https://notifications.google.com/g/p/AD-FnE=
+xQS97iDzwhocSrvmasbPRjDo5j8abhi0_h9PglXh_rz5O1q1qo0wVFhY-WWgv4Jm2zsxcSSfitC=
+aM1IcPaAmpUNOTZ7KNNP6x2yAKNJC1p_I8lNWjQYJ7YolIlLnlnnq7IpPkKMSl0c-ebfNAY1ybL=
+PVaB" aria-hidden=3D"true" style=3D"text-decoration:none" target=3D"_blank"=
+><img src=3D"https://www.gstatic.com/gumdrop/files/spacer-11.gif" alt=3D"" =
+height=3D"6" width=3D"1" border=3D"0" style=3D"display:block" aria-hidden=
+=3D"true"></a></td>
+</tr>
+<tr>
+<td align=3D"center" dir=3D"ltr">
+<a aria-label=3D"Google Mapsin ohjekeskuksesta l=C3=B6yd=C3=A4t tietoja sii=
+t=C3=A4, miten voit kysy=C3=A4 tiettyyn yritykseen tai paikkaan liittyvi=C3=
+=A4 kysymyksi=C3=A4 tai vastata niihin." href=3D"https://notifications.goog=
+le.com/g/p/AD-FnExQS97iDzwhocSrvmasbPRjDo5j8abhi0_h9PglXh_rz5O1q1qo0wVFhY-W=
+Wgv4Jm2zsxcSSfitCaM1IcPaAmpUNOTZ7KNNP6x2yAKNJC1p_I8lNWjQYJ7YolIlLnlnnq7IpPk=
+KMSl0c-ebfNAY1ybLPVaB" style=3D"background:#1a73e8;border-radius:4px;color:=
+#ffffff;display:block;font-family:Google Sans,Roboto,Helvetica Neue,Helveti=
+ca,Arial,sans-serif;font-size:16px;line-height:24px;font-weight:500;border-=
+top:10px solid #1a73e8;border-bottom:10px solid #1a73e8;border-left:24px so=
+lid #1a73e8;border-right:24px solid #1a73e8;text-decoration:none" target=3D=
+"_blank">
+Lue lis=C3=A4=C3=A4
+</a>
+</td>
+</tr>
+<tr>
+<td aria-hidden=3D"true" height=3D"6" align=3D"center" valign=3D"top" style=
+=3D"line-height:6px"><a href=3D"https://notifications.google.com/g/p/AD-FnE=
+xQS97iDzwhocSrvmasbPRjDo5j8abhi0_h9PglXh_rz5O1q1qo0wVFhY-WWgv4Jm2zsxcSSfitC=
+aM1IcPaAmpUNOTZ7KNNP6x2yAKNJC1p_I8lNWjQYJ7YolIlLnlnnq7IpPkKMSl0c-ebfNAY1ybL=
+PVaB" aria-hidden=3D"true" style=3D"text-decoration:none" target=3D"_blank"=
+><img src=3D"https://www.gstatic.com/gumdrop/files/spacer-11.gif" alt=3D"" =
+height=3D"6" width=3D"1" border=3D"0" style=3D"display:block" aria-hidden=
+=3D"true"></a></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"padding:34px 0px 0px 0px">
+<a aria-label=3D"Google Mapsin ohjekeskuksesta l=C3=B6yd=C3=A4t tietoja sii=
+t=C3=A4, miten voit kysy=C3=A4 tiettyyn yritykseen tai paikkaan liittyvi=C3=
+=A4 kysymyksi=C3=A4 tai vastata niihin." href=3D"https://notifications.goog=
+le.com/g/p/AD-FnExqlffgTBlqbwGieN3xs7s5Q2oPbOYtgZLXcfGUBIk_XtWYZDAML6XU8r11=
+ZUQUqZyfvzWDFfog-TwaesFRuPyUBQAaJuuC37Ad-wzSNZLTtidmwb9ixVErIrx4-KIP3sTO0M-=
+1Sl23uxaTLybzmo95rd8" style=3D"text-decoration:none;display:block;width:586=
+px" target=3D"_blank"><img src=3D"https://www.gstatic.com/gumdrop/files/loc=
+al-guides-june-pride-1-desk-transparent-w1173px-h570px-2x.png" alt=3D"" tit=
+le=3D"" width=3D"586" height=3D"auto" style=3D"display:block"></a>
+</td>
+</tr>
+
+
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"padding-top:65px">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" width=3D"100%" align=3D"center">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" dir=3D"ltr" width=3D"616">
+<tbody>
+<tr>
+
+<td align=3D"center" style=3D"border:1px solid #4285f4;border-radius:8px 8p=
+x 8px 8px" valign=3D"top">
+<table role=3D"presentation" align=3D"center" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0" dir=3D"ltr" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" width=3D"100%">
+<tbody><tr>
+<td align=3D"center" style=3D"width:14px;padding:25px 18px 0 33px" valign=
+=3D"top"><img alt=3D"" height=3D"auto" src=3D"https://www.gstatic.com/gumdr=
+op/files/lg-feb-lightbulb.png" style=3D"display:block" title=3D"" width=3D"=
+14"></td>
+</tr>
+</tbody></table>
+</td>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" dir=3D"ltr" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"left" height=3D"5" style=3D"border-collapse:collapse;line-heig=
+ht:5px" valign=3D"top"><img alt=3D"" border=3D"0" height=3D"1" src=3D"https=
+://services.google.com/fh/files/emails/spacer_11.gif" style=3D"display:bloc=
+k" width=3D"1"></td>
+</tr>
+<tr>
+<td align=3D"left" dir=3D"ltr" style=3D"font-family:Google Sans,Roboto,Helv=
+etica Neue,Helvetica,Arial,sans-serif;color:#5f6368;font-size:14px;line-hei=
+ght:22px;padding:18px 5px 0px 0px;font-weight:500;letter-spacing:1.4px" val=
+ign=3D"top">TIESITK=C3=96?</td>
+</tr>
+<tr>
+<td align=3D"left" dir=3D"ltr" style=3D"font-family:Google Sans,Roboto,Helv=
+etica Neue,Helvetica,Arial,sans-serif;color:#5f6368;font-size:14px;line-hei=
+ght:22px;padding:0px 20px 25px 0px" valign=3D"top"> Voit ansaita erilaisia =
+merkkej=C3=A4 lis=C3=A4=C3=A4m=C3=A4ll=C3=A4 arvosteluita, kuvia, muokkauks=
+ia tai videoita Mapsiin. Merkit ovat pysyvi=C3=A4 ja n=C3=A4kyv=C3=A4t Goog=
+le Maps =E2=80=91profiilissasi kaikille k=C3=A4ytt=C3=A4jille. Lis=C3=A4=C3=
+=A4 jatkossakin sis=C3=A4lt=C3=B6=C3=A4 Mapsiin, niin voit ansaita korkeamp=
+ien tasojen merkkej=C3=A4. <a aria-label=3D"Voit lukea Google Mapsin ohjeke=
+skuksesta lis=C3=A4=C3=A4 merkkien ansaitsemisesta." href=3D"https://notifi=
+cations.google.com/g/p/AD-FnEwwRQxFl1fXkpS8HtCwEt9TjZsjudNEY7L08xb354x8oDo-=
+eUU3-OdU552W28zLET-yo7QmDr5BLVqvtSs1gKKqy2UGnPRcGUhfkLdjOIkCIKQYQ67bWQZ8nKk=
+_h3ZYa1-AOXjGQgr8vjRyFE6jI7uknRk" style=3D"text-decoration:none;color:#1967=
+d2" target=3D"_blank">Lue lis=C3=A4=C3=A4</a></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top" style=3D"padding-top:33px">
+<table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0">
+<tbody><tr>
+<td align=3D"left" valign=3D"top">
+<table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" border=3D"=
+0">
+<tbody><tr>
+<td align=3D"center" valign=3D"top" style=3D"padding:16px 0 0 48px">
+<a aria-label=3D"Katso ansaitsemasi rajoitetun er=C3=A4n merkit." href=3D"h=
+ttps://notifications.google.com/g/p/AD-FnEwa1YmBKqUMc8dcP3cvbzQ9nibLNr9ck9V=
+U6r7lSbb7RuQdNzgbM0BZOCInokUOhl4C9EwlgR1mKHj6bFKHmclNizTAEP6XyDJk50VF7eNvcn=
+Zy1ujZkiLbxtYvqwH8d7So0NPVbfUpgfHuLoAoWOPV_vCekea3UM3OIAQ5qhIp7ZBj0pnZCvQGa=
+hG6HE4ZVwfFDlo" style=3D"text-decoration:none;width:287px;display:block" ta=
+rget=3D"_blank"><img aria-hidden=3D"true" src=3D"https://www.gstatic.com/gu=
+mdrop/files/local-guides-june-pride-3-transparent-w573px-h384px-2x.png" wid=
+th=3D"287" height=3D"auto" style=3D"display:block"></a>
+</td>
+</tr>
+</tbody></table>
+</td>
+<td align=3D"left" valign=3D"top" style=3D"padding-left:55px">
+<table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" border=3D"=
+0">
+<tbody><tr>
+<td align=3D"left" valign=3D"top" style=3D"font-family:Google Sans,Roboto,H=
+elvetica Neue,Helvetica,Arial,sans-serif;font-size:20px;line-height:30px;co=
+lor:#202124;padding:0px 60px 0px 0px;font-weight:700">Ansaitse rajoitetun e=
+r=C3=A4n merkkej=C3=A4</td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top" style=3D"font-family:Google Sans,Roboto,H=
+elvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;co=
+lor:#5f6368;padding:7px 70px 0px 0px">Seuraavan kahden kuukauden aikana kai=
+kki nykyiset ja uudet merkit p=C3=A4ivitet=C3=A4=C3=A4n rajoitetun er=C3=A4=
+n merkkeihin. </td>
+</tr>
+
+<tr>
+<td align=3D"left" style=3D"padding:18px 0px 0px 0px">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tbody><tr>
+<td aria-hidden=3D"true" height=3D"6" align=3D"center" valign=3D"top" style=
+=3D"line-height:6px"><a href=3D"https://notifications.google.com/g/p/AD-FnE=
+yGbBR1OywZzMB5N7dHnB2XWKT_gbLHqqgxlqKTu90CoQvV5VoWYHWeBKawPoxjWPUd-V4RzHUXH=
+TWCvyhdf3DTJFn_sW5ZahhJp9awbf354glyBj3PI4jGsSOXi_zUP6VP8dxaqOGZVGA_-mPpeT5o=
+n0WS6loMPxzNMBszX8OlRPKt_0mCtjsxH0K0vPYEmVni7SUS" aria-hidden=3D"true" styl=
+e=3D"text-decoration:none" target=3D"_blank"><img src=3D"https://www.gstati=
+c.com/gumdrop/files/spacer-11.gif" alt=3D"" height=3D"6" width=3D"1" border=
+=3D"0" style=3D"display:block" aria-hidden=3D"true"></a></td>
+</tr>
+<tr>
+<td align=3D"center" dir=3D"ltr">
+<a aria-label=3D"Katso ansaitsemasi rajoitetun er=C3=A4n merkit." href=3D"h=
+ttps://notifications.google.com/g/p/AD-FnEyGbBR1OywZzMB5N7dHnB2XWKT_gbLHqqg=
+xlqKTu90CoQvV5VoWYHWeBKawPoxjWPUd-V4RzHUXHTWCvyhdf3DTJFn_sW5ZahhJp9awbf354g=
+lyBj3PI4jGsSOXi_zUP6VP8dxaqOGZVGA_-mPpeT5on0WS6loMPxzNMBszX8OlRPKt_0mCtjsxH=
+0K0vPYEmVni7SUS" style=3D"border:1px solid #dadce0;background:#ffffff;borde=
+r-radius:4px;color:#1a73e8;display:block;font-family:Google Sans,Roboto,Hel=
+vetica Neue,Helvetica,Arial,sans-serif;font-size:16px;line-height:24px;font=
+-weight:500;padding:10px 24px;text-decoration:none" target=3D"_blank">
+Katso merkkisi
+</a>
+</td>
+</tr>
+<tr>
+<td aria-hidden=3D"true" height=3D"6" align=3D"center" valign=3D"top" style=
+=3D"line-height:6px"><a href=3D"https://notifications.google.com/g/p/AD-FnE=
+yGbBR1OywZzMB5N7dHnB2XWKT_gbLHqqgxlqKTu90CoQvV5VoWYHWeBKawPoxjWPUd-V4RzHUXH=
+TWCvyhdf3DTJFn_sW5ZahhJp9awbf354glyBj3PI4jGsSOXi_zUP6VP8dxaqOGZVGA_-mPpeT5o=
+n0WS6loMPxzNMBszX8OlRPKt_0mCtjsxH0K0vPYEmVni7SUS" aria-hidden=3D"true" styl=
+e=3D"text-decoration:none" target=3D"_blank"><img src=3D"https://www.gstati=
+c.com/gumdrop/files/spacer-11.gif" alt=3D"" height=3D"6" width=3D"1" border=
+=3D"0" style=3D"display:block" aria-hidden=3D"true"></a></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+<tr>
+<td align=3D"center" style=3D"padding-left:20px;padding-right:20px">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tbody>
+
+<tr>
+
+<td align=3D"center" dir=3D"ltr" style=3D"font-family:Google Sans,Roboto,Ar=
+ial,Helvetica,sans-serif;font-size:20px;color:#202124;line-height:30px;font=
+-weight:700;padding:47px 0px 26px"><span role=3D"text">Mit=C3=A4 mielt=C3=
+=A4 olet rajoitetun er=C3=A4n merkeist=C3=A4?</span></td>
+</tr>
+<tr>
+<td aria-hidden=3D"true" align=3D"center" dir=3D"ltr" valign=3D"top">
+<table role=3D"presentation" align=3D"center" width=3D"320" border=3D"0" ce=
+llpadding=3D"0" cellspacing=3D"0">
+<tbody>
+<tr>
+<td aria-hidden=3D"true" align=3D"center" dir=3D"ltr" valign=3D"top">
+<a href=3D"https://notifications.google.com/g/p/AD-FnEwaV9zV0DvqmyX0Z3pd6aw=
+c3Sz7x9BRqhAANuQYnEvxhWEdSMbGn-EeVU6VhsgVP0ClmSYrg0d02d7QZD8cI0JQNU_9F8_tAW=
+yl6SQ68rbOnvHkmAPuxFdRpY0BZfEWQjUiIFV8" style=3D"color:#4285f4;text-decorat=
+ion:none;display:block;width:24px" target=3D"_blank">
+<img align=3D"center" alt=3D"Very dissatisfied" src=3D"https://www.gstatic.=
+com/gumdrop/files/youtube-creator-satisfaction-module-very-dissatisfied-tra=
+nsparent-w64px-h64px-2x.png" style=3D"border:0;display:block;margin:0 auto;=
+outline:none;padding:6px" title=3D"Very dissatisfied" width=3D"24">
+</a>
+</td>
+<td aria-hidden=3D"true" align=3D"center" dir=3D"ltr" valign=3D"top">
+<a href=3D"https://notifications.google.com/g/p/AD-FnEy9xK2sFTX8eIGVdldtxrm=
+mhQJTeGdeagxF6GC8NDU9DBqMKhxPUjGHIztjk5TVZD7F_jdn_42dpAAvYYNzdtF_8cgGxl40qk=
+VNAjuVRZWJGkCekF0b0RoJycYH10IRiLu52dGS" style=3D"color:#4285f4;text-decorat=
+ion:none;display:block;width:24px" target=3D"_blank"><img align=3D"center" =
+alt=3D"Dissatisfied" src=3D"https://www.gstatic.com/gumdrop/files/youtube-c=
+reator-satisfaction-module-dissatisfied-transparent-w64px-h64px-2x.png" sty=
+le=3D"border:0;display:block;margin:0 auto;outline:none;padding:6px" title=
+=3D"Dissatisfied" width=3D"24">
+</a>
+</td>
+<td aria-hidden=3D"true" align=3D"center" dir=3D"ltr" valign=3D"top">
+<a href=3D"https://notifications.google.com/g/p/AD-FnEx91viHiEzLD7l5HmRQwCJ=
+v-VKFGlk8j-0Skn1rFOU-AjUqWGp9FPsZROjEcDPPTEUmn4vskIVmZYCBt7p7qgIcJKvMt3xIny=
+s2bV3Vm4o9qEINIPa_36tMSlyLgsZezYp3Dv5p" style=3D"color:#4285f4;text-decorat=
+ion:none;display:block;width:24px" target=3D"_blank"><img align=3D"center" =
+alt=3D"Neutral" src=3D"https://www.gstatic.com/gumdrop/files/youtube-creato=
+r-satisfaction-module-neutral-transparent-w64px-h64px-2x.png" style=3D"bord=
+er:0;display:block;margin:0 auto;outline:none;padding:6px" title=3D"Neutral=
+" width=3D"24">
+</a>
+</td>
+<td aria-hidden=3D"true" align=3D"center" dir=3D"ltr" valign=3D"top">
+<a href=3D"https://notifications.google.com/g/p/AD-FnEwmPQsjeUmoAtlBJ2-pxYX=
+iUoCAp-HBCiqyYfARWYSKz4C6XiXDUM3LKzbJYprTkWgJAe669s-LKKm78-ErKi9hwJ2BbZuC4P=
+K7iEmqZKnB4zyX9sK4g8j1EhY6rTeuir3t4Ff8" style=3D"color:#4285f4;text-decorat=
+ion:none;display:block;width:24px" target=3D"_blank"><img align=3D"center" =
+alt=3D"Satisfied" src=3D"https://www.gstatic.com/gumdrop/files/youtube-crea=
+tor-satisfaction-module-satisfied-transparent-w64px-h64px-2x.png" style=3D"=
+border:0;display:block;margin:0 auto;outline:none;padding:6px" title=3D"Sat=
+isfied" width=3D"24">
+</a>
+</td>
+<td aria-hidden=3D"true" align=3D"center" dir=3D"ltr" valign=3D"top">
+<a href=3D"https://notifications.google.com/g/p/AD-FnEx55LBIBI9t6Y79-GDqwNk=
+oiK_s5N67E7kZYCqREo1bRRmH4FggNUMS8p1sfm8MSx6pBjCMdEuGJgU_gUpLUJOEpUwbfqMUtk=
+V9c3ItyBMfm30vG3cnQVJKe4cxI-O-dRJyYfdE" style=3D"color:#4285f4;text-decorat=
+ion:none;display:block;width:24px" target=3D"_blank"><img align=3D"center" =
+alt=3D"Very satisfied" src=3D"https://www.gstatic.com/gumdrop/files/youtube=
+-creator-satisfaction-module-very-satisfied-transparent-w64px-h64px-2x.png"=
+ style=3D"border:0;display:block;margin:0 auto;outline:none;padding:6px" ti=
+tle=3D"Very satisfied" width=3D"24">
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" style=3D"padding-bottom:32px;padding-left:12px;padding=
+-top:9px">
+<table role=3D"presentation" width=3D"300" cellspacing=3D"0" cellpadding=3D=
+"0">
+<tbody><tr>
+<td width=3D"100" valign=3D"top" align=3D"left" style=3D"font-family:Roboto=
+,Arial,Helvetica,sans-serif;font-size:14px;color:#5f6368;line-height:22px;f=
+ont-weight:400;letter-spacing:0.2px;padding-left:6px">
+Huono
+</td>
+<td width=3D"100" valign=3D"top" align=3D"center" style=3D"font-family:Robo=
+to,Arial,Helvetica,sans-serif;font-size:14px;color:#5f6368;line-height:22px=
+;font-weight:400;letter-spacing:0.2px">
+Ei hyv=C3=A4 eik=C3=A4 huono
+</td>
+<td width=3D"100" valign=3D"top" align=3D"right" style=3D"font-family:Robot=
+o,Arial,Helvetica,sans-serif;font-size:14px;color:#5f6368;line-height:22px;=
+font-weight:400;letter-spacing:0.2px">
+Erinomainen
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+</tbody>
+</table>
+</td>
+</tr>
+
+
+
+<tr>
+<td align=3D"left" valign=3D"top" style=3D"padding-top:0px;padding-bottom:1=
+6px">
+<table role=3D"presentation" width=3D"720" cellpadding=3D"0" cellspacing=3D=
+"0" border=3D"0">
+<tbody><tr>
+<td align=3D"center" valign=3D"top" style=3D"padding-left:32px">
+<table role=3D"presentation" align=3D"center" width=3D"320" cellpadding=3D"=
+0" cellspacing=3D"0" border=3D"0">
+
+<tbody><tr>
+<td align=3D"left" valign=3D"top" style=3D"padding:56px 0 0 0px;display:non=
+e">
+<table role=3D"presentation" align=3D"center" cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"left" valign=3D"top" style=3D"padding-top:62px">
+<a aria-label=3D"Katso The Keyword =E2=80=91blogista, miten voit p=C3=A4ivi=
+tt=C3=A4=C3=A4 uusia tai puuttuvia teit=C3=A4 Mapsiin." href=3D"https://not=
+ifications.google.com/g/p/AD-FnEzFJg1urjma4n9n_dMPLYTDX5Mhe1Ip3fHKllZKoQaD2=
+QtFuu8Jxwy9VyqwZeL5XAfJUbnow92_NBHDEIc0EVNDfyq9vhtYO9mNcTG-3e-ZZGcB_tRTE1z9=
+9f7mYhF_mrTtwcQm8eu4EUx51CxN3sGab6FvvfIjXvzyLawnlqU6wQgM6FEYNS8McTtPewHL" s=
+tyle=3D"text-decoration:none;width:294px;display:block" target=3D"_blank"><=
+img aria-hidden=3D"true" src=3D"https://www.gstatic.com/gumdrop/files/local=
+-guides-june-pride-4-transparent-w585px-h538px-2x.png" width=3D"294" height=
+=3D"auto" style=3D"display:block">
+</a></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+<tr>
+<td align=3D"left" valign=3D"top" style=3D"font-family:Google Sans,Roboto,H=
+elvetica,Arial,sans-serif;font-size:20px;line-height:30px;color:#000000;pad=
+ding:82px 20px 0px 0px;font-weight:700">
+Helpompi tapa p=C3=A4ivitt=C3=A4=C3=A4 teit=C3=A4
+</td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top" style=3D"font-family:Google Sans,Roboto,H=
+elvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;co=
+lor:#5f6368;padding:7px 25px 0px 0px">Huomasitko tien, joka kaipaa p=C3=A4i=
+vityst=C3=A4? Nyt voit tehd=C3=A4 sen helposti uudella Road Editor =E2=80=
+=91ty=C3=B6p=C3=B6yt=C3=A4sovelluksella, jolla teiden piirt=C3=A4minen, uud=
+elleennime=C3=A4minen tai tietojen p=C3=A4ivitt=C3=A4minen sujuu vaivattoma=
+sti.</td>
+</tr>
+
+<tr>
+<td align=3D"left" style=3D"padding:19px 0px 0px 0px">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0">
+<tbody><tr>
+<td aria-hidden=3D"true" height=3D"6" align=3D"center" valign=3D"top" style=
+=3D"line-height:6px"><a href=3D"https://notifications.google.com/g/p/AD-FnE=
+yqbomWr-5iRUrqqAmKW0hjECFqGEdQqwSO6yXKmw2kGl5SlYhFzODwNc801W9jaCcrw1NBgnPeH=
+1HR7d2l_zAwAMiboLW1D11HlqjZa5yP967qjvioFp9M589r1CEDEkAju5Acl33BhSHv6RgJn9sN=
+vaQ0ZXyc7WQMF_bnPhfWUnLIJn3vJqiCKFHEs8npIA" aria-hidden=3D"true" style=3D"t=
+ext-decoration:none" target=3D"_blank"><img src=3D"https://www.gstatic.com/=
+gumdrop/files/spacer-11.gif" alt=3D"" height=3D"6" width=3D"1" border=3D"0"=
+ style=3D"display:block" aria-hidden=3D"true"></a></td>
+</tr>
+<tr>
+<td align=3D"center" dir=3D"ltr">
+<a aria-label=3D"Katso The Keyword =E2=80=91blogista, miten voit p=C3=A4ivi=
+tt=C3=A4=C3=A4 uusia tai puuttuvia teit=C3=A4 Mapsiin." href=3D"https://not=
+ifications.google.com/g/p/AD-FnEyqbomWr-5iRUrqqAmKW0hjECFqGEdQqwSO6yXKmw2kG=
+l5SlYhFzODwNc801W9jaCcrw1NBgnPeH1HR7d2l_zAwAMiboLW1D11HlqjZa5yP967qjvioFp9M=
+589r1CEDEkAju5Acl33BhSHv6RgJn9sNvaQ0ZXyc7WQMF_bnPhfWUnLIJn3vJqiCKFHEs8npIA"=
+ style=3D"border:1px solid #dadce0;background:#ffffff;border-radius:4px;col=
+or:#1a73e8;display:block;font-family:Google Sans,Roboto,Helvetica Neue,Helv=
+etica,Arial,sans-serif;font-size:16px;line-height:24px;font-weight:500;padd=
+ing:10px 23px;text-decoration:none" target=3D"_blank">
+Lue lis=C3=A4=C3=A4
+</a>
+</td>
+</tr>
+<tr>
+<td aria-hidden=3D"true" height=3D"6" align=3D"center" valign=3D"top" style=
+=3D"line-height:6px"><a href=3D"https://notifications.google.com/g/p/AD-FnE=
+yqbomWr-5iRUrqqAmKW0hjECFqGEdQqwSO6yXKmw2kGl5SlYhFzODwNc801W9jaCcrw1NBgnPeH=
+1HR7d2l_zAwAMiboLW1D11HlqjZa5yP967qjvioFp9M589r1CEDEkAju5Acl33BhSHv6RgJn9sN=
+vaQ0ZXyc7WQMF_bnPhfWUnLIJn3vJqiCKFHEs8npIA" aria-hidden=3D"true" style=3D"t=
+ext-decoration:none" target=3D"_blank"><img src=3D"https://www.gstatic.com/=
+gumdrop/files/spacer-11.gif" alt=3D"" height=3D"6" width=3D"1" border=3D"0"=
+ style=3D"display:block" aria-hidden=3D"true"></a></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+</tbody></table>
+</td>
+<td align=3D"left" valign=3D"top" style=3D"padding:0px 0 0 0px">
+<table role=3D"presentation" width=3D"" align=3D"center" cellpadding=3D"0" =
+cellspacing=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"left" valign=3D"top" style=3D"padding-top:49px;padding-right:7=
+px">
+<a aria-label=3D"Katso The Keyword =E2=80=91blogista, miten voit p=C3=A4ivi=
+tt=C3=A4=C3=A4 uusia tai puuttuvia teit=C3=A4 Mapsiin." href=3D"https://not=
+ifications.google.com/g/p/AD-FnEzFJg1urjma4n9n_dMPLYTDX5Mhe1Ip3fHKllZKoQaD2=
+QtFuu8Jxwy9VyqwZeL5XAfJUbnow92_NBHDEIc0EVNDfyq9vhtYO9mNcTG-3e-ZZGcB_tRTE1z9=
+9f7mYhF_mrTtwcQm8eu4EUx51CxN3sGab6FvvfIjXvzyLawnlqU6wQgM6FEYNS8McTtPewHL" s=
+tyle=3D"text-decoration:none;width:291px;display:block" target=3D"_blank"><=
+img aria-hidden=3D"true" src=3D"https://www.gstatic.com/gumdrop/files/local=
+-guides-june-pride-4-transparent-w585px-h538px-2x.png" width=3D"291" height=
+=3D"auto" style=3D"display:block">
+</a></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+
+<tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" width=3D"720" cellspacing=3D"0" cellpadding=3D=
+"0" border=3D"0">
+<tbody><tr>
+<td valign=3D"top" align=3D"left">
+<table role=3D"presentation" width=3D"52" cellspacing=3D"0" cellpadding=3D"=
+0" border=3D"0">
+<tbody><tr>
+<td aria-hidden=3D"true" height=3D"163" align=3D"center" valign=3D"top" sty=
+le=3D"line-height:163px"><img src=3D"https://www.gstatic.com/gumdrop/files/=
+spacer-11.gif" alt=3D"" height=3D"6" width=3D"1" border=3D"0" style=3D"disp=
+lay:block" aria-hidden=3D"true"></td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top">
+<img aria-hidden=3D"true" src=3D"https://www.gstatic.com/gumdrop/files/loca=
+l-guides-fill-1-transparent-w106px-h160px-2x.png" width=3D"52" height=3D"au=
+to" style=3D"display:block">
+</td>
+</tr>
+</tbody></table>
+</td>
+<td valign=3D"top" align=3D"center">
+<table role=3D"presentation" width=3D"100%" cellspacing=3D"0" cellpadding=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;=
+color:#5f6368;padding-top:81px;letter-spacing:1.4px;font-weight:500">LOCAL =
+GUIDE =E2=80=91OPAS ESITTELYSS=C3=84</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:20px;line-height:30px;=
+color:#000000;padding:6px 15px 0px;font-weight:700">Inklusiivinen kartoitta=
+ja:</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:20px;line-height:30px;=
+color:#000000;padding:0px 15px 0px;font-weight:700">Ralph H</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"padding:14px 0 0 0px">
+<img src=3D"https://www.gstatic.com/gumdrop/files/local-guides-june-pride-6=
+-transparent-w180px-h180px-2x.png" alt=3D"" title=3D"" width=3D"90" height=
+=3D"auto" style=3D"display:block">
+</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;=
+color:#5f6368;padding:15px 40px 0px">Ralph H tiet=C3=A4=C3=A4, ett=C3=A4 ih=
+miset kaipaavat paikkoja, joihin he tuntevat olevansa tervetulleita. Sateen=
+kaariyhteis=C3=B6n j=C3=A4senen=C3=A4 h=C3=A4nelle on t=C3=A4rke=C3=A4=C3=
+=A4 tuntea paikat, jotka ovat turvallisia ja joissa h=C3=A4n saa olla oma i=
+tsens=C3=A4. H=C3=A4n luo Google Mapsiin s=C3=A4=C3=A4nn=C3=B6llisesti list=
+oja inklusiivista paikoista, jotta my=C3=B6s muut h=C3=A4nen kaltaisensa vo=
+ivat l=C3=B6yt=C3=A4=C3=A4 ne.</td>
+</tr>
+</tbody></table>
+</td>
+<td valign=3D"top" align=3D"right">
+<table role=3D"presentation" width=3D"80" cellspacing=3D"0" cellpadding=3D"=
+0" border=3D"0">
+<tbody><tr>
+<td aria-hidden=3D"true" height=3D"143" align=3D"center" valign=3D"top" sty=
+le=3D"line-height:143px"><img src=3D"https://www.gstatic.com/gumdrop/files/=
+spacer-11.gif" alt=3D"" height=3D"6" width=3D"1" border=3D"0" style=3D"disp=
+lay:block" aria-hidden=3D"true"></td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top">
+<img aria-hidden=3D"true" src=3D"https://www.gstatic.com/gumdrop/files/loca=
+l-guides-fill-2-transparent-w159px-h363px-2x.png" width=3D"80" height=3D"au=
+to" style=3D"display:block">
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" width=3D"720" cellspacing=3D"0" cellpadding=3D=
+"0" border=3D"0">
+<tbody><tr>
+<td valign=3D"top" align=3D"left">
+<table role=3D"presentation" width=3D"52" cellspacing=3D"0" cellpadding=3D"=
+0" border=3D"0">
+<tbody><tr>
+<td aria-hidden=3D"true" height=3D"23" align=3D"center" valign=3D"top" styl=
+e=3D"line-height:23px"><img src=3D"https://www.gstatic.com/gumdrop/files/sp=
+acer-11.gif" alt=3D"" height=3D"6" width=3D"1" border=3D"0" style=3D"displa=
+y:block" aria-hidden=3D"true"></td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top">
+<img aria-hidden=3D"true" src=3D"https://www.gstatic.com/gumdrop/files/loca=
+l-guides-fill-3-transparent-w154px-h497px-2x.png" width=3D"77" height=3D"au=
+to" style=3D"display:block">
+</td>
+</tr>
+</tbody></table>
+</td>
+<td valign=3D"top" align=3D"center">
+<table role=3D"presentation" width=3D"100%" cellspacing=3D"0" cellpadding=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td aria-hidden=3D"true" align=3D"center" valign=3D"top" style=3D"padding-t=
+op:35px">
+<img src=3D"https://www.gstatic.com/gumdrop/files/lg-feb-inverted.png" alt=
+=3D"" title=3D"" width=3D"30" height=3D"auto" style=3D"display:block">
+</td>
+</tr>
+<tr>
+<td valign=3D"top">
+<table role=3D"presentation" align=3D"center" cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:20px;line-height:30px;=
+color:#000000;padding:25px 65px 0px;font-weight:700">&quot;Pride tarkoittaa=
+, ett=C3=A4 voin olla h=C3=A4peilem=C3=A4tt=C3=A4 aito oma itseni.&quot;</t=
+d>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;=
+color:#5f6368;padding-top:5px">Ralph H, Chicago, Illinois =E2=80=93 Taso 9<=
+/td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;color:#5f6368;p=
+adding:36px 50px 0px">
+Lue lis=C3=A4=C3=A4 Ralphista h=C3=A4nen <a aria-label=3D"Lue lis=C3=A4=C3=
+=A4 Ralphista Local Guides Connectista." href=3D"https://notifications.goog=
+le.com/g/p/AD-FnExEEgBKs6dqPo8AMX-vPXpDJWV353lhFApElomKg5YbpToVrozhJhalzgRw=
+1Nc8Gkvhyj6iPTxlFhdVWw4rll7Nys_Zmw9CyHpvlDBuPTX1Ea3Fj8oZa96NYbT2C5Wnb5rzfgP=
+Twalobpm9MFYaohsOTYT4bNkygXT6qBqjLARD1zfZHnl0OltAfQ" style=3D"text-decorati=
+on:none;color:#1a73e8" target=3D"_blank">Connect-sivultaan</a> ja tutustu h=
+=C3=A4nen lis=C3=A4=C3=A4m=C3=A4=C3=A4ns=C3=A4 sis=C3=A4lt=C3=B6=C3=B6n <a =
+aria-label=3D"Avaa Google Maps ja tutustu Ralphin lis=C3=A4=C3=A4m=C3=A4=C3=
+=A4n sis=C3=A4lt=C3=B6=C3=B6n." href=3D"https://notifications.google.com/g/=
+p/AD-FnEz81oZAQ-znD1AnqkqVtwPzhEWPRDQQw1zhYPBkdjs0St_PWDsmZmQhqz4P5CPkYM_UF=
+TwMVkA9dx6A43nKT--phPP7Rgb4EiJzTcnsim5PlR1sO4j0L3bLtpBywDddyhVB9yEHCW5ocJS6=
+B5wCRCbPwRjQPmsMHTDpzVF2TsI7kg" style=3D"text-decoration:none;color:#1a73e8=
+" target=3D"_blank">Google Mapsissa</a>.
+</td>
+</tr>
+</tbody></table>
+</td>
+<td valign=3D"top" align=3D"right">
+<table role=3D"presentation" width=3D"80" cellspacing=3D"0" cellpadding=3D"=
+0" border=3D"0">
+<tbody><tr>
+<td aria-hidden=3D"true" height=3D"181" align=3D"center" valign=3D"top" sty=
+le=3D"line-height:181px"><img src=3D"https://www.gstatic.com/gumdrop/files/=
+spacer-11.gif" alt=3D"" height=3D"6" width=3D"1" border=3D"0" style=3D"disp=
+lay:block" aria-hidden=3D"true"></td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top">
+<img aria-hidden=3D"true" src=3D"https://www.gstatic.com/gumdrop/files/loca=
+l-guides-fill-4-transparent-w179px-h143px-2x.png" width=3D"90" height=3D"au=
+to" style=3D"display:block">
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+
+
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"display:none">
+<table role=3D"presentation" width=3D"360" cellspacing=3D"0" cellpadding=3D=
+"0" border=3D"0">
+<tbody><tr>
+<td valign=3D"top" align=3D"left">
+<table role=3D"presentation" width=3D"42" cellspacing=3D"0" cellpadding=3D"=
+0" border=3D"0">
+<tbody><tr>
+<td aria-hidden=3D"true" height=3D"50" align=3D"center" valign=3D"top" styl=
+e=3D"line-height:50px"><img src=3D"https://www.gstatic.com/gumdrop/files/sp=
+acer-11.gif" alt=3D"" height=3D"6" width=3D"1" border=3D"0" style=3D"displa=
+y:block" aria-hidden=3D"true"></td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top">
+<img aria-hidden=3D"true" src=3D"https://www.gstatic.com/gumdrop/files/loca=
+l-guides-fill1-mob-transparent-w84px-h168px-2x.png" width=3D"42" height=3D"=
+auto" style=3D"display:block">
+</td>
+</tr>
+</tbody></table>
+</td>
+<td valign=3D"top" align=3D"center">
+<table role=3D"presentation" width=3D"100%" cellspacing=3D"0" cellpadding=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;=
+color:#5f6368;padding-top:109px;letter-spacing:1.4px;font-weight:500">LOCAL=
+ GUIDE =E2=80=91OPAS ESITTELYSS=C3=84</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:20px;line-height:30px;=
+color:#000000;padding:6px 0px 0px 9px;font-weight:700">Inklusiivinen kartoi=
+ttaja:</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:20px;line-height:30px;=
+color:#000000;padding:0px 0px 0px 9px;font-weight:700">Ralph H</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"padding:14px 0 0 0px">
+<img src=3D"https://www.gstatic.com/gumdrop/files/local-guides-june-pride-6=
+-transparent-w180px-h180px-2x.png" alt=3D"" title=3D"" width=3D"90" height=
+=3D"auto" style=3D"display:block">
+</td>
+</tr>
+</tbody></table>
+</td>
+<td valign=3D"top" align=3D"right">
+<table role=3D"presentation" width=3D"46" cellspacing=3D"0" cellpadding=3D"=
+0" border=3D"0">
+<tbody><tr>
+<td aria-hidden=3D"true" height=3D"181" align=3D"center" valign=3D"top" sty=
+le=3D"line-height:181px"><img src=3D"https://www.gstatic.com/gumdrop/files/=
+spacer-11.gif" alt=3D"" height=3D"6" width=3D"1" border=3D"0" style=3D"disp=
+lay:block" aria-hidden=3D"true"></td>
+</tr>
+<tr>
+<td align=3D"right" valign=3D"top">
+<img aria-hidden=3D"true" src=3D"https://www.gstatic.com/gumdrop/files/loca=
+l-guides-fill2-mob-transparent-w93px-h272px-2x.png" width=3D"46" height=3D"=
+auto" style=3D"display:block">
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"display:none">
+<table role=3D"presentation" width=3D"100%" cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;=
+color:#5f6368;padding:3px 20px 0px">Ralph H tiet=C3=A4=C3=A4, ett=C3=A4 ihm=
+iset kaipaavat paikkoja, joihin he tuntevat olevansa tervetulleita. Sateenk=
+aariyhteis=C3=B6n j=C3=A4senen=C3=A4 h=C3=A4nelle on t=C3=A4rke=C3=A4=C3=A4=
+ tuntea paikat, jotka ovat turvallisia ja joissa h=C3=A4n saa olla oma itse=
+ns=C3=A4. H=C3=A4n luo Google Mapsiin s=C3=A4=C3=A4nn=C3=B6llisesti listoja=
+ inklusiivista paikoista, jotta my=C3=B6s muut h=C3=A4nen kaltaisensa voiva=
+t l=C3=B6yt=C3=A4=C3=A4 ne.</td>
+</tr>
+<tr>
+<td aria-hidden=3D"true" align=3D"center" valign=3D"top" style=3D"padding-t=
+op:31px">
+<img src=3D"https://www.gstatic.com/gumdrop/files/lg-feb-inverted.png" alt=
+=3D"" title=3D"" width=3D"30" height=3D"auto" style=3D"display:block">
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"display:none">
+<table role=3D"presentation" width=3D"360" cellspacing=3D"0" cellpadding=3D=
+"0" border=3D"0">
+<tbody><tr>
+<td valign=3D"top" align=3D"left">
+<table role=3D"presentation" width=3D"36" cellspacing=3D"0" cellpadding=3D"=
+0" border=3D"0">
+<tbody><tr>
+<td aria-hidden=3D"true" height=3D"23" align=3D"center" valign=3D"top" styl=
+e=3D"line-height:23px"><img src=3D"https://www.gstatic.com/gumdrop/files/sp=
+acer-11.gif" alt=3D"" height=3D"6" width=3D"1" border=3D"0" style=3D"displa=
+y:block" aria-hidden=3D"true"></td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top">
+<img aria-hidden=3D"true" src=3D"https://www.gstatic.com/gumdrop/files/loca=
+l-guides-fill-3-transparent-w154px-h497px-2x.png" width=3D"36" height=3D"au=
+to" style=3D"display:block">
+</td>
+</tr>
+</tbody></table>
+</td>
+<td valign=3D"top" align=3D"center">
+<table role=3D"presentation" width=3D"100%" cellspacing=3D"0" cellpadding=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td valign=3D"top">
+<table role=3D"presentation" align=3D"center" cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:20px;line-height:30px;=
+color:#000000;padding:25px 30px 0px 0px;font-weight:700">&quot;Pride tarkoi=
+ttaa, ett=C3=A4 voin olla h=C3=A4peilem=C3=A4tt=C3=A4 aito oma itseni.&quot=
+;</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"display:none">
+<table role=3D"presentation" width=3D"100%" cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;=
+color:#5f6368;padding-top:11px">Ralph H, Chicago, Illinois =E2=80=93 Taso 9=
+</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;color:#5f6368;p=
+adding:18px 10px 0px">
+Lue lis=C3=A4=C3=A4 Ralphista h=C3=A4nen <a aria-label=3D"Lue lis=C3=A4=C3=
+=A4 Ralphista Local Guides Connectista." href=3D"https://notifications.goog=
+le.com/g/p/AD-FnExEEgBKs6dqPo8AMX-vPXpDJWV353lhFApElomKg5YbpToVrozhJhalzgRw=
+1Nc8Gkvhyj6iPTxlFhdVWw4rll7Nys_Zmw9CyHpvlDBuPTX1Ea3Fj8oZa96NYbT2C5Wnb5rzfgP=
+Twalobpm9MFYaohsOTYT4bNkygXT6qBqjLARD1zfZHnl0OltAfQ" style=3D"text-decorati=
+on:none;color:#1a73e8" target=3D"_blank">Connect-sivultaan</a> ja tutustu h=
+=C3=A4nen lis=C3=A4=C3=A4m=C3=A4=C3=A4ns=C3=A4 sis=C3=A4lt=C3=B6=C3=B6n <a =
+aria-label=3D"Avaa Google Maps ja tutustu Ralphin lis=C3=A4=C3=A4m=C3=A4=C3=
+=A4n sis=C3=A4lt=C3=B6=C3=B6n." href=3D"https://notifications.google.com/g/=
+p/AD-FnEz81oZAQ-znD1AnqkqVtwPzhEWPRDQQw1zhYPBkdjs0St_PWDsmZmQhqz4P5CPkYM_UF=
+TwMVkA9dx6A43nKT--phPP7Rgb4EiJzTcnsim5PlR1sO4j0L3bLtpBywDddyhVB9yEHCW5ocJS6=
+B5wCRCbPwRjQPmsMHTDpzVF2TsI7kg" style=3D"text-decoration:none;color:#1a73e8=
+" target=3D"_blank">Google Mapsissa</a>.
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+
+
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"padding-top:24px">
+<table role=3D"presentation" align=3D"center" cellspacing=3D"0" cellpadding=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" align=3D"center" cellspacing=3D"0" cellpadding=
+=3D"0" border=3D"0">
+<tbody><tr>
+<td align=3D"center" valign=3D"top" style=3D"padding-top:65px">
+<a aria-hidden=3D"true" href=3D"#m_-3497613914257182907_m_-1564169966913393=
+58_" style=3D"width:320px;display:block"><img aria-hidden=3D"true" src=3D"h=
+ttps://www.gstatic.com/gumdrop/files/local-guides-keep-it-up-transparent-w6=
+40px-h319px-2x.png" width=3D"320" height=3D"auto" style=3D"display:block"><=
+/a>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica,Arial,sans-serif;font-size:20px;line-height:30px;color:#202124;p=
+adding:25px 20px 0px;font-weight:700">
+Jatka samaan malliin
+</td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" width=3D"400" cellpadding=3D"0" cellspacing=3D=
+"0" border=3D"0">
+<tbody><tr>
+<td align=3D"center" valign=3D"top" style=3D"font-family:Google Sans,Roboto=
+,Helvetica,Arial,sans-serif;font-size:14px;line-height:22px;color:#5f6368;p=
+adding:11px 0px 0px">
+Hienoa, ett=C3=A4 olet luotettava Local Guide =E2=80=91opas. Katsotaan, mit=
+=C3=A4 j=C3=A4nnitt=C3=A4v=C3=A4=C3=A4 uutta sis=C3=A4lt=C3=B6=C3=A4 voit j=
+akaa seuraavaksi.
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+<tr>
+<td align=3D"center" style=3D"padding:20px 0px 0px 0px">
+<table role=3D"presentation" align=3D"center" border=3D"0" cellpadding=3D"0=
+" cellspacing=3D"0">
+<tbody><tr>
+<td aria-hidden=3D"true" height=3D"6" align=3D"center" valign=3D"top" style=
+=3D"line-height:6px"><a href=3D"https://notifications.google.com/g/p/AD-FnE=
+y81tqxyfP7-A-mrn9YR7VQjrl5eW8EFMae9YEvACHtKnmob8tft3bsT5daBRUncd0iYusoLtxf5=
+eSbjpNFRlFLzVLDTPqef6hSQyemlLBaGV7N4_-oawvtwhlDMX9bafan8cWgCe7qZOroPkscORFl=
+w5tjgg" aria-hidden=3D"true" style=3D"text-decoration:none" target=3D"_blan=
+k"><img src=3D"https://www.gstatic.com/gumdrop/files/spacer-11.gif" alt=3D"=
+" height=3D"6" width=3D"1" border=3D"0" style=3D"display:block" aria-hidden=
+=3D"true"></a></td>
+</tr>
+<tr>
+<td align=3D"center" dir=3D"ltr">
+<a aria-label=3D"Siirry Google Mapsiin ja lis=C3=A4=C3=A4 sis=C3=A4lt=C3=B6=
+=C3=A4." href=3D"https://notifications.google.com/g/p/AD-FnEy81tqxyfP7-A-mr=
+n9YR7VQjrl5eW8EFMae9YEvACHtKnmob8tft3bsT5daBRUncd0iYusoLtxf5eSbjpNFRlFLzVLD=
+TPqef6hSQyemlLBaGV7N4_-oawvtwhlDMX9bafan8cWgCe7qZOroPkscORFlw5tjgg" style=
+=3D"background:#1a73e8;border-radius:4px;color:#ffffff;display:block;font-f=
+amily:Google Sans,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;font-siz=
+e:16px;line-height:24px;font-weight:500;border-top:10px solid #1a73e8;borde=
+r-bottom:10px solid #1a73e8;border-left:24px solid #1a73e8;border-right:24p=
+x solid #1a73e8;text-decoration:none" target=3D"_blank">
+Lis=C3=A4=C3=A4 taas sis=C3=A4lt=C3=B6=C3=A4
+</a>
+</td>
+</tr>
+<tr>
+<td aria-hidden=3D"true" height=3D"6" align=3D"center" valign=3D"top" style=
+=3D"line-height:6px"><a href=3D"https://notifications.google.com/g/p/AD-FnE=
+y81tqxyfP7-A-mrn9YR7VQjrl5eW8EFMae9YEvACHtKnmob8tft3bsT5daBRUncd0iYusoLtxf5=
+eSbjpNFRlFLzVLDTPqef6hSQyemlLBaGV7N4_-oawvtwhlDMX9bafan8cWgCe7qZOroPkscORFl=
+w5tjgg" aria-hidden=3D"true" style=3D"text-decoration:none" target=3D"_blan=
+k"><img src=3D"https://www.gstatic.com/gumdrop/files/spacer-11.gif" alt=3D"=
+" height=3D"6" width=3D"1" border=3D"0" style=3D"display:block" aria-hidden=
+=3D"true"></a></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+
+</tbody></table>
+</td>
+</tr>
+
+</tbody></table>
+</td>
+</tr>
+
+<tr>
+<td align=3D"center" valign=3D"top">
+<table role=3D"presentation" border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" width=3D"600" align=3D"center">
+<tbody><tr>
+<td align=3D"left" height=3D"50" style=3D"border-collapse:collapse;line-hei=
+ght:50px" valign=3D"top"><img alt=3D"" border=3D"0" height=3D"1" src=3D"htt=
+ps://www.gstatic.com/gumdrop/files/spacer-11.gif" style=3D"display:block" w=
+idth=3D"1"></td>
+</tr>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" dir=3D"ltr" role=3D=
+"presentation" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" style=3D"border-top:1px solid #dadce0;border-left:1px =
+solid #dadce0;border-right:1px solid #dadce0;border-bottom:1px solid #dadce=
+0;border-radius:8px 8px 8px 8px" valign=3D"top">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" di=
+r=3D"ltr" role=3D"presentation" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"left" height=3D"9" style=3D"border-collapse:collapse;line-heig=
+ht:9px" valign=3D"top"><img alt=3D"" border=3D"0" height=3D"1" src=3D"https=
+://services.google.com/fh/files/emails/spacer_11.gif" style=3D"display:bloc=
+k" width=3D"1"></td>
+</tr>
+<tr>
+<td align=3D"left" height=3D"1" style=3D"border-collapse:collapse;line-heig=
+ht:1px" valign=3D"top" width=3D"8"><img alt=3D"" border=3D"0" height=3D"1" =
+src=3D"https://services.google.com/fh/files/emails/spacer_11.gif" style=3D"=
+display:block" width=3D"1"></td>
+<td align=3D"center" style=3D"width:24px;padding:1px 0 0" valign=3D"top"><i=
+mg alt=3D"" height=3D"auto" src=3D"https://www.gstatic.com/local/guides/ema=
+il/images/incidental/unclassified/error.png" style=3D"display:block" title=
+=3D"" width=3D"24"></td>
+<td align=3D"left" height=3D"1" style=3D"border-collapse:collapse;line-heig=
+ht:1px" valign=3D"top" width=3D"13"><img alt=3D"" border=3D"0" height=3D"1"=
+ src=3D"https://services.google.com/fh/files/emails/spacer_11.gif" style=3D=
+"display:block" width=3D"1"></td>
+<td align=3D"center" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" dir=3D"ltr" role=3D=
+"presentation" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"left" dir=3D"ltr" style=3D"font-family:Roboto,Helvetica Neue,H=
+elvetica,Arial,sans-serif;color:#d93025;font-size:14px;line-height:20px;fon=
+t-weight:600" valign=3D"top">Koronavirus (COVID-19)</td>
+</tr>
+<tr>
+<td align=3D"left" height=3D"5" style=3D"border-collapse:collapse;line-heig=
+ht:5px" valign=3D"top"><img alt=3D"" border=3D"0" height=3D"1" src=3D"https=
+://services.google.com/fh/files/emails/spacer_11.gif" style=3D"display:bloc=
+k" width=3D"1"></td>
+</tr>
+<tr>
+<td align=3D"left" dir=3D"ltr" style=3D"font-family:Roboto,Helvetica Neue,H=
+elvetica,Arial,sans-serif;color:#3c4043;font-size:14px;line-height:20px" va=
+lign=3D"top"><a href=3D"https://notifications.google.com/g/p/AD-FnEwmiD25Zb=
+opWh4q9uVrXrSxHiFbgYs7eAG1-GEqsn9fs9aBII6sqjYFtp1DQZ5khURoQ04ObC1UJeXToV29j=
+jVWjQbzGIo5irYtr4J1dw" style=3D"text-decoration:none;color:#1a73e8" target=
+=3D"_blank">Google Hausta</a> l=C3=B6yd=C3=A4t tuoreimmat uutiset ja linkke=
+j=C3=A4 luotettaviin l=C3=A4hteisiin.</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td align=3D"left" height=3D"1" style=3D"border-collapse:collapse;line-heig=
+ht:1px" valign=3D"top" width=3D"8"><img alt=3D"" border=3D"0" height=3D"1" =
+src=3D"https://services.google.com/fh/files/emails/spacer_11.gif" style=3D"=
+display:block" width=3D"1"></td>
+</tr>
+<tr>
+<td align=3D"left" height=3D"7" style=3D"border-collapse:collapse;line-heig=
+ht:7px" valign=3D"top"><img alt=3D"" border=3D"0" height=3D"1" src=3D"https=
+://services.google.com/fh/files/emails/spacer_11.gif" style=3D"display:bloc=
+k" width=3D"1"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align=3D"left" height=3D"20" style=3D"border-collapse:collapse;line-hei=
+ght:20px" valign=3D"top"><img alt=3D"" border=3D"0" height=3D"1" src=3D"htt=
+ps://services.google.com/fh/files/emails/spacer_11.gif" style=3D"display:bl=
+ock" width=3D"1"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"padding-top:32px">
+<table role=3D"presentation" width=3D"600" border=3D"0" cellspacing=3D"0" c=
+ellpadding=3D"0">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" st=
+yle=3D"margin:0 auto;width:100%" role=3D"presentation">
+<tbody>
+<tr>
+<td align=3D"center" bgcolor=3D"#ffffff" style=3D"padding-left:20px;padding=
+-right:20px">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n">
+<tbody>
+<tr>
+<td align=3D"center" bgcolor=3D"#ffffff" dir=3D"ltr" style=3D"padding:10px =
+0px 30px 0px;font-family:Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;f=
+ont-size:14px;font-weight:normal;color:#3c4043;line-height:20px">Piditk=C3=
+=B6 t=C3=A4st=C3=A4 viestist=C3=A4?</td>
+</tr>
+<tr>
+<td align=3D"center" bgcolor=3D"#ffffff" style=3D"padding-bottom:30px">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" di=
+r=3D"ltr" width=3D"70%" role=3D"presentation">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"middle" bgcolor=3D"#ffffff" style=3D"vertica=
+l-align:middle" width=3D"48"><a aria-label=3D"Sad Face" href=3D"https://not=
+ifications.google.com/g/p/AD-FnEy6xHAT2tvpc7vpXCKdKj0dluctW_c5PBq_UFuTXjZC3=
+LiBHw5Jp4Llff8EqmHNDZeSb91LTJ93NiF2lYKJDled071ja0JSDjdnvduVJAqbvJmGlkv_d_nF=
+4b3IDStQxoQA5F2LhQNLSplJMNp2" style=3D"display:block;width:48px;border-top:=
+9px solid transparent;border-bottom:9px solid transparent" target=3D"_blank=
+"><img alt=3D"Rate dissatisfied" border=3D"0" src=3D"https://www.gstatic.co=
+m/local/guides/email/images/base/icons/frown.png" style=3D"display:block;ve=
+rtical-align:middle" title=3D":(" height=3D"auto" width=3D"30"></a></td>
+<td bgcolor=3D"#ffffff" width=3D"30">=C2=A0</td>
+<td align=3D"center" valign=3D"middle" bgcolor=3D"#ffffff" style=3D"vertica=
+l-align:middle" width=3D"48"><a aria-label=3D"Neutral Face" href=3D"https:/=
+/notifications.google.com/g/p/AD-FnEyMQxQLvW-b55Z97OHg6olQoHcmHzZAz62AFpgqa=
+j-4lvrTNO5A4c1-g6i1adeDQM3HJI3k0AgoIxD5jSRJJZF-UxvLmSLRaG32gBJJQSM_r72Vymse=
+yoiAxAMVJtQslWPUdyYNs9pegFoUZkMu" style=3D"display:block;width:48px;border-=
+top:9px solid transparent;border-bottom:9px solid transparent" target=3D"_b=
+lank"><img alt=3D"Rate neutral" border=3D"0" src=3D"https://www.gstatic.com=
+/local/guides/email/images/base/icons/neutral.png" style=3D"display:block" =
+title=3D":|" height=3D"auto" width=3D"30"></a></td>
+<td bgcolor=3D"#ffffff" width=3D"30">=C2=A0</td>
+<td align=3D"center" valign=3D"middle" bgcolor=3D"#ffffff" style=3D"vertica=
+l-align:middle" width=3D"48"><a aria-label=3D"Happy Face" href=3D"https://n=
+otifications.google.com/g/p/AD-FnEwtNBwRwqXZrt7C8U6kEvOx4pDC8Cg0wFFtcvUuk32=
+Dt49ICB5QHtATGbC8oTOcadLuOlgrfRYBSN9rpsU0piBozAylChFUSGdspXDOYzrP5mJsPx5VMs=
+wlhpt1u3Lqd9WGoKiA_Bz56xHqg1B3qA" style=3D"display:block;width:48px;border-=
+top:9px solid transparent;border-bottom:9px solid transparent" target=3D"_b=
+lank"><img alt=3D"Rate satisfied" border=3D"0" src=3D"https://www.gstatic.c=
+om/local/guides/email/images/base/icons/smile.png" style=3D"display:block" =
+title=3D":)" height=3D"auto" width=3D"30"> </a></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align=3D"center" bgcolor=3D"#ffffff" style=3D"border-top:1px solid #dad=
+ce0;padding-top:40px;padding-bottom:20px">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" di=
+r=3D"ltr" width=3D"100%" role=3D"presentation">
+<tbody>
+<tr>
+<td style=3D"padding-right:40px;line-height:0px;font-size:0px">=C2=A0</td>
+<td align=3D"center" bgcolor=3D"#FFFFFF" style=3D"vertical-align:middle" wi=
+dth=3D"48" height=3D"48"><a href=3D"https://notifications.google.com/g/p/AD=
+-FnEzFHEoKTkdXdYtWGDyvdcZUB11uQwh7C1cvHurs_6YS9LuESjjhXzwO0DLXOjOn2YcrStZJs=
+rrYFPN0pcqSvwJ-fCDBrwi4bw" style=3D"display:block;height:48px;width:48px" t=
+arget=3D"_blank"><img alt=3D"Siirry Google Mapsin Instagram-sivulle" border=
+=3D"0" height=3D"auto" src=3D"https://www.gstatic.com/local/guides/email/im=
+ages/base/icons/instagram_2020.png" style=3D"display:block" title=3D"Instag=
+ram" width=3D"48"></a></td>
+<td style=3D"padding-right:16px;line-height:0px;font-size:0px">=C2=A0</td>
+<td align=3D"center" bgcolor=3D"#FFFFFF" style=3D"vertical-align:middle" wi=
+dth=3D"48" height=3D"48"><a href=3D"https://notifications.google.com/g/p/AD=
+-FnExUkRWVGHcmYFTyw1u8AELQHErhq-vmjopnazIV7JzZ0858hBXine36cFHWLXw-mt1pxYjCl=
+21JbbS7xdDv5kMY7GOaEAisbAmO" style=3D"display:block;height:48px;width:48px"=
+ target=3D"_blank"><img alt=3D"Siirry Google Mapsin YouTube-kanavalle" bord=
+er=3D"0" height=3D"auto" src=3D"https://www.gstatic.com/local/guides/email/=
+images/base/icons/youtube_2020.png" style=3D"display:block" title=3D"YouTub=
+e" width=3D"48"></a></td>
+<td style=3D"padding-right:16px;line-height:0px;font-size:0px">=C2=A0</td>
+<td align=3D"center" bgcolor=3D"#FFFFFF" style=3D"vertical-align:middle" wi=
+dth=3D"48" height=3D"48"><a href=3D"https://notifications.google.com/g/p/AD=
+-FnEywekl3sD4tx85Td2XEfCwLLA3ic2shWu5J_6AfIWDrD2tKk3UoyX20JwdJg-4f-EduLiKOl=
+pB7XdsP1AlD6YYC7rP9qhUq" style=3D"display:block;height:48px;width:48px" tar=
+get=3D"_blank"><img alt=3D"Siirry Google Mapsin Facebook-sivulle" border=3D=
+"0" height=3D"auto" src=3D"https://www.gstatic.com/local/guides/email/image=
+s/base/icons/facebook_2020.png" style=3D"display:block" title=3D"Facebook" =
+width=3D"48"></a></td>
+<td style=3D"padding-right:16px;line-height:0px;font-size:0px">=C2=A0</td>
+<td align=3D"center" bgcolor=3D"#FFFFFF" style=3D"vertical-align:middle" wi=
+dth=3D"48" height=3D"48"><a href=3D"https://notifications.google.com/g/p/AD=
+-FnEz5pe8wNXsd-t5tYBund-xxts9RGsZ_qVOPc7tsvs6zfOmZp8vzptp5Mks4vU2v38C6APELZ=
+WDFRUn31oj1UBFc" style=3D"display:block;height:48px;width:48px" target=3D"_=
+blank"><img alt=3D"Siirry Google Mapsin Twitter-sivulle" border=3D"0" heigh=
+t=3D"auto" src=3D"https://www.gstatic.com/local/guides/email/images/base/ic=
+ons/twitter_2020.png" style=3D"display:block" title=3D"Twitter" width=3D"48=
+"></a></td>
+<td style=3D"padding-right:40px;line-height:0px;font-size:0px">=C2=A0</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+
+<tr>
+<td align=3D"center" bgcolor=3D"#ffffff" dir=3D"ltr" style=3D"border-bottom=
+:1px solid #dadce0;padding:20px 0px;font-family:Roboto,Helvetica Neue,Helve=
+tica,Arial,sans-serif;font-size:12px;font-weight:normal;color:#202124;line-=
+height:16px"> Sait t=C3=A4m=C3=A4n viestin, koska olet ilmoittanut haluavas=
+i vastaanottaa Local Guides =E2=80=91ohjelman uutisia ja tuotep=C3=A4ivityk=
+si=C3=A4 koskevia viestej=C3=A4 s=C3=A4hk=C3=B6postiisi. Voit <a style=3D"c=
+olor:#1a73e8;text-decoration:none" href=3D"https://notifications.google.com=
+/g/optout/AD-FnEx3jZwVxIFT_B0UbWJyeDh134k7GUEaywt9pBZ9CxvT3wDMkDrE6Cb-d4v6p=
+oISyutJ85RPWUAbREVSZ-pywFfQdQGC6MkY9eCMbdcNPW8I6p071hsomdghJjMNtA?hl=3Dfi" =
+target=3D"_blank">peruuttaa tilauksen</a> tai <a style=3D"color:#1a73e8;tex=
+t-decoration:none" href=3D"https://notifications.google.com/g/p/AD-FnEwkt7t=
+bhu9-D9FXadvfp6_NTT4-gEajwWAUtfEOEtAdAINuWxhhLVGun2E0Ghtm3WC8lS5kmXLHTaJR20=
+IrAYOsteDt1NYbzpoKXb9y46H1j8OM77GStA" target=3D"_blank">p=C3=A4ivitt=C3=A4=
+=C3=A4 s=C3=A4hk=C3=B6postiasetuksesi</a> Local Guides =E2=80=91asetussivul=
+la. </td>
+</tr>
+
+<tr>
+<td align=3D"center" bgcolor=3D"#ffffff" dir=3D"ltr" style=3D"padding:20px;=
+font-family:Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:9px;=
+line-height:12px;font-weight:normal;color:#202124"><img height=3D"auto" src=
+=3D"https://www.gstatic.com/local/guides/email/images/base/maps_logo_lockup=
+_hor_new.png" width=3D"180" alt=3D""></td>
+</tr>
+<tr>
+<td align=3D"center" bgcolor=3D"#ffffff" dir=3D"ltr" style=3D"padding-left:=
+20px;padding-right:20px;padding-bottom:20px;padding-top:0;font-family:Robot=
+o,Helvetica Neue,Helvetica,Arial,sans-serif;font-size:10px;line-height:12px=
+;font-weight:normal;color:#202124"><a href=3D"#m_-3497613914257182907_m_-15=
+6416996691339358_" style=3D"text-decoration:none;color:#202124">=C2=A9 2021=
+ Google Ireland Ltd, Gordon House, Barrow Street, Dublin 4, Ireland.</a></t=
+d>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+
+</tbody></table>
+
+
+
+
+
+
+<table><tbody><tr>
+<td width=3D"360" height=3D"1" align=3D"left" valign=3D"top" style=3D"borde=
+r-collapse:collapse;line-height:1px">
+<img src=3D"https://www.gstatic.com/gumdrop/files/spacer-11.gif" alt=3D"" w=
+idth=3D"100%" height=3D"1" border=3D"0" style=3D"display:block">
+</td>
+</tr>
+</tbody></table>
+</div>
+
+ </div></div></div>
+
+--000000000000a0e21d05c5e22532--

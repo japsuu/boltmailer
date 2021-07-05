@@ -1,0 +1,161 @@
+Delivered-To: 0481664@gmail.com
+Received: by 2002:a02:c808:0:0:0:0:0 with SMTP id p8csp4751703jao;
+        Tue, 29 Jun 2021 02:57:24 -0700 (PDT)
+X-Received: by 2002:a05:600c:2301:: with SMTP id 1mr12274897wmo.132.1624960644298;
+        Tue, 29 Jun 2021 02:57:24 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1624960644; cv=none;
+        d=google.com; s=arc-20160816;
+        b=EFjxamouNyOMQJ5aLj8vcyVgc45tRGNjlmueRcR8JMbraG+XXGJVdtPs0l+g1PPSf5
+         Rv0O554ZqUUyICZ1XoiFlQXWod4iX9IjLQ51lWJW3+UwCWuPk0ywt59jJG/7Md5F68OA
+         jrfmJEPBUrsUcgHmb0J2pTARR28N1Vst0zqJfiPkJRivLW+qvN0o4nYWSzkK9v3dZwr0
+         o5Wvzw6iWy9n2AmAXD16rjeNqy1pYX4JHErMVA1UligYhvGwRfav02ADlO5LXjcOqpL9
+         11VRFiekuBmfqld3GW5+9huB8fUXIL8oLT1fzvb98WJnlBifvUaJlPzqSY5cWcCSKiiF
+         TQbQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=EKl/5+XUm+FjS8rU0+Q7rlLtcwA8mLTwrOqHo07KuvY=;
+        b=SHQtJDwkVwXKYxnheFbG+XkGJMLwHYNC70j6K5XjmXFXRmS/oxashJTQiT3YDz2tOm
+         xFcVfmAZJGGEcrNDBRBxQjZ6l8/riNJDrU834ic5ftq+P0L+nGm6IAA9EtoNZz61Yw3D
+         eFPQ1qShm8xBFWvUw764xHj1uKHD8hkgWO3Mn5oH5DHQN1+TXfsEcQvRgfH9siNvrnyu
+         gdHunTphbZMsPu/BOHYhrRgl6ZEVhKNhTcZq7y/nUBQgwoU15mQaval4ps7QyjXdJs1a
+         ZMx3BBzg4axM5bcPIeapDoaLUPGX5LPRv2bEPbtePsL50bFUhxfTOlSsZDZeZojxzO2f
+         20tg==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZtfBszn2;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <japsu.honkasalo@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id t16sor1254781wmq.5.2021.06.29.02.57.24
+        for <0481664@gmail.com>
+        (Google Transport Security);
+        Tue, 29 Jun 2021 02:57:24 -0700 (PDT)
+Received-SPF: pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=ZtfBszn2;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=EKl/5+XUm+FjS8rU0+Q7rlLtcwA8mLTwrOqHo07KuvY=;
+        b=ZtfBszn2GixLf1HAbREF/RwTN7JF3MJ4k1z6sSGnlrDGInOuPlAQQgTlVAiaWQJPRA
+         L4/hnyaNMkvudgaron9EOkUZex00/6jKx5X5UJy0g3Va8jnJmh/1m51QUCY1bx+FbsI9
+         BDqcb44pmaskzfo/OGGXqxsD4V927t3REsEOF5uhkrNqhgaBf0JzROKjkFOKFwu6ImBT
+         0Cde6qH4OROC1gTPZ7n1Zp/oPXmBHQE1mJZDCm7huT2if4NId/MwL1dXsnb1q7HlJxeF
+         rRX3i6ZMuVBL/dWK2Cg/UsPGBsbv1ERqjRv2S50BRj0RSMKIjdz5MQku7Qr/sGfGp2Y5
+         /A7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=EKl/5+XUm+FjS8rU0+Q7rlLtcwA8mLTwrOqHo07KuvY=;
+        b=Aj814utFF7v0GWrwFi1xOOMpAQZ2Oq5YwumL05aQ6jIctAKVMDNiKJMZVnwLjy22W6
+         BJOh5DWOE1r+XBjCI8ayW4grhfhcSMQ20HypRE5ZSxZrtdEZ5zRtWJL/+oaoYAjXnyZj
+         WFhOG5ShOyjg2IHNN/roR3hLO+Kve5Y2Anai2ZMM3gtQLBkBoRaEqq19N5rCcD8NptrD
+         tRRtdz9sWK7P8QW5MTCoveSFcjtCdRrPKjTSfvmj7JWXQNrB6ww/oLK78MXgGnYD0xWU
+         /wiGFKX/u2jU7UObjVkki0VcIhIuJbRu8cZsuz1bjDf2KXn8TDwKiRE/MrHyO4Nk/ODa
+         TBmw==
+X-Gm-Message-State: AOAM533ZVqMeS60m2WYXr1+adi0jI57JwozXs9mr9/GLtKV3ZXPdGaDf
+	Gh/Jq1LhT6x+QPs/w2U0HWcgjghC6ZPKiolHyYVHtLkxAi4=
+X-Google-Smtp-Source: ABdhPJwrMzEPo6mT+cWutZTxlFTETrwFtTAoG64vMXITU73na2EcK3LtyljlyXQbwOGGhIUHOfc69pZPh0Rk7O+3bB0=
+X-Received: by 2002:a1c:5985:: with SMTP id n127mr31376922wmb.75.1624960643902;
+ Tue, 29 Jun 2021 02:57:23 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAKNULYrxFPZG3hLVBw470M7PmE0hMGrBYeREqJb_EHVO8X=pjQ@mail.gmail.com>
+ <0002def4ccf04932b0bd4572711c79a2@HE1PR0102MB3114.eurprd01.prod.exchangelabs.com>
+In-Reply-To: <0002def4ccf04932b0bd4572711c79a2@HE1PR0102MB3114.eurprd01.prod.exchangelabs.com>
+From: Jasper Honkasalo <japsu.honkasalo@gmail.com>
+Date: Tue, 29 Jun 2021 12:57:12 +0300
+Message-ID: <CAKNULYpwMzVNhizTpfG4pAF_n0K89vcN76jbV-bC1qkjEL130Q@mail.gmail.com>
+Subject: Fwd: Automatic reply: Palautus koodihaasteeseen
+To: 0481664@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000f4306f05c5e4a19a"
+
+--000000000000f4306f05c5e4a19a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+teppo testinen
+25.9.2021
+101h
+
+---------- Forwarded message ---------
+From: koodihaaste <koodihaaste@solidabis.com>
+Date: Sat, Jun 5, 2021 at 10:46 PM
+Subject: Automatic reply: Palautus koodihaasteeseen
+To: Jasper Honkasalo <japsu.honkasalo@gmail.com>
+
+
+Moikka!
+
+
+Palautuksesi on vastaanotettu, kiitos osallistumisesta koodihaasteeseen!
+
+Vastausaika haasteessa loppuu 6.6.2021, mink=C3=A4 j=C3=A4lkeen k=C3=A4ymme=
+ kaikki
+vastaukset l=C3=A4pi ja olemme henkil=C3=B6kohtaisesti yhteydess=C3=A4 voit=
+tajiin
+s=C3=A4hk=C3=B6postilla. L=C3=A4het=C3=A4mme kes=C3=A4kuun aikana kaikille =
+osallistujille tiedon
+koodihaasteen tuloksista.
+
+
+Jos ilmoitit olevasi kiinnostunut ty=C3=B6tarjouksista, saatamme olla yhtey=
+dess=C3=A4
+jo ennen voittajien valintaa. Mukavaa kes=C3=A4n alkua!
+
+Terveisin Solidabiksen koodihaastetiimi
+
+--000000000000f4306f05c5e4a19a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">teppo testinen<div>25.9.2021</div><div>101h<br><br><div cl=
+ass=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">---------- Forwar=
+ded message ---------<br>From: <strong class=3D"gmail_sendername" dir=3D"au=
+to">koodihaaste</strong> <span dir=3D"auto">&lt;<a href=3D"mailto:koodihaas=
+te@solidabis.com">koodihaaste@solidabis.com</a>&gt;</span><br>Date: Sat, Ju=
+n 5, 2021 at 10:46 PM<br>Subject: Automatic reply: Palautus koodihaasteesee=
+n<br>To: Jasper Honkasalo &lt;<a href=3D"mailto:japsu.honkasalo@gmail.com">=
+japsu.honkasalo@gmail.com</a>&gt;<br></div><br><br>
+
+
+
+
+
+
+
+
+<div>
+<p class=3D"m_2643791867245037588p1"><span class=3D"m_2643791867245037588s1=
+">Moikka!</span></p>
+<p class=3D"m_2643791867245037588p2"><span class=3D"m_2643791867245037588s1=
+"></span><br>
+</p>
+<p class=3D"m_2643791867245037588p1"><span class=3D"m_2643791867245037588s1=
+">Palautuksesi on vastaanotettu, kiitos osallistumisesta koodihaasteeseen!
+<br>
+</span></p>
+<p class=3D"m_2643791867245037588p1"><span class=3D"m_2643791867245037588s1=
+">Vastausaika haasteessa loppuu 6.6.2021, mink=C3=A4 j=C3=A4lkeen k=C3=A4ym=
+me kaikki vastaukset l=C3=A4pi ja olemme henkil=C3=B6kohtaisesti yhteydess=
+=C3=A4 voittajiin s=C3=A4hk=C3=B6postilla. L=C3=A4het=C3=A4mme kes=C3=A4kuu=
+n aikana kaikille osallistujille tiedon koodihaasteen tuloksista.</span></p=
+>
+<p class=3D"m_2643791867245037588p2"><span class=3D"m_2643791867245037588s1=
+"></span><br>
+</p>
+<p class=3D"m_2643791867245037588p1"><span class=3D"m_2643791867245037588s1=
+">Jos ilmoitit olevasi kiinnostunut ty=C3=B6tarjouksista, saatamme olla yht=
+eydess=C3=A4 jo ennen voittajien valintaa. Mukavaa kes=C3=A4n alkua!
+<br>
+</span></p>
+<p class=3D"m_2643791867245037588p1"><span class=3D"m_2643791867245037588s1=
+">Terveisin Solidabiksen koodihaastetiimi</span></p>
+</div>
+
+</div></div></div>
+
+--000000000000f4306f05c5e4a19a--

@@ -16,6 +16,8 @@ namespace Boltmailer_mainserver
 
         static void Main(string[] args)
         {
+            ConfigManager.ReadConfig();
+
             Console.WriteLine(GetTitleText());
             Console.WriteLine("Open help with '#help'");
             string startOnOpen = ConfigurationManager.AppSettings.Get("StartReaderOnOpen");
@@ -48,6 +50,10 @@ namespace Boltmailer_mainserver
 
                         Console.WriteLine("Reader stopped.");
                     }
+                }
+                else
+                {
+                    Console.WriteLine("Unknown command, please try #help .");
                 }
             }
         }

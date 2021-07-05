@@ -1,0 +1,531 @@
+Delivered-To: 0481664@gmail.com
+Received: by 2002:a02:c808:0:0:0:0:0 with SMTP id p8csp4750323jao;
+        Tue, 29 Jun 2021 02:55:04 -0700 (PDT)
+X-Received: by 2002:a05:600c:3783:: with SMTP id o3mr7271199wmr.123.1624960504543;
+        Tue, 29 Jun 2021 02:55:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1624960504; cv=none;
+        d=google.com; s=arc-20160816;
+        b=XvOPGeAi70LF1K/YjOdUfL0JsbBXnim2dAoCpfqzdlIOh9xrkHwGhb8cNTH7ZQd9yK
+         VD/V4gETdqSzS8nlcciGBGyWtGeFIJUz7GXikSxh7vLOA01GZNCUd3XefP7Z5dZsKkKM
+         TpdJOOAG1DGEu0V7zlQ+qSN6ga6emZBkkHinUgSzB/ZmkbUVMZin/3DwFzB+yoDIVSLr
+         vfE/g3yGA7ZZcH0DJQsXUtGt3mIZiK02PZNIB1lZMkn410W8ZZRPdex2N3X2cL8j4Ydr
+         /O0repqkaVRCwWpHrVQIyk+Fvtr/rlDjJEYv8iX9dBytWQauNpBJua0T4tUoNvMYAZMR
+         cFGw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=KSep30f9yt0lEOlEFMwjo+vm3Cg5+3214IK8RXRmgN4=;
+        b=sUNEzl22HLL8vmlC2TEUuZWEQnvZc9sJ6j1ma5KeDnVf5dnPdmxcyGQhN7cwXyGTF4
+         KD4tI00F2xcp1l3pL7Os4Yiq2gjcONynHBUN3RP/eaUA/cjRSZkXUSc/cPODLKX/UVH1
+         Dtjtijh4yiscw7lh0rdOb9pu1rJlWBZV2BnEKl0OrToquEzbMH20Czr3mP0FRCt3x8XT
+         kD+RjAtx4bF33aI0ZoOKPbdZgtV6o9x2Rm5kzK89rnPkq1fzSzZQGetdFbr6HihSmoQh
+         MPrFrK0PpNADGBKKodl6e4mbXiHcd3Y7ABmoAyipOzYPFV2sL7FURv3r896Ix6Bz0hng
+         d3GQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=u02i74S4;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <japsu.honkasalo@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id z9sor4149486wrr.3.2021.06.29.02.55.04
+        for <0481664@gmail.com>
+        (Google Transport Security);
+        Tue, 29 Jun 2021 02:55:04 -0700 (PDT)
+Received-SPF: pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=u02i74S4;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=KSep30f9yt0lEOlEFMwjo+vm3Cg5+3214IK8RXRmgN4=;
+        b=u02i74S4vAxzTH2JGC0eVtFfALsMU37IxdzxlPfSUyBqssGvYYhnLeq05caOTZkINW
+         wzNSXghURMCj6VIX/3E8uUOhEO02DxX6VgbSJIbjZvh4EFDWi6+Rsqvr0NfnT4NR8Uei
+         uuQ8WBX87VQDGc4RTBj/vBkCuer5rIDNIeHf0sYl1SLAzESv8NVRiGGOfwkRkIzF8zZM
+         Nc+TRAME92YicIeoQwAFaKfJGw52vlfBULvSObYZ6WZ9vj3tg2yHfA+bd5a/m6/JRNka
+         NKKmBuVtm6MYJOyEbuZVcoHT4eVrExdFSTtIheDgSgS9QDYBq4lQj7/LitdrSeBiHDEw
+         nkPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=KSep30f9yt0lEOlEFMwjo+vm3Cg5+3214IK8RXRmgN4=;
+        b=iWTNoV1xygF0K/4eqh7Ryi+scn2wYgvzx0FNh0W1ox3IS/0IiawGltJkKiUaJo4P1x
+         b7WdEeJ1+7/DKVspUdYaLFoUwTCbQk6jk4mDP2UHycvIH5K70z8CAeJ/goN5Cppxaim/
+         KhcDi/w8e3FKr2ZLiuBj18lPIrqpdpiQOW9A0FWdoaff8SBe1ow8E6+E+4t/IFG8B6Kv
+         Jnj599rQbq0ZjSMOfugXrK5rG6XhUQ9RGX9BoIc+PkTd7OMfDSNyGcdlAaa/FZpBimB2
+         PQq10iLmL2C3LoRn+i9zTAg8VTQIUAaNlFeWWcaodrSq3p6DFzT9/rV2c0DHkL/GF5Fi
+         AF5g==
+X-Gm-Message-State: AOAM532O+wxJ2GxmCVSzEOuzgEKSr543ntRvxi3spo+EUMIj3bIcz6f4
+	ykUAkZGeyhLNQI3z0bxLEy/qrZjeiwRmHAxXpYDL4a3qkLk=
+X-Google-Smtp-Source: ABdhPJw6Vql4fYXwoXYMFwkvWul57S3DbbAdTWhUN9jMWEMQU62LQZD2TYB89D49TCsOvmKxkfrKrP50/7yytQgZfQU=
+X-Received: by 2002:adf:9bd0:: with SMTP id e16mr32512315wrc.392.1624960504129;
+ Tue, 29 Jun 2021 02:55:04 -0700 (PDT)
+MIME-Version: 1.0
+References: <db0b9d906d9c2421c0c7b296577313bb1c757d5c-20161147-110960942@google.com>
+In-Reply-To: <db0b9d906d9c2421c0c7b296577313bb1c757d5c-20161147-110960942@google.com>
+From: Jasper Honkasalo <japsu.honkasalo@gmail.com>
+Date: Tue, 29 Jun 2021 12:54:52 +0300
+Message-ID: <CAKNULYr2gSpRsU78ahcegJO+bz7oWSHYir9P4LQUxw_1AiGfdw@mail.gmail.com>
+Subject: Fwd: Jasper: Enroll for the 15% service fee in Google Play Console
+To: 0481664@gmail.com
+Content-Type: multipart/alternative; boundary="0000000000009f6b7305c5e4994f"
+
+--0000000000009f6b7305c5e4994f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+taija ter=C3=A4v=C3=A4
+ensi viikolla joku p=C3=A4iv=C3=A4
+62h
+
+---------- Forwarded message ---------
+From: Google Play <googleplay-noreply@google.com>
+Date: Wed, Jun 9, 2021 at 10:03 AM
+Subject: Jasper: Enroll for the 15% service fee in Google Play Console
+To: <japsu.honkasalo@gmail.com>
+
+
+In March 2021, we announced a new service fee tier. Read on to learn how to
+enroll.
+View as webpage
+<https://notifications.google.com/g/vib/AD-FnEyFV6spbFUzdX-vGYUw1I1ba0QwVFf=
+joUjmow_3o2ZHCZvJ8Gi4g7AplZf7h3BXimh5ehOTmP-YzrT08VAQu4h8nwh_l6QKROekNe7lJb=
+ovjTlTHqDdZrDEJ-cz_SgLg9lRVQzb72qTnrPiZE-moq4LjADgcDyLdg4kWE6hJNgees3a0kiRT=
+3zL5RwyudjucuIooEBr>
+Developer update
+
+Hi Google Play developer,
+
+In March 2021, we announced
+<https://notifications.google.com/g/p/AD-FnEzrNR85e1WXJrNJAPpqMrEXvzmTNn01v=
+n_kQEKoryAVFhXtmsTrEB4gW1ddbU5i56zY785xu5L88aCOPgLesZJseCeCAOI1qRSe7PPVzs6r=
+KgQjMGpfBAz1OIDOBHwcxH-HeoNZwUbQRdgAhslLmndJeSc36Krm1rC7s5E7iBQ>
+that starting July 1, 2021, the service fee will be 15% instead of 30% for
+the first $1M (USD) you earn each year when you sell digital goods or
+services.
+
+*Starting today, you can enroll for the 15% service fee tier in Google Play
+Console.*
+
+To enroll, log into Play Console and:
+=E2=80=A2
+
+Create an account group
+<https://notifications.google.com/g/p/AD-FnEwvTqnilJMziSmicUaBHdeq4O2pdK96q=
+jVyS24s66gG5DuOoBkzth5-nWAO2dygle0wtjJ2MU3ZAqL9gfEgh8h1wNjsSDa72vBXDbyRyyyh=
+Po-nkfV2o3EDgEkrGQb8qjn5GUHTicVGqPgnBqCqlN8zUXz2bqkqG9iyg3BjHB5U6dt64zFmfVb=
+J6A>
+and let us know if you have any associated developer accounts, and
+=E2=80=A2
+
+Accept the service fee terms and conditions.
+
+Because we=E2=80=99re launching the program halfway through the year, the t=
+hreshold
+will be prorated so the service fee will be 15% instead of 30% for the
+first $500,000 (USD). If enrollment is completed after July 1st, earnings
+are counted from the day you enroll.
+
+For more details, please see our Help Center article
+<https://notifications.google.com/g/p/AD-FnExng2quSkh7_KXKmxEJoiuSr78tAQdWm=
+7HwgIpPHvuYjKA-varK9uHtXguOwvgSFVCyzlt5HztFdzEyksW1tdCoqYxpIaI0EjYKcIdrft2g=
+zgrlb2Lrn8_lbPPDH_msT5GkpKbf8O4P1csmgxxeMDelhe91pmZ4rARsRRa3n2SgMuKIUNo>
+.
+Thanks,
+The Google Play team
+Connect with us
+[image: Help]
+<https://notifications.google.com/g/p/AD-FnEz9bwiBm_tzr-KBwRnkAJdD4Cmmq7zD0=
+INuJcV8P7tVGoOsWvssR3BUPFu_IBiY8EoKs8ehZvv8JWgVoNJ0nkmfuUoWIfknY-y4_Vyiyo-G=
+eTy3sCIi3dWeGe8x3XNUOhtW1boqsSDkDva6o8B05BHVauvehT4hErvsJAr1XJw2>
+[image:
+Play Icon]
+<https://notifications.google.com/g/p/AD-FnEzCA_RVPkJWdwUgxVFPNYdahc7DX-Nxa=
+acF3L9r53IhkDb8DX4ZkTLg9Q8S-x2aky4cP0UaPzvfMakL2GCmZcGooK7xapZ6MYX8DECUIJRs=
+evVm7qKp1YTlULjt9X4heb6ACiVNryavbA>
+[image:
+Play Academy]
+<https://notifications.google.com/g/p/AD-FnExfY7aOQevdMzlKV1C9dVuKlfiDReJ98=
+O0-uZXuporm7ytqJV8wwTBONe-oce9bsVYTQ5E6-_5RIlpxaKaIoOwrnXrYqHvNdoWwdHVIfD-z=
+bf0uKiy-w1nnO7abrN_eki8_Y1hBryQxKbqh4AaBMnODdnizqEJQHvqEWnX1CDG5qyol5y6JgBK=
+PpL4gVwf_t2w8dlGxdju7lKgykpTuff9PE0yONVdAYQ>
+=C2=A9 2021 Google LLC 1600 Amphitheatre Parkway, Mountain View, CA 94043, =
+USA
+<#m_-3736145972365236070_>
+This message was sent to japsu.honkasalo@gmail.com
+<#m_-3736145972365236070_> to inform you about important updates on your
+Google Play developer account.
+
+--0000000000009f6b7305c5e4994f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">taija ter=C3=A4v=C3=A4<div>ensi viikolla joku p=C3=A4iv=C3=
+=A4</div><div>62h<br><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">---------- Forwarded message ---------<br>From: <strong cla=
+ss=3D"gmail_sendername" dir=3D"auto">Google Play</strong> <span dir=3D"auto=
+">&lt;<a href=3D"mailto:googleplay-noreply@google.com">googleplay-noreply@g=
+oogle.com</a>&gt;</span><br>Date: Wed, Jun 9, 2021 at 10:03 AM<br>Subject: =
+Jasper: Enroll for the 15% service fee in Google Play Console<br>To:  &lt;<=
+a href=3D"mailto:japsu.honkasalo@gmail.com">japsu.honkasalo@gmail.com</a>&g=
+t;<br></div><br><br>=20
+
+=20
+
+<u></u>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style=3D"margin:0 auto;padding:0px">
+
+<p style=3D"padding-top:0;font-size:0px;line-height:0px;color:#ffffff" alig=
+n=3D"center">In March 2021, we announced a new service fee tier. Read on to=
+ learn how to enroll.</p>
+
+<table role=3D"presentation" align=3D"center" border=3D"0" cellspacing=3D"0=
+" cellpadding=3D"0" width=3D"100%">
+<tbody><tr>
+<td align=3D"center" valign=3D"top">
+
+<table role=3D"presentation" border=3D"0" cellspacing=3D"0" cellpadding=3D"=
+0" bgcolor=3D"#ffffff" width=3D"1024" style=3D"max-width:1024px;width:100%"=
+ align=3D"center">
+
+
+
+<tbody><tr>
+<td align=3D"center" valign=3D"top" bgcolor=3D"#ffffff" background=3D"https=
+://services.google.com/fh/files/emails/play_dev_dark_mode_116.png" style=3D=
+"background:url(https://ci4.googleusercontent.com/proxy/e6tMYOulrG3VBeh1WdX=
+d2A45oOGOtfvB1jM68REJ8ABH0AmeMMegEaQXprdkIhMTYgBEXnlxGzs3wHqmeQgQgSKTzhApjK=
+H6_AKuzxnB2heaICyeCiGFenU=3Ds0-d-e1-ft#https://services.google.com/fh/files=
+/emails/play_dev_dark_mode_116.png);background-repeat:repeat-x;background-s=
+ize:100%;width:1px" width=3D"1px">
+<table role=3D"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0">
+<tbody>
+
+<tr>
+<td class=3D"m_-3736145972365236070view_as" align=3D"center" valign=3D"midd=
+le" style=3D"font-family:Roboto,Google Sans,Helvetica,Arial,sans-serif;font=
+-size:10px;color:#424242;line-height:18px;padding:10px 0px 9px 0;border-bot=
+tom:#f5f5f5 1px solid"><a href=3D"https://notifications.google.com/g/vib/AD=
+-FnEyFV6spbFUzdX-vGYUw1I1ba0QwVFfjoUjmow_3o2ZHCZvJ8Gi4g7AplZf7h3BXimh5ehOTm=
+P-YzrT08VAQu4h8nwh_l6QKROekNe7lJbovjTlTHqDdZrDEJ-cz_SgLg9lRVQzb72qTnrPiZE-m=
+oq4LjADgcDyLdg4kWE6hJNgees3a0kiRT3zL5RwyudjucuIooEBr" style=3D"text-decorat=
+ion:none;color:#424242;font-size:10px" target=3D"_blank">View as webpage</a=
+></td>
+</tr>
+
+
+<tr>
+<td align=3D"center" valign=3D"top" width=3D"100%;">
+
+<table role=3D"presentation" border=3D"0" cellspacing=3D"0" cellpadding=3D"=
+0" width=3D"647" style=3D"max-width:647px;width:100%">
+<tbody><tr>
+<td align=3D"left" valign=3D"top">
+<table role=3D"presentation" border=3D"0" cellspacing=3D"0" cellpadding=3D"=
+0" width=3D"100%">
+<tbody><tr>
+<td align=3D"left" valign=3D"top">
+<table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0">
+<tbody>
+<tr>
+<td align=3D"left" valign=3D"top" class=3D"m_-3736145972365236070pd-l-30 m_=
+-3736145972365236070logopadd" width=3D"155" height=3D"auto" style=3D"paddin=
+g-top:24px;padding-bottom:23px"><img aria-hidden=3D"true" src=3D"https://se=
+rvices.google.com/fh/files/emails/logo_web_play_dev_updated_dark.png" style=
+=3D"display:block" width=3D"155" height=3D"auto" class=3D"m_-37361459723652=
+36070logo109" title=3D"Google Play" alt=3D""></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td align=3D"right" valign=3D"top">
+<table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0">
+<tbody>
+<tr>
+<td align=3D"right" class=3D"m_-3736145972365236070pd-r-30 m_-3736145972365=
+236070pd-t-28 m_-3736145972365236070pd-b-21" valign=3D"top" style=3D"font-f=
+amily:Roboto,Google Sans,Helvetica,Arial,sans-serif;font-size:14px;color:#4=
+24242;line-height:21px;padding:33px 0px 30px 0px"> Developer update </td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+
+</td>
+</tr>
+
+</tbody>
+</table>
+</td>
+</tr>
+
+<tr>
+<td height=3D"25" align=3D"right" valign=3D"top" style=3D"border-collapse:c=
+ollapse;line-height:25px" bgcolor=3D"#546E7A"><img src=3D"https://services.=
+google.com/fh/files/emails/spacer_11.gif" width=3D"100%" height=3D"25" bord=
+er=3D"0" alt=3D"" style=3D"display:block"></td>
+</tr>
+
+
+<tr>
+<td align=3D"left" valign=3D"top">
+<table role=3D"presentation" border=3D"0" cellspacing=3D"0" cellpadding=3D"=
+0" align=3D"center" width=3D"647" style=3D"max-width:647px;width:100%">
+<tbody>
+<tr>
+<td align=3D"left" valign=3D"top" class=3D"m_-3736145972365236070pd-lr-30" =
+style=3D"padding-top:32px;padding-bottom:1px"><table role=3D"presentation" =
+cellpadding=3D"0" cellspacing=3D"0" width=3D"647" align=3D"left" style=3D"m=
+ax-width:647px;width:100%">
+<tbody>
+<tr>
+<td align=3D"left" valign=3D"top"><table role=3D"presentation" cellpadding=
+=3D"0" cellspacing=3D"0" border=3D"0">
+<tbody><tr>
+<td width=3D"100%" align=3D"left" valign=3D"top"><table role=3D"presentatio=
+n" width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=3D"0">
+<tbody><tr>
+<td style=3D"padding-top:0px;padding-bottom:16px" align=3D"left" valign=3D"=
+top"><p style=3D"margin:0;font-family:Roboto,Helvetica,Arial,sans-serif;fon=
+t-size:14px;color:#424242;line-height:22px;padding-right:20px">Hi Google Pl=
+ay developer,</p></td>
+</tr>
+<tr>
+<td style=3D"padding-top:0px;padding-bottom:16px" align=3D"left" valign=3D"=
+top"><p style=3D"margin:0;font-family:Roboto,Helvetica,Arial,sans-serif;fon=
+t-size:14px;color:#424242;line-height:22px;padding-right:20px">In March 202=
+1, we <a href=3D"https://notifications.google.com/g/p/AD-FnEzrNR85e1WXJrNJA=
+PpqMrEXvzmTNn01vn_kQEKoryAVFhXtmsTrEB4gW1ddbU5i56zY785xu5L88aCOPgLesZJseCeC=
+AOI1qRSe7PPVzs6rKgQjMGpfBAz1OIDOBHwcxH-HeoNZwUbQRdgAhslLmndJeSc36Krm1rC7s5E=
+7iBQ" style=3D"text-decoration:none;color:#004dcf" target=3D"_blank">announ=
+ced</a> that starting July 1, 2021, the service fee will be 15% instead of =
+30% for the first $1M (USD) you earn each year when you sell digital goods =
+or services.</p></td>
+</tr>
+<tr>
+<td style=3D"padding-top:0px;padding-bottom:16px" align=3D"left" valign=3D"=
+top"><p style=3D"margin:0;font-family:Roboto,Helvetica,Arial,sans-serif;fon=
+t-size:14px;color:#424242;line-height:22px;padding-right:20px"><strong>Star=
+ting today, you can enroll for the 15% service fee tier in Google Play Cons=
+ole.</strong></p></td>
+</tr>
+<tr>
+<td style=3D"padding-top:0px;padding-bottom:16px" align=3D"left" valign=3D"=
+top"><p style=3D"margin:0;font-family:Roboto,Helvetica,Arial,sans-serif;fon=
+t-size:14px;color:#424242;line-height:22px;padding-right:20px">To enroll, l=
+og into Play Console and:</p></td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top" style=3D"padding-left:10px;padding-bottom=
+:16px">
+<table role=3D"presentation" cellpadding=3D"0" cellspacing=3D"0" border=3D"=
+0">
+<tbody><tr>
+<td aria-hidden=3D"true" width=3D"20" align=3D"center" valign=3D"top" style=
+=3D"line-height:22px">=E2=80=A2</td>
+<td style=3D"padding-top:0px;padding-bottom:5px" align=3D"left" valign=3D"t=
+op"><p style=3D"margin:0;font-family:Roboto,Helvetica,Arial,sans-serif;font=
+-size:14px;color:#424242;line-height:22px;padding-right:0px"><a href=3D"htt=
+ps://notifications.google.com/g/p/AD-FnEwvTqnilJMziSmicUaBHdeq4O2pdK96qjVyS=
+24s66gG5DuOoBkzth5-nWAO2dygle0wtjJ2MU3ZAqL9gfEgh8h1wNjsSDa72vBXDbyRyyyhPo-n=
+kfV2o3EDgEkrGQb8qjn5GUHTicVGqPgnBqCqlN8zUXz2bqkqG9iyg3BjHB5U6dt64zFmfVbJ6A"=
+ style=3D"text-decoration:none;color:#004dcf" target=3D"_blank">Create an a=
+ccount group</a> and let us know if you have any associated developer accou=
+nts, and</p></td>
+</tr>
+<tr>
+<td aria-hidden=3D"true" width=3D"20" align=3D"center" valign=3D"top" style=
+=3D"line-height:22px">=E2=80=A2</td>
+<td style=3D"padding-top:0px;padding-bottom:0px" align=3D"left" valign=3D"t=
+op"><p style=3D"margin:0;font-family:Roboto,Helvetica,Arial,sans-serif;font=
+-size:14px;color:#424242;line-height:22px;padding-right:0px">Accept the ser=
+vice fee terms and conditions.</p></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td style=3D"padding-top:0px;padding-bottom:16px" align=3D"left" valign=3D"=
+top"><p style=3D"margin:0;font-family:Roboto,Helvetica,Arial,sans-serif;fon=
+t-size:14px;color:#424242;line-height:22px;padding-right:20px">Because we=
+=E2=80=99re launching the program halfway through the year, the threshold w=
+ill be prorated so the service fee will be 15% instead of 30% for the first=
+ $500,000 (USD). If enrollment is completed after July 1st, earnings are co=
+unted from the day you enroll.</p></td>
+</tr>
+<tr>
+<td style=3D"padding-top:0px;padding-bottom:25px" align=3D"left" valign=3D"=
+top"><p style=3D"margin:0;font-family:Roboto,Helvetica,Arial,sans-serif;fon=
+t-size:14px;color:#424242;line-height:22px;padding-right:20px">For more det=
+ails, please see our <a href=3D"https://notifications.google.com/g/p/AD-FnE=
+xng2quSkh7_KXKmxEJoiuSr78tAQdWm7HwgIpPHvuYjKA-varK9uHtXguOwvgSFVCyzlt5HztFd=
+zEyksW1tdCoqYxpIaI0EjYKcIdrft2gzgrlb2Lrn8_lbPPDH_msT5GkpKbf8O4P1csmgxxeMDel=
+he91pmZ4rARsRRa3n2SgMuKIUNo" style=3D"text-decoration:none;color:#004dcf" t=
+arget=3D"_blank">Help Center article</a><span aria-hidden=3D"true">.</span>=
+</p></td>
+</tr>
+</tbody></table></td>
+</tr>
+</tbody></table></td>
+</tr>
+
+
+<tr>
+<td align=3D"center" valign=3D"top" style=3D"padding-top:15px;border-top:#f=
+1f3f4 2px solid"><table role=3D"presentation" width=3D"647" border=3D"0" ce=
+llspacing=3D"0" cellpadding=3D"0" style=3D"max-width:647px;width:100%">
+<tbody>
+<tr>
+<td align=3D"left" valign=3D"top" style=3D"padding-bottom:32px" class=3D"m_=
+-3736145972365236070dblock m_-3736145972365236070w-100"><table role=3D"pres=
+entation" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+
+<tbody>
+<tr>
+<td class=3D"m_-3736145972365236070lh16" align=3D"left" valign=3D"top" styl=
+e=3D"font-family:Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-heig=
+ht:28px;color:#424242">Thanks,</td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top" style=3D"font-family:Roboto,Helvetica,Ari=
+al,sans-serif;font-size:20px;line-height:30px;color:#424242">The Google Pla=
+y team</td>
+</tr>
+<tr>
+<td align=3D"left" valign=3D"top" style=3D"font-family:Roboto,Helvetica,Ari=
+al,sans-serif;font-size:14px;line-height:22px;color:#424242;padding-top:20p=
+x">Connect with us</td>
+</tr>
+
+<tr>
+<td align=3D"left" valign=3D"top" style=3D"padding-top:10px"><table role=3D=
+"presentation" width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+<tbody>
+<tr>
+<td align=3D"left"><table role=3D"presentation" border=3D"0" cellspacing=3D=
+"0" cellpadding=3D"0" align=3D"left">
+<tbody>
+<tr>
+
+<td width=3D"28" align=3D"center"><a href=3D"https://notifications.google.c=
+om/g/p/AD-FnEz9bwiBm_tzr-KBwRnkAJdD4Cmmq7zD0INuJcV8P7tVGoOsWvssR3BUPFu_IBiY=
+8EoKs8ehZvv8JWgVoNJ0nkmfuUoWIfknY-y4_Vyiyo-GeTy3sCIi3dWeGe8x3XNUOhtW1boqsSD=
+kDva6o8B05BHVauvehT4hErvsJAr1XJw2" style=3D"text-decoration:none" target=3D=
+"_blank"> <img src=3D"https://services.google.com/fh/files/emails/help_icon=
+_image_updated_msa.png" width=3D"28" alt=3D"Help" title=3D"Help" style=3D"d=
+isplay:block"></a></td>
+<td aria-hidden=3D"true" width=3D"13"><img src=3D"https://services.google.c=
+om/fh/files/emails/spacer_11.gif" width=3D"10" height=3D"1" border=3D"0" st=
+yle=3D"display:block"></td>
+<td width=3D"28" align=3D"center"><a href=3D"https://notifications.google.c=
+om/g/p/AD-FnEzCA_RVPkJWdwUgxVFPNYdahc7DX-NxaacF3L9r53IhkDb8DX4ZkTLg9Q8S-x2a=
+ky4cP0UaPzvfMakL2GCmZcGooK7xapZ6MYX8DECUIJRsevVm7qKp1YTlULjt9X4heb6ACiVNrya=
+vbA" style=3D"text-decoration:none" target=3D"_blank"><img src=3D"https://s=
+ervices.google.com/fh/files/emails/google_play_icon_msa.png" width=3D"28" a=
+lt=3D"Play Icon" title=3D"Play Icon" style=3D"display:block"></a></td>
+<td aria-hidden=3D"true" width=3D"13"><img src=3D"https://services.google.c=
+om/fh/files/emails/spacer_11.gif" width=3D"10" height=3D"1" border=3D"0" st=
+yle=3D"display:block"></td>
+<td width=3D"28" align=3D"center"><a href=3D"https://notifications.google.c=
+om/g/p/AD-FnExfY7aOQevdMzlKV1C9dVuKlfiDReJ98O0-uZXuporm7ytqJV8wwTBONe-oce9b=
+sVYTQ5E6-_5RIlpxaKaIoOwrnXrYqHvNdoWwdHVIfD-zbf0uKiy-w1nnO7abrN_eki8_Y1hBryQ=
+xKbqh4AaBMnODdnizqEJQHvqEWnX1CDG5qyol5y6JgBKPpL4gVwf_t2w8dlGxdju7lKgykpTuff=
+9PE0yONVdAYQ" style=3D"text-decoration:none" target=3D"_blank"><img src=3D"=
+https://services.google.com/fh/files/emails/google_play_play_academy_logo.p=
+ng" width=3D"28" alt=3D"Play Academy" title=3D"Play Academy" style=3D"displ=
+ay:block"></a></td>
+</tr>
+
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+
+
+<tr>
+<td class=3D"m_-3736145972365236070pd-t-40 m_-3736145972365236070pd-lr-30" =
+bgcolor=3D"#F1F3F4" align=3D"center" valign=3D"top" style=3D"padding-top:32=
+px;padding-bottom:33px">
+
+<table role=3D"presentation" border=3D"0" cellspacing=3D"0" cellpadding=3D"=
+0" width=3D"647" style=3D"max-width:647px;width:100%" align=3D"center">
+
+<tbody>
+
+
+<tr>
+<td role=3D"text" class=3D"m_-3736145972365236070pd-0 m_-373614597236523607=
+0text-left" align=3D"center" valign=3D"top" style=3D"color:#424242;font-fam=
+ily:Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:18px;paddi=
+ng-left:25px;padding-right:25px;padding-top:0px">
+=C2=A9 2021 <a href=3D"#m_-3736145972365236070_" style=3D"text-decoration:n=
+one;color:#424242">Google LLC 1600 Amphitheatre Parkway, Mountain View, CA =
+94043, USA</a>
+</td>
+</tr>
+
+
+<tr>
+<td role=3D"text" class=3D"m_-3736145972365236070text-left" align=3D"center=
+" valign=3D"top" style=3D"color:#424242;font-family:Roboto,Helvetica,Arial,=
+sans-serif;font-size:12px;line-height:18px;padding-top:16px">This message w=
+as sent to <a href=3D"#m_-3736145972365236070_" style=3D"text-decoration:no=
+ne;color:#424242">japsu.honkasalo@gmail.com</a> to inform you about importa=
+nt updates on your Google Play developer account.</td>
+</tr>
+
+</tbody>
+</table>
+
+</td>
+</tr>
+
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+
+
+
+<img alt=3D"" height=3D"1" width=3D"3" src=3D"https://notifications.google.=
+com/g/img/AD-FnEyy30_h7hO7E7xGXdlmD5F958fb911D1kq72yFiI8SMNlE.gif"></div>
+</div></div></div>
+
+--0000000000009f6b7305c5e4994f--

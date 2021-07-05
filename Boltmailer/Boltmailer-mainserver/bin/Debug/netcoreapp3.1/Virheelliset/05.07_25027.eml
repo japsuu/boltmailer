@@ -1,0 +1,388 @@
+Delivered-To: 0481664@gmail.com
+Received: by 2002:a02:6f1a:0:0:0:0:0 with SMTP id x26csp1703423jab;
+        Mon, 5 Jul 2021 01:21:19 -0700 (PDT)
+X-Received: by 2002:a05:600c:198c:: with SMTP id t12mr13159063wmq.140.1625473279148;
+        Mon, 05 Jul 2021 01:21:19 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1625473279; cv=none;
+        d=google.com; s=arc-20160816;
+        b=LgduQCIxpZe8HXJDF99erh4BmnZtIkN8jtpmw46Cw+MjLZ4XATeGdCE7qlGkRODouG
+         Kwu+kCeV7ScnflwU/T3f5DNiASvTw0b/kMIeJyQ4oEX13onpK136YaZfCDcDYxe06KUm
+         H6R0enivHAA/eHhQYqsoB4qvQ8LCU+bFVSLNP0VIt/jJchiAPCrU0jUygeY56DXsyo91
+         3VUMXFxRQgjX5QSklqdLP6Q9lkpNJWcztzK92YEmLfzEEMBnGcu92CPpNtb1UAxwuYHk
+         nKdNSVWj/YC/NrMz4UMP3Itu45vwHw9hWGFZ4y/hSwoaxcsAWKJO79aUeYeIpoWNIa2n
+         i0dQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=CDEEJs3Q/TofzplvCdxGQ1en9okgrEd7EH4zxLhj2LE=;
+        b=TM3IJTQlw6F1EmSz7XmyLWrTd+gKuRVQvBC41b4NjhoV9JmLPaLm8itcTGzKfRQpL6
+         03xJXAV2tTF0jHvzyC9mIBbwYBT8wsED2ePrCGJd51QVgtWBQgPZMCQQ0teB5SLGOHlg
+         zI8FEiEh6CvJnZIkLmf/mLj2oyjzRPQQQsu0vOCUatYHXrIgqnt+BLow6cE3QK15A4vz
+         5a3OHYKrMebeVAUC14eaqJu1cd0/B7wILySwKLm+39EqVCI4W/WxYhgHpQQhVKok1Kq+
+         3iMsFd4m6W0V7J17UEFf2+C3czoYL1ez4VzFHmhk0g5wp9pGw3/gNF79lNizYWh0xYlX
+         9gww==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b="N18Ib/q0";
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <japsu.honkasalo@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id v11sor2437064wrt.19.2021.07.05.01.21.19
+        for <0481664@gmail.com>
+        (Google Transport Security);
+        Mon, 05 Jul 2021 01:21:19 -0700 (PDT)
+Received-SPF: pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b="N18Ib/q0";
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=CDEEJs3Q/TofzplvCdxGQ1en9okgrEd7EH4zxLhj2LE=;
+        b=N18Ib/q0aYCv4opdB0NIGeoybl5Csg9tcI3hPVzeDnqqGlipdsf0qurUzfAm71qoKn
+         E7GmRwCBZNMMMjlQQoVhHBr+OMNiXpUbw4JcRcWFglMUwnE3zRmolNS9+zBGO6XvwrXV
+         5EgYivTtgpUgD9z6sM4tKimDTMFTIZZNQxB680GaB+GtdbAucYlk9GoTaSye10WcMFCB
+         +sjpvesaAadCHdUUDNCafxCRtgpptpUX6enlqaCUS+LRhxroNTZkE1TnDZiClzjwj19P
+         nvSARkP+2+6tBDN3z6JIuCQl13on4f4itOubpfOTz7owP08qeAsJVpK7xZCllImSDLSy
+         0U/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=CDEEJs3Q/TofzplvCdxGQ1en9okgrEd7EH4zxLhj2LE=;
+        b=VMnnAiyy9+U9u79AqUJ1lYWtz2Ulz++qipm2qotiaxaDZWeRdCsUndQM38tfYgtN3W
+         j98Q1OiSD9D5a86M9rBgXQ8MW1luNyXWSSpd+SWvcYYxAAfDrPBvW13QL9HUSMBpx37+
+         ghiK5CEssDG4ePLD2hozvxl+KkXoKADudn9eqmBqsEoE5hehnJAVj4EFkdsS4CKAUzU3
+         7og1nov3pv5aK4+UJUGIboCb0GGYWzcalAeu02t8IgpGgHBa3CUAkVlwKzOs+NGF9YDz
+         9mGFkZtQdUMkwNj8+KfxuNEtPadlWqlRC08XSCGooQFdJ5HsnbO74ymwhdteyLZ6CWpc
+         kzaA==
+X-Gm-Message-State: AOAM532kH3RT6s/lrPVH7JlUYGJ4UHtXsX8CgF/3NCtw4S+VRiD8c0gt
+	KIWkEnaarzw5uQ3eLCpHdgyLLHDwcgyKQ54fbIp6l2GphEAWwA==
+X-Google-Smtp-Source: ABdhPJw8/xiPJjKyUxU4z5WqPYmmdextdG783OlK3SzkBw13Y1rq41HuUOAtNej1JF5eKCfX99wqS7vSHdTsJZgfs3I=
+X-Received: by 2002:adf:fc47:: with SMTP id e7mr14651938wrs.284.1625473278717;
+ Mon, 05 Jul 2021 01:21:18 -0700 (PDT)
+MIME-Version: 1.0
+References: <01000179e76a52b8-bd4776ac-5d8c-4656-b002-ff2cdf2e6209-000000@email.amazonses.com>
+ <CAKNULYr5S9Tqw6_zpAEaAaNEm5oWu0hx9ZhzkicLve_FWAStGQ@mail.gmail.com> <CAKNULYpzSun_FVkd-qbd0KpGPhomXn71shrj9uAUcuxTsesBxQ@mail.gmail.com>
+In-Reply-To: <CAKNULYpzSun_FVkd-qbd0KpGPhomXn71shrj9uAUcuxTsesBxQ@mail.gmail.com>
+From: Jasper Honkasalo <japsu.honkasalo@gmail.com>
+Date: Mon, 5 Jul 2021 11:21:07 +0300
+Message-ID: <CAKNULYpqnLPubaWYG6YWY4os1rzrwY_U6C+SRxy0hyYc4fR1uQ@mail.gmail.com>
+Subject: Fwd: testitesti
+To: 0481664@gmail.com
+Content-Type: multipart/alternative; boundary="0000000000005eb35f05c65bfd14"
+
+--0000000000005eb35f05c65bfd14
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+update
+ensi perjantaiksi
+8 tuntia
+
+---------- Forwarded message ---------
+From: Reddit <noreply@reddit.com>
+Date: Mon, Jun 7, 2021 at 7:59 PM
+Subject: You=E2=80=99ve authorized a new app in your Reddit account
+To: <japsu.honkasalo@gmail.com>
+
+
+<https://www.reddit.com/>
+u/TheJapsu1
+<https://www.reddit.com/user/TheJapsu1/?correlation_id=3Dffa66534-8041-46fe=
+-aaaf-84732d9aff35&ref=3Doauth2_app_approve&ref_campaign=3Doauth2_app_appro=
+ve&ref_source=3Demail>
+Hi there,
+
+This is a confirmation to let you know that you=E2=80=99ve authorized an ap=
+p to
+access your *TheJapsu1* Reddit account.
+
+App Name: *Infinity for Reddit*
+App ID: *NOe2iKrPPzwscA*
+
+You can review and manage what apps you=E2=80=99ve added or given access to=
+ your
+account at any time, by visiting the apps preferences
+<https://www.reddit.com/prefs/apps> section of your settings.
+
+If you didn=E2=80=99t authorize this app, we recommend that you remove it f=
+rom your
+authorized apps now <https://www.reddit.com/prefs/apps> and update your
+Reddit password <https://www.reddit.com/password> as an extra precaution to
+protect your account. And if you think something weird is going on, let us
+know <https://www.reddithelp.com/en/submit-request/account-issues> and
+we=E2=80=99ll make sure everything=E2=80=99s ok.
+
+P.S. This email was sent automatically (from a bot, not a human), so if you
+respond to this email we won=E2=80=99t get your message. If you need any he=
+lp with
+your account, check out our Account Security FAQs
+<https://www.reddithelp.com/en/categories/privacy-security/account-security=
+>
+or contact support
+<https://www.reddithelp.com/en/submit-request/account-issues> and we=E2=80=
+=99ll get
+back to you as soon as possible.
+<https://www.reddit.com/>
+<https://apps.apple.com/us/app/reddit/id1064216828>
+<https://play.google.com/store/apps/details?id=3Dcom.reddit.frontpage>
+548 Market St., #16093, San Francisco, CA 94104=E2=80=935401
+
+--0000000000005eb35f05c65bfd14
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr"><div class=3D"=
+gmail_quote"><div dir=3D"ltr"><div>update</div><div>ensi perjantaiksi</div>=
+<div>8 tuntia<br><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"g=
+mail_attr">---------- Forwarded message ---------<br>From: <strong class=3D=
+"gmail_sendername" dir=3D"auto">Reddit</strong> <span dir=3D"auto">&lt;<a h=
+ref=3D"mailto:noreply@reddit.com" target=3D"_blank">noreply@reddit.com</a>&=
+gt;</span><br>Date: Mon, Jun 7, 2021 at 7:59 PM<br>Subject: You=E2=80=99ve =
+authorized a new app in your Reddit account<br>To:  &lt;<a href=3D"mailto:j=
+apsu.honkasalo@gmail.com" target=3D"_blank">japsu.honkasalo@gmail.com</a>&g=
+t;<br></div><br><br><u></u>
+
+
+
+=09
+
+=09
+=09
+=09
+=09
+=09
+=09
+=09
+=09
+=09
+=09
+=09
+=09
+
+
+=09
+
+
+<div style=3D"padding:0!important;margin:0 auto!important;display:block!imp=
+ortant;min-width:100%!important;width:100%!important;background:#ffffff">
+	<center>
+		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0" st=
+yle=3D"margin:0;padding:0;width:100%" bgcolor=3D"#ffffff">
+			<tbody><tr>
+				<td style=3D"margin:0;padding:0;width:100%" align=3D"center">
+					<table width=3D"600" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+						<tbody><tr>
+							<td style=3D"width:600px;min-width:600px;font-size:0pt;line-height:0=
+pt;padding:0;margin:0;font-weight:normal">
+								<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+
+								=09
+									<tbody><tr>
+										<td style=3D"font-size:0pt;line-height:0pt;text-align:left">
+											<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0">
+												<tbody><tr>
+													<td style=3D"padding-left:32px;padding-right:32px">
+														<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"0">
+															<tbody><tr>
+																<td style=3D"padding-top:16px;padding-bottom:28px">
+																	<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellp=
+adding=3D"0">
+																		<tbody><tr>
+																			<td style=3D"padding-bottom:34px">
+																				<table width=3D"100%" border=3D"0" cellspacing=3D"0" ce=
+llpadding=3D"0">
+																					<tbody><tr>
+																						<td width=3D"112" style=3D"font-size:0pt;line-height:=
+0pt;text-align:left">
+																							<a href=3D"https://www.reddit.com/" target=3D"_blank=
+"><img src=3D"https://www.redditstatic.com/emaildigest/logo@2x.png" width=
+=3D"112" height=3D"39" border=3D"0" alt=3D""></a></td>
+																						<td width=3D"20" style=3D"font-size:0pt;line-height:0=
+pt;text-align:left">
+																						</td>
+																						<td style=3D"font-size:0pt;line-height:0pt;text-align=
+:left">
+																							<table width=3D"100%" border=3D"0" cellspacing=3D"0"=
+ cellpadding=3D"0">
+																								<tbody><tr>
+																									<td align=3D"right">
+																										<table border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0">
+																											<tbody><tr>
+																												<td width=3D"16" valign=3D"top" style=3D"font-s=
+ize:0pt;line-height:0pt;text-align:left">
+																													<img src=3D"https://styles.redditmedia.com/t5_=
+19v16r/styles/profileIcon_snoo82215e4a-3004-4a84-ba9a-28b8c0bb3d80-headshot=
+.png?width=3D256&amp;height=3D256&amp;crop=3D256:256,smart&amp;s=3Db0f6092a=
+2885881a9116708ecfbd5eeabee1aaa7" width=3D"16" height=3D"16" border=3D"0" a=
+lt=3D"">
+																												</td>
+																												<td width=3D"4" style=3D"font-size:0pt;line-hei=
+ght:0pt;text-align:left">
+																												</td>
+																												<td style=3D"font-size:12px;line-height:14px;fo=
+nt-family:Helvetica,Arial,sans-serif;text-align:left;min-width:auto!importa=
+nt;color:#7a9299">
+																													<a href=3D"https://www.reddit.com/user/TheJaps=
+u1/?correlation_id=3Dffa66534-8041-46fe-aaaf-84732d9aff35&amp;ref=3Doauth2_=
+app_approve&amp;ref_campaign=3Doauth2_app_approve&amp;ref_source=3Demail" s=
+tyle=3D"text-decoration:none;color:#7a9299" target=3D"_blank"><span style=
+=3D"text-decoration:none;color:#7a9299">u/TheJapsu1</span></a>
+																												</td>
+																											</tr>
+																										</tbody></table>
+																									</td>
+																								</tr>
+																							</tbody></table>
+																						</td>
+																					</tr>
+																				</tbody></table>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td style=3D"font-size:16px;line-height:18px;color:#0000=
+00;font-family:Helvetica,Arial,sans-serif;text-align:left;min-width:auto!im=
+portant;padding-bottom:28px">
+																				Hi there,
+																				<br><br>
+
+																				This is a confirmation to let you know
+																				that you=E2=80=99ve authorized an app to access
+																				your <span style=3D"color:#006cbf"><strong>TheJapsu1</s=
+trong></span>
+																				Reddit account.
+
+																				<blockquote>App Name: <span style=3D"color:#006cbf"><st=
+rong>Infinity for Reddit</strong></span>
+																					<span style=3D"color:#000000"> <br>
+																						App ID:
+																						<strong>NOe2iKrPPzwscA</strong></span>
+																				</blockquote>
+
+																				You can review and manage what apps
+																				you=E2=80=99ve added or given access to your
+																				account at any time, by visiting the <a href=3D"https:/=
+/www.reddit.com/prefs/apps" style=3D"text-decoration:none;color:#006cbf" ta=
+rget=3D"_blank"><span style=3D"text-decoration:none;color:#006cbf">apps
+																						preferences</span></a> section
+																				of your settings.
+																				<br><br>
+
+																				If you didn=E2=80=99t authorize this app,
+																				we recommend that you <a href=3D"https://www.reddit.com=
+/prefs/apps" style=3D"text-decoration:none;color:#006cbf" target=3D"_blank"=
+><span style=3D"text-decoration:none;color:#006cbf">remove
+																						it from your authorized apps
+																						now</span></a> and <a href=3D"https://www.reddit.com/=
+password" style=3D"text-decoration:none;color:#006cbf" target=3D"_blank"><s=
+pan style=3D"text-decoration:none;color:#006cbf">update
+																						your Reddit password</span></a>
+																				as an extra precaution to protect your
+																				account. And if you think something
+																				weird is going on, <a href=3D"https://www.reddithelp.co=
+m/en/submit-request/account-issues" style=3D"text-decoration:none;color:#00=
+6cbf" target=3D"_blank"><span style=3D"text-decoration:none;color:#006cbf">=
+let
+																						us know</span></a> and
+																				we=E2=80=99ll make sure everything=E2=80=99s
+																				ok.
+																				<br><br>
+
+																				P.S. This email was sent automatically
+																				(from a bot, not a human), so if you
+																				respond to this email we won=E2=80=99t get your
+																				message. If you need any help with your
+																				account, check out our <a href=3D"https://www.reddithel=
+p.com/en/categories/privacy-security/account-security" style=3D"text-decora=
+tion:none;color:#006cbf" target=3D"_blank"><span style=3D"text-decoration:n=
+one;color:#006cbf">Account
+																						Security FAQs</span></a> or <a href=3D"https://www.re=
+ddithelp.com/en/submit-request/account-issues" style=3D"text-decoration:non=
+e;color:#006cbf" target=3D"_blank"><span style=3D"text-decoration:none;colo=
+r:#006cbf">contact
+																						support</span></a> and we=E2=80=99ll get
+																				back to you as soon as possible.
+
+																			</td>
+																		</tr>
+																	</tbody></table>
+																</td>
+															</tr>
+														</tbody></table>
+													</td>
+												</tr>
+											</tbody></table>
+										</td>
+									</tr>
+								=09
+
+								=09
+									<tr>
+										<td bgcolor=3D"#f1f5f6" style=3D"padding-bottom:34px">
+											<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0">
+												<tbody><tr>
+													<td style=3D"font-size:0pt;line-height:0pt;text-align:left"><a=
+ href=3D"https://www.reddit.com/" target=3D"_blank"><img src=3D"https://www=
+.redditstatic.com/emaildigest/footer_logo_8_8.png" width=3D"600" height=3D"=
+125" border=3D"0" alt=3D""></a></td>
+												</tr>
+												<tr>
+													<td align=3D"center" style=3D"padding-bottom:40px">
+														<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0">
+															<tbody><tr>
+																<td valign=3D"top" style=3D"font-size:0pt;line-height:0pt;t=
+ext-align:left">
+																	<a href=3D"https://apps.apple.com/us/app/reddit/id10642168=
+28" target=3D"_blank"><img src=3D"https://www.redditstatic.com/emaildigest/=
+app_store_8_8.png" width=3D"124" height=3D"37" border=3D"0" alt=3D""></a></=
+td>
+																<td width=3D"10" style=3D"font-size:0pt;line-height:0pt;tex=
+t-align:left">
+																</td>
+																<td valign=3D"top" style=3D"font-size:0pt;line-height:0pt;t=
+ext-align:left">
+																	<a href=3D"https://play.google.com/store/apps/details?id=
+=3Dcom.reddit.frontpage" target=3D"_blank"><img src=3D"https://www.redditst=
+atic.com/emaildigest/google_play_8_8.png" width=3D"124" height=3D"37" borde=
+r=3D"0" alt=3D""></a></td>
+															</tr>
+														</tbody></table>
+													</td>
+												</tr>
+												<tr>
+													<td style=3D"font-size:16px;line-height:18px;font-family:Helve=
+tica,Arial,sans-serif;min-width:auto!important;color:#222222;text-align:cen=
+ter;padding-left:24px;padding-right:24px">
+														548 Market St., #16093, San Francisco, CA 94104=E2=80=935401<=
+/td>
+												</tr>
+											</tbody></table>
+										</td>
+									</tr>
+								=09
+								</tbody></table>
+							</td>
+						</tr>
+					</tbody></table>
+				</td>
+			</tr>
+		</tbody></table>
+	</center>
+<img alt=3D"" src=3D"http://ql9whnmm.r.us-east-1.awstrack.me/I0/01000179e76=
+a52b8-bd4776ac-5d8c-4656-b002-ff2cdf2e6209-000000/b9HgjecoGuRg-jDX9Eg2DAfhp=
+ws=3D217" style=3D"display:none;width:1px;height:1px">
+</div>
+
+
+</div></div></div>
+</div></div>
+</div></div>
+
+--0000000000005eb35f05c65bfd14--

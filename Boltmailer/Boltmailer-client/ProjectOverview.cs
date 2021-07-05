@@ -53,6 +53,7 @@ namespace Boltmailer_client
                 catch
                 {
                 }
+                Program.LastCreatedLockfilePath = lockPath;
             }
 
             // Set proj name to header
@@ -61,7 +62,7 @@ namespace Boltmailer_client
             {
                 ProjectStatus.Aloittamaton => 0,
                 ProjectStatus.Kesken => 1,
-                ProjectStatus.Valmis => 2,
+                ProjectStatus.Palautettu => 2,
                 _ => 0,
             };
 
@@ -70,7 +71,7 @@ namespace Boltmailer_client
             {
                 new StatusComboItem(ProjectStatus.Aloittamaton, "Aloittamaton"),
                 new StatusComboItem(ProjectStatus.Kesken, "Kesken"),
-                new StatusComboItem(ProjectStatus.Valmis, "Valmis")
+                new StatusComboItem(ProjectStatus.Palautettu, "Palautettu")
             };
             StatusComboBox.SelectedIndex = selectionIndex;
 
@@ -83,7 +84,7 @@ namespace Boltmailer_client
                 case ProjectStatus.Kesken:
                     projectstatusLabel.ForeColor = Color.Orange;
                     break;
-                case ProjectStatus.Valmis:
+                case ProjectStatus.Palautettu:
                     projectstatusLabel.ForeColor = Color.Green;
                     break;
                 default:
@@ -140,10 +141,32 @@ namespace Boltmailer_client
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
             if(e.Name.ToLower() == "notes")
-                ProjectNotesBox.Invoke(new Action(() => SetNotes(File.ReadAllText(e.FullPath))));
+            {
+                if (IsHandleCreated)
+                {
+                    ProjectNotesBox.BeginInvoke(new Action(() => SetNotes(File.ReadAllText(e.FullPath))));
+                }
+                else
+                {
+                    //MessageBox.Show("Not executing on UI thread", "Virhe");
+                }
+
+                //ProjectNotesBox.Invoke(new Action(() => SetNotes(File.ReadAllText(e.FullPath))));
+            }
 
             if (e.Name.ToLower() == "info.json")
-                ProjectNotesBox.Invoke(new Action(() => SetTimeEstimate(File.ReadAllText(e.FullPath))));
+            {
+                if (IsHandleCreated)
+                {
+                    ProjectNotesBox.BeginInvoke(new Action(() => SetTimeEstimate(File.ReadAllText(e.FullPath))));
+                }
+                else
+                {
+                    //MessageBox.Show("Not executing on UI thread", "Virhe");
+                }
+
+                //ProjectNotesBox.Invoke(new Action(() => SetTimeEstimate(File.ReadAllText(e.FullPath))));
+            }
         }
 
         private void OnDeleted(object sender, FileSystemEventArgs e)
@@ -167,9 +190,9 @@ namespace Boltmailer_client
             if (canEdit)
             {
                 info.TimeEstimate = TimeEstimateBox.Text;
-                JsonTools.WriteJson(info, projectPath);
+                FileTools.WriteInfo(info, projectPath);
 
-                File.WriteAllText(notesPath, ProjectNotesBox.Text);
+                FileTools.WriteAllText(notesPath, ProjectNotesBox.Text);
                 try
                 {
                     File.Delete(lockPath);
@@ -183,7 +206,6 @@ namespace Boltmailer_client
 
         private void FolderOpenButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(projectPath);
             System.Diagnostics.Process.Start("explorer.exe", projectPath);
         }
 
@@ -199,7 +221,7 @@ namespace Boltmailer_client
                 case ProjectStatus.Kesken:
                     projectstatusLabel.ForeColor = Color.Orange;
                     break;
-                case ProjectStatus.Valmis:
+                case ProjectStatus.Palautettu:
                     projectstatusLabel.ForeColor = Color.Green;
                     break;
                 default:
@@ -207,7 +229,7 @@ namespace Boltmailer_client
             }
             projectstatusLabel.Text = "Status: " + item.Text;
             info.Status = item.Status;
-            JsonTools.WriteJson(info, projectPath);
+            //FileTools.WriteInfo(info, projectPath);
         }
     }
 

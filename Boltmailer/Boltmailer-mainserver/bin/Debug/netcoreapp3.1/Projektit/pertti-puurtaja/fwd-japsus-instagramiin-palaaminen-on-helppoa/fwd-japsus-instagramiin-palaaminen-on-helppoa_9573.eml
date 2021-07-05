@@ -1,0 +1,234 @@
+Delivered-To: 0481664@gmail.com
+Received: by 2002:a02:c808:0:0:0:0:0 with SMTP id p8csp4702017jao;
+        Tue, 29 Jun 2021 01:35:15 -0700 (PDT)
+X-Received: by 2002:a1c:4cd:: with SMTP id 196mr11329827wme.145.1624955715796;
+        Tue, 29 Jun 2021 01:35:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1624955715; cv=none;
+        d=google.com; s=arc-20160816;
+        b=MGd+8kJmXmSJ/qlOF/SI4JubbctEu0UN6NzUOHm+wxhtj3IESuwQayejftESuTrJA+
+         9OPFg5b8wzgS1Fy+kGsgk7WPCmPG1E61ikw7m+2r08rpHvlr0Yt/0Kj+O85lnGVmogpC
+         nSqwNMh3Wk4MSZ/MQ4JEtz8oVMuL5hUt25/z+kDewSdVSjgxP/l1c6IO0DzG0Y27JvxE
+         j4GUzlP5NTHs4in7jaBjrozCXL+eqYttnYJ6g4bXGXD9xEeHAyoZ4R/Y/xqm/1nkcYSI
+         /fcLS7UCOUrhSXdto8uoPzTlOZUPfR4dZLfJHAW6wyK4sl9/ERWqQykHSPwtvzWAv1qH
+         Wxhg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=5QYWk79tbgv5m709EsO8Oxhj/9BisFC689XUqrXBsiA=;
+        b=qpqL7qd253iMde+cvt5B9N1iI5SPQshm6tK5ADF+8SNJHTp5+Cn5isI1qoIP5qsIp3
+         izubVB7Tj0CISalAyJlUKQnTgmjEHKMCuE5hm+Vylwh1G+XM9W2uxixIy8oM3xCgVrzW
+         ZIJXISW60k43AJ3WXRB+AfeUxhSnTuoa/OTGFYkraMso50ZlK+UJ7p+jNUhlxvtrPfZf
+         dw8uFcTxgeyCQw+3pe2Dcl9G9lT82dWbbQCTAFbxpxQnRh9K18nNdgyPMuCFSHnF09bo
+         9wkR8fL3RGhgnGB/MBs2CZ9cIvmXuwZ4ybplfy1ZS+BjulN3sUwsjp2VCQoRCtBlHHqk
+         Ar7A==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=XTNvBuyb;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <japsu.honkasalo@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id a21sor1113789wmj.9.2021.06.29.01.35.15
+        for <0481664@gmail.com>
+        (Google Transport Security);
+        Tue, 29 Jun 2021 01:35:15 -0700 (PDT)
+Received-SPF: pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=XTNvBuyb;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=5QYWk79tbgv5m709EsO8Oxhj/9BisFC689XUqrXBsiA=;
+        b=XTNvBuybUIjRkdH3RXDBfa0oOhvW6R/48bn9L5Q1/XIJleG2pYtWRQkQ9iJeXyReY7
+         dcwJ9zK3ADw/Bt2ItMDJAFwmVMaeq5e075GW1JMU1QrJTk3qBLQAyBqJ1sxUX5l3kvat
+         pim4JaqmlBrj+jEA1Q9RT71d7TEQu8TsurvDO9fUS4c0fGL7p4eCuK5Jx5Exo8hiPP/V
+         txgwB/BbSIz7PYQLRXL6ximsFtiZrWpk0MzXy9680rOUbeJ3W9gO0QFTe0OHqtymVwVV
+         ePtPxRMil378xdEOBlza5vd01xRtsdING+clHgbUL/FJu6hnflSD7Lz6gF5/nZ67Kf/M
+         YEEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=5QYWk79tbgv5m709EsO8Oxhj/9BisFC689XUqrXBsiA=;
+        b=KucGQ1CpEqBhfYmZeeDlrHjv4lTcw2abVaCgXZYwG9iilMgPO+gBNnjjgiLyZL50pa
+         sk2/ME78xTXBCgspj2OGraR87fIbLgDlc9PzvYTcq7LhMmgTsRjJUShupy/U758iY2KW
+         5AkR3WeaK5s6WWiJB9ZO7y1EwhKugpjzg4Phee71ebZrbY6OmPqwxSUQHWFStkhc7i0B
+         ina7fUtjFfIo01IRot5y4PN4f3ZqRW6a6in9Dm3DXsA6dw0VOq263tXut8RroPVcH+7j
+         E2mptlq37/hLMa0YnmhE3kB8PP24crFLcLASOlgBIXny0cLnthKPkGXyojKTVEc+MrUN
+         QT/g==
+X-Gm-Message-State: AOAM530bd9iV/GXad3BMFglqltGAbNKkF1kMsm6ZVhfHeWphIcJAh7nT
+	I9KUPREXnaZcrnp6YFR77PjAxVj5OE8fuVFaSBny6LKHnWg=
+X-Google-Smtp-Source: ABdhPJz99O4hmeAI4hxyeu6OSPgEvuYqeKgb9QS4VY+ht18/vYrUsLQF4YdISNI5AUYtLhRgoXx6TQNqvctqne2UVjI=
+X-Received: by 2002:a1c:5985:: with SMTP id n127mr30992643wmb.75.1624955715392;
+ Tue, 29 Jun 2021 01:35:15 -0700 (PDT)
+MIME-Version: 1.0
+References: <b3f7e40cd0c311ebbce098039bc7250c-e7ba2760@mail.instagram.com>
+In-Reply-To: <b3f7e40cd0c311ebbce098039bc7250c-e7ba2760@mail.instagram.com>
+From: Jasper Honkasalo <japsu.honkasalo@gmail.com>
+Date: Tue, 29 Jun 2021 11:35:03 +0300
+Message-ID: <CAKNULYp5yKfpM1Lia9-q+PK3=jwcksqiVYYW_59Vh2GwHyJg_A@mail.gmail.com>
+Subject: Fwd: japsu.s, Instagramiin palaaminen on helppoa
+To: 0481664@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000311d8c05c5e37cfb"
+
+--000000000000311d8c05c5e37cfb
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+pertti puurtaja
+7.12.2021
+14h
+
+---------- Forwarded message ---------
+From: Instagram <security@mail.instagram.com>
+Date: Sat, Jun 19, 2021 at 9:00 AM
+Subject: japsu.s, Instagramiin palaaminen on helppoa
+To: <japsu.honkasalo@gmail.com>
+
+
+
+
+
+
+Hei japsu.s!
+
+Ik=C3=A4v=C3=A4=C3=A4, ett=C3=A4 sinulla on ongelmia Instagramiin kirjautum=
+isessa. Voimme
+auttaa sinut suoraan k=C3=A4ytt=C3=A4j=C3=A4tiliisi.
+
+Kirjaudu sis=C3=A4=C3=A4n nimell=C3=A4 japsu.s
+<https://www.instagram.com/_n/web_emaillogin?uid=3D11sofqx&token=3DvUSYEM&a=
+uto_send=3D0>
+<https://www.instagram.com/_n/web_emaillogin?uid=3D11sofqx&token=3DvUSYEM&a=
+uto_send=3D0>
+
+
+
+Voit my=C3=B6s vaihtaa Instagram-salasanan
+<https://instagram.com/accounts/password/reset/confirm/?uidb36=3D11sofqx&to=
+ken=3DzZ9fvOAlcb9EwgQZ7Qx6U5dSC4I0nzi6SgheBQcHt61r844Xf4BCAC74XPhLIqkz:one_=
+click_login_email&s=3Done_click_login_email>
+.
+
+
+
+
+
+=C2=A9 Instagram. Facebook Inc., 1601 Willow Road, Menlo Park, CA 94025, US=
+A
+Viesti l=C3=A4hetettiin osoitteeseen japsu.honkasalo@gmail.com. Sen
+vastaanottaja on japsu.s. Eik=C3=B6 k=C3=A4ytt=C3=A4j=C3=A4tili ole sinun? =
+Poista
+s=C3=A4hk=C3=B6postiosoitteesi
+<https://instagram.com/accounts/remove/revoke_wrong_email/?uidb36=3D11sofqx=
+&token=3D5rl-990b8ebfa95d4e256028b5b6f5dc8050&nonce=3Dsdy3LpxG&encoded_emai=
+l=3DamFwc3UuaG9ua2FzYWxvQGdtYWlsLmNvbQ>
+k=C3=A4ytt=C3=A4j=C3=A4tililt=C3=A4.
+
+--000000000000311d8c05c5e37cfb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">pertti puurtaja<div>7.12.2021</div><div>14h<br><br><div cl=
+ass=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">---------- Forwar=
+ded message ---------<br>From: <strong class=3D"gmail_sendername" dir=3D"au=
+to">Instagram</strong> <span dir=3D"auto">&lt;<a href=3D"mailto:security@ma=
+il.instagram.com">security@mail.instagram.com</a>&gt;</span><br>Date: Sat, =
+Jun 19, 2021 at 9:00 AM<br>Subject: japsu.s, Instagramiin palaaminen on hel=
+ppoa<br>To:  &lt;<a href=3D"mailto:japsu.honkasalo@gmail.com">japsu.honkasa=
+lo@gmail.com</a>&gt;<br></div><br><br><u></u><div style=3D"margin:0;padding=
+:0" dir=3D"ltr" bgcolor=3D"#ffffff"><table border=3D"0" cellspacing=3D"0" c=
+ellpadding=3D"0" align=3D"center" id=3D"m_1047064222334985488email_table" s=
+tyle=3D"border-collapse:collapse"><tbody><tr><td id=3D"m_104706422233498548=
+8email_content" style=3D"font-family:Helvetica Neue,Helvetica,Lucida Grande=
+,tahoma,verdana,arial,sans-serif;background:#ffffff"><table border=3D"0" wi=
+dth=3D"100%" cellspacing=3D"0" cellpadding=3D"0" style=3D"border-collapse:c=
+ollapse"><tbody><tr><td height=3D"20" style=3D"line-height:20px" colspan=3D=
+"3">=C2=A0</td></tr><tr><td height=3D"1" colspan=3D"3" style=3D"line-height=
+:1px"></td></tr><tr><td><table border=3D"0" width=3D"100%" cellspacing=3D"0=
+" cellpadding=3D"0" style=3D"border-collapse:collapse;text-align:center;wid=
+th:100%"><tbody><tr><td width=3D"15px" style=3D"width:15px"></td><td style=
+=3D"line-height:0px;max-width:600px;padding:0 0 15px 0"><table border=3D"0"=
+ width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" style=3D"border-collaps=
+e:collapse"><tbody><tr><td style=3D"width:100%;text-align:left;height:33px"=
+><img height=3D"33" src=3D"https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/QTa=
+-gpOyYBa.png" style=3D"border:0"></td></tr></tbody></table></td><td width=
+=3D"15px" style=3D"width:15px"></td></tr></tbody></table></td></tr><tr><td>=
+<table border=3D"0" width=3D"430" cellspacing=3D"0" cellpadding=3D"0" style=
+=3D"border-collapse:collapse;margin:0 auto 0 auto"><tbody><tr><td><table bo=
+rder=3D"0" width=3D"430px" cellspacing=3D"0" cellpadding=3D"0" style=3D"bor=
+der-collapse:collapse;margin:0 auto 0 auto;width:430px"><tbody><tr><td widt=
+h=3D"15" style=3D"display:block;width:15px">=C2=A0=C2=A0=C2=A0</td></tr><tr=
+><td><table border=3D"0" width=3D"100%" cellspacing=3D"0" cellpadding=3D"0"=
+ style=3D"border-collapse:collapse"><tbody><tr><td><table border=3D"0" cell=
+spacing=3D"0" cellpadding=3D"0" style=3D"border-collapse:collapse"><tbody><=
+tr><td width=3D"20" style=3D"display:block;width:20px">=C2=A0=C2=A0=C2=A0</=
+td><td><table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"bor=
+der-collapse:collapse"><tbody><tr><td><p style=3D"margin:10px 0 10px 0;colo=
+r:#565a5c;font-size:18px">Hei japsu.s!</p><p style=3D"margin:10px 0 10px 0;=
+color:#565a5c;font-size:18px">Ik=C3=A4v=C3=A4=C3=A4, ett=C3=A4 sinulla on o=
+ngelmia Instagramiin kirjautumisessa. Voimme auttaa sinut suoraan k=C3=A4yt=
+t=C3=A4j=C3=A4tiliisi.</p></td></tr><tr><td height=3D"20" style=3D"line-hei=
+ght:20px">=C2=A0</td></tr><tr><td><a href=3D"https://www.instagram.com/_n/w=
+eb_emaillogin?uid=3D11sofqx&amp;token=3DvUSYEM&amp;auto_send=3D0" style=3D"=
+color:#3b5998;text-decoration:none;display:block;width:370px" target=3D"_bl=
+ank"><table border=3D"0" width=3D"390" cellspacing=3D"0" cellpadding=3D"0" =
+style=3D"border-collapse:collapse"><tbody><tr><td style=3D"border-collapse:=
+collapse;border-radius:3px;text-align:center;display:block;border:solid 1px=
+ #009fdf;padding:10px 16px 14px 16px;margin:0 2px 0 auto;min-width:80px;bac=
+kground-color:#47a2ea"><a href=3D"https://www.instagram.com/_n/web_emaillog=
+in?uid=3D11sofqx&amp;token=3DvUSYEM&amp;auto_send=3D0" style=3D"color:#3b59=
+98;text-decoration:none;display:block" target=3D"_blank"><center><font size=
+=3D"3"><span style=3D"font-family:Helvetica Neue,Helvetica,Roboto,Arial,san=
+s-serif;white-space:nowrap;font-weight:bold;vertical-align:middle;color:#fd=
+fdfd;font-size:16px;line-height:16px">Kirjaudu=C2=A0sis=C3=A4=C3=A4n=C2=A0n=
+imell=C3=A4=C2=A0japsu.s</span></font></center></a></td></tr></tbody></tabl=
+e></a></td></tr><tr><td height=3D"20" style=3D"line-height:20px">=C2=A0</td=
+></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><=
+/td></tr><tr><td width=3D"15" style=3D"display:block;width:15px">=C2=A0=C2=
+=A0=C2=A0</td></tr><tr></tr><tr><td><table border=3D"0" width=3D"100%" cell=
+spacing=3D"0" cellpadding=3D"0" style=3D"border-collapse:collapse"><tbody><=
+tr><td><table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" style=3D"bor=
+der-collapse:collapse"><tbody><tr><td width=3D"20" style=3D"display:block;w=
+idth:20px">=C2=A0=C2=A0=C2=A0</td><td><table border=3D"0" cellspacing=3D"0"=
+ cellpadding=3D"0" style=3D"border-collapse:collapse"><tbody><tr><td></td><=
+td style=3D"padding:0;margin:10px 0 10px 0;color:#565a5c;font-size:16px">Vo=
+it my=C3=B6s <a href=3D"https://instagram.com/accounts/password/reset/confi=
+rm/?uidb36=3D11sofqx&amp;token=3DzZ9fvOAlcb9EwgQZ7Qx6U5dSC4I0nzi6SgheBQcHt6=
+1r844Xf4BCAC74XPhLIqkz:one_click_login_email&amp;s=3Done_click_login_email"=
+ style=3D"color:#3b5998;text-decoration:none" target=3D"_blank">vaihtaa Ins=
+tagram-salasanan</a>.</td></tr><tr><td><div></div></td></tr></tbody></table=
+></td><td width=3D"20" style=3D"display:block;width:20px">=C2=A0=C2=A0=C2=
+=A0</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></=
+table></td></tr></tbody></table></td></tr><tr><td><table border=3D"0" cells=
+pacing=3D"0" cellpadding=3D"0" style=3D"border-collapse:collapse;margin:0 a=
+uto 0 auto;width:100%;max-width:600px"><tbody><tr><td height=3D"4" style=3D=
+"line-height:4px" colspan=3D"3">=C2=A0</td></tr><tr><td width=3D"15px" styl=
+e=3D"width:15px"></td><td width=3D"20" style=3D"display:block;width:20px">=
+=C2=A0=C2=A0=C2=A0</td><td style=3D"text-align:center"><div style=3D"paddin=
+g-top:10px;display:flex"><div style=3D"margin:auto"><img src=3D"https://sta=
+tic.xx.fbcdn.net/rsrc.php/v3/y5/r/pTeXjRdVk8c.png" height=3D"30" width=3D"7=
+7" alt=3D""></div><br></div><div style=3D"height:10px"></div><div style=3D"=
+color:#abadae;font-size:11px;margin:0 auto 5px auto">=C2=A9 Instagram. Face=
+book Inc., 1601 Willow Road, Menlo Park, CA 94025, USA<br></div><div style=
+=3D"color:#abadae;font-size:11px;margin:0 auto 5px auto">Viesti l=C3=A4hete=
+ttiin osoitteeseen <a style=3D"color:#abadae;text-decoration:underline">jap=
+su.honkasalo@gmail.com</a>. Sen vastaanottaja on japsu.s. Eik=C3=B6 k=C3=A4=
+ytt=C3=A4j=C3=A4tili ole sinun? <a href=3D"https://instagram.com/accounts/r=
+emove/revoke_wrong_email/?uidb36=3D11sofqx&amp;token=3D5rl-990b8ebfa95d4e25=
+6028b5b6f5dc8050&amp;nonce=3Dsdy3LpxG&amp;encoded_email=3DamFwc3UuaG9ua2FzY=
+WxvQGdtYWlsLmNvbQ" style=3D"color:#abadae;text-decoration:underline" target=
+=3D"_blank">Poista s=C3=A4hk=C3=B6postiosoitteesi</a> k=C3=A4ytt=C3=A4j=C3=
+=A4tililt=C3=A4.<br></div></td><td width=3D"20" style=3D"display:block;widt=
+h:20px">=C2=A0=C2=A0=C2=A0</td><td width=3D"15px" style=3D"width:15px"></td=
+></tr><tr><td height=3D"32" style=3D"line-height:32px" colspan=3D"3">=C2=A0=
+</td></tr></tbody></table></td></tr><tr><td height=3D"20" style=3D"line-hei=
+ght:20px" colspan=3D"3">=C2=A0</td></tr></tbody></table><span><img src=3D"h=
+ttps://www.facebook.com/email_open_log_pic.php?mid=3D5c517e00e2a4fG24bc2d63=
+32f5b9G5c51829a42d22G3df" style=3D"border:0;width:1px;height:1px"></span></=
+td></tr></tbody></table></div>
+
+</div></div></div>
+
+--000000000000311d8c05c5e37cfb--

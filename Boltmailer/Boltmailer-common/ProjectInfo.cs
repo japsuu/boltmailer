@@ -28,7 +28,7 @@ namespace Boltmailer_common
     {
         Aloittamaton,
         Kesken,
-        Valmis
+        Palautettu
     }
 
     public interface IProjectInfo

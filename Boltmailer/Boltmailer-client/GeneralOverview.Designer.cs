@@ -33,12 +33,14 @@
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.HelpButton = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConfigButton = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchBox = new System.Windows.Forms.TextBox();
             this.SearchBoxLabel = new System.Windows.Forms.Label();
             this.AlwaysOnTopCheckbox = new System.Windows.Forms.CheckBox();
             this.FilterEmployeesLabel = new System.Windows.Forms.Label();
             this.FilterEmployeesBox = new System.Windows.Forms.TextBox();
-            this.ConfigButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.SendNotificationsCheckbox = new System.Windows.Forms.CheckBox();
+            this.ShowCompletedProjectsCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ProjectsDataGrid)).BeginInit();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -113,6 +115,15 @@
             this.AboutButton.Text = "Tietoa";
             this.AboutButton.ToolTipText = "Tietoa sovelluksesta ja sen tekijöistä";
             // 
+            // ConfigButton
+            // 
+            this.ConfigButton.AutoToolTip = true;
+            this.ConfigButton.CheckOnClick = true;
+            this.ConfigButton.ForeColor = System.Drawing.SystemColors.Window;
+            this.ConfigButton.Name = "ConfigButton";
+            this.ConfigButton.Size = new System.Drawing.Size(119, 20);
+            this.ConfigButton.Text = "Avaa konfiguraatio";
+            // 
             // SearchBox
             // 
             this.SearchBox.Location = new System.Drawing.Point(796, 28);
@@ -137,7 +148,7 @@
             // 
             this.AlwaysOnTopCheckbox.AutoSize = true;
             this.AlwaysOnTopCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.AlwaysOnTopCheckbox.Location = new System.Drawing.Point(800, 428);
+            this.AlwaysOnTopCheckbox.Location = new System.Drawing.Point(722, 428);
             this.AlwaysOnTopCheckbox.Name = "AlwaysOnTopCheckbox";
             this.AlwaysOnTopCheckbox.Size = new System.Drawing.Size(139, 19);
             this.AlwaysOnTopCheckbox.TabIndex = 7;
@@ -163,20 +174,39 @@
             this.FilterEmployeesBox.TabIndex = 9;
             this.FilterEmployeesBox.TextChanged += new System.EventHandler(this.FilterEmployeesBox_TextChanged);
             // 
-            // ConfigButton
+            // SendNotificationsCheckbox
             // 
-            this.ConfigButton.AutoToolTip = true;
-            this.ConfigButton.CheckOnClick = true;
-            this.ConfigButton.ForeColor = System.Drawing.SystemColors.Window;
-            this.ConfigButton.Name = "ConfigButton";
-            this.ConfigButton.Size = new System.Drawing.Size(119, 20);
-            this.ConfigButton.Text = "Avaa konfiguraatio";
+            this.SendNotificationsCheckbox.AutoSize = true;
+            this.SendNotificationsCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.SendNotificationsCheckbox.Location = new System.Drawing.Point(464, 428);
+            this.SendNotificationsCheckbox.Name = "SendNotificationsCheckbox";
+            this.SendNotificationsCheckbox.Size = new System.Drawing.Size(202, 19);
+            this.SendNotificationsCheckbox.TabIndex = 10;
+            this.SendNotificationsCheckbox.Text = "Anna ilmoitus listan muutoksista:";
+            this.SendNotificationsCheckbox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SendNotificationsCheckbox.UseVisualStyleBackColor = true;
+            this.SendNotificationsCheckbox.CheckedChanged += new System.EventHandler(this.SendNotificationsCheckbox_CheckedChanged);
+            // 
+            // ShowCompletedProjectsCheckbox
+            // 
+            this.ShowCompletedProjectsCheckbox.AutoSize = true;
+            this.ShowCompletedProjectsCheckbox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ShowCompletedProjectsCheckbox.Location = new System.Drawing.Point(194, 429);
+            this.ShowCompletedProjectsCheckbox.Name = "ShowCompletedProjectsCheckbox";
+            this.ShowCompletedProjectsCheckbox.Size = new System.Drawing.Size(193, 19);
+            this.ShowCompletedProjectsCheckbox.TabIndex = 11;
+            this.ShowCompletedProjectsCheckbox.Text = "Näytä myös palautetut projektit";
+            this.ShowCompletedProjectsCheckbox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ShowCompletedProjectsCheckbox.UseVisualStyleBackColor = true;
+            this.ShowCompletedProjectsCheckbox.CheckedChanged += new System.EventHandler(this.ShowCompletedProjectsCheckbox_CheckedChanged);
             // 
             // GeneralOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(948, 453);
+            this.Controls.Add(this.ShowCompletedProjectsCheckbox);
+            this.Controls.Add(this.SendNotificationsCheckbox);
             this.Controls.Add(this.FilterEmployeesBox);
             this.Controls.Add(this.FilterEmployeesLabel);
             this.Controls.Add(this.AlwaysOnTopCheckbox);
@@ -213,6 +243,8 @@
         private System.Windows.Forms.Label FilterEmployeesLabel;
         private System.Windows.Forms.TextBox FilterEmployeesBox;
         private System.Windows.Forms.ToolStripMenuItem ConfigButton;
+        private System.Windows.Forms.CheckBox SendNotificationsCheckbox;
+        private System.Windows.Forms.CheckBox ShowCompletedProjectsCheckbox;
     }
 }
 
