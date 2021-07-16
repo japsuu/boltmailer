@@ -1,0 +1,9 @@
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-common\bin\Release\netcoreapp3.1\Boltmailer-common.deps.json
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-common\bin\Release\netcoreapp3.1\Boltmailer-common.dll
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-common\bin\Release\netcoreapp3.1\Boltmailer-common.pdb
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-common\obj\Release\netcoreapp3.1\Boltmailer-common.csproj.AssemblyReference.cache
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-common\obj\Release\netcoreapp3.1\Boltmailer-common.AssemblyInfoInputs.cache
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-common\obj\Release\netcoreapp3.1\Boltmailer-common.AssemblyInfo.cs
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-common\obj\Release\netcoreapp3.1\Boltmailer-common.csproj.CoreCompileInputs.cache
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-common\obj\Release\netcoreapp3.1\Boltmailer-common.dll
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-common\obj\Release\netcoreapp3.1\Boltmailer-common.pdb

@@ -7,6 +7,7 @@ namespace Boltmailer_mainserver
 {
     public static class ConfigManager
     {
+        public static string OutputDirectory { get; set; }
         public static string EmailImapHost { get; set; }
         public static int EmailImapPort { get; set; }
         public static bool EmailImapUseSSL { get; set; }
@@ -21,6 +22,7 @@ namespace Boltmailer_mainserver
 
         public static void ReadConfig()
         {
+            OutputDirectory = ConfigurationManager.AppSettings.Get("OutputDirectory");
             EmailImapHost = ConfigurationManager.AppSettings.Get("EmailImapHost");
             EmailImapPort = int.Parse(ConfigurationManager.AppSettings.Get("EmailImapPort"));
             EmailImapUseSSL = bool.Parse(ConfigurationManager.AppSettings.Get("EmailImapUseSSL"));

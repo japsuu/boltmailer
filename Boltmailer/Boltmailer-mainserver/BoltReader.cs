@@ -22,28 +22,46 @@ namespace Boltmailer_mainserver
     class BoltReader
     {
         bool firstStart = true;
+
         System.Timers.Timer ticker;
+
         readonly Random rnd = new Random();
 
         public void StartTicking()
         {
             Console.Clear();
+
             Console.ForegroundColor = ConsoleColor.Gray;
 
             if (firstStart)
             {
                 Console.WriteLine(GetTitleText());
                 Console.WriteLine(GetStartingUpText());
+
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+
+                Console.WriteLine("\nRunning startup tests, please do not close this window at this time...\n");
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.Gray;
+
                 Console.WriteLine("Initiating a connection with the mail server, please allow up to two minutes...");
             }
 
             ticker = new System.Timers.Timer();
+
             ticker.Elapsed += new ElapsedEventHandler(ReadInbox);
+
             int refreshFrequency = int.Parse(ConfigurationManager.AppSettings.Get("EmailRefreshFrequency"));
+
             if (refreshFrequency < 10000)
                 refreshFrequency = 10000;
+
             ticker.Interval = refreshFrequency;
+
             ReadInbox(null, null);
+
             ticker.Start();
         }
 
@@ -54,14 +72,62 @@ namespace Boltmailer_mainserver
         /// <param name="arg2"></param>
         private void ReadInbox(object arg1, EventArgs arg2)
         {
+            // Check if this was the first cycle, if it was, show info that everything is working and wait for next cycle
+            if (!firstStart)
+            {
+                using var imapClient = GetImapClient();
+                using var smtpClient = GetSmtpClient();
+
+                // Check if connection was successful. If not, abort.
+                if (imapClient == null || smtpClient == null)
+                {
+                    return;
+                }
+
+                // Try to open the Imap inbox
+                try
+                {
+                    imapClient.Inbox.Open(FolderAccess.ReadWrite);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Could not open the inbox: " + ex);
+                    return;
+                }
+
+                // Read the inbox contents
+                var uids = imapClient.Inbox.Search(SearchQuery.NotSeen);
+
+                // Handle the found messages
+                HandleMessages(uids, imapClient, smtpClient);
+
+                // Disconnect, to not leave the connection hanging
+                imapClient.Disconnect(true);
+                smtpClient.Disconnect(true);
+            }
+            else
+            {
+                if (!RunStartupChecks())
+                {
+                    ticker.Stop();
+                }
+                else
+                {
+                    Thread.Sleep(5000);
+                    firstStart = false;
+                    Console.Clear();
+                    Console.WriteLine(GetTitleText());
+                    Console.WriteLine($"\n'Output Directory' is now set to {ConfigManager.OutputDirectory}.");
+                    Console.WriteLine($"\n'Email Refresh Frequency' is now set to {ticker.Interval}.");
+                    Console.WriteLine($"\n'Trusted Domain' is now set to {ConfigManager.TrustedDomain}.\n");
+                }
+            }
+        }
+
+        bool RunStartupChecks()
+        {
             using var imapClient = GetImapClient();
             using var smtpClient = GetSmtpClient();
-
-            // Check if connection was successful. If not, abort.
-            if(imapClient == null || smtpClient == null)
-            {
-                return;
-            }
 
             // Try to open the Imap inbox
             try
@@ -72,29 +138,57 @@ namespace Boltmailer_mainserver
             catch (Exception ex)
             {
                 LOG("Opening inbox...", false, ex.Message);
-                return;
+                return false;
             }
 
-            // Check if this was the first cycle, if it was, show info that everything is working and wait for next cycle
-            if (!firstStart)
+            try
             {
-                // Read the inbox contents
                 var uids = imapClient.Inbox.Search(SearchQuery.NotSeen);
-
-                // Handle the found messages
-                HandleMessages(uids, imapClient, smtpClient);
-            }
-            else
-            {
                 LOG("Reading inbox contents...", true);
-                Thread.Sleep(1000);
-                firstStart = false;
-                Console.Clear();
-                Console.WriteLine(GetTitleText());
+            }
+            catch (Exception ex)
+            {
+                LOG("Reading inbox contents...", false, ex.ToString());
+                return false;
             }
 
-            // Disconnect, to not leave the connection hanging
-            imapClient.Disconnect(true);
+            try
+            {
+                DirectoryInfo path = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Test");
+                Directory.Delete(path.FullName);
+                LOG("Checking output folder...", true);
+            }
+            catch (Exception ex)
+            {
+                LOG("Checking output folder...", false, ex.ToString());
+                return false;
+            }
+
+            try
+            {
+                File.Create(ConfigManager.OutputDirectory + "\\Test").Close();
+                File.Delete(ConfigManager.OutputDirectory + "\\Test");
+                LOG("Checking file priviledges...", true);
+            }
+            catch (Exception ex)
+            {
+                LOG("Checking file priviledges...", false, ex.ToString());
+                return false;
+            }
+
+            try
+            {
+                imapClient.Disconnect(true);
+                smtpClient.Disconnect(true);
+                LOG("Disconnecting...", true);
+            }
+            catch (Exception ex)
+            {
+                LOG("Disconnecting...", false, ex.ToString());
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -167,7 +261,7 @@ namespace Boltmailer_mainserver
                         projectName = FilenameFromTitle(projectName).ToLower();
                         assignedEmployee = FilenameFromTitle(assignedEmployee);
 
-                        DirectoryInfo path = Directory.CreateDirectory("Projektit" + "\\" + assignedEmployee + "\\" + projectName);
+                        DirectoryInfo path = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Projektit\\" + assignedEmployee + "\\" + projectName);
 
                         // Create notes file if needed
                         if (!File.Exists(path + "\\" + "notes"))
@@ -205,7 +299,7 @@ namespace Boltmailer_mainserver
                         // Check if the project we need to update exists, and write the email there
                         if (Directory.Exists("Projektit" + "\\" + assignedEmployee + "\\" + projectName))
                         {
-                            DirectoryInfo path = Directory.CreateDirectory("Projektit" + "\\" + assignedEmployee + "\\" + projectName);
+                            DirectoryInfo path = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Projektit\\" + assignedEmployee + "\\" + projectName);
 
                             message.WriteTo($"{path}\\{projectName}_update_{rnd.Next(1000, 9999)}.eml");
 
@@ -220,7 +314,7 @@ namespace Boltmailer_mainserver
                 }
                 catch (Exception ex)    // Error reading the MSG
                 {
-                    DirectoryInfo directory = Directory.CreateDirectory("Virheelliset" + "\\");
+                    DirectoryInfo directory = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Virheelliset" + "\\");
 
                     string path = directory.FullName + DateTime.Now.ToString("dd.MM") + "_" + rnd.Next(10000, 99999);
 
@@ -400,21 +494,22 @@ namespace Boltmailer_mainserver
             bodyBuilder.HtmlBody =
                 $@"
 <h4>Tämä on automaattinen viesti Boltmailer Serveriltä. <b>Ethän yritä vastata tähän viestiin.</b></h4>
+<h4>Muistathan varmistaa syöttämäsi tiedot oikeiksi ennen viestin lähettämistä!</h4>
 <h3>Uuden projektin lisääminen:</h3>
 <h4><pre>
     Otsikko: Projektin nimi
-    Ensimmäinen viestin rivi: Työntekijä jolle projektin annetaan (tai vapaa)
+    Ensimmäinen viestin rivi: Työntekijän nimi jolle projektin annetaan (tai vapaa)
     Toinen viestin rivi: Deadline
     Kolmas viestin rivi: Aika-arvio.</pre>
 </h4>
 
-<h3>Olemassa-olevan projektin päivittäminen:</h3>
+<h3>Olemassa-olevaan projektiin tiedostojen lisääminen:</h3>
 <h4><pre>
     Otsikko: Projektin nimi
-    Ensimmäinen viestin rivi: Työntekijä jolle projektin annetaan (tai vapaa)
+    Ensimmäinen viestin rivi: Työntekijä jolle projekti on annettu (tai vapaa)
     Toinen viestin rivi: ""update"" (ilman heittomerkkejä).</pre>
 </h4>
-                                ";
+                ";
 
             reply.Body = bodyBuilder.ToMessageBody();
 

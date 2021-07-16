@@ -1,0 +1,9 @@
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Boltmailer-client.exe
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Boltmailer-client.dll
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Boltmailer-client.deps.json
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Boltmailer-client.runtimeconfig.json
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Boltmailer-client.dll.config
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Boltmailer-client.pdb
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Microsoft.Toolkit.Uwp.Notifications.dll
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Boltmailer-common.dll
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Boltmailer-common.pdb
