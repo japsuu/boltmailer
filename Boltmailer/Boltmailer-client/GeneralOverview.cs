@@ -3,6 +3,7 @@ using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -11,9 +12,18 @@ namespace Boltmailer_client
 {
     public partial class GeneralOverview : Form
     {
+        /// <summary>
+        /// Root of where all the employees' folders are located.
+        /// </summary>
         readonly string EMPLOYEES_ROOT_PATH = ConfigurationManager.AppSettings.Get("employeesRootPath");
 
+        /// <summary>
+        /// Called when any project updates.
+        /// </summary>
         FileSystemWatcher allProjectsWatcher;
+        /// <summary>
+        /// Called when a project which name matches the search updates.
+        /// </summary>
         FileSystemWatcher userProjectsWatcher;
 
         /// <summary>
@@ -28,6 +38,10 @@ namespace Boltmailer_client
 
         bool sendNotifications;
         bool showCompleted;
+
+        /// <summary>
+        /// True if initialization is fully and successfully completed.
+        /// </summary>
         bool initialized;
 
         public GeneralOverview()
@@ -44,6 +58,9 @@ namespace Boltmailer_client
             }
         }
 
+        /// <summary>
+        /// Initializes all paths, UI elements, listeners, and reads the config.
+        /// </summary>
         void Initialize()
         {
             // Read the config
@@ -119,7 +136,7 @@ namespace Boltmailer_client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SendCreatedNotification(object sender, FileSystemEventArgs e)
+        void SendCreatedNotification(object sender, FileSystemEventArgs e)
         {
             if (
                 e.FullPath.ToLower().Contains(FilterEmployeesBox.Text) &&
@@ -158,7 +175,6 @@ namespace Boltmailer_client
 
                 if (sender is FileSystemWatcher)
                 {
-                    System.Diagnostics.Debug.WriteLine("FS kutsuu päivityksen koska: " + e.FullPath + "\n" + e.ChangeType.ToString());
                     InvokeUI(RefreshView);
                 }
                 else
@@ -172,29 +188,46 @@ namespace Boltmailer_client
             }
         }
 
+        /// <summary>
+        /// Calls an action on the UI thread.
+        /// </summary>
+        /// <param name="a">Action to call</param>
         void InvokeUI(Action a)
         {
             this.BeginInvoke(new MethodInvoker(new Action(() => { RunDelayedAction(500, a); })));
         }
 
+        /// <summary>
+        /// Refreshes the projects view. Should not be called manually.
+        /// </summary>
         void RefreshView()
         {
+            // Clear the rows to not get duplicates
             ProjectsDataGrid.Rows.Clear();
+
+            // Update the grid
             UpdateProjectGrid();
+
+            // Log down the refresh
             NotifyRefresh();
         }
 
+        /// <summary>
+        /// Changes the debuglabel to show the time of the last refresh.
+        /// </summary>
         void NotifyRefresh()
         {
             DebugLabel.Text = "Päivitetty: " + DateTime.Now.ToString("HH:mm");
         }
 
+        /// <summary>
+        /// Updates the projects grid. Should not be called manually.
+        /// </summary>
         void UpdateProjectGrid()
         {
+            // Clear all the remaining entries to not get duplicates
             ProjectsDataGrid.Rows.Clear();
             employeeDirectories.Clear();
-
-            // Reset the projectPaths dictionary
             projectPaths.Clear();
 
             // Go through all employers' folders
@@ -237,6 +270,8 @@ namespace Boltmailer_client
                     }
                 }
 
+                List<DataGridViewRow> rows = new List<DataGridViewRow>();
+
                 // Add all the projects to GridView as rows
                 for (int i = 0; i < projects.Count; i++)
                 {
@@ -245,21 +280,27 @@ namespace Boltmailer_client
                     // Get the employee name, in original format, from the folder name
                     string employee = NamingConventions.EmployeeFromPath(directory);
 
-                    // Only add the divider for the last row
-                    //if (i == projects.Count - 1)
-                    //    ProjectsDataGrid.Rows.Add(GetRow(info, employee, true));
-                    //else
-                    ProjectsDataGrid.Rows.Add(GetRow(info, employee, false));
+                    DataGridViewRow row = GetRow(info, employee);
+
+                    rows.Add(row);
                 }
+                ProjectsDataGrid.Rows.AddRange(rows.ToArray());
 
                 employeeDirectories.Add(directory);
             }
+
+            // Filter the results
             FilterEmployees(FilterEmployeesBox.Text);
+
+            // Clear the automatic selection
             ProjectsDataGrid.ClearSelection();
             ProjectsDataGrid.CurrentCell = null;
-            //MessageBox.Show("Päivitetty");
         }
 
+        /// <summary>
+        /// Hides all rows not matching the searched term.
+        /// </summary>
+        /// <param name="employee"></param>
         void FilterEmployees(string employee)
         {
             string query = employee.ToLower();
@@ -274,36 +315,14 @@ namespace Boltmailer_client
                 {
                     row.Visible = false;
                 }
-                /////if (showCompleted)  //TODO: Now why the fuck does this work without contents of this check?
-                /////{
-                /////    
-                /////}
-                /////else
-                /////{
-                /////    ProjectInfo info = (ProjectInfo)row.Cells[5].Value;
-                /////    if ((row.Cells[0].Value.ToString().ToLower().Contains(query) || row.Cells[0].Value.ToString().ToLower().Contains("vapaa")) && info.Status != ProjectStatus.Palautettu)
-                /////    {
-                /////        row.Visible = true;
-                /////        continue;
-                /////    }
-                /////    else
-                /////    {
-                /////        row.Visible = false;
-                /////    }
-                /////}
             }
-            //if (!string.IsNullOrEmpty(query))
-            //{
-            //}
-            //else
-            //{
-            //    foreach (DataGridViewRow row in ProjectsDataGrid.Rows)
-            //    {
-            //        row.Visible = true;
-            //    }
-            //}
         }
 
+        /// <summary>
+        /// Runs an action after 'millisecond' * ms has passed.
+        /// </summary>
+        /// <param name="millisecond"></param>
+        /// <param name="action"></param>
         void RunDelayedAction(int millisecond, Action action)
         {
             var timer = new Timer();
@@ -317,11 +336,17 @@ namespace Boltmailer_client
             timer.Start();
         }
 
-        DataGridViewRow GetRow(ProjectInfo info, string employee, bool last)
+        /// <summary>
+        /// Creates and returns a new Row according to the info provided.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="employee"></param>
+        /// <returns></returns>
+        DataGridViewRow GetRow(ProjectInfo info, string employee)
         {
             DataGridViewRow row = new DataGridViewRow();
 
-            // Check if the project is unassigned
+            // Check if the project is unassigned for styling
             if (employee == "vapaa")
             {
                 row.DefaultCellStyle = GetUnassignedCellStyle();
@@ -331,6 +356,7 @@ namespace Boltmailer_client
                 row.DefaultCellStyle = GetDefaultCellStyle();
             }
 
+            // Create the cells of the row
             row.Cells.AddRange(new DataGridViewTextBoxCell[]
             {
                 new DataGridViewTextBoxCell { Value = employee },
@@ -341,14 +367,16 @@ namespace Boltmailer_client
                 new DataGridViewTextBoxCell { ValueType = typeof(ProjectInfo), Value = info }
             });
 
+            // Set the style of the status cell
             row.Cells[2].Style = GetStatusCellStyle(info.Status);
-
-            if (last)
-                row.DividerHeight = 10;
 
             return row;
         }
 
+        /// <summary>
+        /// Gets the style of a cell that has no specific style set.
+        /// </summary>
+        /// <returns></returns>
         DataGridViewCellStyle GetUnassignedCellStyle()
         {
             DataGridViewCellStyle style = new DataGridViewCellStyle
@@ -358,6 +386,10 @@ namespace Boltmailer_client
             return style;
         }
 
+        /// <summary>
+        /// Sets default style of all cells without styling.
+        /// </summary>
+        /// <returns></returns>
         DataGridViewCellStyle GetDefaultCellStyle()
         {
             DataGridViewCellStyle style = new DataGridViewCellStyle
@@ -367,6 +399,11 @@ namespace Boltmailer_client
             return style;
         }
 
+        /// <summary>
+        /// Gets the styling of a status cell according to the status.
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
         DataGridViewCellStyle GetStatusCellStyle(ProjectStatus status)
         {
             DataGridViewCellStyle style = new DataGridViewCellStyle(GetDefaultCellStyle());
@@ -393,6 +430,10 @@ namespace Boltmailer_client
             return style;
         }
 
+        /// <summary>
+        /// Creates and returns all the columns for the gridView.
+        /// </summary>
+        /// <returns></returns>
         DataGridViewTextBoxColumn[] GetGridViewColumns()
         {
             DataGridViewTextBoxColumn[] cols = new DataGridViewTextBoxColumn[]
@@ -436,6 +477,10 @@ namespace Boltmailer_client
             return cols;
         }
 
+        /// <summary>
+        /// Returns column header default style.
+        /// </summary>
+        /// <returns></returns>
         DataGridViewCellStyle GetHeaderStyle()
         {
             DataGridViewCellStyle style = new DataGridViewCellStyle
@@ -449,35 +494,14 @@ namespace Boltmailer_client
 
         private void ProjectsDataGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            /*
-             * DataGridViewCell cell = ProjectsDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                ProjectInfo info = (ProjectInfo)ProjectsDataGrid.Rows[e.RowIndex].Cells[5].Value;
-                string employee = (string)ProjectsDataGrid.Rows[e.RowIndex].Cells[0].Value;
-
-                // Apply colors based on unassigned or not
-                if (employee == "vapaa")
-                {
-                    ProjectsDataGrid.Rows[e.RowIndex].DefaultCellStyle = GetUnassignedCellStyle();
-                }
-                else
-                {
-                    ProjectsDataGrid.Rows[e.RowIndex].DefaultCellStyle = GetDefaultCellStyle();
-                }
-
-                // Apply colors based on status
-                ProjectsDataGrid.Rows[e.RowIndex].Cells[2].Style = GetStatusCellStyle(info.Status);
-
-                // Highlight the Searched cells
-                if (!string.IsNullOrEmpty(SearchBox.Text) && e.Value.ToString().ToLower().Contains(SearchBox.Text.ToLower()))
-                {
-                    cell.Style = new DataGridViewCellStyle(cell.Style) { BackColor = Color.Chartreuse };
-                }
-             */
-
+            // Set cell styling to none
             e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.None;
+
+            // Safety checks
             if (e.RowIndex < 1 || e.ColumnIndex < 0)
                 return;
 
+            // Hide borders between matching cells
             if (CompareCellValues(e.ColumnIndex, e.RowIndex) && e.ColumnIndex == 0)
             {
                 e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.None;
@@ -486,35 +510,6 @@ namespace Boltmailer_client
             {
                 e.AdvancedBorderStyle.Top = ProjectsDataGrid.AdvancedCellBorderStyle.Top;
             }
-
-            //if (ProjectsDataGrid.Rows.Count > e.RowIndex + 1)
-            //{
-            //    int comparedRow = 1;
-            //    while ((ProjectsDataGrid.Rows.Count > e.RowIndex + comparedRow) && !ProjectsDataGrid.Rows[comparedRow].Visible)
-            //    {
-            //        if (ProjectsDataGrid.Rows.Count > e.RowIndex + comparedRow)
-            //        {
-            //            break;
-            //        }
-            //        comparedRow++;
-            //    }
-            //    //TODO: Try with .Equals on the two objects?
-            //    if (ProjectsDataGrid.Rows[e.RowIndex].Cells[0].ToolTipText != ProjectsDataGrid.Rows[e.RowIndex + comparedRow].Cells[0].ToolTipText)
-            //    {
-            //        ProjectsDataGrid.Rows[e.RowIndex].DividerHeight = 10;
-            //    }
-            //}
-
-            //if (ProjectsDataGrid.Rows.Count > e.RowIndex + 1)
-            //{
-            //    //TODO: It's a bit hacky, but it works!
-            //    if (ProjectsDataGrid.Rows[e.RowIndex].Cells[0].ToolTipText != ProjectsDataGrid.Rows[e.RowIndex + 1].Cells[0].ToolTipText)
-            //    {
-            //
-            //
-            //        ProjectsDataGrid.Rows[e.RowIndex].DividerHeight = 10;
-            //    }
-            //}
         }
 
         /// <summary>
@@ -538,15 +533,18 @@ namespace Boltmailer_client
 
         private void ProjectsDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            // Safety checks
             if (e.RowIndex == 0 || e.ColumnIndex != 0)
                 return;
 
+            // For matching cells set the bottom one's text to an arrow.
             if (CompareCellValues(e.ColumnIndex, e.RowIndex))
             {
                 e.Value = "          \u21B3";
                 e.FormattingApplied = true;
             }
 
+            // For not maching cells create a divider between them
             if(!CompareCellValues(e.ColumnIndex, e.RowIndex))
             {
                 ProjectsDataGrid.Rows[e.RowIndex - 1].DividerHeight = 10;
@@ -557,8 +555,10 @@ namespace Boltmailer_client
 
         #region Events
 
+        // Unselecting cells
         void ProjectsDataGrid_MouseDown(object sender, MouseEventArgs e)
         {
+            // Handles clicking outside the gridView to unselect items
             try
             {
                 DataGridView.HitTestInfo hitTest = ProjectsDataGrid.HitTest(e.X, e.Y);
@@ -568,17 +568,18 @@ namespace Boltmailer_client
                     ProjectsDataGrid.ClearSelection();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("Virhe: " + ex);
             }
         }
 
+        // Un-used
         private void ProjectsDataGrid_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            // un-used
         }
 
+        // Opening project overviews
         private void ProjectsDataGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             // Get the ProjectInfo
@@ -587,11 +588,14 @@ namespace Boltmailer_client
             // Get the project path
             projectPaths.TryGetValue(info, out string path);
 
+            // Open an overview of the project
             ProjectOverview overview = new ProjectOverview(info, path, employeeDirectories, (string)ProjectsDataGrid.Rows[e.RowIndex].Cells[0].Value);
+
             overview.TopMost = AlwaysOnTopCheckbox.Checked;
             overview.ShowDialog();
         }
 
+        // Main window menu strip handling
         private void MenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if(e.ClickedItem.Name == "HelpButton")
@@ -616,16 +620,19 @@ namespace Boltmailer_client
             }
         }
 
+        // Un-used
         private void GeneralOverview_Load(object sender, EventArgs e)
         {
 
         }
 
+        // Refreshing the proj grid
         private void SearchBox_TextChanged(object sender, EventArgs e)
         {
             ProjectsDataGrid.Refresh();
         }
 
+        // Handles alwaysOnTop and saving it to config
         private void AlwaysOnTopCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             TopMost = AlwaysOnTopCheckbox.Checked;
@@ -633,6 +640,7 @@ namespace Boltmailer_client
             ModifyConfig("alwaysOnTop", AlwaysOnTopCheckbox.Checked.ToString().ToLower());
         }
 
+        // Handles sendNotifications and saving it to config
         private void SendNotificationsCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             sendNotifications = SendNotificationsCheckbox.Checked;
@@ -640,6 +648,7 @@ namespace Boltmailer_client
             ModifyConfig("sendNotifications", SendNotificationsCheckbox.Checked.ToString().ToLower());
         }
 
+        // Handles showCompletedProjects and saving it to config and updating proj view
         private void ShowCompletedProjectsCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             showCompleted = ShowCompletedProjectsCheckbox.Checked;
@@ -652,6 +661,7 @@ namespace Boltmailer_client
             }
         }
 
+        // Handles filterEmployees and saving it to config
         private void FilterEmployeesBox_TextChanged(object sender, EventArgs e)
         {
             ModifyConfig("employeeSearchTerm", FilterEmployeesBox.Text);
