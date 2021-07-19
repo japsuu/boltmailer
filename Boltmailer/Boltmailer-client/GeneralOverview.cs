@@ -16,7 +16,15 @@ namespace Boltmailer_client
         FileSystemWatcher allProjectsWatcher;
         FileSystemWatcher userProjectsWatcher;
 
-        Dictionary<ProjectInfo, string> projectPaths = new Dictionary<ProjectInfo, string>();
+        /// <summary>
+        /// Key = Info, Value = path for that info
+        /// </summary>
+        readonly Dictionary<ProjectInfo, string> projectPaths = new Dictionary<ProjectInfo, string>();
+
+        /// <summary>
+        /// Key = path, Value = employee name
+        /// </summary>
+        readonly List<string> employeeDirectories = new List<string>();
 
         bool sendNotifications;
         bool showCompleted;
@@ -38,7 +46,7 @@ namespace Boltmailer_client
 
         void Initialize()
         {
-            // Try to set the search term based on saved string
+            // Read the config
             try
             {
                 FilterEmployeesBox.Text = ConfigurationManager.AppSettings.Get("employeeSearchTerm");
@@ -106,14 +114,19 @@ namespace Boltmailer_client
             InvokeRefresh("Initial refresh", null);
         }
 
+        /// <summary>
+        /// Sends a notification about a created/modified project.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SendCreatedNotification(object sender, FileSystemEventArgs e)
         {
             if (
                 e.FullPath.ToLower().Contains(FilterEmployeesBox.Text) &&
-                !(e.FullPath.Substring(e.FullPath.LastIndexOf('\\') + 1) == "lock") &&
-                !(e.FullPath.Substring(e.FullPath.LastIndexOf('\\') + 1) == "notes") &&
-                !(e.FullPath.Substring(e.FullPath.LastIndexOf('\\') + 1) == "info.json") &&
-                !(e.FullPath.Substring(e.FullPath.LastIndexOf('.') + 1) == "eml"))
+                !(NamingConventions.FilenameFromPath(e.FullPath) == "lock") &&
+                !(NamingConventions.FilenameFromPath(e.FullPath) == "notes") &&
+                !(NamingConventions.FilenameFromPath(e.FullPath) == "info.json") &&
+                !(NamingConventions.FileExtensionFromPath(e.FullPath) == "eml"))
             {
                 if (e != null && sendNotifications)
                 {
@@ -121,16 +134,22 @@ namespace Boltmailer_client
                         .AddArgument("action", "openProj")
                         .AddArgument("path", e.FullPath)
                         .AddText("Uusi Projekti / Päivitys projektiin:")
-                        .AddText(e.FullPath.Substring(e.FullPath.LastIndexOf('\\') + 1))
+                        .AddText(NamingConventions.FilenameFromPath(e.FullPath))
                         .Show();
                 }
             }
         }
 
+        /// <summary>
+        /// Invokes a refresh on the projects grid on the UI thread.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void InvokeRefresh(object sender, FileSystemEventArgs e)
         {
             try
             {
+                // Disable event raising to not get multiple calls
                 allProjectsWatcher.EnableRaisingEvents = false;
 
                 // Don't update for lockfile changes
@@ -173,9 +192,10 @@ namespace Boltmailer_client
         void UpdateProjectGrid()
         {
             ProjectsDataGrid.Rows.Clear();
+            employeeDirectories.Clear();
 
             // Reset the projectPaths dictionary
-            projectPaths = new Dictionary<ProjectInfo, string>();
+            projectPaths.Clear();
 
             // Go through all employers' folders
             foreach (string directory in Directory.GetDirectories(EMPLOYEES_ROOT_PATH))
@@ -223,14 +243,16 @@ namespace Boltmailer_client
                     ProjectInfo info = projects[i];
 
                     // Get the employee name, in original format, from the folder name
-                    string employee = directory.Substring(directory.LastIndexOf('\\') + 1).Replace('_', ' ').Replace('-', ' ').ToLower();
+                    string employee = NamingConventions.EmployeeFromPath(directory);
 
                     // Only add the divider for the last row
                     //if (i == projects.Count - 1)
                     //    ProjectsDataGrid.Rows.Add(GetRow(info, employee, true));
                     //else
-                        ProjectsDataGrid.Rows.Add(GetRow(info, employee, false));
+                    ProjectsDataGrid.Rows.Add(GetRow(info, employee, false));
                 }
+
+                employeeDirectories.Add(directory);
             }
             FilterEmployees(FilterEmployeesBox.Text);
             ProjectsDataGrid.ClearSelection();
@@ -565,7 +587,7 @@ namespace Boltmailer_client
             // Get the project path
             projectPaths.TryGetValue(info, out string path);
 
-            ProjectOverview overview = new ProjectOverview(info, path);
+            ProjectOverview overview = new ProjectOverview(info, path, employeeDirectories, (string)ProjectsDataGrid.Rows[e.RowIndex].Cells[0].Value);
             overview.TopMost = AlwaysOnTopCheckbox.Checked;
             overview.ShowDialog();
         }

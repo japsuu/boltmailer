@@ -538,34 +538,6 @@ namespace Boltmailer_mainserver
             }
         }
 
-        private static string FilenameFromTitle(string name)
-        {
-            // first trim the raw string
-            string safe = name.Trim();
-
-            // replace spaces with hyphens
-            safe = safe.Replace(" ", "-").ToLower();
-
-            // replace any 'double spaces' with singles
-            if (safe.IndexOf("--") > -1)
-                while (safe.IndexOf("--") > -1)
-                    safe = safe.Replace("--", "-");
-
-            // trim out illegal characters
-            safe = System.Text.RegularExpressions.Regex.Replace(safe, "[^a-ö0-9\\-]", "");
-
-            // trim the length
-            if (safe.Length > 50)
-                safe = safe.Substring(0, 49);
-
-            // clean the beginning and end of the filename
-            char[] replace = { '-', '.' };
-            safe = safe.TrimStart(replace);
-            safe = safe.TrimEnd(replace);
-
-            return safe;
-        }
-
         static string GetTitleText()
         {
             string title =

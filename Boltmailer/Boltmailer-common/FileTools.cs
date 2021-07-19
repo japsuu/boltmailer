@@ -86,7 +86,6 @@ namespace Boltmailer_common
                     }
                     else
                     {
-                        System.Diagnostics.Debug.WriteLine("\no need to write, no changes\n");
                         return false;
                     }
                 }

@@ -1,71 +1,69 @@
 ﻿using Boltmailer_common;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Boltmailer_client
 {
     public partial class ProjectOverview : Form
     {
-        string projectPath;
-        string lockPath;
-        string notesPath;
+        readonly string projectPath;
+        readonly string currentEmployee;
+        readonly string lockPath;
+        readonly string notesPath;
+
         bool canEdit = false;
-        ProjectInfo info;
+        bool employeeHasChanged = false;
+        bool setupDone = false;
+
+        readonly ProjectInfo info;
+
         FileSystemWatcher watcher;
 
-        public ProjectOverview(ProjectInfo info, string notesFilePath)
+        readonly List<string> employeePaths;
+
+        public ProjectOverview(ProjectInfo info, string notesFilePath, List<string> employeePaths, string currentEmployee)
         {
             InitializeComponent();
-            SetInfo(info, notesFilePath);
-        }
-
-        private void ProjectOverview_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        void SetInfo(ProjectInfo _info, string projectPath)
-        {
-            this.projectPath = projectPath;
-            this.info = _info;
-            lockPath = projectPath + "\\lock";
-            notesPath = projectPath + "\\notes";
-
-            // Check if somebody is editing the project currently. If not, lock the directory, if is, disable editing and add a watcher for changes
-            if (File.Exists(lockPath))
-            {
-                DisableEditing();
-            }
-            else
-            {
-                canEdit = true;
-                File.Create(lockPath).Close();
-                try
-                {
-                    File.SetAttributes(lockPath, FileAttributes.Hidden);
-                }
-                catch
-                {
-                }
-                Program.LastCreatedLockfilePath = lockPath;
-            }
 
             // Set proj name to header
             Text = info.ProjectName;
-            var selectionIndex = info.Status switch
-            {
-                ProjectStatus.Aloittamaton => 0,
-                ProjectStatus.Kesken => 1,
-                ProjectStatus.Palautettu => 2,
-                _ => 0,
-            };
 
+            // Prepare all paths
+            this.currentEmployee = currentEmployee;
+
+            this.employeePaths = employeePaths;
+
+            this.info = info;
+
+            projectPath = notesFilePath;
+
+            lockPath = projectPath + "\\lock";
+
+            notesPath = projectPath + "\\notes";
+
+            Setup();
+        }
+
+        void ProjectOverview_Load(object sender, EventArgs e)
+        {
+        }
+
+        void Setup()
+        {
+            // Check if somebody is editing the project currently. If not, lock the directory, if is, disable editing and add a watcher for changes
+            CheckEditPerms();
+
+            // Prepare all the UI elements
+            PrepareUI();
+
+            setupDone = true;
+        }
+
+        void PrepareUI()
+        {
             // Set Status selection ComboBox values
             StatusComboBox.DataSource = new StatusComboItem[]
             {
@@ -73,7 +71,41 @@ namespace Boltmailer_client
                 new StatusComboItem(ProjectStatus.Kesken, "Kesken"),
                 new StatusComboItem(ProjectStatus.Palautettu, "Palautettu")
             };
-            StatusComboBox.SelectedIndex = selectionIndex;
+
+            // Set the currently selected status
+            int statusSelectionIndex = info.Status switch
+            {
+                ProjectStatus.Aloittamaton => 0,
+                ProjectStatus.Kesken => 1,
+                ProjectStatus.Palautettu => 2,
+                _ => 0,
+            };
+            StatusComboBox.SelectedIndex = statusSelectionIndex;
+
+
+
+            // Set Employee selection ComboBox values
+            List<EmployeeComboItem> employeeComboItems = new List<EmployeeComboItem>();
+
+            foreach (string employeePath in employeePaths)
+            {
+                string employeeName = NamingConventions.EmployeeFromPath(employeePath);
+
+                employeeComboItems.Add(new EmployeeComboItem(employeePath, employeeName));
+            }
+            EmployeeComboBox.DataSource = employeeComboItems;
+
+            int employeeSelectionIndex = employeePaths.FindIndex(p =>
+            {
+                string employee = NamingConventions.EmployeeFromPath(p);
+
+                return employee.Contains(currentEmployee);
+            });
+
+            if (employeeSelectionIndex > -1)
+                EmployeeComboBox.SelectedIndex = employeeSelectionIndex;
+
+
 
             // Set status
             switch (info.Status)
@@ -92,20 +124,31 @@ namespace Boltmailer_client
             }
             projectstatusLabel.Text = "Status: " + info.Status.ToString();
 
+
+
             // Set deadline
             projectDeadlineLabel.Text = "Deadline: " + info.Deadline;
+
+
 
             // Set time est
             TimeEstimateBox.Text = info.TimeEstimate;
 
+
+
             // Set notes
+            HandleNotes();
+        }
+
+        void HandleNotes()
+        {
             try
             {
                 ProjectNotesBox.Text = File.ReadAllText(notesPath);
             }
             catch (Exception)
             {
-                MessageBox.Show($"Huomio-tiedostoa ei ole olemassa.\n\nTiedosto luodaan.", "Varoitus");
+                MessageBox.Show($"Muistiinpanot-tiedostoa ei ole olemassa.\n\nTiedosto luodaan.", "Varoitus");
                 File.CreateText(notesPath).Close();
                 try
                 {
@@ -114,6 +157,29 @@ namespace Boltmailer_client
                 catch
                 {
                 }
+            }
+        }
+
+        void CheckEditPerms()
+        {
+            if (File.Exists(lockPath))
+            {
+                DisableEditing();
+            }
+            else
+            {
+                canEdit = true;
+
+                File.Create(lockPath).Close();
+
+                try
+                {
+                    File.SetAttributes(lockPath, FileAttributes.Hidden);
+                }
+                catch
+                {
+                }
+                Program.LastCreatedLockfilePath = lockPath;
             }
         }
 
@@ -138,7 +204,7 @@ namespace Boltmailer_client
             watcher.EnableRaisingEvents = true;
         }
 
-        private void OnChanged(object sender, FileSystemEventArgs e)
+        void OnChanged(object sender, FileSystemEventArgs e)
         {
             if(e.Name.ToLower() == "notes")
             {
@@ -169,7 +235,7 @@ namespace Boltmailer_client
             }
         }
 
-        private void OnDeleted(object sender, FileSystemEventArgs e)
+        void OnDeleted(object sender, FileSystemEventArgs e)
         {
             watcher.Changed -= OnChanged;
             watcher.Deleted -= OnDeleted;
@@ -185,14 +251,20 @@ namespace Boltmailer_client
             TimeEstimateBox.Text = content;
         }
 
-        private void ProjectOverview_FormClosing(object sender, FormClosingEventArgs e)
+        void ProjectOverview_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (canEdit)
             {
+                // Change info's time estimate
                 info.TimeEstimate = TimeEstimateBox.Text;
+
+                // Write the info
                 FileTools.WriteInfo(info, projectPath);
 
+                // Write the notes
                 FileTools.WriteAllText(notesPath, ProjectNotesBox.Text);
+
+                // Delete the lockfile
                 try
                 {
                     File.Delete(lockPath);
@@ -201,16 +273,37 @@ namespace Boltmailer_client
                 {
                     MessageBox.Show($"Virhe poistaessa kansion lukitustiedostoa:\n\n{ex.Message}", "Virhe");
                 }
+
+                // Move project if needed
+                if (employeeHasChanged)
+                    MoveProject();
             }
         }
 
-        private void FolderOpenButton_Click(object sender, EventArgs e)
+        void MoveProject()
+        {
+            string employeeToMoveTo = employeePaths[EmployeeComboBox.SelectedIndex] + NamingConventions.FilenameFromPath(projectPath, true);
+
+            try
+            {
+                Directory.Move(projectPath, employeeToMoveTo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not move the project:\n\n" + ex);
+            }
+        }
+
+        void FolderOpenButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("explorer.exe", projectPath);
         }
 
-        private void StatusComboBox_SelectedValueChanged(object sender, EventArgs e)
+        void StatusComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
+            if (!setupDone)
+                return;
+
             StatusComboItem item = (StatusComboItem)StatusComboBox.SelectedValue;
 
             switch (item.Status)
@@ -227,26 +320,18 @@ namespace Boltmailer_client
                 default:
                     break;
             }
-            projectstatusLabel.Text = "Status: " + item.Text;
+            projectstatusLabel.Text = "Status: " + item.DisplayText;
             info.Status = item.Status;
             //FileTools.WriteInfo(info, projectPath);
         }
-    }
 
-    public class StatusComboItem
-    {
-        public ProjectStatus Status { get; set; }
-        public string Text { get; set; }
-
-        public StatusComboItem(ProjectStatus status, string text)
+        void EmployeeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Status = status;
-            Text = text;
-        }
+            if (!setupDone)
+                return;
 
-        public override string ToString()
-        {
-            return Text;
+            if (EmployeeComboBox.SelectedValue.ToString() != currentEmployee)
+                employeeHasChanged = true;
         }
     }
 }
