@@ -20,11 +20,8 @@ namespace Boltmailer_mainserver
 
             Console.WriteLine(GetTitleText());
             Console.WriteLine("Open help with '#help'");
-            string startOnOpen = ConfigurationManager.AppSettings.Get("StartReaderOnOpen");
-            if (startOnOpen != "false")
-            {
-                Start();
-            }
+
+            Start();
 
             while (!quit)
             {
@@ -37,19 +34,6 @@ namespace Boltmailer_mainserver
 
                     if (input == "#help")
                         ShowHelp();
-
-                    if (input == "#start")
-                    {
-                        Start();
-                    }
-
-                    if (input == "#stop")
-                    {
-                        if (boltReader != null)
-                            boltReader = null;
-
-                        Console.WriteLine("Reader stopped.");
-                    }
                 }
                 else
                 {
@@ -64,9 +48,8 @@ namespace Boltmailer_mainserver
             boltReader.StartTicking();
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Initialization successful, reading started!");
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("Open help with '#help'");
+            Console.WriteLine("\nOpen help with '#help'");
         }
 
         static void ShowHelp()
@@ -80,10 +63,6 @@ Boltmailer Server version {Versioning.GetServerVersion()}" + @"
 |   #help   -   Show this box.                  |
 |                                               |
 |   #quit   -   Close the server.               |
-|                                               |
-|   #start  -   Starts reading mails            |
-|                                               |
-|   #stop   -   Stops reading mails             |
 |                                               |
 |                                               |
 -------------------------------------------------

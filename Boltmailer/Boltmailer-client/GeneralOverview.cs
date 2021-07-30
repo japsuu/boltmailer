@@ -15,7 +15,7 @@ namespace Boltmailer_client
         /// <summary>
         /// Root of where all the employees' folders are located.
         /// </summary>
-        readonly string EMPLOYEES_ROOT_PATH = ConfigurationManager.AppSettings.Get("employeesRootPath");
+        readonly string EMPLOYEES_ROOT_PATH = ConfigurationManager.AppSettings.Get("employeesRootPath") + "\\Projektit";
 
         /// <summary>
         /// Called when any project updates.

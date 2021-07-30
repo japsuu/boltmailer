@@ -23,6 +23,8 @@ namespace Boltmailer_mainserver
     {
         bool firstStart = true;
 
+        static bool isParsingMail = false;
+
         System.Timers.Timer ticker;
 
         readonly Random rnd = new Random();
@@ -72,6 +74,11 @@ namespace Boltmailer_mainserver
         /// <param name="arg2"></param>
         private void ReadInbox(object arg1, EventArgs arg2)
         {
+            if (isParsingMail)
+                return;
+
+            isParsingMail = true;
+
             // Check if this was the first cycle, if it was, show info that everything is working and wait for next cycle
             if (!firstStart)
             {
@@ -110,6 +117,8 @@ namespace Boltmailer_mainserver
                 if (!RunStartupChecks())
                 {
                     ticker.Stop();
+                    ticker.Interval = 1000000;
+                    Console.WriteLine("\nInitialization process halted!");
                 }
                 else
                 {
@@ -120,14 +129,24 @@ namespace Boltmailer_mainserver
                     Console.WriteLine($"\n'Output Directory' is now set to {ConfigManager.OutputDirectory}.");
                     Console.WriteLine($"\n'Email Refresh Frequency' is now set to {ticker.Interval}.");
                     Console.WriteLine($"\n'Trusted Domain' is now set to {ConfigManager.TrustedDomain}.\n");
+                    Console.WriteLine("Initialization successful, reading started!");
                 }
             }
+
+            isParsingMail = false;
         }
 
         bool RunStartupChecks()
         {
             using var imapClient = GetImapClient();
+
+            if (imapClient == null)
+                return false;
+
             using var smtpClient = GetSmtpClient();
+
+            if (smtpClient == null)
+                return false;
 
             // Try to open the Imap inbox
             try
@@ -155,7 +174,13 @@ namespace Boltmailer_mainserver
             try
             {
                 DirectoryInfo path = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Test");
-                Directory.Delete(path.FullName);
+
+                File.CreateText(path.FullName + "\\testtext.txt").Close();
+
+                Directory.Delete(path.FullName, true);
+
+                Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Projektit");
+
                 LOG("Checking output folder...", true);
             }
             catch (Exception ex)
@@ -258,8 +283,8 @@ namespace Boltmailer_mainserver
                     // Create necessary files (notes, msg, info), if the msg is not a update to existing project
                     if (!isUpdate)
                     {
-                        projectName = FilenameFromTitle(projectName).ToLower();
-                        assignedEmployee = FilenameFromTitle(assignedEmployee);
+                        projectName = NamingConventions.FilenameFromTitle(projectName).ToLower();
+                        assignedEmployee = NamingConventions.FilenameFromTitle(assignedEmployee);
 
                         DirectoryInfo path = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Projektit\\" + assignedEmployee + "\\" + projectName);
 
@@ -293,8 +318,8 @@ namespace Boltmailer_mainserver
                     else
                     {
                         // It's an update
-                        projectName = FilenameFromTitle(projectName).ToLower();
-                        assignedEmployee = FilenameFromTitle(assignedEmployee);
+                        projectName = NamingConventions.FilenameFromTitle(projectName).ToLower();
+                        assignedEmployee = NamingConventions.FilenameFromTitle(assignedEmployee);
 
                         // Check if the project we need to update exists, and write the email there
                         if (Directory.Exists("Projektit" + "\\" + assignedEmployee + "\\" + projectName))
