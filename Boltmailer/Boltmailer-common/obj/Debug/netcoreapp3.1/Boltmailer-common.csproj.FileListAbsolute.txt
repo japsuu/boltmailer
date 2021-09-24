@@ -6,3 +6,5 @@ C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-common\obj\Debug\netcore
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-common\obj\Debug\netcoreapp3.1\Boltmailer-common.csproj.CoreCompileInputs.cache
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-common\obj\Debug\netcoreapp3.1\Boltmailer-common.dll
 C:\Users\japsu\Desktop\Boltmailer\Boltmailer\Boltmailer-common\obj\Debug\netcoreapp3.1\Boltmailer-common.pdb
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-common\obj\Debug\netcoreapp3.1\Boltmailer-common.csproj.AssemblyReference.cache
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-common\obj\Debug\netcoreapp3.1\Boltmailer-common.GeneratedMSBuildEditorConfig.editorconfig

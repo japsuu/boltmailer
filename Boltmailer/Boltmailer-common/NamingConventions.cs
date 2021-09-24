@@ -8,20 +8,22 @@ namespace Boltmailer_common
     {
         public static string EmployeeFromPath(string path)
         {
-            return path.Substring(path.LastIndexOf('\\') + 1).Replace('_', ' ').Replace('-', ' ').ToLower();
+            return path[(path.LastIndexOf('\\') + 1)..].Replace('_', ' ').Replace('-', ' ').ToLower();
         }
 
         /// <summary>
         /// Retrieves the substring after the last '\'
         /// </summary>
         /// <param name="fullPath"></param>
+        /// <param name="includeSlash"></param>
         /// <returns></returns>
         public static string FilenameFromPath(string fullPath, bool includeSlash = false)
         {
-            if(!includeSlash)
-                return fullPath.Substring(fullPath.LastIndexOf('\\') + 1);
-            else
-                return fullPath.Substring(fullPath.LastIndexOf('\\'));
+            return includeSlash switch
+            {
+                false => fullPath[(fullPath.LastIndexOf('\\') + 1)..],
+                _ => fullPath[fullPath.LastIndexOf('\\')..]
+            };
         }
 
         public static string FilenameFromTitle(string name)
@@ -33,8 +35,8 @@ namespace Boltmailer_common
             safe = safe.Replace(" ", "-").ToLower();
 
             // replace any 'double spaces' with singles
-            if (safe.IndexOf("--") > -1)
-                while (safe.IndexOf("--") > -1)
+            if (safe.IndexOf("--", StringComparison.Ordinal) > -1)
+                while (safe.IndexOf("--", StringComparison.Ordinal) > -1)
                     safe = safe.Replace("--", "-");
 
             // trim out illegal characters
@@ -42,7 +44,7 @@ namespace Boltmailer_common
 
             // trim the length
             if (safe.Length > 50)
-                safe = safe.Substring(0, 49);
+                safe = safe[..49];
 
             // clean the beginning and end of the filename
             char[] replace = { '-', '.' };
@@ -54,7 +56,7 @@ namespace Boltmailer_common
 
         public static string FileExtensionFromPath(string fullPath)
         {
-            return fullPath.Substring(fullPath.LastIndexOf('.') + 1);
+            return fullPath[(fullPath.LastIndexOf('.') + 1)..];
         }
     }
 }

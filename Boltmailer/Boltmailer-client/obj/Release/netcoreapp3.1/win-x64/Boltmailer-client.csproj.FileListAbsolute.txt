@@ -220,7 +220,6 @@ C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netco
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\win-x64\hostfxr.dll
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\win-x64\hostpolicy.dll
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\win-x64\mscordaccore.dll
-C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\win-x64\mscordaccore_amd64_amd64_4.700.21.26205.dll
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\win-x64\mscordbi.dll
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\win-x64\mscorrc.debug.dll
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\win-x64\mscorrc.dll
@@ -502,3 +501,5 @@ C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\obj\Release\netco
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\obj\Release\netcoreapp3.1\win-x64\Boltmailer-client.dll
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\obj\Release\netcoreapp3.1\win-x64\Boltmailer-client.pdb
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\obj\Release\netcoreapp3.1\win-x64\Boltmailer-client.genruntimeconfig.cache
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\win-x64\mscordaccore_amd64_amd64_4.700.21.35901.dll
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\obj\Release\netcoreapp3.1\win-x64\Boltmailer-client.GeneratedMSBuildEditorConfig.editorconfig

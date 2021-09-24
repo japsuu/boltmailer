@@ -16,9 +16,8 @@ namespace Boltmailer_mainserver
         public static bool EmailSmtpUseSSL { get; set; }
         public static string EmailUsername { get; set; }
         public static string EmailPassword { get; set; }
-        public static int EmailRefreshFrequency { get; set; }
-        public static bool StartReaderOnOpen { get; set; }
         public static string TrustedDomain { get; set; }
+        public static LogLevel LogLevel { get; set; }
 
         public static void ReadConfig()
         {
@@ -32,6 +31,7 @@ namespace Boltmailer_mainserver
             EmailUsername = ConfigurationManager.AppSettings.Get("EmailUsername");
             EmailPassword = ConfigurationManager.AppSettings.Get("EmailPassword");
             TrustedDomain = ConfigurationManager.AppSettings.Get("TrustedDomain");
+            LogLevel = Enum.Parse<LogLevel>(ConfigurationManager.AppSettings.Get("LogLevel"));
         }
     }
 }

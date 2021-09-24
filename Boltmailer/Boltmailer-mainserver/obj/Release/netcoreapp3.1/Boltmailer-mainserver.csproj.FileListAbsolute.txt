@@ -36,3 +36,4 @@ C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-mainserver\obj\Release\n
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-mainserver\obj\Release\netcoreapp3.1\Boltmailer-mainserver.dll
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-mainserver\obj\Release\netcoreapp3.1\Boltmailer-mainserver.pdb
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-mainserver\obj\Release\netcoreapp3.1\Boltmailer-mainserver.genruntimeconfig.cache
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-mainserver\obj\Release\netcoreapp3.1\Boltmailer-mainserver.GeneratedMSBuildEditorConfig.editorconfig

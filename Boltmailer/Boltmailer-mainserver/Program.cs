@@ -9,12 +9,12 @@ using System.Linq;
 
 namespace Boltmailer_mainserver
 {
-    class Program
+    internal static class Program
     {
-        static bool quit;
-        static BoltReader boltReader = null;
+        private static bool quit;
+        private static BoltReader boltReader = null;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             ConfigManager.ReadConfig();
 
@@ -27,13 +27,17 @@ namespace Boltmailer_mainserver
             {
                 string input = Console.ReadLine();
 
-                if (input.StartsWith('#'))
+                if (input != null && input.StartsWith('#'))
                 {
-                    if (input == "#quit")
-                        quit = true;
-
-                    if (input == "#help")
-                        ShowHelp();
+                    switch (input)
+                    {
+                        case "#quit":
+                            quit = true;
+                            break;
+                        case "#help":
+                            ShowHelp();
+                            break;
+                    }
                 }
                 else
                 {
@@ -42,7 +46,7 @@ namespace Boltmailer_mainserver
             }
         }
 
-        static void Start()
+        private static void Start()
         {
             boltReader = new BoltReader();
             boltReader.StartTicking();
@@ -52,7 +56,7 @@ namespace Boltmailer_mainserver
             Console.WriteLine("\nOpen help with '#help'");
         }
 
-        static void ShowHelp()
+        private static void ShowHelp()
         {
             string help =
                 $@"
@@ -71,10 +75,9 @@ Boltmailer Server version {Versioning.GetServerVersion()}" + @"
             Console.WriteLine(help);
         }
 
-        static string GetTitleText()
+        private static string GetTitleText()
         {
-            string title =
-                @"
+            const string title = @"
 ██████   ██████  ██   ████████ ███╗   ███╗ █████╗ ██╗██╗     ███████╗██████╗ 
 ██   ██ ██    ██ ██      ██    ████╗ ████║██╔══██╗██║██║     ██╔════╝██╔══██╗
 ██████  ██    ██ ██      ██    ██╔████╔██║███████║██║██║     █████╗  ██████╔╝
