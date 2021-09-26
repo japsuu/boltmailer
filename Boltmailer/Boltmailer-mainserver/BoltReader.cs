@@ -100,8 +100,8 @@ namespace Boltmailer_mainserver
             else
             {
                 Console.Write("*.*");
-                using var imapClient = GetImapClient();
-                using var smtpClient = GetSmtpClient();
+                using ImapClient imapClient = GetImapClient();
+                using SmtpClient smtpClient = GetSmtpClient();
 
                 // Check if connection was successful. If not, abort.
                 if (imapClient == null || smtpClient == null)
@@ -138,12 +138,12 @@ namespace Boltmailer_mainserver
 
         private bool RunStartupChecks()
         {
-            using var imapClient = GetImapClient();
+            using ImapClient imapClient = GetImapClient();
 
             if (imapClient == null)
                 return false;
 
-            using var smtpClient = GetSmtpClient();
+            using SmtpClient smtpClient = GetSmtpClient();
 
             if (smtpClient == null)
                 return false;
@@ -220,11 +220,12 @@ namespace Boltmailer_mainserver
         /// Handles the list of uIds, sending them to correct folders.
         /// </summary>
         /// <param name="uIds"></param>
+        /// <param name="imapClient"></param>
         private void HandleMessages(IEnumerable<UniqueId> uIds, ImapClient imapClient)
         {
-            foreach (var uid in uIds)
+            foreach (UniqueId uid in uIds)
             {
-                var message = imapClient.Inbox.GetMessage(uid);
+                MimeMessage message = imapClient.Inbox.GetMessage(uid);
 
                 string sender = message.From.OfType<MailboxAddress>().Single().Address;
                 string projectName = message.Subject;
@@ -253,7 +254,7 @@ namespace Boltmailer_mainserver
                 }
 
                 // Check if message is a help-message
-                if (message.Subject == "help")
+                if (message.Subject.ToLower() == "help")
                 {
                     SendHelpReply(sender);
 
@@ -268,80 +269,58 @@ namespace Boltmailer_mainserver
                     if (message.TextBody == null)
                     {
                         Console.WriteLine("Error parsing a mail, there's no text body! Full HTML? Please no.");
+
+                        imapClient.Inbox.SetFlags(uid, MessageFlags.Seen, false);
                         
                         continue;
                     }
                     
-                    using (var reader = new StringReader(message.TextBody))
+                    using (StringReader reader = new StringReader(message.TextBody))
                     {
                         // Set the employee if it's not null
                         string employeeLn = reader.ReadLine();
-                        if (!string.IsNullOrEmpty(employeeLn))
-                            assignedEmployee = employeeLn;
+                        if (!string.IsNullOrEmpty(employeeLn)) assignedEmployee = employeeLn;
 
                         // Set the deadline if it's not null
                         string deadlineLn = reader.ReadLine();
-                        if (!string.IsNullOrEmpty(deadlineLn))
-                            projectDeadline = deadlineLn;
+                        if (!string.IsNullOrEmpty(deadlineLn)) projectDeadline = deadlineLn;
 
                         // Set the time estimate if it's not null
                         string timeEstimateLn = reader.ReadLine();
-                        if (!string.IsNullOrEmpty(timeEstimateLn))
-                            timeEstimate = timeEstimateLn;
+                        if (!string.IsNullOrEmpty(timeEstimateLn)) timeEstimate = timeEstimateLn;
+
+                        string updateLn = reader.ReadLine();
 
                         // Set the update flag
-                        isUpdate = projectDeadline.ToLower().Contains("update") || timeEstimate.ToLower().Contains("update");
+                        isUpdate = projectDeadline.ToLower().Contains("update")
+                                   || timeEstimate.ToLower().Contains("update")
+                                   || updateLn.ToLower().Contains("update");
                     }
 
                     // Create necessary files (notes, msg, info), if the msg is not a update to existing project
-                    if (!isUpdate)
-                    {
-                        projectName = NamingConventions.FilenameFromTitle(projectName).ToLower();
-                        assignedEmployee = NamingConventions.FilenameFromTitle(assignedEmployee);
-
-                        DirectoryInfo path = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Projektit\\" + assignedEmployee + "\\" + projectName);
-
-                        // Create notes file if needed
-                        if (!File.Exists(path + "\\" + "notes"))
-                        {
-                            File.CreateText(path + "\\" + "notes").Close();
-                            File.SetAttributes(path + "\\" + "notes", FileAttributes.Hidden);
-                        }
-
-                        // Create the email file
-                        message.WriteTo($"{path}\\{projectName}_{rnd.Next(1000, 9999)}.eml");
-
-                        // Create the info file if needed
-                        if (!File.Exists(path + "\\info.json"))
-                        {
-                            ProjectInfo info = new ProjectInfo() { ProjectName = message.Subject, Deadline = projectDeadline, TimeEstimate = timeEstimate, Status = ProjectStatus.Aloittamaton };
-
-                            if (FileTools.WriteInfo(info, path.FullName, true))
-                            {
-                                File.SetAttributes(path + "\\info.json", FileAttributes.Hidden);
-                            }
-                            else
-                            {
-                                Console.WriteLine($"\nThe info file was not properly created. Removing the corrupt directory at {path.FullName}\n");
-                                Directory.Delete(path.FullName, true);
-                            }
-                        }
-                        Console.WriteLine($"\nWrote project '{projectName}' for '{assignedEmployee}' with deadline '{projectDeadline}' to file.");
-                    }
-                    else
+                    if (isUpdate)
                     {
                         // It's an update
                         projectName = NamingConventions.FilenameFromTitle(projectName).ToLower();
                         assignedEmployee = NamingConventions.FilenameFromTitle(assignedEmployee);
 
                         // Check if the project we need to update exists, and write the email there
-                        if (Directory.Exists("Projektit" + "\\" + assignedEmployee + "\\" + projectName))
+                        if (Directory.Exists(ConfigManager.OutputDirectory +
+                                             "\\Projektit" + "\\" + assignedEmployee + "\\" + projectName))
                         {
-                            DirectoryInfo path = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Projektit\\" + assignedEmployee + "\\" + projectName);
+                            DirectoryInfo projectRootPath = Directory.CreateDirectory(ConfigManager.OutputDirectory +
+                                                                           "\\Projektit\\" + assignedEmployee + "\\" +
+                                                                           projectName);
 
-                            message.WriteTo($"{path}\\{projectName}_update_{rnd.Next(1000, 999999)}.eml");
+                            int suffix = 1;
+                            while (File.Exists($"{projectRootPath}\\{projectName}_update_{suffix}.eml"))
+                            {
+                                suffix++;
+                            }
+                            message.WriteTo($"{projectRootPath}\\{projectName}_update_{suffix}.eml");
 
-                            Console.WriteLine($"\nWrote update to project '{projectName}' for '{assignedEmployee}' to file.");
+                            Console.WriteLine(
+                                $"\nUpdated project '{projectName}' for '{assignedEmployee}'.");
                         }
                         else
                         {
@@ -349,25 +328,73 @@ namespace Boltmailer_mainserver
                             SendErrorReply(sender, projectName, assignedEmployee, true);
                         }
                     }
+                    else    //TODO: Check if the assigned user exists, if not, send error reply.
+                    {
+                        projectName = NamingConventions.FilenameFromTitle(projectName).ToLower();
+                        assignedEmployee = NamingConventions.FilenameFromTitle(assignedEmployee);
+
+                        DirectoryInfo projectRootPath = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Projektit\\" +
+                                                                       assignedEmployee + "\\" + projectName);
+
+                        // Create notes file if needed
+                        if (!File.Exists(projectRootPath + "\\" + "notes"))
+                        {
+                            File.CreateText(projectRootPath + "\\" + "notes").Close();
+                            File.SetAttributes(projectRootPath + "\\" + "notes", FileAttributes.Hidden);
+                        }
+
+                        // Create the email file
+                        int suffix = 1;
+                        while (File.Exists($"{projectRootPath}\\{projectName}_{suffix}.eml"))
+                        {
+                            suffix++;
+                        }
+                        message.WriteTo($"{projectRootPath}\\{projectName}_{suffix}.eml");
+
+                        // Create the info file if needed
+                        if (!File.Exists(projectRootPath + "\\info.json"))
+                        {
+                            ProjectInfo info = new ProjectInfo
+                            {
+                                ProjectName = message.Subject, Deadline = projectDeadline, TimeEstimate = timeEstimate,
+                                Status = ProjectStatus.Aloittamaton
+                            };
+
+                            if (FileTools.WriteInfo(info, projectRootPath.FullName, true))
+                            {
+                                File.SetAttributes(projectRootPath + "\\info.json", FileAttributes.Hidden);
+                            }
+                            else
+                            {
+                                Console.WriteLine(
+                                    $"\nThe info file was not properly created. Removing the corrupt directory at {projectRootPath.FullName}\n");
+                                Directory.Delete(projectRootPath.FullName, true);
+                            }
+                        }
+
+                        Console.WriteLine(
+                            $"\nSaved project '{projectName}' for '{assignedEmployee}' with deadline '{projectDeadline}'.");
+                    }
                 }
                 catch (Exception ex)    // Error reading the MSG
                 {
                     DirectoryInfo directory = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Virheelliset" + "\\");
 
-                    string path = directory.FullName + DateTime.Now.ToString("dd.MM") + "_" + rnd.Next(10000, 99999);
+                    string path = directory.FullName + DateTime.Now.ToString("dd.MM") + "_" + rnd.Next(0, 99999);
 
-                    Console.WriteLine($"\n\nError parsing a mail:\n{ex}.\n\nSaving at: {path}\n\nAnd notifying the sender of the mail.");
+                    Console.WriteLine($"\n\nError parsing a mail:\n{ex}.\n\nSaving at: {path}\n\nAnd notifying the sender of the error.");
 
                     // Try saving the email to file
                     try
                     {
-                        var msg = imapClient.Inbox.GetMessage(uid);
+                        MimeMessage msg = imapClient.Inbox.GetMessage(uid);
 
                         msg.WriteTo($"{path}.eml");
                     }
                     catch
                     {
                         // ignored
+                        Console.WriteLine("Saving failed :(");
                     }
 
                     SendErrorReply(sender, projectName, assignedEmployee, isUpdate, ex);
@@ -384,7 +411,7 @@ namespace Boltmailer_mainserver
         /// <returns>Logged on client</returns>
         private ImapClient GetImapClient()
         {
-            var imapClient = new ImapClient();
+            ImapClient imapClient = new ImapClient();
             try
             {
                 // Authenticate imap client
@@ -416,7 +443,7 @@ namespace Boltmailer_mainserver
         /// <returns>Logged on client</returns>
         private SmtpClient GetSmtpClient()
         {
-            var smtpClient = new SmtpClient();
+            SmtpClient smtpClient = new SmtpClient();
 
             try
             {
@@ -456,8 +483,8 @@ namespace Boltmailer_mainserver
         {
             Console.WriteLine($"\nTried to update non-existent project '{projectName}' for '{assignedEmployee}', notifying email sender ({recipient}).");
 
-            var reply = new MimeMessage();
-            var bodyBuilder = new BodyBuilder();
+            MimeMessage reply = new MimeMessage();
+            BodyBuilder bodyBuilder = new BodyBuilder();
 
             // from
             reply.From.Add(new MailboxAddress("Boltmailer Mainserver", ConfigManager.EmailUsername));
@@ -514,8 +541,8 @@ namespace Boltmailer_mainserver
         {
             Console.WriteLine($"\nUser ({recipient}) requested help. Replying with help MSG.");
 
-            var reply = new MimeMessage();
-            var bodyBuilder = new BodyBuilder();
+            MimeMessage reply = new MimeMessage();
+            BodyBuilder bodyBuilder = new BodyBuilder();
 
             // from
             reply.From.Add(new MailboxAddress("Boltmailer Mainserver", ConfigManager.EmailUsername));

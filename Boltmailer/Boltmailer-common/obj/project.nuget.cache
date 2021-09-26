@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "nRWAu8Dc4xMlgL2d3PL9URE6OP6REbVC174UFzfdJIZunKhjhEanTmQDrt+KC1OTG6MNTi2aD386yoAASV5Evw==",
+  "dgSpecHash": "PbJtfpyH7bL/vRBvDVQ8WrlOQurGFPtEmGireNS0nNuS7Y29ufyWiJiXlkLqW83kQZo2OCAy8FOO/xwl0sXPtQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\japsu\\Desktop\\boltmailer\\Boltmailer\\Boltmailer-common\\Boltmailer-common.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\japsu\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\japsu\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\japsu\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512"
+  ],
   "logs": []
 }
