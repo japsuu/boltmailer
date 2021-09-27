@@ -1,6 +1,9 @@
-﻿public enum LogLevel
+﻿namespace Boltmailer_mainserver
 {
-    Errors = 0,
-    Debug = 1,
-    Everything = 2
+    public enum LogLevel
+    {
+        Errors = 0,
+        Debug = 1,
+        Warnings = 2
+    }
 }

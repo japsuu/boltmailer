@@ -1,0 +1,4 @@
+Defaulttina ekaa kertaa käynnistettäessä pyytää täyttä nimeä, asettaa sen filtteriksi, ja filtterin vain luku-tilaan.
+Lisää "Ota itselle"/"Aseta vapaaksi"-napin työntek. dropdownin tilalle
+
+Configiin kenttä "admin modelle", joka ottaa käyttöön työntek. vaihto dropdownin, sekä suodattimen muokattavaksi.

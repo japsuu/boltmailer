@@ -37,6 +37,34 @@ namespace Boltmailer_mainserver
                         case "#help":
                             ShowHelp();
                             break;
+                        case "#createusr":
+                        {
+                            Console.WriteLine("Please input the name of the new user: ");
+                            string name = Console.ReadLine();
+                            DirectoryInfo userDir = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Projektit\\" + name);
+                            
+                            Console.WriteLine("User directory created at " + userDir.FullName);
+                            
+                            break;
+                        }
+                        case "#deleteusr":
+                        {
+                            Console.WriteLine("Please input the name of the user to delete: ");
+                            string name = Console.ReadLine();
+                            string dir = ConfigManager.OutputDirectory + "\\Projektit\\" + name;
+                            
+                            Console.WriteLine("WARNING!!! Deleting a user will delete their user directory, and all data inside it!");
+                            Console.WriteLine("The directory " + dir + " will be deleted, alongside of all of it's contents.");
+                            Console.WriteLine("Do you want to continue? (Yes/No).");
+                            
+                            if(Console.ReadLine()?.ToLower() != "yes") break;
+                            
+                            Directory.Delete(dir, true);
+                            
+                            Console.WriteLine("User directory at " + dir + " deleted.");
+                            
+                            break;
+                        }
                     }
                 }
                 else
@@ -65,6 +93,10 @@ Boltmailer Server version {Versioning.GetServerVersion()}" + @"
 |                                               |
 |                                               |
 |   #help   -   Show this box.                  |
+|                                               |
+|   #createusr  -   Create a new user.          |
+|                                               |
+|   #deleteusr  -   Delete a user.              |
 |                                               |
 |   #quit   -   Close the server.               |
 |                                               |

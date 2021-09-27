@@ -6,8 +6,8 @@ namespace Boltmailer_common
 {
     public static class Versioning
     {
-        private static readonly int SERVER_VERSION_NUMBER = 63;
-        private static readonly int CLIENT_VERSION_NUMBER = 82;
+        private static readonly int SERVER_VERSION_NUMBER = 74;
+        private static readonly int CLIENT_VERSION_NUMBER = 92;
 
         /// <summary>
         /// Current version number of the main server.
@@ -16,7 +16,7 @@ namespace Boltmailer_common
         /// </summary>
         public static string GetServerVersion()
         {
-            string date = "21-07";
+            string date = "21-09";
             //string date = DateTime.Now.ToString("yy-MM");
             return date + "." + SERVER_VERSION_NUMBER;
         }
