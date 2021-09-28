@@ -35,14 +35,14 @@ namespace Boltmailer_mainserver
 <h4>Tämä on automaattinen viesti Boltmailer Serveriltä. <b>Ethän yritä vastata tähän viestiin.</b></h4>
 </br>
 </br>
-<h3>Käyttäjällä {assignedEmployee} ei ole projektia '{projectName}', jota yrität päivittää. Tarkistathan parametrisi, sekä että päivitettävä projekti on olemassa:</h3>
+<h3>Käyttäjää {assignedEmployee} ei ole olemassa, tai parametrisi ovat väärin. Tarkistathan parametrisi.</h3>
 <h4>{ex?.Message}</h4>
 </br>
 <h4>Jos uskot tämän olevan virhe, ota yhteyttä ylläpitäjiin.</h4>
 </br></br>
 <h1>In English:</h1>
 <h4>This is an automated message sent by the Boltmailer Mainserver. <b>Please do not try to reply to this email.</b></h4>
-<h3>The user {assignedEmployee} does not have the project '{projectName}' that you're trying to update. Please check your parameters.</h3>
+<h3>The user {assignedEmployee} does not exist. Please check your parameters.</h3>
 <h4>If you believe this is an error, please contact the Administrators.</h4>
                                 ";
         }

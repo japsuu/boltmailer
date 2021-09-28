@@ -21,7 +21,19 @@ namespace Boltmailer_client
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GeneralOverview());
+            //Application.Run(new GeneralOverview());
+
+            bool configCompleted = bool.Parse(System.Configuration.ConfigurationManager.AppSettings.Get("setupCompleted"));
+
+            if (configCompleted)
+            {
+                Application.Run(new GeneralOverview());
+            }
+            else
+            {
+                Application.Run(new Setup());
+            }
+
         }
 
         static void HandleUncaught(object sender, UnhandledExceptionEventArgs args)

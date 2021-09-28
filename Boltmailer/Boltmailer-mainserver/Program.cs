@@ -40,7 +40,7 @@ namespace Boltmailer_mainserver
                         case "#createusr":
                         {
                             Console.WriteLine("Please input the name of the new user: ");
-                            string name = Console.ReadLine();
+                            string name = NamingConventions.FilenameFromTitle(Console.ReadLine());
                             DirectoryInfo userDir = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Projektit\\" + name);
                             
                             Console.WriteLine("User directory created at " + userDir.FullName);
@@ -51,7 +51,7 @@ namespace Boltmailer_mainserver
                         {
                             Console.WriteLine("Please input the name of the user to delete: ");
                             string name = Console.ReadLine();
-                            string dir = ConfigManager.OutputDirectory + "\\Projektit\\" + name;
+                            string dir = ConfigManager.OutputDirectory + "\\Projektit\\" + NamingConventions.FilenameFromTitle(name);
                             
                             Console.WriteLine("WARNING!!! Deleting a user will delete their user directory, and all data inside it!");
                             Console.WriteLine("The directory " + dir + " will be deleted, alongside of all of it's contents.");

@@ -291,8 +291,12 @@ namespace Boltmailer_mainserver
 
                         // Set the update flag
                         isUpdate = projectDeadline.ToLower().Contains("update")
-                                   || timeEstimate.ToLower().Contains("update")
-                                   || updateLn.ToLower().Contains("update");
+                                   || timeEstimate.ToLower().Contains("update");
+
+                        if (updateLn != null && !isUpdate)
+                        {
+                            isUpdate = updateLn.ToLower().Contains("update");
+                        }
                     }
                     
                     ReadMessage(message, sender, assignedEmployee, projectDeadline, projectName, timeEstimate, isUpdate);
@@ -330,6 +334,7 @@ namespace Boltmailer_mainserver
 
         private void ReadMessage(MimeMessage message, string sender, string assignedEmployee, string projectDeadline, string projectName, string timeEstimate, bool isUpdate)
         {
+            DLog("Reading " + projectName + " from " + sender, LogLevel.Debug);
             // Create necessary files (notes, msg, info), if the msg is not a update to existing project
             if (isUpdate)
             {
@@ -368,8 +373,10 @@ namespace Boltmailer_mainserver
                 // Check if the user exists
                 if (Directory.Exists(ConfigManager.OutputDirectory + "\\Projektit\\" + assignedEmployee))
                 {
-                    string projectRootPath = ConfigManager.OutputDirectory + "\\Projektit\\" + assignedEmployee + "\\" + projectName;
-                    
+                    DirectoryInfo projectRoot = Directory.CreateDirectory(ConfigManager.OutputDirectory + "\\Projektit\\" + assignedEmployee + "\\" + projectName);
+
+                    string projectRootPath = projectRoot.FullName;
+
                     // Create notes file if needed
                     if (!File.Exists(projectRootPath + "\\" + "notes"))
                     {
@@ -411,8 +418,10 @@ namespace Boltmailer_mainserver
                 else    // User did not exist
                 {
                     //TODO: Send error msg
+                    SendErrorReply(sender, Exceptions.GetUserNotFoundException(projectName, assignedEmployee, sender, new Exception("The specified user does not exist.")));
                 }
             }
+            DLog("Done.", LogLevel.Debug);
         }
 
         /// <summary>
@@ -441,6 +450,7 @@ namespace Boltmailer_mainserver
             ImapClient imapClient = new ImapClient();
             try
             {
+                DLog("Started imap login with SSL= " + ConfigManager.EmailImapUseSSL, LogLevel.Debug);
                 // Authenticate imap client
                 if (ConfigManager.EmailImapUseSSL)
                 {
@@ -453,6 +463,7 @@ namespace Boltmailer_mainserver
                 imapClient.Authenticate(ConfigManager.EmailUsername, ConfigManager.EmailPassword);
 
                 Log("Logging on (Imap)... ", true);
+                DLog("Successful imap login", LogLevel.Debug);
 
                 return imapClient;
             }
@@ -476,6 +487,7 @@ namespace Boltmailer_mainserver
 
             try
             {
+                DLog("Started smtp login with SSL= " + ConfigManager.EmailSmtpUseSSL, LogLevel.Debug);
                 // Authenticate smtp client
                 smtpClient.ServerCertificateValidationCallback = (s, c, h, e) => true;
                 if (ConfigManager.EmailSmtpUseSSL)
@@ -489,6 +501,7 @@ namespace Boltmailer_mainserver
                 smtpClient.Authenticate(ConfigManager.EmailUsername, ConfigManager.EmailPassword);
 
                 Log("Logging on (Smtp)... ", true);
+                DLog("Successful smtp login", LogLevel.Debug);
 
                 return smtpClient;
             }
@@ -509,6 +522,7 @@ namespace Boltmailer_mainserver
         /// <param name="exception">Exceptions.Exception to send</param>
         private void SendErrorReply(string recipient, string exception)
         {
+            DLog("Sending error reply to " + recipient, LogLevel.Debug);
             MimeMessage reply = new MimeMessage();
             BodyBuilder bodyBuilder = new BodyBuilder();
 
@@ -529,6 +543,9 @@ namespace Boltmailer_mainserver
 
             smtpClient.Send(reply);
             smtpClient.Disconnect(true);
+
+            DLog("Success.", LogLevel.Debug);
+
         }
 
         /// <summary>

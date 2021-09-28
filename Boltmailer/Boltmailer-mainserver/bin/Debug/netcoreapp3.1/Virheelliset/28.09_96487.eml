@@ -1,0 +1,754 @@
+Delivered-To: 0481664@gmail.com
+Received: by 2002:a02:c80d:0:0:0:0:0 with SMTP id p13csp5020025jao;
+        Tue, 28 Sep 2021 04:04:44 -0700 (PDT)
+X-Received: by 2002:a05:6102:9a:: with SMTP id t26mr4434270vsp.34.1632827084096;
+        Tue, 28 Sep 2021 04:04:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1632827084; cv=none;
+        d=google.com; s=arc-20160816;
+        b=UjGEi0sFg32QpFJ4Yf/OpNnK0ID0HngddrbYS+5v2isvnwiXM7VjetL2hWh/6aOX6o
+         wud+5J7kIWhW/fk4cbNuGoTdvzl8rizWTuxwIEgDACMIiJHcUNFkMltrE/MpZyjXXg/Z
+         VjazLlzyVKKuwqJvnTldpqi+pd59Hke+vNHgxKkj/JJXMSkFb82fO+GaYSuvjhYcaU0T
+         2IEeCkcleWuZhs3uQhf8bYhlcQadCihYouqSnV1jgDLaU1p2Ez0u3drtRyRTtECfbH1u
+         JNAyPRmTR2SstmTYPjbZoD3eDHm38g26zaU30ugw3AqSiiFGpxZ262F8IKOXbiGp/KQ5
+         68PQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=IE70MzQzHPVoLu1lwLNS7kJEoscn0/VmLq3bIAt4JcU=;
+        b=Bq+gr81NPsv/+iI3SxdBwQN3zIiTa6K0L8QBusaYoSDrWLiEqCK0IzZG0X8oEkbeDh
+         N3hXOV+RyFZWCtgc9v2JxxEu/A46P6+IPQQlA8qyXB3YmHH8W/Skf7yPlWcc7tqNGarn
+         WReEkHp4qWa3dF3W/Vm6sub4egr+UKlNmerAgeZsp2UNltQ3qVnoX/0QttdIRLODdk9q
+         KwJn+fwVW/1Vh2ngUSFXwqnhgIWhPmz+u4upXJpd+4OhGeJifKSSlb7zVMt4pGpGcbAU
+         PjWY2fEsPRLaKeTPMrhSJilNpQxVtmx6Ge/dXHxIsWfW2aQH6Gb/y4GlZRVPmirLg5IN
+         cuYQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20210112 header.b=XB0jH5C4;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <japsu.honkasalo@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id p25sor5747965vsj.43.2021.09.28.04.04.44
+        for <0481664@gmail.com>
+        (Google Transport Security);
+        Tue, 28 Sep 2021 04:04:44 -0700 (PDT)
+Received-SPF: pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20210112 header.b=XB0jH5C4;
+       spf=pass (google.com: domain of japsu.honkasalo@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=japsu.honkasalo@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=IE70MzQzHPVoLu1lwLNS7kJEoscn0/VmLq3bIAt4JcU=;
+        b=XB0jH5C4aR50RGg0zPE5kuXzuKljaVkMUPpD4D/yBq+bUL0rhFCRzqjDrrEbyBxdYR
+         mYhC1DO1I6q+ZtuNbaSq+b+WUKpchXIqZb19BGC0+tGNWzfKb8I0SMFRyZU5btWwp/8D
+         xGU1fBM0+FTTOB/1D3t6Z724nXp/I/kpqnDotgoZqSDW0rQ75H696TpVtWe4Q0Xql5Bi
+         iG/kE6uFs9OTpRk397KwmPhvAUfMFqZLcKojDLYwyDLUb+6dYaWdOsQ4GpeND2mhvj6k
+         Z1/iT1AkxJvXSkZB1QcoXAsGeccichCHiu9g9DTvzwhbn1PY+hTSoqhAxDm8BvEOM8a4
+         S24A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=IE70MzQzHPVoLu1lwLNS7kJEoscn0/VmLq3bIAt4JcU=;
+        b=8KHhj3XEW+YBznRhktkhWdZKgvb8zGoBBTW5wxTR4OCpe7Z6f5GvVg+KqWZYn1IsRs
+         yyivYO6JbLcEgRN2amMnsVOYbqNUupWNl5YE0HquQEalzu98NzrBgi/6XRIoT+6u/Ulc
+         DmfHna2tJ/HnmDegAwwR8jy3lSnmTx9ck1YYFFPi8dfcu/fbadl/vyraWKblSNGJuB7I
+         ux23b/gAS0uUQ3XRJex1nPkfykC3F6B0JtuBSkuJ9d/sMfU14Dl5dxheumvoS6kte/xm
+         rp7YcneowKpSOflvGo0NheNszzx55YRQTu8IqTwhAubbIFt/jmk6oQI9SNbk96Y6T7qx
+         Wrzg==
+X-Gm-Message-State: AOAM533PwARgsUg1eD0HH7XK0s9thl2XQP6k48Lnxi49idgWowkQXac8
+	M3vYxkikhpd9JOUQBh/oRTgq5eoab48KoTeY9dKzXqNi
+X-Google-Smtp-Source: ABdhPJwah3oUtPZbf67HaK0PzsQdcmQ7ltn8Qi0003iSBXLLnAMOB36jbS/tzrL68FlLeARax8qW9Zx3QRXmCEomIec=
+X-Received: by 2002:a05:6102:222f:: with SMTP id d15mr4229004vsb.16.1632827083479;
+ Tue, 28 Sep 2021 04:04:43 -0700 (PDT)
+MIME-Version: 1.0
+References: <1015746862.520402463.1632755292094@abmktmail-batch1k.marketo.org> <CAKNULYoeMuS1TV0kvPfOOOsgSL1nTGR0jWBRUvv5G2inzn5K9A@mail.gmail.com>
+In-Reply-To: <CAKNULYoeMuS1TV0kvPfOOOsgSL1nTGR0jWBRUvv5G2inzn5K9A@mail.gmail.com>
+From: Jasper Honkasalo <japsu.honkasalo@gmail.com>
+Date: Tue, 28 Sep 2021 14:04:31 +0300
+Message-ID: <CAKNULYoLpdE2=Lu=8+ZCqfPak0Cb+geCaw33EFUE=_fLiFvUwQ@mail.gmail.com>
+Subject: Fwd: Updates to our Data Processing Agreement (DPA)
+To: 0481664@gmail.com
+Content-Type: multipart/alternative; boundary="0000000000004a5ff505cd0c2ee1"
+
+--0000000000004a5ff505cd0c2ee1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+teppo testinen
+8.9.2021
+120h
+
+---------- Forwarded message ---------
+From: Team DigitalOcean <team@info.digitalocean.com>
+Date: Tue, Sep 28, 2021 at 2:06 AM
+Subject: Updates to our Data Processing Agreement (DPA)
+To: <japsu.honkasalo@gmail.com>
+
+
+We=E2=80=99re writing to let you know that we=E2=80=99ve updated DigitalOce=
+an=E2=80=99s Data
+Processing Agreement (DPA) incorporating new Standard Contractual Clauses
+(SCCs).
+ =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=
+=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=
+=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =
+=E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=
+=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C
+=E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=
+=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=
+=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =
+=E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=
+=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C
+
+[ Image ]
+
+
+We=E2=80=99re writing to let you know that we=E2=80=99ve updated DigitalOce=
+an=E2=80=99s Data
+Processing Agreement (DPA)
+<https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHut7WHc087Vb1WQQ-0T3=
+7428KGR_NEtDygVhDybKQAJgCyhaMKNaRhFTuxYRaRoGEnEs=3D>
+incorporating new Standard Contractual Clauses (SCCs).
+
+
+We recommend reading through the updated terms for yourself, but here=E2=80=
+=99s a
+summary:
+
+   - We made changes to our DPA to more clearly define the roles and
+   responsibilities of you as the customer and our responsibility as
+   DigitalOcean. Additionally, we have new Controller-to-Controller and
+   Controller-to-Processor Schedules in our DPA for you to review.
+   - We have included the new versions of the SCCs within our updated DPA.
+   Section 4.1 of our DPA incorporates the updated SCCs.
+   - We have created a Schrems II FAQ
+   <https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHurLZ8TnkrvhQLyRL=
+KVyRACfDq8N_JrMWlPrOfi8T1D2--3AYyyd4TTTblXh6LOy9Yo4=3D>
+   page to help answer questions.
+   - We have implemented a new support process for accessing more sensitive
+   data within your droplet console
+   <https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHuj6JbgCKdn7rmULN=
+KzLjoYS36f0IsQ52cJn7DhOZ_LKTw7GQ0J5EPtFWETsVbJkHVBE=3D>.
+   Non-EU-based DigitalOcean employees will be unable to access droplet
+   consoles of resources located in EU data centers. Any requests for dropl=
+et
+   console access will be routed through EU-based DigitalOcean employees.
+
+These updated terms will take effect on *September 27, 2021*, and your
+continued usage of our platform will be considered consent to the updated D=
+ata
+Processing Agreement
+<https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHut7WHc087Vb1WQQ-0T3=
+7428KGR_NEtDygVhDybKQAJgCyhaMKNaRhFTuxYRaRoGEnEs=3D>
+.
+
+
+If you have any questions, please contact us here
+<https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHuiOkI2BmVq4KtWukiij=
+XxooiDm7G7Jc5eEzp60GVAnOXkqM_S4yCEpf2ZYcXq1pCw_M=3D>
+or reply to this email and we'll be happy to help!
+
+
+
+Thank you,
+
+DigitalOcean Privacy Team
+
+[image: Twitter]
+<https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHuhp4cvGhx4h7VjuZ-MZ=
+KbAxe70wO12749pRhwwCR8lbQn9Dz4UjBYjNmz_k8e0Cim-E=3D>
+[image: Facebook]
+<https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHujiBxq581Bvj_yXTsHl=
+t7yMruo9fAXpyazI03P1jXOpoX2jODXcIAcnmJCsrZCGmym8=3D>
+[image: YouTube]
+<https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHul7yIdgjshrMarsXfZr=
+EWWOienlHgeijimZWE0xO_FqQRTjQPDpTl9pcWOZE8fad_Oc=3D>
+[image: Instagram]
+<https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHupaSxiAKIrO7Qn9ihrK=
+Ws7xRvW-QEeSKnicLkC7nEmJ-hFktEwM5sPUffmzz7H1oWoQ=3D>
+[image: Linkedin]
+<https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHuuAZ8GYbFTib_brd4uy=
+mzwWw0eEXdexxVWSKP8DMwlPCk9vo3mRhOdxdIkSEeaP5e-g=3D>
+
+Give $100, get $25. Refer a friend.
+<https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHupr3iaImkTQiEFnJ6mD=
+7HzaOWHvBbnT_8PPVOKi02pjzWlImLKMTCJtMgYzKZXEyMEE=3D>
+*Trouble seeing this email? View it as a web page.
+<https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHuoBXQKRtC5jvEbmJu0E=
+qfS0MhgkoNSZXdEjHhLFm9r7rcEBwRWbJgSRvJdJPLFJqKwY=3D>*
+
+Copyright DigitalOcean. All right reserved.
+Floor 10, 101 Avenue of the Americas, New York, NY 10013
+[image: DigitalOcean logo (footer section)]
+[ DigitalOcean logo (footer section) ]
+
+--0000000000004a5ff505cd0c2ee1
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr"><div>teppo tes=
+tinen</div><div>8.9.2021</div><div>120h</div><div><br><div class=3D"gmail_q=
+uote"><div dir=3D"ltr" class=3D"gmail_attr">---------- Forwarded message --=
+-------<br>From: <strong class=3D"gmail_sendername" dir=3D"auto">Team Digit=
+alOcean</strong> <span dir=3D"auto">&lt;<a href=3D"mailto:team@info.digital=
+ocean.com" target=3D"_blank">team@info.digitalocean.com</a>&gt;</span><br>D=
+ate: Tue, Sep 28, 2021 at 2:06 AM<br>Subject: Updates to our Data Processin=
+g Agreement (DPA)<br>To:  &lt;<a href=3D"mailto:japsu.honkasalo@gmail.com" =
+target=3D"_blank">japsu.honkasalo@gmail.com</a>&gt;<br></div><br><br><u></u=
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style=3D"word-spacing:normal;background-color:#ffffff">
+
+<div id=3D"m_4139891862449364423m_-4681986408300939055emailPreHeader" style=
+=3D"opacity:0;color:transparent;line-height:0;font-size:0px;overflow:hidden=
+;border-width:0;display:none!important">
+We=E2=80=99re writing to let you know that we=E2=80=99ve updated DigitalOce=
+an=E2=80=99s Data Processing Agreement (DPA) incorporating new Standard Con=
+tractual Clauses (SCCs).
+</div>
+<div style=3D"display:none;max-height:0px;overflow:hidden">
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=
+=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C=C2=A0=E2=80=8C
+</div>
+
+<div style=3D"background-color:#ffffff;background-position:center center;ba=
+ckground-size:auto;background-repeat:repeat">
+<div>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"background-color:#f3f5f9;width:100%">
+<tbody>
+<tr>
+<td align=3D"center">
+
+<div style=3D"background:#0248ff;background-color:#0248ff;Margin:0px auto;m=
+ax-width:600px">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"background-color:#0248ff;width:100%">
+<tbody>
+<tr>
+<td style=3D"border-top:10px solid #f3f5f9;font-size:0px;padding:20px 20px =
+20px 20px;text-align:center;vertical-align:top">
+
+<div style=3D"font-size:0px;text-align:left;direction:ltr;display:inline-bl=
+ock;vertical-align:top;width:100%">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius:0px;vertical-align:top" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"left" style=3D"font-size:0px;padding:5px 5px 5px 5px;word-brea=
+k:break-word">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-collapse:collapse;border-spacing:0px">
+<tbody>
+<tr>
+<td style=3D"width:175px">
+<div id=3D"m_4139891862449364423m_-4681986408300939055kimage-tp828dn1h">
+<img alt=3D"" height=3D"auto" src=3D"https://client-data.knak.io/production=
+/email_assets/5f18b38fc36ef/i98ylbkFUxLLicuJIz4L1TH1sIdnincxLNbdvr89.png" s=
+tyle=3D"border:none;display:block;outline:none;text-decoration:none;height:=
+auto;width:100%;font-size:13px" width=3D"175">
+</div>
+
+<div id=3D"m_4139891862449364423m_-4681986408300939055image-plain-text-t577=
+3z3h2" style=3D"opacity:0;color:transparent;line-height:0;font-size:0px;ove=
+rflow:hidden;border-width:0;display:none!important">
+[ Image ]
+</div>
+</td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div style=3D"font-size:0px;text-align:left;direction:ltr;display:inline-bl=
+ock;vertical-align:top;width:100%">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius:0px;vertical-align:top" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"right" style=3D"font-size:0px;padding:10px 0px 0px 0px;word-br=
+eak:break-word">
+<div id=3D"m_4139891862449364423m_-4681986408300939055ktext-ftmyzkm33" styl=
+e=3D"font-family:&#39;Proxima Nova&#39;,Arial,Helvetica,Calibri,sans-serif;=
+font-size:12px;letter-spacing:none;line-height:1.2;text-align:right;color:#=
+ffffff">
+<div style=3D"font-family:&#39;Proxima Nova&#39;,Arial,Helvetica,Calibri,sa=
+ns-serif;font-size:12px;letter-spacing:none;line-height:1.2;text-align:righ=
+t;color:#ffffff">
+=C2=A0
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"background-color:#f3f5f9;width:100%">
+<tbody>
+<tr>
+<td align=3D"center">
+
+<div style=3D"background:#ffffff;background-color:#ffffff;Margin:0px auto;m=
+ax-width:600px">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"background-color:#ffffff;width:100%">
+<tbody>
+<tr>
+<td style=3D"font-size:0px;padding:0px;text-align:center;vertical-align:top=
+">
+
+<div style=3D"font-size:0px;text-align:left;direction:ltr;display:inline-bl=
+ock;vertical-align:top;width:100%">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius:0px;vertical-align:top" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"left" style=3D"font-size:0px;padding:25px 25px 0px 25px;word-b=
+reak:break-word">
+<div id=3D"m_4139891862449364423m_-4681986408300939055ktext-1lz2spae0" styl=
+e=3D"font-family:&#39;Proxima Nova&#39;,Arial,Helvetica,Calibri,sans-serif;=
+font-size:16px;letter-spacing:none;line-height:1.4;text-align:left;color:#5=
+b6987">
+<div style=3D"font-family:&#39;Proxima Nova&#39;,Arial,Helvetica,Calibri,sa=
+ns-serif;font-size:16px;letter-spacing:none;line-height:1.4;text-align:left=
+;color:#5b6987">=20
+<p style=3D"margin:0 0">We=E2=80=99re writing to let you know that we=E2=80=
+=99ve updated DigitalOcean=E2=80=99s <a href=3D"https://waves.digitalocean.=
+com/MTEzLURUTi0yNjYAAAF_xsVHut7WHc087Vb1WQQ-0T37428KGR_NEtDygVhDybKQAJgCyha=
+MKNaRhFTuxYRaRoGEnEs=3D" rel=3D"noopener" style=3D"text-decoration:none;col=
+or:#0080ff" target=3D"_blank">Data Processing Agreement (DPA)</a> incorpora=
+ting new Standard Contractual Clauses (SCCs).</p>=20
+<p style=3D"margin:0 0"><br>We recommend reading through the updated terms =
+for yourself, but here=E2=80=99s a summary:</p>=20
+<ul style=3D"display:block">=20
+<li style=3D"list-style:disc">We made changes to our DPA to more clearly de=
+fine the roles and responsibilities of you as the customer and our responsi=
+bility as DigitalOcean. Additionally, we have new Controller-to-Controller =
+and Controller-to-Processor Schedules in our DPA for you to review.</li>=20
+<li style=3D"list-style:disc">We have included the new versions of the SCCs=
+ within our updated DPA. Section 4.1 of our DPA incorporates the updated SC=
+Cs.</li>=20
+<li style=3D"list-style:disc">We have created a <a href=3D"https://waves.di=
+gitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHurLZ8TnkrvhQLyRLKVyRACfDq8N_JrMWlPrO=
+fi8T1D2--3AYyyd4TTTblXh6LOy9Yo4=3D" rel=3D"noopener" style=3D"text-decorati=
+on:none;color:#0080ff" target=3D"_blank">Schrems II FAQ</a> page to help an=
+swer questions.</li>=20
+<li style=3D"list-style:disc">We have implemented a new support process for=
+ accessing more sensitive data within your <a href=3D"https://waves.digital=
+ocean.com/MTEzLURUTi0yNjYAAAF_xsVHuj6JbgCKdn7rmULNKzLjoYS36f0IsQ52cJn7DhOZ_=
+LKTw7GQ0J5EPtFWETsVbJkHVBE=3D" rel=3D"noopener" style=3D"text-decoration:no=
+ne;color:#0080ff" target=3D"_blank">droplet console</a>. Non-EU-based Digit=
+alOcean employees will be unable to access droplet consoles of resources lo=
+cated in EU data centers. Any requests for droplet console access will be r=
+outed through EU-based DigitalOcean employees.</li>=20
+</ul>=20
+<p style=3D"margin:0 0">These updated terms will take effect on <strong>Sep=
+tember 27, 2021</strong>, and your continued usage of our platform will be =
+considered consent to the updated <a href=3D"https://waves.digitalocean.com=
+/MTEzLURUTi0yNjYAAAF_xsVHut7WHc087Vb1WQQ-0T37428KGR_NEtDygVhDybKQAJgCyhaMKN=
+aRhFTuxYRaRoGEnEs=3D" rel=3D"noopener" style=3D"text-decoration:none;color:=
+#0080ff" target=3D"_blank">Data Processing Agreement</a>.</p>=20
+<p style=3D"margin:0 0"><br>If you have any questions, please <a href=3D"ht=
+tps://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHuiOkI2BmVq4KtWukiijXxo=
+oiDm7G7Jc5eEzp60GVAnOXkqM_S4yCEpf2ZYcXq1pCw_M=3D" rel=3D"noopener" style=3D=
+"text-decoration:none;color:#0080ff" target=3D"_blank">contact us here</a> =
+or reply to this email and we&#39;ll be happy to help!</p>=20
+<p style=3D"margin:0 0">=C2=A0</p>=20
+<p style=3D"margin:0 0">Thank you,</p>=20
+<p style=3D"margin:0 0">DigitalOcean Privacy Team</p>=20
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"background-color:#f3f5f9;width:100%">
+<tbody>
+<tr>
+<td align=3D"center">
+
+<div style=3D"background:#ffffff;background-color:#ffffff;Margin:0px auto;m=
+ax-width:600px">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"background-color:#ffffff;width:100%">
+<tbody>
+<tr>
+<td style=3D"font-size:0px;padding:0px;text-align:center;vertical-align:top=
+">
+
+<div style=3D"font-size:0px;text-align:left;direction:ltr;display:inline-bl=
+ock;vertical-align:top;width:100%">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius:0px;vertical-align:top" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" style=3D"font-size:0px;padding:25px 0px 10px 0px;word-=
+break:break-word">
+<p style=3D"border-top:solid 1px #dfdede;font-size:1px;margin:0px auto;widt=
+h:100%;text-align:center"></p>
+
+
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"background-color:#f3f5f9;width:100%">
+<tbody>
+<tr>
+<td align=3D"center">
+
+<div style=3D"background:#ffffff;background-color:#ffffff;Margin:0px auto;m=
+ax-width:600px">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"background-color:#ffffff;width:100%">
+<tbody>
+<tr>
+<td style=3D"font-size:0px;padding:0px;text-align:center;vertical-align:top=
+">
+
+<div style=3D"font-size:0px;text-align:left;direction:ltr;display:inline-bl=
+ock;vertical-align:top;width:100%">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius:0px;vertical-align:top" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" style=3D"font-size:0px;padding:10px 25px 0px 25px;word=
+-break:break-word">
+
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"float:none;display:inline-table">
+<tbody>
+<tr>
+<td style=3D"padding:10px">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"background:transparent;border-radius:2px;width:19px">
+<tbody>
+<tr>
+<td style=3D"padding:0px;font-size:0;height:19px;vertical-align:middle;widt=
+h:19px">
+<div id=3D"m_4139891862449364423m_-4681986408300939055ksocial-sr8lzg7ti">
+<a href=3D"https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHuhp4cvGhx=
+4h7VjuZ-MZKbAxe70wO12749pRhwwCR8lbQn9Dz4UjBYjNmz_k8e0Cim-E=3D" style=3D"tex=
+t-decoration:none;color:#0080ff" target=3D"_blank"><img alt=3D"Twitter" hei=
+ght=3D"19" src=3D"https://client-data.knak.io/production/email_assets/5f18b=
+38fc36ef/QsMwEP7mUmOXAAkqJzOoOyD1ofAiwAYar3ETBABO.png" style=3D"border-radi=
+us:2px;display:block" width=3D"19"></a>
+</div></td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table>
+
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"float:none;display:inline-table">
+<tbody>
+<tr>
+<td style=3D"padding:10px">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"background:transparent;border-radius:2px;width:19px">
+<tbody>
+<tr>
+<td style=3D"padding:0px;font-size:0;height:19px;vertical-align:middle;widt=
+h:19px">
+<div id=3D"m_4139891862449364423m_-4681986408300939055ksocial-xeskjqe0x">
+<a href=3D"https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHujiBxq581=
+Bvj_yXTsHlt7yMruo9fAXpyazI03P1jXOpoX2jODXcIAcnmJCsrZCGmym8=3D" style=3D"tex=
+t-decoration:none;color:#0080ff" target=3D"_blank"><img alt=3D"Facebook" he=
+ight=3D"19" src=3D"https://client-data.knak.io/production/email_assets/5f18=
+b38fc36ef/3nclaeOYDedN51KQicUBC3816Vm6sbv1Iu5Rinug.png" style=3D"border-rad=
+ius:2px;display:block" width=3D"19"></a>
+</div></td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table>
+
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"float:none;display:inline-table">
+<tbody>
+<tr>
+<td style=3D"padding:10px">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"background:#0080fb;border-radius:2px;width:19px">
+<tbody>
+<tr>
+<td style=3D"padding:0px;font-size:0;height:19px;vertical-align:middle;widt=
+h:19px">
+<div id=3D"m_4139891862449364423m_-4681986408300939055ksocial-ocxzh02n5">
+<a href=3D"https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHul7yIdgjs=
+hrMarsXfZrEWWOienlHgeijimZWE0xO_FqQRTjQPDpTl9pcWOZE8fad_Oc=3D" style=3D"tex=
+t-decoration:none;color:#0080ff" target=3D"_blank"><img alt=3D"YouTube" hei=
+ght=3D"19" src=3D"https://s3.amazonaws.com/assets.knak.io/img/icons/builder=
+-social/youtube.png" style=3D"border-radius:2px;display:block" width=3D"19"=
+></a>
+</div></td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table>
+
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"float:none;display:inline-table">
+<tbody>
+<tr>
+<td style=3D"padding:10px">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"background:transparent;border-radius:2px;width:19px">
+<tbody>
+<tr>
+<td style=3D"padding:0px;font-size:0;height:19px;vertical-align:middle;widt=
+h:19px">
+<div id=3D"m_4139891862449364423m_-4681986408300939055ksocial-1dxzo7y9n">
+<a href=3D"https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHupaSxiAKI=
+rO7Qn9ihrKWs7xRvW-QEeSKnicLkC7nEmJ-hFktEwM5sPUffmzz7H1oWoQ=3D" style=3D"tex=
+t-decoration:none;color:#0080ff" target=3D"_blank"><img alt=3D"Instagram" h=
+eight=3D"19" src=3D"https://client-data.knak.io/production/email_assets/5f1=
+8b38fc36ef/HTSj6QdBi8KLRBENU6Jn31VOD4f0YVEGOOnDy2vj.png" style=3D"border-ra=
+dius:2px;display:block" width=3D"19"></a>
+</div></td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table>
+
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"float:none;display:inline-table">
+<tbody>
+<tr>
+<td style=3D"padding:10px">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"background:#0080fb;border-radius:2px;width:19px">
+<tbody>
+<tr>
+<td style=3D"padding:0px;font-size:0;height:19px;vertical-align:middle;widt=
+h:19px">
+<div id=3D"m_4139891862449364423m_-4681986408300939055ksocial-g269thw6g">
+<a href=3D"https://waves.digitalocean.com/MTEzLURUTi0yNjYAAAF_xsVHuuAZ8GYbF=
+Tib_brd4uymzwWw0eEXdexxVWSKP8DMwlPCk9vo3mRhOdxdIkSEeaP5e-g=3D" style=3D"tex=
+t-decoration:none;color:#0080ff" target=3D"_blank"><img alt=3D"Linkedin" he=
+ight=3D"19" src=3D"https://s3.amazonaws.com/assets.knak.io/img/icons/builde=
+r-social/linkedin.png" style=3D"border-radius:2px;display:block" width=3D"1=
+9"></a>
+</div></td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"background-color:#f3f5f9;width:100%">
+<tbody>
+<tr>
+<td align=3D"center">
+
+<div style=3D"background:#ffffff;background-color:#ffffff;Margin:0px auto;m=
+ax-width:600px">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"background-color:#ffffff;width:100%">
+<tbody>
+<tr>
+<td style=3D"font-size:0px;padding:0px;text-align:center;vertical-align:top=
+">
+
+<div style=3D"font-size:0px;text-align:left;direction:ltr;display:inline-bl=
+ock;vertical-align:top;width:100%">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius:0px;vertical-align:top" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" style=3D"font-size:0px;padding:10px 25px 10px 25px;wor=
+d-break:break-word">
+<div id=3D"m_4139891862449364423m_-4681986408300939055ktext-jnesoous1" styl=
+e=3D"font-family:&#39;Proxima Nova&#39;,Arial,Helvetica,Calibri,sans-serif;=
+font-size:14px;letter-spacing:none;line-height:1.4;text-align:center;color:=
+#5b6987">
+<div style=3D"font-family:&#39;Proxima Nova&#39;,Arial,Helvetica,Calibri,sa=
+ns-serif;font-size:14px;letter-spacing:none;line-height:1.4;text-align:cent=
+er;color:#5b6987">
+<p style=3D"margin:0 0">Give $100, get $25. <a href=3D"https://waves.digita=
+locean.com/MTEzLURUTi0yNjYAAAF_xsVHupr3iaImkTQiEFnJ6mD7HzaOWHvBbnT_8PPVOKi0=
+2pjzWlImLKMTCJtMgYzKZXEyMEE=3D" rel=3D"noopener" style=3D"text-decoration:n=
+one;color:#0080ff" target=3D"_blank">Refer a friend.</a><br><em><span style=
+=3D"font-size:12px">Trouble seeing this email? <a href=3D"https://waves.dig=
+italocean.com/MTEzLURUTi0yNjYAAAF_xsVHuoBXQKRtC5jvEbmJu0EqfS0MhgkoNSZXdEjHh=
+LFm9r7rcEBwRWbJgSRvJdJPLFJqKwY=3D" rel=3D"noopener" style=3D"text-decoratio=
+n:none;color:#0080ff" target=3D"_blank">View it as a web page.</a></span></=
+em><br><br>Copyright DigitalOcean. All right reserved.<br>Floor 10, 101 Ave=
+nue of the Americas, New York, NY 10013</p>
+</div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"background-color:#f3f5f9;width:100%">
+<tbody>
+<tr>
+<td align=3D"center">
+
+<div style=3D"background:#ffffff;background-color:#ffffff;Margin:0px auto;m=
+ax-width:600px">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ro=
+le=3D"presentation" style=3D"background-color:#ffffff;width:100%">
+<tbody>
+<tr>
+<td style=3D"border-bottom:10px solid #f3f5f9;font-size:0px;padding:0px 0px=
+ 25px 0px;text-align:center;vertical-align:top">
+
+<div style=3D"font-size:0px;text-align:left;direction:ltr;display:inline-bl=
+ock;vertical-align:top;width:100%">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-radius:0px;vertical-align:top" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" style=3D"font-size:0px;padding:10px 0px 0px 0px;word-b=
+reak:break-word">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"border-collapse:collapse;border-spacing:0px">
+<tbody>
+<tr>
+<td style=3D"width:36px">
+<div id=3D"m_4139891862449364423m_-4681986408300939055kimage-b91hlzxn3">
+<img alt=3D"DigitalOcean logo (footer section)" height=3D"auto" src=3D"http=
+s://client-data.knak.io/production/email_assets/5f18b38fc36ef/RecQIPMBEzddR=
+lbIakDkxczblhSoimcsLFSs479o.png" style=3D"border:none;display:block;outline=
+:none;text-decoration:none;height:auto;width:100%;font-size:13px" width=3D"=
+36">
+</div>
+
+<div id=3D"m_4139891862449364423m_-4681986408300939055image-plain-text-m0cw=
+n0mwe" style=3D"opacity:0;color:transparent;line-height:0;font-size:0px;ove=
+rflow:hidden;border-width:0;display:none!important">
+[ DigitalOcean logo (footer section) ]
+</div>
+</td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<img src=3D"https://waves.digitalocean.com/trk?t=3D1&amp;mid=3DMTEzLURUTi0y=
+NjY6MDozNjk1OjIyMTkyOjE2MTIwODo1NDU4Ojk6MzY5Mzo2NzgxMDUzOmphcHN1Lmhvbmthc2F=
+sb0BnbWFpbC5jb20%3D" width=3D"1" height=3D"1" style=3D"display:none!importa=
+nt" alt=3D"">
+</div>
+</div></div></div>
+</div></div>
+
+--0000000000004a5ff505cd0c2ee1--

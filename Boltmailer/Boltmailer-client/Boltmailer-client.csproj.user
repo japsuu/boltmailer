@@ -16,5 +16,8 @@
     <Compile Update="ProjectOverview.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Setup.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

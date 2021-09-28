@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "arOrzKpBQR9sMEyOUGfVP4gPvXq+GayPwkOweCV6rnvmCAE+odIxUeiXCYvJXJERAg9OL/m6Ap2ar+jMZt1KVw==",
+  "dgSpecHash": "h0DBAiQI//MM18d3CQOuFEz31fkIPwWkOVqtRehExpG639N41Yblc4r9+LuXMXf7196Ehl2CzIUwt1rNNiG4Bg==",
   "success": true,
   "projectFilePath": "C:\\Users\\japsu\\Desktop\\boltmailer\\Boltmailer\\Boltmailer-mainserver\\Boltmailer-mainserver.csproj",
   "expectedPackageFiles": [
@@ -20,8 +20,7 @@
     "C:\\Users\\japsu\\.nuget\\packages\\system.security.permissions\\5.0.0\\system.security.permissions.5.0.0.nupkg.sha512",
     "C:\\Users\\japsu\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
     "C:\\Users\\japsu\\.nuget\\packages\\system.text.encoding.codepages\\4.4.0\\system.text.encoding.codepages.4.4.0.nupkg.sha512",
-    "C:\\Users\\japsu\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512",
-    "C:\\Users\\japsu\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.18\\microsoft.netcore.app.host.win-x64.3.1.18.nupkg.sha512"
+    "C:\\Users\\japsu\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -7,6 +7,24 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Tulpep.NotificationWindow;
+
+
+
+/// <summary>
+/// 
+/// 
+/// TODO: Since we are now using a "account based" system, we can just use filesystemwatcher to check for the user directory, not the main root!
+/// Saves on resources etc, the user client does not need to be aware of anything else than the local user directory!
+/// 
+/// No need for two FileSystemWatchers, need only one for the user local directory.
+/// 
+/// IMPLEMENT ASAP!
+/// 
+/// 
+/// </summary>
+
+
 
 namespace Boltmailer_client
 {
@@ -15,7 +33,7 @@ namespace Boltmailer_client
         /// <summary>
         /// Root of where all the employees' folders are located.
         /// </summary>
-        readonly string EMPLOYEES_ROOT_PATH = ConfigurationManager.AppSettings.Get("employeesRootPath") + "\\Projektit";
+        string EMPLOYEES_ROOT_PATH = ConfigurationManager.AppSettings.Get("employeesRootPath") + "\\Projektit";
 
         /// <summary>
         /// Called when any project updates.
@@ -38,6 +56,11 @@ namespace Boltmailer_client
 
         bool sendNotifications;
         bool showCompleted;
+
+        /// <summary>
+        /// True if the current user has overriding admin priviledges.
+        /// </summary>
+        public static bool isAdminModeEnabled;
 
         /// <summary>
         /// True if initialization is fully and successfully completed.
@@ -66,6 +89,8 @@ namespace Boltmailer_client
             // Read the config
             try
             {
+                EMPLOYEES_ROOT_PATH = ConfigurationManager.AppSettings.Get("employeesRootPath") + "\\Projektit";
+
                 FilterEmployeesBox.Text = ConfigurationManager.AppSettings.Get("employeeSearchTerm");
 
                 AlwaysOnTopCheckbox.Checked = bool.Parse(ConfigurationManager.AppSettings.Get("alwaysOnTop"));
@@ -75,6 +100,12 @@ namespace Boltmailer_client
 
                 showCompleted = bool.Parse(ConfigurationManager.AppSettings.Get("showCompletedProjects"));
                 ShowCompletedProjectsCheckbox.Checked = showCompleted;
+
+                // Check for admin privs
+                isAdminModeEnabled = bool.Parse(ConfigurationManager.AppSettings.Get("adminMode"));
+                FilterEmployeesLabel.Visible = isAdminModeEnabled;
+                FilterEmployeesBox.Visible = isAdminModeEnabled;
+                ConfigButton.Visible = isAdminModeEnabled;
             }
             catch (Exception ex)
             {
@@ -136,7 +167,7 @@ namespace Boltmailer_client
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void SendCreatedNotification(object sender, FileSystemEventArgs e)
+        void SendCreatedNotification(object sender, FileSystemEventArgs e)  //TODO: Change to use the same notification system as setup.
         {
             if (
                 e.FullPath.ToLower().Contains(FilterEmployeesBox.Text) &&
@@ -147,12 +178,20 @@ namespace Boltmailer_client
             {
                 if (e != null && sendNotifications)
                 {
+                    /*
                     new ToastContentBuilder()
                         .AddArgument("action", "openProj")
                         .AddArgument("path", e.FullPath)
                         .AddText("Uusi Projekti / Päivitys projektiin:")
                         .AddText(NamingConventions.FilenameFromPath(e.FullPath))
-                        .Show();
+                        .Show();*/
+
+                    PopupNotifier popup = new PopupNotifier
+                    {
+                        TitleText = "Uusi Projekti / Päivitys projektiin:",
+                        ContentText = "NamingConventions.FilenameFromPath(e.FullPath)"
+                    };
+                    popup.Popup();
                 }
             }
         }
@@ -683,6 +722,9 @@ namespace Boltmailer_client
             config.AppSettings.Settings[key].Value = value;
 
             config.Save(ConfigurationSaveMode.Modified);
+
+            // Added, no idea if this helps tbh
+            ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }
