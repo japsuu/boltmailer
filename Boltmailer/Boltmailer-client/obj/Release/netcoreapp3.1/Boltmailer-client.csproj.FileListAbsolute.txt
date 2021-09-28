@@ -23,3 +23,5 @@ C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\obj\Release\netco
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\obj\Release\netcoreapp3.1\Boltmailer-client.pdb
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\obj\Release\netcoreapp3.1\Boltmailer-client.genruntimeconfig.cache
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\obj\Release\netcoreapp3.1\Boltmailer-client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\Tulpep.NotificationWindow.dll
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\obj\Release\netcoreapp3.1\Boltmailer_client.Setup.resources

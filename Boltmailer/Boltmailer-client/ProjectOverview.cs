@@ -13,6 +13,9 @@ namespace Boltmailer_client
         readonly string currentEmployee;
         readonly string lockPath;
         readonly string notesPath;
+        readonly string projectsRootPath;
+
+        string projectMoveDestination;
 
         bool canEdit = false;
         bool employeeHasChanged = false;
@@ -24,7 +27,7 @@ namespace Boltmailer_client
 
         readonly List<string> employeePaths;
 
-        public ProjectOverview(ProjectInfo info, string notesFilePath, List<string> employeePaths, string currentEmployee)
+        public ProjectOverview(ProjectInfo info, string notesFilePath, List<string> employeePaths, string currentEmployee, string projectsRootPath)
         {
             InitializeComponent();
 
@@ -38,11 +41,15 @@ namespace Boltmailer_client
 
             this.info = info;
 
+            this.projectsRootPath = projectsRootPath;
+
             projectPath = notesFilePath;
 
             lockPath = projectPath + "\\lock";
 
             notesPath = projectPath + "\\notes";
+
+            projectMoveDestination = "none";
 
             Setup();
         }
@@ -83,27 +90,46 @@ namespace Boltmailer_client
             StatusComboBox.SelectedIndex = statusSelectionIndex;
 
 
+            bool isAdminModeEnabled = bool.Parse(System.Configuration.ConfigurationManager.AppSettings.Get("adminMode"));
 
-            // Set Employee selection ComboBox values
-            List<EmployeeComboItem> employeeComboItems = new List<EmployeeComboItem>();
-
-            foreach (string employeePath in employeePaths)
+            if (isAdminModeEnabled)
             {
-                string employeeName = NamingConventions.EmployeeFromPath(employeePath);
+                EmployeeComboBox.Visible = true;
+                AssignToLabel.Visible = true;
+                AssignToSelfBtn.Visible = false;
 
-                employeeComboItems.Add(new EmployeeComboItem(employeePath, employeeName));
+                // Set Employee selection ComboBox values
+                List<EmployeeComboItem> employeeComboItems = new List<EmployeeComboItem>();
+
+                foreach (string employeePath in employeePaths)
+                {
+                    string employeeName = NamingConventions.EmployeeFromPath(employeePath);
+
+                    employeeComboItems.Add(new EmployeeComboItem(employeePath, employeeName));
+                }
+                EmployeeComboBox.DataSource = employeeComboItems;
+
+                int employeeSelectionIndex = employeePaths.FindIndex(p =>
+                {
+                    string employee = NamingConventions.EmployeeFromPath(p);
+
+                    return employee.Contains(currentEmployee);
+                });
+
+                if (employeeSelectionIndex > -1)
+                    EmployeeComboBox.SelectedIndex = employeeSelectionIndex;
             }
-            EmployeeComboBox.DataSource = employeeComboItems;
-
-            int employeeSelectionIndex = employeePaths.FindIndex(p =>
+            else
             {
-                string employee = NamingConventions.EmployeeFromPath(p);
+                EmployeeComboBox.Visible = false;
+                AssignToLabel.Visible = false;
+                AssignToSelfBtn.Visible = true;
 
-                return employee.Contains(currentEmployee);
-            });
-
-            if (employeeSelectionIndex > -1)
-                EmployeeComboBox.SelectedIndex = employeeSelectionIndex;
+                if(currentEmployee == System.Configuration.ConfigurationManager.AppSettings.Get("employeeSearchTerm"))
+                {
+                    AssignToSelfBtn.Text = "Aseta vapaaksi";
+                }
+            }
 
 
 
@@ -124,17 +150,11 @@ namespace Boltmailer_client
             }
             projectstatusLabel.Text = "Status: " + info.Status.ToString();
 
-
-
             // Set deadline
             projectDeadlineLabel.Text = "Deadline: " + info.Deadline;
 
-
-
             // Set time est
             TimeEstimateBox.Text = info.TimeEstimate;
-
-
 
             // Set notes
             HandleNotes();
@@ -277,6 +297,21 @@ namespace Boltmailer_client
                 // Move project if needed
                 if (employeeHasChanged)
                     MoveProject();
+
+                // Move to free/to self if needed
+                if(projectMoveDestination != "none")
+                {
+                    try
+                    {
+                        if (File.Exists(projectMoveDestination)) throw new Exception("File already exists!");
+
+                        Directory.Move(projectPath, projectMoveDestination);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Could not move the project:\n\n" + ex);
+                    }
+                }
             }
         }
 
@@ -332,6 +367,20 @@ namespace Boltmailer_client
 
             if (EmployeeComboBox.SelectedValue.ToString() != currentEmployee)
                 employeeHasChanged = true;
+        }
+
+        private void AssignToSelfBtn_Click(object sender, EventArgs e)
+        {
+            if (currentEmployee == System.Configuration.ConfigurationManager.AppSettings.Get("employeeSearchTerm"))
+            {
+                projectMoveDestination = projectsRootPath + "\\vapaa" + NamingConventions.FilenameFromPath(projectPath, true);
+            }
+            else
+            {
+                projectMoveDestination = projectsRootPath + "\\" + NamingConventions.FilenameFromTitle(System.Configuration.ConfigurationManager.AppSettings.Get("employeeSearchTerm")) + NamingConventions.FilenameFromPath(projectPath, true);
+            }
+
+            Close();
         }
     }
 }

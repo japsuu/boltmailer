@@ -486,5 +486,6 @@ C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netco
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Win-x64\wpfgfx_cor3.dll
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Win-x64\Microsoft.Toolkit.Uwp.Notifications.dll
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Win-x64\Microsoft.Win32.SystemEvents.dll
+C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Win-x64\Tulpep.NotificationWindow.dll
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Win-x64\Boltmailer-common.dll
 C:\Users\japsu\Desktop\boltmailer\Boltmailer\Boltmailer-client\bin\Release\netcoreapp3.1\publish\Win-x64\Boltmailer-common.pdb

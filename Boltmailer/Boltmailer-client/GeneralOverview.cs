@@ -628,7 +628,7 @@ namespace Boltmailer_client
             projectPaths.TryGetValue(info, out string path);
 
             // Open an overview of the project
-            ProjectOverview overview = new ProjectOverview(info, path, employeeDirectories, (string)ProjectsDataGrid.Rows[e.RowIndex].Cells[0].Value);
+            ProjectOverview overview = new ProjectOverview(info, path, employeeDirectories, (string)ProjectsDataGrid.Rows[e.RowIndex].Cells[0].Value, EMPLOYEES_ROOT_PATH);
 
             overview.TopMost = AlwaysOnTopCheckbox.Checked;
             overview.ShowDialog();

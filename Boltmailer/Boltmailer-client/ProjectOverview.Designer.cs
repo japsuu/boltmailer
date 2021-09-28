@@ -41,11 +41,12 @@ namespace Boltmailer_client
             this.label2 = new System.Windows.Forms.Label();
             this.EmployeeComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.AssignToLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.AssignToSelfBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NotesTitle
@@ -164,14 +165,14 @@ namespace Boltmailer_client
             this.label3.TabIndex = 12;
             this.label3.Text = "Vaihda statusta:";
             // 
-            // label4
+            // AssignToLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(211, 116);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 15);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Vaihda tekijää:";
+            this.AssignToLabel.AutoSize = true;
+            this.AssignToLabel.Location = new System.Drawing.Point(211, 116);
+            this.AssignToLabel.Name = "AssignToLabel";
+            this.AssignToLabel.Size = new System.Drawing.Size(82, 15);
+            this.AssignToLabel.TabIndex = 13;
+            this.AssignToLabel.Text = "Vaihda tekijää:";
             // 
             // label5
             // 
@@ -217,16 +218,28 @@ namespace Boltmailer_client
             this.label8.Size = new System.Drawing.Size(200, 2);
             this.label8.TabIndex = 17;
             // 
+            // AssignToSelfBtn
+            // 
+            this.AssignToSelfBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.AssignToSelfBtn.Location = new System.Drawing.Point(211, 116);
+            this.AssignToSelfBtn.Name = "AssignToSelfBtn";
+            this.AssignToSelfBtn.Size = new System.Drawing.Size(95, 41);
+            this.AssignToSelfBtn.TabIndex = 18;
+            this.AssignToSelfBtn.Text = "Ota itsellesi";
+            this.AssignToSelfBtn.UseVisualStyleBackColor = true;
+            this.AssignToSelfBtn.Click += new System.EventHandler(this.AssignToSelfBtn_Click);
+            // 
             // ProjectOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(318, 388);
+            this.Controls.Add(this.AssignToSelfBtn);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.AssignToLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.EmployeeComboBox);
             this.Controls.Add(this.label2);
@@ -263,10 +276,11 @@ namespace Boltmailer_client
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox EmployeeComboBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label AssignToLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button AssignToSelfBtn;
     }
 }
